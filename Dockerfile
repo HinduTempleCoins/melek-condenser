@@ -1,8 +1,10 @@
-### BUILD MINIFIED PRODUCTION ##
-FROM faddart/anarchylinux
+FROM faddat/archlinux
 
-RUN pacman --noconfirm -Syyu yarn && \
+COPY . .
+
+RUN pacman --noconfirm -Syyu yarn nodejs-lts-erbium git base-devel&& \
 	yarn install && \
 	yarn run build
+
 
 CMD [ "yarn", "run", "production" ]

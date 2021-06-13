@@ -485,7 +485,7 @@
         "liquid_token": "Tradeable tokens that may be transferred anywhere at anytime.<br/>%(LIQUID_TOKEN)s can be converted to %(VESTING_TOKEN)s in a process called powering up.",
         "influence_token": "Influence tokens which give you more control over post payouts and allow you to earn on curation rewards.",
         "estimated_value": "The estimated value is based on an average value of %(LIQUID_TOKEN)s in US dollars.",
-        "non_transferable": "%(VESTING_TOKEN)s is non-transferable and requires 3 months (13 payments) to convert back to %(LIQUID_TOKEN)s.",
+        "non_transferable": "%(VESTING_TOKEN)s is non-transferable and requires 1 month (4 payments) to convert back to %(LIQUID_TOKEN)s.",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Converted %(VESTING_TOKEN)s can be sent to yourself or someone else but can not transfer again without converting back to %(LIQUID_TOKEN)s.",
         "part_of_your_blurt_power_is_currently_delegated": "Part of %(user_name)s's BLURT POWER is currently delegated. Delegation is donated for influence or to help new users perform actions on Blurt. Your delegation amount can fluctuate.",
         "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."

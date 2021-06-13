@@ -474,7 +474,7 @@
         "liquid_token": "Zbywalne tokeny które mogą być przesłane gdziekolwiek w dowolnym momencie.<br/> %(LIQUID_TOKEN)s mogą zostać również przekonwertowane na %(VESTING_TOKEN)s w procesie nazywanym zwiększenie mocy.",
         "influence_token": "Tokeny wpływu, które zwiększają Twój wpływ na podział wypłat za publikowanie treści, oraz pozwalają Ci zarabiać na głosowaniu na treści.",
         "estimated_value": "Szacowana wartość bazuje na średniej cenie tokenu %(LIQUID_TOKEN)s w dolarach amerykańskich.",
-        "non_transferable": "Jednostki %(VESTING_TOKEN)s są niezbywalne i wymagają 3 miesięcy (w 13 ratach) do konwersji z powrotem na tokeny %(LIQUID_TOKEN)s.",
+        "non_transferable": "Jednostki %(VESTING_TOKEN)s są niezbywalne i wymagają 1 miesiąca (w 4 ratach) do konwersji z powrotem na tokeny %(LIQUID_TOKEN)s.",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Przekonwertowane jednostki %(VESTING_TOKEN)s możesz wysłać sobie lub komuś innemu ale nie możesz ich wysłać ponownie bez konwersji z powrotem do tokenów %(LIQUID_TOKEN)s.",
         "part_of_your_blurt_power_is_currently_delegated": "Część z Twoich jednostek wpływu BLURT POWER jest Ci oddelegowana. Delegowane jednostek to czasowe użyczenie dla zwiększenia wpływu lub by pomóc nowym użytkownikom platformy w korzystaniu ze Blurt. Kwota oddelegowanych jednostek może się zmieniać w czasie.",
         "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."

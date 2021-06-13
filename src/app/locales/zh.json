@@ -473,7 +473,7 @@
         "liquid_token": "可交易代币可以在任何时候发送到任何地方。%(LIQUID_TOKEN)s可以在一个被称为Power Up的过程中被转换成%(VESTING_TOKEN)s。",
         "influence_token": "代币的影响力可以使你对文章的赏金有更大的控制权，并可以获得审查奖励。",
         "estimated_value": "基于美元计算，%(LIQUID_TOKEN)s的估值。",
-        "non_transferable": "%(VESTING_TOKEN)s是不可转让的，需要3个月(13笔付款)才可换回%(LIQUID_TOKEN)s",
+        "non_transferable": "%(VESTING_TOKEN)s是不可转让的，需要1个月(4笔付款)才可换回%(LIQUID_TOKEN)s",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "%(VESTING_TOKEN)s可以转给你自己或其他人，但是只有转回%(LIQUID_TOKEN)s后，才可以进行下一次转账。",
         "part_of_your_blurt_power_is_currently_delegated": "有一部分BLURT POWER是代理给你使用的。代理的BLURT POWER是为了帮助新用户在blurt.blog上进行操作。你被代理的数量可能会有波动。",
         "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."

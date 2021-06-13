@@ -487,7 +487,7 @@
         "liquid_token": "Ликвидные цифровые токены, которые могут переданы куда угодно в любой момент.<br/>%(LIQUID_TOKEN)s может быть конвертирован в %(VESTING_TOKEN)s, этот процесс называется \"увеличение Силы Голоса\".",
         "influence_token": "Токены дают вам возможность влиять на вознаграждения за контент, а также возможность зарабатывать на курации контента.",
         "estimated_value": "Сметная стоимость основана на среднем значении %(LIQUID_TOKEN)s в долларах США.",
-        "non_transferable": "%(VESTING_TOKEN)s - не ликвидные токены, требуется три месяца (13 еженедальных выплат) чтобы сконвертировать их в ликвидные токены %(LIQUID_TOKEN)s.",
+        "non_transferable": "%(VESTING_TOKEN)s - не ликвидные токены, требуется один месяц (4 еженедальных выплат) чтобы сконвертировать их в ликвидные токены %(LIQUID_TOKEN)s.",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Конвертированные %(VESTING_TOKEN)s токены могут быть отправлены себе или кому-либо еще, но не могут быть переданы вновь без конвертации в %(LIQUID_TOKEN)s.",
         "part_of_your_blurt_power_is_currently_delegated": "Часть BLURT POWER вам делегирована, это увеличивает ваше влияние на платформе. Количество делегированных токенов со временем может изменяться.",
         "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."

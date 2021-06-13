@@ -474,7 +474,7 @@
         "liquid_token": "Des jetons négociables peuvent être transférés n'importe où à tout moment. <br/> %(LIQUID_TOKEN)s peuvent être convertis en %(VESTING_TOKEN)s lors d'un processus appelé conversion en influence, ou power up.",
         "influence_token": "Jetons d'influence qui vous donnent plus de contrôle sur les gains potentiels des articles et vous permettent d'augmenter vos gains de curation",
         "estimated_value": "La valeur estimée est basée sur la valeur moyenne de %(LIQUID_TOKEN)s en dollars américains.",
-        "non_transferable": "%(VESTING_TOKEN)s est non transférable et demande 3 mois (13 paiements) pour être convertis en %(LIQUID_TOKEN)s. ",
+        "non_transferable": "%(VESTING_TOKEN)s est non transférable et demande 1 mois (4 paiements) pour être convertis en %(LIQUID_TOKEN)s. ",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Les %(VESTING_TOKEN)s convertis peuvent être envoyés soit à vous, soit à quelqu'un d'autre, mais ne peuvent pas être transférés à nouveau sans être convertis en %(LIQUID_TOKEN)s.",
         "part_of_your_blurt_power_is_currently_delegated": "Une partie de votre influence, ou BLURT POWER, est actuellement déléguée. La délégation est un don pour augmenter l'influence ou pour encourager les nouveaux utilisateurs à effectuer des actions sur Blurt. Le montant délégué peut varier.",
         "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."

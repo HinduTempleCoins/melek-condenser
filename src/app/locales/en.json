@@ -619,6 +619,7 @@
         "login_to_wallet": "Login to Wallet",
         "sign_transfer": "Sign to complete transfer",
         "use_keychain": "Use WhaleVault extension",
+        "get_keychain": "Get Keychain",
         "dont_have_an_account": "Don't have a Blurt account?"
     },
     "chainvalidation_js": {

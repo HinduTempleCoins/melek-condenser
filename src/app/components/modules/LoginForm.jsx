@@ -14,7 +14,7 @@ import { serverApiRecordEvent } from 'app/utils/ServerApiClient';
 import tt from 'counterpart';
 import { APP_URL } from 'app/client_config';
 import { PrivateKey, PublicKey } from '@blurtfoundation/blurtjs/lib/auth/ecc';
-import { SIGNUP_URL } from 'shared/constants';
+import { SIGNUP_URL, KEYCHAIN_URL } from 'shared/constants';
 
 class LoginForm extends Component {
     static propTypes = {
@@ -100,6 +100,10 @@ class LoginForm extends Component {
         const opAction = document.getElementsByClassName('OpAction')[0];
         const onType = opAction ? opAction.textContent : 'Login';
         serverApiRecordEvent('SignIn', onType);
+    }
+
+    GetKeychain() {
+        window.location.href = KEYCHAIN_URL;
     }
 
     onUseKeychainCheckbox = (e) => {
@@ -304,6 +308,14 @@ class LoginForm extends Component {
                     onClick={this.SignUp}
                 >
                     {tt('loginform_jsx.sign_up_get_blurt')}
+                </button>
+                <button
+                    type="button"
+                    className="button hollow"
+                    onClick={this.GetKeychain}
+                    style={{ float: 'right' }}
+                >
+                    {tt('loginform_jsx.get_keychain')}
                 </button>
             </div>
         );

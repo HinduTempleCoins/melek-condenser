@@ -10,7 +10,9 @@
     "author": "Blurt",
     "main": "index.js",
     "scripts": {
+        "prebuild": "mkdir tmp || true",
         "build": "NODE_ENV=production webpack --config ./webpack/prod.config.js && babel src --out-dir lib -Dq",
+        "clean": "rm -rf node_modules dist lib tmp",
         "checktranslations": "node scripts/check_translations.js",
         "ci:eslint": "eslint src/",
         "ci:test": "jest --coverage",

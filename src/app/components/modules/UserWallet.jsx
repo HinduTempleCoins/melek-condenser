@@ -248,7 +248,7 @@ class UserWallet extends React.Component {
 
         const total_blurt =
             vesting_blurt + balance_blurt + saving_balance_blurt + blurtOrders;
-        let total_value =
+        const total_value =
             '$' + numberWithCommas((total_blurt * price_per_blurt).toFixed(2));
 
         // format spacing on estimated value based on account state
@@ -647,7 +647,6 @@ export default connect(
             const operation = {
                 account: username,
                 reward_blurt: account.get('reward_blurt_balance'),
-                //reward_sbd: account.get('reward_sbd_balance'),
                 reward_vests: account.get('reward_vesting_balance'),
             };
 

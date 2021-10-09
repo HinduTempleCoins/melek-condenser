@@ -240,6 +240,7 @@
         "currency_market": "Marché des devises",
         "stolen_account_recovery": "Récupération de comptes dérobés",
         "change_account_password": "Changement de mot de passe",
+        "change_recovery_account": "Changement du compte de récupération",
         "witnesses": "Témoins",
         "vote_for_witnesses": "Voter pour les témoins",
         "privacy_policy": "Politique de confidentialité",

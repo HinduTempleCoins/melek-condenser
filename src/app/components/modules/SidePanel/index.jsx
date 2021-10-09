@@ -60,8 +60,7 @@ const SidePanel = ({
             {
                 value: 'faq',
                 label: tt('navigation.faq'),
-                link:
-                    'https://blurtfaq.org/wiki/FAQ_%E2%80%93_The_Bloggers_Almanac',
+                link: 'https://blurtwallet.com/faq.html',
             },
             {
                 value: 'change_password',
@@ -113,43 +112,32 @@ const SidePanel = ({
             {
                 value: 'leodex',
                 label: 'Leodex',
-                link: 'https://leodex.io/',
-            },
-        ],
-        wrapped: [
-            {
-                value: 'wblurt',
-                label: 'Uniswap',
-                link:
-                    'https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x37472814e5c6146e6ca7ed1753cd1b18b733e5d4',
+                link: 'https://leodex.io/market/BLURT',
             },
         ],
         external: [
+            {
+                value: 'gitlab',
+                label: 'GitLab',
+                link: 'https://gitlab.com/blurt/blurt/',
+            },
             {
                 value: 'chat',
                 label: tt('navigation.chat'),
                 link: 'https://discord.blurt.world/',
             },
+        ],
+        block_explorers: [
             {
-                value: 'block_explorer',
-                label: 'Block Explorer',
+                value: 'blurt_explorer',
+                label: 'Blurt Explorer',
                 link: 'https://blocks.blurtwallet.com',
             },
-            // {
-            //     value: 'jobs',
-            //     label: tt('navigation.jobs'),
-            //     link: 'https://recruiting.paylocity.com/recruiting/jobs/List/3288/Steemit-Inc',
-            // },
             {
-                value: 'tools',
-                label: 'Blurt Tools',
-                link: 'https://blurt.tools/',
+                value: 'ecosynthesizer',
+                label: 'Ecosynthesizer',
+                link: 'https://ecosynthesizer.com/blurt/',
             },
-            // {
-            //     value: 'business',
-            //     label: tt('navigation.business_center'),
-            //     link: 'https://steemeconomy.com/',
-            // },
             // {
             //     value: 'api_docs',
             //     label: tt('navigation.api_docs'),
@@ -200,12 +188,12 @@ const SidePanel = ({
             {
                 value: 'signup',
                 label: tt('g.sign_up'),
-                link: 'https://signup.blurt.world',
+                link: 'https://signup.blurtwallet.com',
             },
             {
                 value: 'post',
                 label: tt('g.post'),
-                link: '/submit.html',
+                link: 'https://blurt.blog/submit.html',
             },
         ],
         swag: [
@@ -233,6 +221,15 @@ const SidePanel = ({
                     {sidePanelLinks.internal.map(makeLink)}
                 </ul>
                 <ul className="vertical menu">
+                    {sidePanelLinks.external.map(makeLink)}
+                </ul>
+                <ul className="vertical menu">
+                    <li>
+                        <a className="menu-section">Block Explorers</a>
+                    </li>
+                    {sidePanelLinks.block_explorers.map(makeLink)}
+                </ul>
+                <ul className="vertical menu">
                     <li>
                         <a className="menu-section">
                             {tt('navigation.third_party_exchanges')}
@@ -242,20 +239,11 @@ const SidePanel = ({
                 </ul>
                 <ul className="vertical menu">
                     <li>
-                        <a className="menu-section">Wrapped BLURT</a>
-                    </li>
-                    {sidePanelLinks.wrapped.map(makeLink)}
-                </ul>
-                <ul className="vertical menu">
-                    <li>
                         <a className="menu-section">
                             {tt('navigation.blurt_swag')}
                         </a>
                     </li>
                     {sidePanelLinks.swag.map(makeLink)}
-                </ul>
-                <ul className="vertical menu">
-                    {sidePanelLinks.external.map(makeLink)}
                 </ul>
                 <ul className="vertical menu">
                     {sidePanelLinks.organizational.map(makeLink)}

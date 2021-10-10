@@ -90,6 +90,11 @@ const SidePanel = ({
                 link: 'https://ionomy.com/en/markets/btc-blurt',
             },
             {
+                value: 'robiniaswap',
+                label: 'Robinia Swap',
+                link: 'https://robiniaswap.com/',
+            },
+            {
                 value: 'beldex',
                 label: 'Beldex',
                 link: 'https://www.beldex.io/tradeAdvance?pair=BLURT_BTC',

@@ -62,6 +62,7 @@
         "account_sid": "SDC_TWILIO_ACCOUNT_SID",
         "auth_token": "SDC_TWILIO_AUTH_TOKEN"
     },
+    "price_info_url": "SDC_PRICE_INFO_URL",
     "upload_image": "SDC_UPLOAD_IMAGE_URL",
     "session_cookie_key": "SDC_SESSION_COOKIE_KEY",
     "blurtd_connection_client": "SDC_CLIENT_BLURTD_URL",

@@ -29,6 +29,7 @@ global.$STM_Config = {
     address_prefix: config.get('address_prefix'),
     img_proxy_prefix: config.get('img_proxy_prefix'),
     ipfs_prefix: config.get('ipfs_prefix'),
+    price_info_url: config.get('price_info_url'),
     disable_signups: config.get('disable_signups'),
     read_only_mode: config.get('read_only_mode'),
     registrar_fee: config.get('registrar.fee'),

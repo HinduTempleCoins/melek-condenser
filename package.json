@@ -4,7 +4,7 @@
     "description": "The Blurt Wallet allows you to send and recieve blurt, and set your profile picture, and vote for witnesses!",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.com/blurt/openblurt/wallet.git"
+        "url": "https://gitlab.com/blurt/blurt.git"
     },
     "license": "MIT",
     "author": "Blurt",
@@ -43,7 +43,7 @@
         "testURL": "http://localhost/"
     },
     "dependencies": {
-        "@blurtfoundation/blurtjs": "^0.1.1",
+        "@blurtfoundation/blurtjs": "^0.1.2",
         "@steem/crypto-session": "git+https://github.com/steemit/crypto-session.git#83a90b319ce5bc6a70362d52a15a815de7e729bb",
         "assert": "1.4.1",
         "autoprefixer-loader": "3.2.0",

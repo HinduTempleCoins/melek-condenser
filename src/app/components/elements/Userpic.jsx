@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import shouldComponentUpdate from 'app/utils/shouldComponentUpdate';
 import { imageProxy } from 'app/utils/ProxifyUrl';
 
-export const SIZE_SMALL = 'small';
-export const SIZE_MED = 'medium';
-export const SIZE_LARGE = 'large';
+export const SIZE_SMALL = '64x64';
+export const SIZE_MED = '128x128';
+export const SIZE_LARGE = '512x512';
 
 const sizeList = [SIZE_SMALL, SIZE_MED, SIZE_LARGE];
 
@@ -21,24 +21,18 @@ class Userpic extends Component {
     shouldComponentUpdate = shouldComponentUpdate(this, 'Userpic');
 
     render() {
-        const { account, json_metadata, size, className = '' } = this.props;
+        const { account, size, className = '' } = this.props;
         const hideIfDefault = this.props.hideIfDefault || false;
-        const avSize = size && sizeList.indexOf(size) > -1 ? '/' + size : '';
-        let imageUrl = '';
-        // try to extract image url from users metaData
-        try {
-            const md = JSON.parse(json_metadata);
-            if (!/^(https?:)\/\//.test(md.profile.profile_image)) {
-                imageUrl = `https://images.blurt.blog/u/${account}/avatar/small`;
-            } else {
-                imageUrl = md.profile.profile_image;
-            }
-        } catch (e) {
-            imageUrl = `https://images.blurt.blog/u/${account}/avatar/small`;
+        let avSize = size && sizeList.indexOf(size) > -1 ? '/' + size : '';
+        if (avSize === '') {
+            avSize = '/64x64';
         }
-        const style = {
-            backgroundImage: `url(${imageUrl})`,
-        };
+        let imageUrl = '';
+        // Get profile picture from image proxy
+
+        imageUrl = `${imageProxy()}profileimage/${account}${avSize}`;
+
+        const style = { backgroundImage: `url(${imageUrl})` };
 
         return (
             <div className={classnames('Userpic', className)} style={style} />

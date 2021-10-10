@@ -9,7 +9,8 @@
  * @type {RegExp}
  */
 const rProxyDomain = /^http(s)?:\/\/imgp.blurt.world\//g;
-const rProxyDomainsDimensions = /http(s)?:\/\/imgp.blurt.world\/([0-9]+x[0-9]+)\//g;
+const rProxyDomainsDimensions =
+    /http(s)?:\/\/imgp.blurt.world\/([0-9]+x[0-9]+)\//g;
 const NATURAL_SIZE = '0x0/';
 const CAPPED_SIZE = '768x0/';
 

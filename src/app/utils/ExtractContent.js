@@ -69,15 +69,17 @@ export default function extractContent(get, content) {
             const htmlText = isHtml
                 ? body
                 : remarkable.render(
-                      body.replace(
-                          /<!--([\s\S]+?)(-->|$)/g,
-                          '(html comment removed: $1)'
-                      )
-                  );
+                    body.replace(
+                        /<!--([\s\S]+?)(-->|$)/g,
+                        '(html comment removed: $1)'
+                    )
+                );
             rtags = HtmlReady(htmlText, { mutate: false });
         }
 
-        [image_link] = Array.from(rtags.images);
+        if (rtags.images) {
+            [image_link] = Array.from(rtags.images);
+        }
     }
 
     // Was causing broken thumnails.  IPFS was not finding images uploaded to another server until a restart.

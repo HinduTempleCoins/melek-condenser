@@ -123,7 +123,7 @@ export default function (html, { mutate = true, hideImages = false } = {}) {
 
 function traverse(node, state, depth = 0) {
     if (!node || !node.childNodes) return;
-    Array(...node.childNodes).forEach((child) => {
+    Array.from(node.childNodes).forEach((child) => {
         // console.log(depth, 'child.tag,data', child.tagName, child.data)
         const tag = child.tagName ? child.tagName.toLowerCase() : null;
         if (tag) state.htmltags.add(tag);
@@ -215,7 +215,7 @@ function img(state, child) {
 // For all img elements with non-local URLs, prepend the proxy URL
 function proxifyImages(doc) {
     if (!doc) return;
-    [...doc.getElementsByTagName('img')].forEach((node) => {
+    Array.from(doc.getElementsByTagName('img')).forEach((node) => {
         const url = node.getAttribute('src');
         if (!linksRe.local.test(url)) {
             node.setAttribute('src', proxifyImageUrl(url, true));

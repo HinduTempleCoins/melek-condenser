@@ -87,7 +87,7 @@ const SidePanel = ({
             {
                 value: 'ionomy',
                 label: 'Ionomy',
-                link: 'https://ionomy.com/en/markets/btc-blurt',
+                link: 'https://exchange.ionomy.com/en/markets/btc-blurt',
             },
             {
                 value: 'robiniaswap',

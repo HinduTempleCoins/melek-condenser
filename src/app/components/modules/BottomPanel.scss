@@ -19,7 +19,7 @@ $btm-panel-height: 90px;
         box-sizing: border-box;
         transition: visibility 250ms, transform ease 250ms;
         left: 50%;
-        margin-left: -$btm-panel-width/2;
+        margin-left: -$btm-panel-width*0.5;
         bottom: -$btm-panel-height;
         visibility: hidden;
 

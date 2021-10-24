@@ -82,7 +82,7 @@ const SidePanel = ({
             {
                 value: 'probit',
                 label: 'Probit',
-                link: 'https://www.probit.com/app/exchange/BLURT-BTC',
+                link: 'https://www.probit.com/app/exchange/BLURT-BTC/r/54051558',
             },
             {
                 value: 'ionomy',

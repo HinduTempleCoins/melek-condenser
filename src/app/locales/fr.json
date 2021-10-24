@@ -703,7 +703,7 @@
         "transfers_are_temporary_disabled": "Les transferts sont temporairement désactivés.",
         "history": "HISTORIQUE",
         "redeem_rewards": "Réclamer les gains (transférer vers le solde)",
-        "buy_blurt_or_blurt_power": "Acheter du BLURT ou du BLURT POWER"
+        "buy_blurt_or_blurt_power": "Acheter du BLURT"
     },
     "powerdown_jsx": {
         "power_down": "Diminuer son influence",

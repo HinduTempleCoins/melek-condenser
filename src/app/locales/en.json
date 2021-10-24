@@ -710,7 +710,7 @@
         "transfers_are_temporary_disabled": "Transfers are temporary disabled.",
         "history": "HISTORY",
         "redeem_rewards": "Redeem Rewards (Transfer to Balance)",
-        "buy_blurt_or_blurt_power": "Buy BLURT or BLURT POWER"
+        "buy_blurt_or_blurt_power": "Buy BLURT"
     },
     "powerdown_jsx": {
         "power_down": "Power Down",

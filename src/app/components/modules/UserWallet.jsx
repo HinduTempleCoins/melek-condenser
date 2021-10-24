@@ -37,6 +37,13 @@ class UserWallet extends React.Component {
         this.state = {
             claimInProgress: false,
         };
+        this.onShowBuyBlurt = (e) => {
+            e.preventDefault();
+            const new_window = window.open();
+            new_window.opener = null;
+            new_window.location =
+                'https://www.probit.com/app/exchange/BLURT-BTC/r/54051558';
+        };
         this.onShowDepositBlurt = (e) => {
             if (e && e.preventDefault) e.preventDefault();
             const name = this.props.currentUser.get('username');
@@ -435,6 +442,20 @@ class UserWallet extends React.Component {
                             isMyAccount={isMyAccount}
                         />
                     </div>
+                    {
+                        <div className="columns shrink">
+                            {isMyAccount && (
+                                <button
+                                    className="UserWallet__buybp button hollow"
+                                    onClick={this.onShowBuyBlurt}
+                                >
+                                    {tt(
+                                        'userwallet_jsx.buy_blurt_or_blurt_power'
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    }
                 </div>
                 <div className="UserWallet__balance row">
                     <div className="column small-12 medium-8">

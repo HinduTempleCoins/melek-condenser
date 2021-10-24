@@ -703,7 +703,7 @@
         "transfers_are_temporary_disabled": "送金は一時的に無効になっています。",
         "history": "履歴",
         "redeem_rewards": "報酬の請求 (残高に送る)",
-        "buy_blurt_or_blurt_power": "BLURTやBLURT POWERを購入する"
+        "buy_blurt_or_blurt_power": "BLURTを購入する"
     },
     "powerdown_jsx": {
         "power_down": "パワーダウン",

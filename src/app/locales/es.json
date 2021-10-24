@@ -703,7 +703,7 @@
         "transfers_are_temporary_disabled": "Las transferencias están temporalmente inhabilitadas.",
         "history": "HISTORIA",
         "redeem_rewards": "Liquidar recompensas (Transferir al saldo)",
-        "buy_blurt_or_blurt_power": "Compra BLURT o BLURT POWER."
+        "buy_blurt_or_blurt_power": "Compra BLURT"
     },
     "powerdown_jsx": {
         "power_down": "Power Down",

@@ -109,11 +109,11 @@ const SidePanel = ({
                 label: 'Hive Engine',
                 link: 'https://hive-engine.com/?p=market&t=BLURT',
             },
-            {
-                value: 'steem-engine',
-                label: 'Steem Engine',
-                link: 'https://steem-engine.com/?p=market&t=BLURT',
-            },
+            // {
+            //     value: 'steem-engine',
+            //     label: 'Steem Engine',
+            //     link: 'https://steem-engine.com/?p=market&t=BLURT',
+            // },
             {
                 value: 'leodex',
                 label: 'Leodex',

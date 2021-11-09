@@ -37,20 +37,20 @@ class Settings extends React.Component {
             validation: (values) => ({
                 profile_image:
                     values.profile_image &&
-                    !/^https?:\/\//.test(values.profile_image)
+                        !/^https?:\/\//.test(values.profile_image)
                         ? tt('settings_jsx.invalid_url')
                         : null,
                 cover_image:
                     values.cover_image &&
-                    !/^https?:\/\//.test(values.cover_image)
+                        !/^https?:\/\//.test(values.cover_image)
                         ? tt('settings_jsx.invalid_url')
                         : null,
                 name:
                     values.name && values.name.length > 20
                         ? tt('settings_jsx.name_is_too_long')
                         : values.name && /^\s*@/.test(values.name)
-                        ? tt('settings_jsx.name_must_not_begin_with')
-                        : null,
+                            ? tt('settings_jsx.name_must_not_begin_with')
+                            : null,
                 about:
                     values.about && values.about.length > 160
                         ? tt('settings_jsx.about_is_too_long')
@@ -63,8 +63,8 @@ class Settings extends React.Component {
                     values.website && values.website.length > 100
                         ? tt('settings_jsx.website_url_is_too_long')
                         : values.website && !/^https?:\/\//.test(values.website)
-                        ? tt('settings_jsx.invalid_url')
-                        : null,
+                            ? tt('settings_jsx.invalid_url')
+                            : null,
             }),
         });
         this.handleSubmitForm = this.state.accountSettings.handleSubmit(
@@ -118,6 +118,55 @@ class Settings extends React.Component {
                 this.setState({ progress: {} });
             }, 4000); // clear message
         });
+    };
+
+    // eslint-disable-next-line class-methods-use-this
+    recieveAvatarUrl = (e) => {
+        const url = e.data;
+
+        if (
+            (typeof url === 'string' || url instanceof String) && url.includes('http')
+        ) {
+            const { account, updateAccount } = this.props;
+            let { metaData } = this.props;
+            this.setState({ loading: true });
+            // set avatar url in metadata
+            if (!metaData) metaData = {};
+            if (!metaData.profile) metaData.profile = {};
+            metaData.profile.avatarUrl = url;
+
+            updateAccount({
+                json_metadata: JSON.stringify(metaData),
+                account: account.name,
+                extensions: [],
+                posting_json_metadata: '',
+                errorCallback: (e) => {
+                    if (e === 'Canceled') {
+                        this.setState({
+                            loading: false,
+                            errorMessage: '',
+                        });
+                    } else {
+                        console.log('updateAccount ERROR', e);
+                        this.setState({
+                            loading: false,
+                            changed: false,
+                            errorMessage: tt('g.server_returned_error'),
+                        });
+                    }
+                },
+                successCallback: () => {
+                    this.setState({
+                        loading: false,
+                        changed: false,
+                        errorMessage: '',
+                        successMessage: "Avatar Saved Succesfully !",
+                    });
+                    // remove successMessage after a while
+                    setTimeout(() => this.setState({ successMessage: '' }), 4000);
+                },
+            });
+        }
     };
 
     handleSubmit = ({ updateInitialValues }) => {
@@ -243,6 +292,16 @@ class Settings extends React.Component {
             blurt.api.setOptions({ url: event.target.value });
         }
     };
+
+    componentDidMount() {
+        // to catch avatar url on creation
+        window.addEventListener('message', this.recieveAvatarUrl);
+    }
+
+    componentWillUnmount() {
+        // to remove avatar url listener
+        window.removeEventListener('message', this.recieveAvatarUrl);
+    }
 
     render() {
         const { state, props } = this;
@@ -431,6 +490,27 @@ class Settings extends React.Component {
                             </small>
                         ) : null}
                     </form>
+                </div>
+                <br />
+                <div className="row">
+                    <div className="small-12 medium-12 large-12 columns">
+                        <h4>Add a Ready Player Me Avatar to your profile</h4>
+
+                        <div>
+                            <iframe
+                                ref={(elem) => (this.avatarIFrame = elem)}
+                                className="Avatar-iframe"
+                                title="Ready Player Avatar"
+                                src="https://blurt.readyplayer.me"
+                            />
+                        </div>
+
+                        <small>
+                            Your avatar will be saved to your profile after
+                            you create one, just come here again and edit to
+                            change avatar
+                        </small>
+                    </div>
                 </div>
             </div>
         );

@@ -37,20 +37,20 @@ class Settings extends React.Component {
             validation: (values) => ({
                 profile_image:
                     values.profile_image &&
-                        !/^https?:\/\//.test(values.profile_image)
+                    !/^https?:\/\//.test(values.profile_image)
                         ? tt('settings_jsx.invalid_url')
                         : null,
                 cover_image:
                     values.cover_image &&
-                        !/^https?:\/\//.test(values.cover_image)
+                    !/^https?:\/\//.test(values.cover_image)
                         ? tt('settings_jsx.invalid_url')
                         : null,
                 name:
                     values.name && values.name.length > 20
                         ? tt('settings_jsx.name_is_too_long')
                         : values.name && /^\s*@/.test(values.name)
-                            ? tt('settings_jsx.name_must_not_begin_with')
-                            : null,
+                        ? tt('settings_jsx.name_must_not_begin_with')
+                        : null,
                 about:
                     values.about && values.about.length > 160
                         ? tt('settings_jsx.about_is_too_long')
@@ -63,8 +63,8 @@ class Settings extends React.Component {
                     values.website && values.website.length > 100
                         ? tt('settings_jsx.website_url_is_too_long')
                         : values.website && !/^https?:\/\//.test(values.website)
-                            ? tt('settings_jsx.invalid_url')
-                            : null,
+                        ? tt('settings_jsx.invalid_url')
+                        : null,
             }),
         });
         this.handleSubmitForm = this.state.accountSettings.handleSubmit(
@@ -125,7 +125,8 @@ class Settings extends React.Component {
         const url = e.data;
 
         if (
-            (typeof url === 'string' || url instanceof String) && url.includes('http')
+            (typeof url === 'string' || url instanceof String) &&
+            url.includes('http')
         ) {
             const { account, updateAccount } = this.props;
             let { metaData } = this.props;
@@ -160,10 +161,13 @@ class Settings extends React.Component {
                         loading: false,
                         changed: false,
                         errorMessage: '',
-                        successMessage: "Avatar Saved Succesfully !",
+                        successMessage: 'Avatar Saved Succesfully !',
                     });
                     // remove successMessage after a while
-                    setTimeout(() => this.setState({ successMessage: '' }), 4000);
+                    setTimeout(
+                        () => this.setState({ successMessage: '' }),
+                        4000
+                    );
                 },
             });
         }
@@ -175,14 +179,8 @@ class Settings extends React.Component {
         if (!metaData.profile) metaData.profile = {};
         delete metaData.user_image; // old field... cleanup
 
-        const {
-            profile_image,
-            cover_image,
-            name,
-            about,
-            location,
-            website,
-        } = this.state;
+        const { profile_image, cover_image, name, about, location, website } =
+            this.state;
 
         // Update relevant fields
         metaData.profile.profile_image = profile_image.value;
@@ -506,9 +504,9 @@ class Settings extends React.Component {
                         </div>
 
                         <small>
-                            Your avatar will be saved to your profile after
-                            you create one, just come here again and edit to
-                            change avatar
+                            Your avatar will be saved to your profile after you
+                            create one, just come here again and edit to change
+                            avatar
                         </small>
                     </div>
                 </div>

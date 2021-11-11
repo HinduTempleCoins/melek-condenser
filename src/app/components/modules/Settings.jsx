@@ -344,7 +344,9 @@ class Settings extends React.Component {
                                 {tt('g.choose_preferred_endpoint')}
                                 <select
                                     defaultValue={preferred_api_endpoint}
-                                    onChange={this.handlePreferredAPIEndpointChange}
+                                    onChange={
+                                        this.handlePreferredAPIEndpointChange
+                                    }
                                 >
                                     <option value={preferred_api_endpoint}>
                                         {preferred_api_endpoint}
@@ -359,9 +361,13 @@ class Settings extends React.Component {
                                 onSubmit={this.handleSubmitForm}
                                 className="small-12 medium-8 large-10 columns"
                             >
-                                <h4>{tt('settings_jsx.public_profile_settings')}</h4>
+                                <h4>
+                                    {tt('settings_jsx.public_profile_settings')}
+                                </h4>
                                 {progress.message && (
-                                    <div className="info">{progress.message}</div>
+                                    <div className="info">
+                                        {progress.message}
+                                    </div>
                                 )}
                                 {progress.error && (
                                     <div className="error">
@@ -408,7 +414,11 @@ class Settings extends React.Component {
                                         {...cover_image.props}
                                         autoComplete="off"
                                     />
-                                    <a onClick={() => this.onOpenClick('cover_image')}>
+                                    <a
+                                        onClick={() =>
+                                            this.onOpenClick('cover_image')
+                                        }
+                                    >
                                         {tt('settings_jsx.upload_image')}
                                     </a>
                                 </label>
@@ -463,7 +473,9 @@ class Settings extends React.Component {
                                     />
                                 </label>
                                 <div className="error">
-                                    {website.blur && website.touched && website.error}
+                                    {website.blur &&
+                                        website.touched &&
+                                        website.error}
                                 </div>
                                 <br />
                                 {state.loading && (
@@ -495,11 +507,15 @@ class Settings extends React.Component {
                     <div className="small-12 medium-6 large-6 columns">
                         <div className="row">
                             <div className="small-12 medium-12 large-12 columns">
-                                <h4>Add a Ready Player Me Avatar to your profile</h4>
+                                <h4>
+                                    Add a Ready Player Me Avatar to your profile
+                                </h4>
 
                                 <div>
                                     <iframe
-                                        ref={(elem) => (this.avatarIFrame = elem)}
+                                        ref={(elem) =>
+                                            (this.avatarIFrame = elem)
+                                        }
                                         className="Avatar-iframe"
                                         title="Ready Player Avatar"
                                         src="https://blurt.readyplayer.me"
@@ -507,9 +523,9 @@ class Settings extends React.Component {
                                 </div>
 
                                 <small>
-                                    Your avatar will be saved to your profile after
-                                    you create one, just come here again and edit to
-                                    change avatar
+                                    Your avatar will be saved to your profile
+                                    after you create one, just come here again
+                                    and edit to change avatar
                                 </small>
                             </div>
                         </div>

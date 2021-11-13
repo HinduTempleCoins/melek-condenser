@@ -197,13 +197,13 @@ Blurt has redefined social media by building a living, breathing, and growing so
 
 Blurt.blog is one of the many websites that are powered by the Blurt blockchain and BLURT cryptocurrency. All of these websites read and write content to the Blurt blockchain, which stores the content in an immutable blockchain ledger, and rewards users for their contributions with digital tokens called BLURT.
 
-Every day, the Blurt blockchain mints new BLURT tokens and adds them to a community's "rewards pool". These tokens are then awarded to users for their contributions, based on the votes that their content receives. Users who hold more tokens in their account as "Blurt Power" will get to decide where a larger portion of the rewards pool is distributed.
+Every day, the Blurt blockchain mints new BLURT tokens and adds them to a community's "rewards pool". These tokens are then awarded to users for their contributions, based on the votes that their content receives as well as the votes they give out. Users who hold more tokens in their account as "Blurt Power" can influence where a larger portion of the rewards pool is distributed.
 
 <a href="#Table_of_Contents_General">^</a>
 
 ## <span id="How_does_Blurt_differ_from_other_social_media_websites">How does Blurt.blog differ from other social media websites?</span>
 
-While most social media sites extract this value for the benefit of their shareholders, Blurt believes that the users of the platform should receive the benefits and rewards for their attention and the contributions they make to the platform.
+While most social media sites extract value for the benefit of their shareholders, Blurt believes that the users of the platform should receive the benefits and rewards for their attention and the contributions they make to the platform.
 
 <a href="#Table_of_Contents_General">^</a>
 
@@ -219,7 +219,7 @@ Each account has multiple keys, which each have different levels of authority: o
 
 ## <span id="Does_it_cost_anything_to_post__comment__or_vote">Does it cost anything to post, comment, or vote?</span>
 
-No. It is free to post, comment, and vote on content on blurt.blog. You might even get paid for it!
+There is a small fee to interact with the blockchain, whether posting or voting. This fee comes from a user's liquid BLURT holdings. It is therefore important to maintain a positive balance; this amount really depends on how active you are, but a reasonable suggestion would be to keep at least 10 BLURT liquid. If you do get too low to be able to effect transactions, then just buy some BLURT on the markets and transfer them into your account - such inward transfers are free.
 
 <a href="#Table_of_Contents_General">^</a>
 

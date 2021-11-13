@@ -27,12 +27,12 @@
 
 ### <span id="Table_of_Contents_Site_Navigation">Site Navigation</span>
 
--   <a href="#How_do_I_upvote_a_post_or_comment">How do I upvote a post or comment?</a>
--   <a href="#What_do_the_Home__New__Hot__Trending__and_Promoted_links_show">What do the Home, New, Hot, Trending, and Promoted links show?</a>
+-   <a href="#How_do_I_vote_on_a_post_or_comment">How do I vote on a post or comment?</a>
+-   <a href="#What_do_the_Home__New__Hot__Trending__and_Promoted_links_show">What do the Home, New, Hot and Trending links show?</a>
 -   <a href="#What_information_is_available_in_my_account_menu">What information is available in my account menu?</a>
 -   <a href="#How_do_I_see_my_recent_rewards">How do I see my recent rewards?</a>
 -   <a href="#What_information_is_shown_in_my_wallet">What information is shown in my wallet?</a>
--   <a href="#How_do_I_transfer_my_BLURT_or_Blurt_Dollars_into_savings">How do I transfer my BLURT or Blurt Dollars into savings?</a>
+-   <a href="#How_do_I_transfer_my_BLURT_or_Blurt_Dollars_into_savings">How do I transfer my BLURT into savings?</a>
 -   <a href="#How_do_I_send_money_to_another_user">How do I send money to another user?</a>
 -   <a href="#Will_I_receive_notifications_when_there_is_activity_with_my_account">Will I receive notifications when there is activity with my account?</a>
 -   <a href="#What_is_shown_in_my_profile">What is shown in my profile?</a>
@@ -48,7 +48,7 @@
 ### <span id="Table_of_Contents_Posting">Posting</span>
 
 -   <a href="#What_can_users_post_to_Blurt">What can users post to Blurt.blog?</a>
--   <a href="#What_are_the_different_choices_for_post_rewards__50__50___Power_Up_100___Decline_Payout">What are the different choices for post rewards (50%/50%, Power Up 100%, Decline Payout)?</a>
+-   <a href="#What_are_the_different_choices_for_post_rewards__50__50___Power_Up_100___Decline_Payout">What are the different choices for post rewards (25%/75%, Power Up 100%, Decline Payout)?</a>
 -   <a href="#How_do_I_add_images_and_photos_to_my_posts">How do I add images and photos to my posts?</a>
 -   <a href="#How_do_I_set_the_thumbnail_image_for_my_post">How do I set the thumbnail image for my post?</a>
 -   <a href="#What_is_the_recommend_aspect_ratio_for_thumbnail_images">What is the recommend aspect ratio for thumbnail images?</a>
@@ -63,8 +63,6 @@
 -   <a href="#How_long_can_my_post_be">How long can my post be?</a>
 -   <a href="#If_posting_in_a_language_other_than_English__how_will_I_get_recognized">If posting in a language other than English, how will I get recognized?</a>
 -   <a href="#Can_I_delete_something_I_posted">Can I delete something I posted?</a>
--   <a href="#What_does__Promoting__a_post_do">What does "Promoting" a post do?</a>
--   <a href="#How_do_I_promote_a_post">How do I promote a post?</a>
 
 ### <span id="Table_of_Contents_Comments">Comments</span>
 
@@ -86,14 +84,9 @@
 -   <a href="#What_is_delegated_BLURT_Power">What is delegated BLURT Power?</a>
 -   <a href="#What_determines_the_price_of_BLURT">What determines the price of BLURT?</a>
 -   <a href="#How_do_I_get_more_BLURT_Power">How do I get more BLURT Power?</a>
--   <a href="#How_long_does_it_take_BLURT_or_BLURT_Power_that_I_purchased_to_show_up_in_my_account">How long does it take BLURT or BLURT Power that I purchased to show up in my account?</a>
+-   <a href="#How_long_does_it_take_BLURT_or_BLURT_Power_that_I_purchased_to_show_up_in_my_account">How long does it take BLURT that I purchased to show up in my account?</a>
 -   <a href="#What_is_powering_up_and_down">What is powering up and down?</a>
--   <a href="#What_do_the_dollar_amounts_for_pending_payouts_represent">What do the dollar amounts for pending payouts represent?</a>
--   <a href="#Will_1_Blurt_Dollar_always_be_worth__1_00_USD">Will 1 Blurt Dollar always be worth $1.00 USD?</a>
--   <a href="#How_do_Blurt_Dollar_to_BLURT_conversions_work">How do Blurt Dollar to BLURT conversions work?</a>
--   <a href="#Is_there_a_way_for_me_to_convert_my_Blurt_Dollars_to_BLURT_without_waiting_3_5_days">Is there a way for me to convert my Blurt Dollars to BLURT without waiting 3.5 days?</a>
 -   <a href="#What_can_I_do_with_my_BLURT_tokens">What can I do with my BLURT tokens?</a>
--   <a href="#What_can_I_do_with_my_HBD_tokens">What can I do with my HBD tokens?</a>
 -   <a href="#What_is_a_MVEST">What is a MVEST?</a>
 -   <a href="#Can_I_sell_goods_and_services_on_Blurt">Can I sell goods and services on Blurt?</a>
 -   <a href="#How_can_I_withdraw_my_BLURT_or_HBD_coins">How can I withdraw my BLURT or HBD coins?</a>
@@ -227,19 +220,17 @@ There is a small fee to interact with the blockchain, whether posting or voting.
 
 You can earn digital tokens on Blurt by:
 
-**Posting** - By sharing your posts, you can earn upvotes from community members. Depending on the upvotes you receive, you may get a portion of the "rewards pool".
+**Posting** - By sharing your posts and comments, you can earn votes from community members. Depending on the votes you receive, you may get a portion of the "rewards pool", paid after 7 days from the time of posting.
 
-**Voting and curating** - If you discover a post and upvote it before it becomes popular, you can earn a curation reward. The reward amount will depend on the amount of Blurt Power you have.
+**Voting and curating** - If you discover and like a post, you can show your appreciation by voting on it. Your votes generate "curation rewards" that are distributed back to you. The amount of such rewards will depend on the size of your vote. Curation rewards are currently set to 50% of your total vote value and are distributed as Blurt Power.
 
-**Purchasing** - Users can purchase Blurt or Blurt Dollar tokens directly through their Blurt wallet using bitcoin, Ether, or BitShares tokens. They are also available from other markets and exchanges including [Ionomy](https://ionomy.com).
-
-**Vesting** - BLURT tokens that are powered up to Blurt Power will earn a small amount of new tokens for holding.
+**Purchasing and Vesting** - Users can purchase BLURT tokens through various exchanges and then transfer them into your account. Such BLURT tokens can then be powered up, becoming Blurt Power (BP). Such BP will increase in value even without earning voting rewards. The current earning rate is set by witnesses and can be found in your Blurt Wallet. 
 
 <a href="#Table_of_Contents_General">^</a>
 
 ## <span id="Where_do_the_tokens_come_from">Where do the tokens come from?</span>
 
-The Blurt network continually creates new digital tokens to reward content creators and curators. Some of the newly-created tokens are transferred to users who add value to Blurt by posting, commenting, and voting on other people's posts. The remainder is distributed to holders of Blurt Power and the witnesses that power the blockchain.
+The Blurt network continually creates new digital tokens to reward content creators and curators. Some of the newly-created tokens are transferred to users who add value to Blurt by posting, commenting, and voting on other people's posts. The remainder is distributed to holders of Blurt Power and the witnesses that power and secure the blockchain.
 
 <a href="#Table_of_Contents_General">^</a>
 
@@ -255,7 +246,7 @@ By analogy, Blurt is a game system where users compete for attention and rewards
 
 Blurt is not a "get rich quick" scheme. While it is possible to post content that goes viral quickly and earn a lot of rewards on a single post, this is not typical for most users.
 
-Most of the authors that you see earning high rewards are users that have spent a lot of time in the network building followings, making connections with others, and developing a reputation for bringing high quality content.
+Most of the authors that you see earning high rewards are users that have spent a lot of time in the network building followings, making connections with others, and developing a reputation for bringing high quality content. Sometimes, the value of a post is not in the post itself but in what it brings to the ecosystem, for example, the development of a new Blurt app or service.
 
 It is best to have realistic expectations, without focusing on rewards when you are first starting out. Work on building a following, making connections, and developing a good reputation. Consistency will pay off in the long run.
 
@@ -265,13 +256,13 @@ It is best to have realistic expectations, without focusing on rewards when you 
 
 ## <span id="Can_I_change_my_username">Can I change my username?</span>
 
-Account names can not be changed. If you would like a new account name, you must pay to create a new account using a third-party account creation service.
+Account names cannot be changed. If you would like a new account name, you must pay to create a new account using a third-party account creation service.
 
 <a href="#Table_of_Contents_Accounts">^</a>
 
 ## <span id="Can_I_delete_or_deactivate_my_account">Can I delete or deactivate my account?</span>
 
-Accounts can not be deactivated or deleted. The account along with all of its activity is permanently stored in the blockchain.
+Accounts cannot be deactivated or deleted. The account along with all of its activity is permanently stored in the blockchain.
 
 <a href="#Table_of_Contents_Accounts">^</a>
 
@@ -289,9 +280,9 @@ Many users also like to post a photo or a video which shows them holding up a sh
 
 # Site Navigation
 
-## <span id="How_do_I_upvote_a_post_or_comment">How do I upvote a post or comment?</span>
+## <span id="How_do_I_vote_on_a_post_or_comment">How do I vote on a post or comment?</span>
 
-To upvote a post or comment, click on the "upvote" icon at the bottom of the post/comment. <Icon name="chevron-up-circle" />
+To vote on a post or comment, click on the "vote" icon at the bottom of the post/comment. <Icon name="chevron-up-circle" />
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
@@ -307,7 +298,7 @@ These are various ways to sort Blurt posts.
 
 **Trending** - Posts with the most amount of votes, stake-weighted, recently.
 
-**Promoted** - Listings that are boosted by Blurt Dollar payments get promoted for greater visibility.
+**Featured** - A few posts at the very top may show as Featured; these are important updates or announcements for the whole platform and are promoted as such by the dev team.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
@@ -325,7 +316,7 @@ You can get to your account menu by clicking on the avatar icon in the top-right
 
 **Toggle Night Mode** - This will toggle the blurt.blog website views between "night" and "day" mode themes.
 
-**Wallet** - This will take you to your wallet, where you go to see your wallet balances, make transfers, exchange BLURT or Blurt Dollars, manage your account, and Power Up.
+**Wallet** - This will take you to your wallet, where you go to see your wallet balances, make transfers, exchange BLURT or Blurt Dollars, manage your account, and Power Up. Your wallet requires a fresh login.
 
 **Settings** - Here is where you go to update your settings.
 
@@ -347,25 +338,25 @@ You can also view the same information for other users by visiting their wallet 
 
 ## <span id="What_information_is_shown_in_my_wallet">What information is shown in my wallet?</span>
 
-Your wallet shows how many Blurt and Blurt Dollar tokens you have in your account. It shows how much Blurt Power it has, and how much BP is delegated. It also shows how many of your BLURT and Blurt Dollar tokens are being held in the savings account, which is a balance that is subject to 3 day withdraw waiting period. The wallet page shows any the progress of any Blurt Dollar to BLURT conversions as well as the status of a power down. It also shows an estimated value of all the tokens in your account, based on the recent market price of BLURT.
+Your wallet shows how many BLURT tokens you have in your account. It shows how much Blurt Power you have, and how much BP is delegated to other accounts. It also shows how many of your BLURT tokens are being held in the savings account, which is a balance that is subject to 3 day withdraw waiting period. The wallet page shows any the progress of your BP to BLURT power down. It also shows an estimated value of all the tokens in your account, based on the recent market price of BLURT from a basket of exchanges.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
-## <span id="How_do_I_transfer_my_BLURT_or_Blurt_Dollars_into_savings">How do I transfer my BLURT or BLURT Dollars into savings?</span>
+## <span id="How_do_I_transfer_my_BLURT_or_Blurt_Dollars_into_savings">How do I transfer my BLURT into Savings?</span>
 
-Your savings balance is BLURT and HBD tokens that are subject to 3 day withdraw waiting period. This is an extra security measure in case your account credentials are compromised. To transfer BLURT or HBD tokens into savings, click on the drop-down arrow next to BLURT or BLURT DOLLARS in your wallet, and select "Transfer to Savings".
+Your savings balance is BLURT tokens that are subject to 3 day withdraw waiting period. This is an extra security measure in case your account credentials are compromised. To transfer BLURT tokens into savings, click on the drop-down arrow next to BLURT in your wallet, and select "Transfer to Savings". As of writing, the Savings account serves like a zero-interest deposit account.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
 ## <span id="How_do_I_send_money_to_another_user">How do I send money to another user?</span>
 
--   From your wallet page, click the BLURT or Blurt Dollar balances with the down arrow next to them.
+-   From your wallet page, click the BLURT balance with the down arrow next to them.
 -   In the drop-down menu, click 'Transfer'.
--   Type the username of the account you want to send the BLURT or Blurt Dollars to. Double and triple check the spelling.
--   Enter the amount of BLURT or Blurt Dollars to send.
+-   Type the username of the account you want to receive the BLURT. Double and triple check the spelling.
+-   Enter the amount of BLURT to send.
 -   Enter a memo to go along with the transaction (optional).
 -   Click Submit.
--   You will be prompted for your password. You will need to enter your master password or active key.
+-   You will be prompted for your password. You will need to enter your master password or active key - *not* your posting key.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
@@ -377,17 +368,17 @@ Notifications are currently not supported, but they are a feature we are plannin
 
 ## <span id="What_is_shown_in_my_profile">What is shown in my profile?</span>
 
-At the top of your profile is your display name and reputation score. Below your display name is the number of followers you have, the number of posts and comments you have written, and the number of people you are following. It also shows the month and year when your account was created.
+At the top of your profile is your display name. Below your display name is the number of followers you have, the number of posts and comments you have written, and the number of people you are following. It also shows the month and year when your account was created.
 
-You have the option to change your avatar and display name on the [wallet.blurt.blog](https://wallet.blurt.blog) Settings page. There, you can set additional information such as "about" information, your location, and add a link to a website of your choosing. You also have the option to set a cover image for your profile.
+You have the option to change your avatar and display name on the Settings page. There, you can set additional information such as "about" information, your location, and add a link to a website of your choosing. You also have the option to set a cover image for your profile.
 
-You can view your own profile by clicking on the link to your Blog in your account menu.
+You can view your own profile by clicking on the link to your Blog in your account menu. After saving any changes, it is sometimes necessary to refresh your profile page, or even clear the cache, to see your updated details.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
 ## <span id="How_do_I_change_my_avatar_image_and_other_profile_information">How do I change my avatar image and other profile information?</span>
 
-Your profile info, avatar image, and cover image are set in your [wallet.blurt.blog](https://wallet.blurt.blog) Settings page. In order to update your avatar picture and cover image, you will need to host the images somewhere. This can be done by uploading it via the wallet GUI, or using a third-party image hosting site such as <a href="http://postimage.io/">Postimage</a>. Once your image is uploaded, copy its URL and paste it into the "Profile Picture URL" box for the avatar, or the "Cover Image URL" box for the cover image. Then click the Update button and enter your password or active key.
+Your profile info, avatar image, and cover image are set in your Settings page. In order to update your avatar picture and cover image, you will need to host the images somewhere. This can be done by uploading it via the wallet GUI, or using a third-party image hosting site such as <a href="http://postimage.io/">Postimage</a>. Once your image is uploaded, copy its URL and paste it into the "Profile Picture URL" box for the avatar, or the "Cover Image URL" box for the cover image. Then click the Update button and enter your password or active key.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
@@ -415,7 +406,7 @@ There is also an **Explore** link in the main menu, where you can browse through
 
 ## <span id="Can_I_see_which_users_I_have_muted">Can I see which users I have muted?</span>
 
-Yes. This can be seen under the Settings page.
+Yes. This can be seen under in your profile page. Click "following" and this will list both the users you are following and those muted.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
@@ -445,9 +436,9 @@ Blurt is an open platform meant to host and welcome any legal content that compl
 
 <a href="#Table_of_Contents_Posting">^</a>
 
-## <span id="What_are_the_different_choices_for_post_rewards__50__50___Power_Up_100___Decline_Payout">What are the different choices for post rewards (50%/50%, Power Up 100%, Decline Payout)?</span>
+## <span id="What_are_the_different_choices_for_post_rewards__50__50___Power_Up_100___Decline_Payout">What are the different choices for post rewards (25%/75%, Power Up 100%, Decline Payout)?</span>
 
--   **50%/50%** - This rewards in half Blurt Power, and half liquid BLURT / Blurt Dollars. The ratio of liquid BLURT to Blurt Dollars rewarded is based on network conditions at the time of payout. This is the default payout option.
+-   **25% BLURT/75% BP** - This rewards in 25% liquid BLURT and 75% Blurt Power. This is the default payout option.
 
 -   **Power Up 100%** - This option rewards the post in 100% Blurt Power.
 
@@ -497,11 +488,11 @@ Tags are a way to categorize your content, so that others can find it. The more 
 
 ## <span id="What_tags_should_I_use">What tags should I use?</span>
 
-Try to use tags that are relevant to your post, and that will be popular for other people to browse. For example, "mytriptoalaska" may be relevant to your post, but readers are probably not going to go searching for that. Using "travel" would be a better choice for a tag in this case.
+Try to use tags that are relevant to your post, and that will be popular for other people to browse. For example, "mytriptoalaska" may be relevant to your post, but readers are probably not going to go searching for that. Using "travel" and "alaska" would be a better choice for tags in this case.
 
 You can browse through commonly used tags using the "Explore" link, in the main menu.
 
-Be mindful when choosing tags. If your tags aren’t related to your post, your post may get downvotes for mistagging.
+Be mindful when choosing tags. If your tags aren’t related to your post, your post may get negative feedback or be ignored by voters.
 
 All tags must be lowercase letters. Spaces aren't allowed, but hyphenated words with a single dash are.
 
@@ -509,7 +500,7 @@ All tags must be lowercase letters. Spaces aren't allowed, but hyphenated words 
 
 ## <span id="How_many_tags_can_I_use">How many tags can I use?</span>
 
-You can use up to 8 tags per post.
+You can use up to 5 tags per post.
 
 <a href="#Table_of_Contents_Posting">^</a>
 
@@ -552,11 +543,15 @@ For more advanced formatting, a guide describing the common markdown formatting 
 
 You are allowed to post almost as often as you like. Currently, posts must be spaced 5 minutes apart. However, the community may not find value in users that are posting too frequently. Keep in mind what your audience will be interested in viewing, so that you do not overwhelm your followers with too much content.
 
+Note that comments also count as posts, so if replying too quickly you may see a message just asking you to wait a bit to comment again.
+
 <a href="#Table_of_Contents_Posting">^</a>
 
 ## <span id="How_long_can_my_post_be">How long can my post be?</span>
 
 Post sizes are limited to about 64,000 characters including formatting. This is ample for most posts. If writing blogs, consider how much people are willing to read at one time. If you make your posts too long, readers may lose interest which may affect the amount of upvotes and rewards you receive.
+
+Also note that the posting fee will depend on the size of your post.
 
 <a href="#Table_of_Contents_Posting">^</a>
 
@@ -582,27 +577,12 @@ The blockchain will always contain the full edit history of posts and comments, 
 
 <a href="#Table_of_Contents_Posting">^</a>
 
-## <span id="What_does__Promoting__a_post_do">What does "Promoting" a post do?</span>
-
-When you make a post, there is the option to promote it with Blurt Dollars. It will then show up in the “Promoted” tab. The order that it appears in the list depends on how much the post was promoted for. Posts with a higher promoted amount will be higher than posts with less.
-
-Blurt Dollars spent to promote a post are paid to the account @null, which nobody owns or controls. Once a user transfers HBD to @null, the Blurt blockchain removes them from the currency supply.
-
-You can promote your own posts, or posts that you like from other users.
-
-<a href="#Table_of_Contents_Posting">^</a>
-
-## <span id="How_do_I_promote_a_post">How do I promote a post?</span>
-
-At the bottom of each post is a button to "Promote". After clicking the button, type the number of Blurt Dollars that you want to spend and click “PROMOTE”. The operation will require your master password or active key.
-
-<a href="#Table_of_Contents_Posting">^</a>
 
 # Comments
 
 ## <span id="Can_I_earn_digital_tokens_for_commenting">Can I earn digital tokens for commenting?</span>
 
-Yes, comments that are upvoted can earn rewards just like posts!
+Yes, comments that are voted on can earn rewards just like posts!
 
 <a href="#Table_of_Contents_Comments">^</a>
 
@@ -622,7 +602,7 @@ Blockchains like Blurt and Bitcoin produce new tokens each time a block is produ
 
 ## <span id="How_many_new_tokens_are_generated_by_the_blockchain">How many new tokens are generated by the blockchain?</span>
 
-Starting with the network's 16th hard fork in December 2016, Blurt began creating new tokens at a yearly inflation rate of 9.5%. The inflation rate decreases at a rate of 0.01% every 250,000 blocks, or about 0.5% per year. The inflation will continue decreasing at this pace until the overall inflation rate reaches 0.95%. This will take about 20.5 years from the time hard fork 16 went into effect.
+Blurt began creating new tokens at a yearly inflation rate of 9.5%. The inflation rate decreases at a rate of 0.01% every 250,000 blocks, or about 0.5% per year. The inflation will continue decreasing at this pace until the overall inflation rate reaches 0.95%. This will take about 20.5 years from the time it went into effect.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
@@ -637,25 +617,21 @@ Out of the new tokens that are generated:
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="Which_exchanges_are_BLURT_and_HBD_listed_on">Which exchanges are BLURT and HBD listed on?</span>
+## <span id="Which_exchanges_are_BLURT_and_HBD_listed_on">Which exchanges is BLURT listed on?</span>
 
-BLURT and HBD are listed on the following exchanges:
-
-| Exchange                     | BLURT |
-| ---------------------------- | :---: |
-| [Ionomy](https://ionomy.com) |   Y   |
+You can see a full and up to date list in the blurt.blog dropdown menu under "Third-party exchanges".
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="What_is_the_reward_pool">What is the reward pool?</span>
 
-Every day, a fixed amount of BLURT tokens are allocated to the network reward fund, commonly called the "reward pool." These get distributed to authors and curators for posting and voting on content.
+Every day, a fixed amount of BLURT tokens are allocated to the network reward fund, commonly called the "reward pool." These get distributed to authors and curators for posting and voting on content. The reward pool acts as a kind of treasury, and the amount of BLURT within it can vary depending on overall activity within the ecosystem.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="How_is_the_reward_pool_split_between_authors_and_curators">How is the reward pool split between authors and curators?</span>
 
-Up to 50% of a post's payout is awarded to curators (the people who upvoted the post) as a reward for discovering the content. The other 50% is awarded to the author.
+Up to 50% of a post's payout is awarded to curators (the people who voted on the post) as a reward for discovering the content. The other 50% is awarded to the author. The portion that goes to the authors is then further split between BLURT and BP, depending on the author's choice on posting, while curators are rewarded wholly in BP.
 
 If curators vote for a post within the first 5 minutes of it being created, a portion of their curation reward remains in the rewards pool for other authors/curators. This portion is linear to the age of the post between 0 and 5 minutes. As an example: upvoting at two minutes will donate 60% of your potential curation reward back to the rewards pool.
 
@@ -663,24 +639,19 @@ If curators vote for a post within the first 5 minutes of it being created, a po
 
 ## <span id="Will_the_reward_pool_pay_out_more_or_less_depending_on_who_votes">Will the reward pool pay out more or less depending on who votes?</span>
 
-There is a fixed amount of BLURT coins that gets added to the rewards pool each day. In the short term, the amount of coins that get paid out may be higher or lower depending on the amount of voting activity, but over time it will pay out the full amount of rewards regardless of who votes.
-
-Votes in Blurt are stake-weighted. Therefore voters with more Blurt Power have a greater influence over the allocation than voters with less BP, but their votes do not increase the amount of rewards in the rewards pool.
+At the time of paying out a post (or comment) the amount of BLURT taken from the reward pool is a linear proportion based on the votes that post has received. That total is then split, again proportionately, between the author and all the voters based on their individual votes. Such votes depend on the BP held and the vote weight used by each voter. It is thus not a question of *who* votes but rather about how much each user votes.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="Why_do_the_earnings_for_my_post_go_up_or_down">Why do the earnings for my post go up or down?</span>
 
-The amount that is shown next to a post is a "**Potential Payout**". This is an estimated value of how much money the post will make based on the votes that have occurred so far. Depending on various factors, this value can go up or down until the payout window closes:
+The amount that is shown next to a post is a "**Potential Payout**" in BLURT. This is an estimated value of how much BLURT the post will make based on the votes that have occurred so far and the economic factors such as the reward pool and recent claims. Note that these are *not* USD estimates and hence should not fluctuate very much unless some voting activity has taken place. Depending on various factors, this value can go up or down until the payout window closes:
 
 -   If a post receives more upvotes, the potential payout of the post can go up.
--   If a post receives more downvotes, the potential payout of the post can go down.
--   If other posts receive more upvotes, the potential payout of the post can go down.
--   If other posts receive more downvotes, the potential payout of the post can go up.
+-   If other posts receive more upvotes, the potential payout of the post can go down very slightly.
 -   If upvotes are removed from a post, the potential payout of the post can go down.
--   If downvotes are removed from a post, the potential payout of the post can go up.
--   If the price of BLURT goes up, the potential payout of all posts can go up.
--   If the price of BLURT goes down, the potential payout of all posts can go down.
+
+It is important to understand that global economic changes, such as voting activity increasing or decreasing across the Blurt chain, will have a small effect during the 7-day voting period on an individual post; the largest effect is from the votes on the post itself.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
@@ -690,23 +661,19 @@ Posts and comments remain active for 7 days. When the period is over, you are ab
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="What_is_the_difference_between_BLURT__BLURT_Power__and_Blurt_Dollars">What is the difference between BLURT, Blurt Power, and Blurt Dollars?</span>
+## <span id="What_is_the_difference_between_BLURT__BLURT_Power__and_Blurt_Dollars">What is the difference between BLURT and Blurt Power?</span>
 
-**BLURT** - BLURT is the base liquid currency token in the platform. BLURT can be powered up into Blurt Power, traded for Blurt Dollars, or transferred to other accounts. It is a cryptocurrency token, similar to bitcoin.
+**BLURT** - BLURT is the base liquid currency token in the platform. BLURT can be powered up into Blurt Power, and can be transferred or delegated to other accounts. It is a cryptocurrency token, similar to Bitcoin.
 
-**Blurt Power** - Blurt Power (abbreviated BP) is a measurement of how much influence a user has in the Blurt network. The more Blurt Power a user holds, the more they can influence the value of posts and comments. Blurt Power is less liquid. If a user wishes to “Power Down” BP, they will receive equal distributions of the BLURT weekly, over a 13 week period.
-
-**Blurt Dollars** - Blurt Dollars (commonly abbreviated HBD) are liquid stable-value currency tokens designed to be pegged to $1 USD. Blurt Dollars can be traded with BLURT, and transferred to other accounts for commerce or exchange. Blurt Dollars may also be converted into BLURT via a process that takes 3.5 days.
+**Blurt Power** - Blurt Power (abbreviated BP) is a measurement of how much influence a user has in the Blurt network. The more Blurt Power a user holds, the more they can influence the value of posts and comments. Blurt Power is less liquid. If a user wishes to “Power Down” BP, they will receive equal distributions of the BLURT weekly, over a 4 week period.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="What_is_delegated_BLURT_Power">What is delegated Blurt Power?</span>
 
-Users have the option to delegate Blurt Power to other users. When a user is delegated Blurt Power - their Resource Credits, content votes, and curation rewards are calculated as if it were their own Blurt Power. Users are not able to power down or cash out delegated Blurt Power however, as it still belongs to the original owner.
+Users have the option to delegate Blurt Power to other users. When a user receives delegated Blurt Power, their mana, vests and voting power increase; this means that their votes are calculated as if that delegated BLURT was their own. One can think of delegation as a kind of loan, but the person giving the delegation retains full control of when they take that delegation back - to undelegate. 
 
-Most users will have a small amount of Blurt Power delegated to them by the Blurt account after creating an account.
-
-Delegated Blurt Power shows up in a user's wallet below their actual Blurt Power balance in parentheses.
+Delegated Blurt Power shows up in a user's wallet below their actual Blurt Power balance in parentheses. Those who delegate out will see a negative balance there. Note, there is no special function to *un*delegate - to do so, just use the delegation function and set it to 0 (zero) BLURT. It takes 5 days for an undelegated amount to show up back into the originator's account - this allows the mana to fully recharge.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
@@ -718,85 +685,36 @@ The price of BLURT is based on the supply and demand of the token, as determined
 
 ## <span id="How_do_I_get_more_BLURT_Power">How do I get more Blurt Power?</span>
 
-With BLURT tokens in your wallet, click "Power Up" to turn them into Blurt Power. If you have Blurt Dollars, you can convert them to BLURT from your wallet, and then power up the BLURT.
-
-If you don’t already have BLURT or Blurt Dollars in your wallet, you can purchase them using bitcoin (BTC), Ether (ETH), Litecoin (LTC), or BitShares (BTS) tokens. You may purchase BTC on various exchanges, such as Coinbase.com or Localbitcoins.com.
-
-To buy:
-
--   Click "Buy Blurt" from the main menu in the top right corner of blurt.blog, or from your wallet.
--   Select the currency to deposit, and enter the amount of that currency you wish to use.
--   Enter your Blurt account name (without the @) for "Your receive address".
--   Click the "Get Deposit Address" button.
--   Send the currency to the provided address.
-
-BLURT purchases made via blurt.blog are facilitated by <a href="https://blocktrades.us">BlockTrades</a>.
-
-Bitcoin can also be exchanged for BLURT on external markets.
+With BLURT tokens in your wallet, click "Power Up" to turn them into Blurt Power. You will also be rewarded in BP from your voting curation rewards. To purchase more BLURT to then power up, just look at the exchanges listed on your profile page dropdown menu.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="How_long_does_it_take_BLURT_or_BLURT_Power_that_I_purchased_to_show_up_in_my_account">How long does it take BLURT or Blurt Power that I purchased to show up in my account?</span>
+## <span id="How_long_does_it_take_BLURT_or_BLURT_Power_that_I_purchased_to_show_up_in_my_account">How long does it take BLURT that I purchased to show up in my account?</span>
 
-Transactions on the Blurt blockchain typically only take about three seconds to process, but when you are purchasing the BLURT tokens using bitcoin or some other token, then the transaction must wait for the transaction to be confirmed on the other network. This can take several hours, and sometimes even days.
+Transactions on the Blurt blockchain typically only take about three seconds to process, but when you are purchasing the BLURT tokens using bitcoin or some other token, then the transaction must wait for the transaction to be confirmed on the other network. If the transfer of BLURT from an exchange into your Blurt account seems to be taking too long, please consult that exchange's rules and their process for submitting a ticket.
 
-If you paid using bitcoin, the third party website <a href="https://bitcoinfees.21.co/">bitcoinfees.21.co</a> can estimate the approximate wait time of the transaction based on the fees that were paid. The third party website <a href="https://blockchain.info/">blockchain.info</a> will lookup the fees that were paid on a specific blockchain transaction.
+Note that BLURT tokens never really leave the blockchain, they are just moved between accounts, including exchange accounts. You can thus monitor the exchanges on the Blurt blockchain to see if your transaction is an isolated glitch, or part of a broader backlog. But, again, please contact that exchange.
+
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="What_is_powering_up_and_down">What is powering up and down?</span>
 
-**Powering up** - If you have BLURT tokens, you can Power Up to Blurt Power to get more voting influence on posts and comments. Having more Blurt Power also increases the amount of curation rewards and new vested tokens that you can earn. More BP also grants more influence on approving Blurt witnesses.
+**Powering up** - If you have BLURT tokens, you can Power Up to Blurt Power to get more voting influence on posts and comments. Having more Blurt Power also increases the amount of curation rewards and new vested tokens that you can earn. More BP also grants more influence on approving Blurt witnesses. BP also increases in value just for holding it, without even voting.
 
-**Powering down** - If you have Blurt Power, you can power down to turn it into liquid BLURT over a period of time. The system will transfer 1/13 of your Blurt Power to BLURT each week for about three months (13 weeks), starting 1 week from the time it is started. However, you will lose your influence in the network proportionally to how much is powered down, so think about it carefully. Power downs can be stopped at any time.
-
-<a href="#Table_of_Contents_Economics">^</a>
-
-## <span id="What_do_the_dollar_amounts_for_pending_payouts_represent">What do the dollar amounts for pending payouts represent?</span>
-
-The dollar amounts next to posts and comments are estimates of the potential payout that will occur when the payout period ends, based on the current voting activity and price of BLURT. These potential payout amounts may fluctuate up or down until the payout period ends.
-
-Payouts occur as a combination of Blurt Power and Blurt Dollars. Sometimes the blockchain may substitute BLURT in place of the Blurt Dollars based on market conditions.
-
-The blockchain estimates the dollar value of BLURT and Blurt Power based on the 3.5 day average price of BLURT reported by the witnesses. The blockchain assumes Blurt Dollars are worth approximately one USD.
+**Powering down** - Blurt Power cannot be traded directly, hence users may wish to turn some BP back into liquid BLURT. Also note that some BLURT is always necessary to pay the small transaction fees. So, if you have Blurt Power, you can power down to turn it back into liquid BLURT over a period of time. You decide how much BP you wish to power down. The system will transfer 1/4 of your Blurt Power to BLURT each week for four weeks, starting one week from the time it is activated. However, you will lose your influence in the network on a weekly basis during the powering down period, so think about it carefully. Power downs can be stopped at any time. Also, you cannot power down BP that has been delegated - you must undelegate first and wait the 5 days for that BP to be credited to your account again.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="Will_1_Blurt_Dollar_always_be_worth__1_00_USD">Will 1 Blurt Dollar always be worth $1.00 USD?</span>
-
-The market value of a Blurt Dollar is dictated by the supply and demand of the token. Therefore it is possible for 1 HBD to be worth more or less than 1 USD depending on market conditions.
-
-<a href="#Table_of_Contents_Economics">^</a>
-
-## <span id="How_do_Blurt_Dollar_to_BLURT_conversions_work">How do Blurt Dollar to BLURT conversions work?</span>
-
-If you convert Blurt Dollars to BLURT, the blockchain will process the transaction over a period of 3.5 days. At the end of the 3.5 days, the HBD will be gone and replaced by approximately $1 USD worth of BLURT tokens. The "approximately 1 USD worth of BLURT tokens" is based on the median BLURT price over the 3.5 days, using the price feeds from the Blurt witnesses. Depending on price fluctuations during the 3.5 days it is possible to end up with more or less than $1 USD worth of BLURT per HBD at the end of the conversion. This is an advanced user feature, and is currently only available to users using external wallets.
-
-<a href="#Table_of_Contents_Economics">^</a>
-
-## <span id="Is_there_a_way_for_me_to_convert_my_Blurt_Dollars_to_BLURT_without_waiting_3_5_days">Is there a way for me to convert my Blurt Dollars to BLURT without waiting 3.5 days?</span>
-
-You can exchange them. Visit the internal Market, found in the main menu. There you can exchange your HBD for BLURT in real-time at whatever the current market price is.
-
-<a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="What_can_I_do_with_my_BLURT_tokens">What can I do with my BLURT tokens?</span>
 
 -   "Power Up" to Blurt Power
--   Exchange for HBD in the internal market
 -   Withdraw to an exchange, and trade for BTC or other digital tokens
 -   Purchase items through third-party stores that accept BLURT tokens
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="What_can_I_do_with_my_HBD_tokens">What can I do with my HBD tokens?</span>
-
--   Convert to BLURT via your wallet (takes 3.5 days)
--   Exchange for BLURT in the internal market
--   Withdraw to an exchange, and trade for BTC or other digital tokens
--   Purchase items through third-party stores that accept HBD tokens
-
-<a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="What_is_a_MVEST">What is a MVEST?</span>
 

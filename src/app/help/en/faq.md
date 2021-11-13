@@ -1011,7 +1011,7 @@ If your tokens are in Blurt Power, it is impossible for a hacker to take out mor
 
 ## <span id="How_do_I_report_a_security_vulnerability">How do I report a security vulnerability?</span>
 
-If you find a security issue please report the details to privacy@blurt.io.
+If you find a security issue please report the details to us in the <a href="https://discord.blurt.world">Blurt Discord</a> channel.
 
 <a href="#Table_of_Contents_Security">^</a>
 
@@ -1033,7 +1033,7 @@ Yes. The public repository can be found at https://gitlab.com/blurt/blurt.
 
 ## <span id="Is_there_a_Github_page_for_the_Blurt_blockchain">Is there a Github page for the Blurt blockchain?</span>
 
-Yes. Will be made public after launch
+Yes. The public repository can be found at https://gitlab.com/blurt/blurt.
 
 <a href="#Table_of_Contents_Developers">^</a>
 
@@ -1041,7 +1041,7 @@ Yes. Will be made public after launch
 
 Many software engineers are currently leveraging the open-source code to build their applications on Blurt
 
-The [Blurt Developer Portal](https://developers.blurt.io/) also contains documents and resources for developing tools and applications for the Blurt blockchain.
+The Blurt Developer Channel can be found within our <a href="https://discord.blurt.world">Blurt Discord</a> server .
 
 <a href="#Table_of_Contents_Developers">^</a>
 

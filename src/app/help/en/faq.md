@@ -698,10 +698,9 @@ Note that BLURT tokens never really leave the blockchain, they are just moved be
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-
 ## <span id="What_is_a_MVEST">What is a VEST?</span>
 
-A VEST is a unit of measurement for Blurt Power. When Blurt was created, the value was fixed at 1 VEST equal to 1 BLURT, and also equal to 1 million "mana". When you power up, your BLURT are actually converted into VESTS, but the value you see as BP is the conversion back into BLURT. The reason for doing this is that BP has two functions: voting and earning some APR. 
+A VEST is a unit of measurement for Blurt Power. When Blurt was created, the value was fixed at 1 VEST equal to 1 BLURT, and also equal to 1 million "mana". When you power up, your BLURT are actually converted into VESTS, but the value you see as BP is the conversion back into BLURT. The reason for doing this is that BP has two functions: voting and earning some APR.
 
 The way it achieves this is that the APR calculates a slowly increasing value for BLURT/VESTS (without creating any new tokens) and you only see this when powering down into liquid BLURT. At the same time, the actual VESTS remain fixed and can hence calculate the value of votes. Without this extra token, a vote already cast could decrease in value just because that voter is then powering down - this doesn't happen.
 
@@ -731,12 +730,11 @@ No, you are not being paid by Blurt. The Blurt network rewards you. It is your r
 
 There are small fees to make transactions such as posting, voting, delegating and others. The fees are set by the Blurt witnesses and can be seen on any blurt.blog feed page. The total fee per transaction is calculated as an Operation Flat Fee plus a Bandwidth Fee, and can be see just before a transaction is signed with your key.
 
-As Blurt has no "downvotes", the fees have served to make much spam uneconomic. Also, in the long term, as the blockchain inflation decreases, so a significant part of witness rewards may come from such fees and hence help secure the blockchain. 
+As Blurt has no "downvotes", the fees have served to make much spam uneconomic. Also, in the long term, as the blockchain inflation decreases, so a significant part of witness rewards may come from such fees and hence help secure the blockchain.
 
 Fees for sending BLURT tokens are usually very small as the size of those transactions is very small. You can see the calculation just before signing the transfer.
 
 <a href="#Table_of_Contents_Economics">^</a>
-
 
 ## <span id="How_long_does_it_take_to_transfer_BLURT_or_HBD_tokens_between_users">How long does it take to transfer BLURT or HBD tokens between users?</span>
 
@@ -759,7 +757,6 @@ The amount of mana you have in absolute terms is equal to your Vests times 1 mil
 ## <span id="How_many_times_can_I_vote_without_depleting_my_voting_mana">How many times can I vote without depleting my voting mana?</span>
 
 Every 100% vote you cast will use 2% of your remaining voting mana. Your voting mana will recharge linearly by 20% each day. You can vote more than 10 times per day, but each vote will be worth less, and it will take longer to reach full voting mana again.
-
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
@@ -804,7 +801,6 @@ Within the blockchain, comments are treated almost the same as posts, except com
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
-
 ## <span id="What_are_curation_trails">What are curation trails?</span>
 
 Some users decide to use third party applications to automatically cast votes. Users can automatically vote for the same posts and comments that other users does. Typically they will set this up to follow the votes of users who are good at curating. When a user has other users automatically voting for the same content that they do, the people that automatically vote after them are called their "curation trail". There are no official curation trails on Blurt, but there may be third party services.
@@ -817,7 +813,6 @@ Every vote has an effect. If you have very low Blurt Power, or have voted with a
 
 If you look at such a post in a Block Explorer (such as blocks.blurtwallet.com), you will see the relationship between your rshares and the vote value in BLURT. The rshares are intermediate tokens that convert Vests into vote values.
 
-
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
 ## <span id="Is_there_a_way_to_make_my_votes_count_for_more">Is there a way to make my votes count for more?</span>
@@ -827,7 +822,6 @@ Yes. The more Blurt Power you have, the more influence your votes will have.
 The platform does not require that anybody purchase BP in order to participate, and there are many users who have earned a lot of Blurt Power without spending any of their own money. You have the option of purchasing more Blurt Power through your blurt.blog wallet by powering up.
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
-
 
 # Plagiarism, Spam, and Abuse
 
@@ -868,7 +862,6 @@ Using random pictures from the internet without giving credit is discouraged. Yo
 You can report any abusive content to the <a href="https://discord.blurt.world">#blurtabuse</a> channel on <a href="https://discord.blurt.world">OpenBlurt.Chat</a>.
 
 <a href="#Table_of_Contents_Plagiarism__Spam__and_Abuse">^</a>
-
 
 # Followers, Feeds, and Reblurting
 

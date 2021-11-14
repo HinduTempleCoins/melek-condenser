@@ -768,7 +768,6 @@ Once you reach about 50 Blurt Power, you will see a vote slider appear when you 
 
 <img src="https://images.hive.blog/DQmV6c21tzSrgXwPHx4tvuc1UiCXBEvzkLBH9QCZHtVN6Ma/image.png">
 
-
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
 ## <span id="Where_can_I_check_my_voting_mana">Where can I check my voting mana?</span>

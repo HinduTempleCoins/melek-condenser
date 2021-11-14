@@ -92,7 +92,6 @@
 -   <a href="#How_can_I_withdraw_my_BLURT_or_HBD_coins">How can I withdraw my BLURT or HBD coins?</a>
 -   <a href="#Will_I_get_a_1099_from_Blurt">Will I get a 1099 from Blurt.blog?</a>
 -   <a href="#How_much_are_the_transaction_fees_for_sending_tokens_to_other_users">How much are the transaction fees for sending tokens to other users?</a>
--   <a href="#Are_there_fees_for_Powering_Up__Powering_Down__trading_on_the_internal_market__or_converting_HBD_to_BLURT">Are there fees for Powering Up, Powering Down, trading on the internal market, or converting HBD to BLURT?</a>
 -   <a href="#How_long_does_it_take_to_transfer_BLURT_or_HBD_tokens_between_users">How long does it take to transfer BLURT or HBD tokens between users?</a>
 
 ### <span id="Table_of_Contents_Voting_and_Curating">Voting and Curating</span>
@@ -103,13 +102,9 @@
 -   <a href="#Where_can_I_check_my_voting_mana">Where can I check my voting mana?</a>
 -   <a href="#What_determines_how_much_of_the_curation_reward_goes_to_the_author_versus_curators">What determines how much of the curation reward goes to the author versus curators?</a>
 -   <a href="#Can_I_get_curation_rewards_for_upvoting_comments">Can I get curation rewards for upvoting comments?</a>
--   <a href="#Do_I_get_curation_rewards_for_downvoting_posts_or_comments">Do I get curation rewards for downvoting posts or comments?</a>
 -   <a href="#What_are_curation_trails">What are curation trails?</a>
 -   <a href="#Why_don_t_my_upvotes_have_an_effect_on_a_post_s_rewards">Why don't my upvotes have an effect on a post's rewards?</a>
 -   <a href="#Is_there_a_way_to_make_my_votes_count_for_more">Is there a way to make my votes count for more?</a>
--   <a href="#What_are_the_valid_reasons_for_downvoting">What are the valid reasons for downvoting?</a>
--   <a href="#Does_a_downvote_mean_that_I_did_something_wrong">Does a downvote mean that I did something wrong?</a>
--   <a href="#Will_a_downvote_hurt_my_reputation">Will a downvote hurt my reputation?</a>
 
 ### <span id="Table_of_Contents_Plagiarism__Spam__and_Abuse">Plagiarism, Spam, and Abuse</span>
 
@@ -120,24 +115,15 @@
 -   <a href="#What_is__cheetah">What is @cheetah?</a>
 -   <a href="#Where_do_I_report_a_post_or_comment_that_contains_plagiarism__spam__or_abuse">Where do I report a post or comment that contains plagiarism, spam, or abuse?</a>
 
-### <span id="Table_of_Contents_Reputation">Reputation</span>
+### <span id="Table_of_Contents_Followers__Feeds_and_Reblurts">Followers, Feeds, and Reblurts</span>
 
--   <a href="#What_is_Reputation">What is Reputation?</a>
--   <a href="#How_is_the_Reputation_score_measured">How is the Reputation score measured?</a>
--   <a href="#How_do_I_improve_my_reputation_score">How do I improve my reputation score?</a>
--   <a href="#What_causes_my_reputation_score_to_go_down">What causes my reputation score to go down?</a>
--   <a href="#Why_does_my_reputation_score_matter">Why does my reputation score matter?</a>
-
-### <span id="Table_of_Contents_Followers__Feeds_and_Reblog">Followers, Feeds, and Reblog</span>
-
--   <a href="#What_is_Reblogging">What is Reblogging?</a>
+-   <a href="#What_is_Reblurting">What is Reblurting?</a>
 -   <a href="#Can_I_share_on_other_social_media">Can I share on other social media?</a>
 
 ### <span id="Table_of_Contents_Blockchain">Blockchain</span>
 
 -   <a href="#What_is_a_blockchain">What is a blockchain?</a>
 -   <a href="#What_is_the_Blurt_blockchain">What is the Blurt blockchain?</a>
--   <a href="#How_do_Resource_Credits_work_on_the_Blurt_blockchain">How do Resource Credits work on the Blurt blockchain?</a>
 -   <a href="#What_is_the_difference_between_Blurt_and_Blurt_blog">What is the difference between Blurt and Blurt.blog?</a>
 -   <a href="#How_is_Blurt_different_from_Bitcoin">How is Blurt different from Bitcoin?</a>
 -   <a href="#What_is_the_difference_between_Proof_of_Work__Proof_of_Stake__and_Delegated_Proof_of_Stake">What is the difference between Proof of Work, Proof of Stake, and Delegated Proof of Stake?</a>
@@ -153,13 +139,13 @@
 -   <a href="#Why_is_the_master_password_a_long_string_of_gibberish">Why is the master password a long string of gibberish?</a>
 -   <a href="#What_are_my_different_keys_for">What are my different keys for?</a>
 -   <a href="#What_do_I_do_if_I_lost_my_password_keys">What do I do if I lost my password/keys?</a>
--   <a href="#Are_my_BLURT_and_Blurt_Dollar_tokens_insured_in_the_event_of_a_hack_or_if_someone_takes_over_my_account">Are my BLURT and Blurt Dollar tokens insured in the event of a hack or if someone takes over my account?</a>
+-   <a href="#Are_my_BLURT_tokens_insured_in_the_event_of_a_hack_or_if_someone_takes_over_my_account">Are my BLURT tokens insured in the event of a hack or if someone takes over my account?</a>
 -   <a href="#How_do_I_report_a_security_vulnerability">How do I report a security vulnerability?</a>
 
 ### <span id="Table_of_Contents_Developers">Developers</span>
 
 -   <a href="#Are_the_Blurt_blockchain_and_Blurt_blog_code_open_source">Are the Blurt blockchain and Blurt.blog code open-source?</a>
--   <a href="#Is_there_a_Github_page_for_Blurt_blog">Is there a Github page for Blurt.blog?</a>
+-   <a href="#Is_there_a_Gitlab_page_for_Blurt_blog">Is there a Gitlab page for Blurt.blog?</a>
 -   <a href="#Is_there_a_Github_page_for_the_Blurt_blockchain">Is there a Github page for the Blurt blockchain?</a>
 -   <a href="#What_is_available_for_developers_interested_in_Blurt_and_Blurt_blog">What is available for developers interested in Blurt and Blurt.blog?</a>
 -   <a href="#How_do_I_use_cli_wallet">How do I use cli_wallet?</a>
@@ -712,21 +698,26 @@ Note that BLURT tokens never really leave the blockchain, they are just moved be
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="What_is_a_MVEST">What is a MVEST?</span>
 
-A VEST is a unit of measurement for Blurt Power. A MVEST is one million VESTS. The amount of Blurt Power in one MVEST can be found on <a href="https://blocks.blurtwallet.com/">blocks.blurtwallet.com</a> as `blurt_per_mvests`.
+## <span id="What_is_a_MVEST">What is a VEST?</span>
+
+A VEST is a unit of measurement for Blurt Power. When Blurt was created, the value was fixed at 1 VEST equal to 1 BLURT, and also equal to 1 million "mana". When you power up, your BLURT are actually converted into VESTS, but the value you see as BP is the conversion back into BLURT. The reason for doing this is that BP has two functions: voting and earning some APR. 
+
+The way it achieves this is that the APR calculates a slowly increasing value for BLURT/VESTS (without creating any new tokens) and you only see this when powering down into liquid BLURT. At the same time, the actual VESTS remain fixed and can hence calculate the value of votes. Without this extra token, a vote already cast could decrease in value just because that voter is then powering down - this doesn't happen.
+
+As of writing, the internal exchange is about 1 VEST = 1.0390 BLURT, and this reflects the APR of about 18 months. The BP APR is set by the witnesses.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="Can_I_sell_goods_and_services_on_Blurt">Can I sell goods and services on Blurt?</span>
 
-Other than making a post and making sales manually, there is no interface for selling items directly on blurt.blog. You can list goods and services on the third-party websites and accept payment in Blurt Dollars or BLURT. You also have the option to advertise your items through Blurt posts.
+Other than making a post and making sales manually, there is no interface for selling items directly on blurt.blog. You can list goods and services on the third-party websites and accept payment in BLURT. You also have the option to advertise your items through Blurt posts.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="How_can_I_withdraw_my_BLURT_or_HBD_coins">How can I withdraw my BLURT or HBD coins?</span>
 
-BLURT token are readily tradable to bitcoin, which can be traded for the local currency of your choice. There is a link to "Sell" your BLURT token in your wallet, which uses the <a href="https://blocktrades.us/">BlockTrades</a> interface.
+BLURT token are readily tradable to Bitcoin, which can be traded for the local currency of your choice. There is a link to "Sell" your BLURT token in your wallet or various exchanges listed in the dropdown menu.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
@@ -738,15 +729,14 @@ No, you are not being paid by Blurt. The Blurt network rewards you. It is your r
 
 ## <span id="How_much_are_the_transaction_fees_for_sending_tokens_to_other_users">How much are the transaction fees for sending tokens to other users?</span>
 
-There are never any fees for transfers within the Blurt network. However, if you transfer Blurt to an exchange and convert it to another currency, you may incur a small fee from the exchange.
+There are small fees to make transactions such as posting, voting, delegating and others. The fees are set by the Blurt witnesses and can be seen on any blurt.blog feed page. The total fee per transaction is calculated as an Operation Flat Fee plus a Bandwidth Fee, and can be see just before a transaction is signed with your key.
+
+As Blurt has no "downvotes", the fees have served to make much spam uneconomic. Also, in the long term, as the blockchain inflation decreases, so a significant part of witness rewards may come from such fees and hence help secure the blockchain. 
+
+Fees for sending BLURT tokens are usually very small as the size of those transactions is very small. You can see the calculation just before signing the transfer.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
-## <span id="Are_there_fees_for_Powering_Up__Powering_Down__trading_on_the_internal_market__or_converting_HBD_to_BLURT">Are there fees for Powering Up, Powering Down, trading on the internal market, or converting HBD to BLURT?</span>
-
-No. None of these actions incur any fees.
-
-<a href="#Table_of_Contents_Economics">^</a>
 
 ## <span id="How_long_does_it_take_to_transfer_BLURT_or_HBD_tokens_between_users">How long does it take to transfer BLURT or HBD tokens between users?</span>
 
@@ -762,19 +752,20 @@ Voting mana is like an "energy bar" in a computer game that goes down a little b
 
 As you use more of your voting mana, your votes will carry less influence. A vote with 50% voting mana left will be worth 1/2 as much as a vote cast with 100% voting mana. Not to worry, the network recharges your voting mana by 20% every day.
 
+The amount of mana you have in absolute terms is equal to your Vests times 1 million. When you vote, your mana (and voting power) decrease but your Vests remain unaffected.
+
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
 ## <span id="How_many_times_can_I_vote_without_depleting_my_voting_mana">How many times can I vote without depleting my voting mana?</span>
 
-Every 100% vote you cast will use 2% of your remaining voting mana. Your voting mana will recharge by 20% each day. You can vote more than 10 times per day, but each vote will be worth less, and it will take longer to reach full voting mana again.
+Every 100% vote you cast will use 2% of your remaining voting mana. Your voting mana will recharge linearly by 20% each day. You can vote more than 10 times per day, but each vote will be worth less, and it will take longer to reach full voting mana again.
 
-Each user also has a mana pool specifically for down votes. This pool is 25% of the upvote mana pool. Downvotes will consume this mana first before consuming regular mana. When voting, 1/50th of the remaining mana is used for a 100% vote. The same math is used for downvote mana but multiplied by 4 because the downvote mana pool is 25% the size of the normal mana pool. The maximum of these values is used. When both mana pools are at 100%, the values are the same. When downvote mana runs out normal mana is used in the same manner as the current behavior.
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
 ## <span id="Can_I_vote_with_less_than_100__of_my_voting_strength">Can I vote with less than 100% of my voting strength?</span>
 
-New users can only upvote and downvote with 100% voting strength.
+Users with low Blurt Power can only upvote with 100% voting weight. This is done automatically to avoid worthless dust votes.
 
 Once you reach about 500 Blurt Power, you will see a vote slider appear when you vote. You can use the slider to adjust the weight of your vote, between 1% and 100% voting strength. Voting with less than 100% voting weight will use up less voting mana, but it will also have less of an influence on the post or comment's rewards.
 
@@ -801,31 +792,31 @@ Of the 50% that goes to the curator, the curator will receive less than 100% if 
 -   At 4 minutes, the curator receives 80%, and 20% remains in the rewards pool.
 -   If a post is upvoted 5 minutes (or later) after posting, 100% of the curation reward goes to the curator.
 
-<a href="#Table_of_Contents_Voting_and_Curating">^</a>
-
-## <span id="Can_I_get_curation_rewards_for_upvoting_comments">Can I get curation rewards for upvoting comments?</span>
-
-Yes. You can earn curation rewards from upvoting both posts and comments!
+Those 5 minutes allow the author to make any edits, if needed, and avoids voting bots "jumping" on posts. The current linear curation curve has removed any economic reason to vote very early anyway.
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
-## <span id="Do_I_get_curation_rewards_for_downvoting_posts_or_comments">Do I get curation rewards for downvoting posts or comments?</span>
+## <span id="Can_I_get_curation_rewards_for_upvoting_comments">Can I get curation rewards for voting on comments?</span>
 
-No. Since downvoting reduces the rewards on a post/comment, it does not earn curation rewards.
+Yes. You can earn curation rewards from voting on both posts and comments!
+
+Within the blockchain, comments are treated almost the same as posts, except comments cannot be reblurted.
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
+
 
 ## <span id="What_are_curation_trails">What are curation trails?</span>
 
-Some users decide to use third party applications to automatically cast votes. Users can automatically vote for the same posts and comments that other users does. Typically they will set this up to follow the votes of users who are good at curating. When a user has other users automatically voting for the same content that they do, the people that automatically vote after them are called their "curation trail".
+Some users decide to use third party applications to automatically cast votes. Users can automatically vote for the same posts and comments that other users does. Typically they will set this up to follow the votes of users who are good at curating. When a user has other users automatically voting for the same content that they do, the people that automatically vote after them are called their "curation trail". There are no official curation trails on Blurt, but there may be third party services.
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
 ## <span id="Why_don_t_my_upvotes_have_an_effect_on_a_post_s_rewards">Why don't my upvotes have an effect on a post's rewards?</span>
 
-A user with more BP is going to have a larger influence on the rewards than users with less BP. One vote from a user with a lot of BP can often have more of an effect than 100 votes from users with a small amount of BP.
+Every vote has an effect. If you have very low Blurt Power, or have voted with a very low weight, such as 1%, then it may be that the value of your vote is below 0.01 BLURT and hence may not show in a post's pending rewards. The precision within your wallet is to the nearest 0.001 BLURT, so it may still have some value.
 
-Even though your vote may not have an immediate effect, when it gets added in along with all the other votes at the end of the payout period, it can still affect the payout. It may also cause more users to vote on the post too, because they saw that you upvoted it - so your votes can have an indirect effect on the payout this way.
+If you look at such a post in a Block Explorer (such as blocks.blurtwallet.com), you will see the relationship between your rshares and the vote value in BLURT. The rshares are intermediate tokens that convert Vests into vote values.
+
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
@@ -833,27 +824,10 @@ Even though your vote may not have an immediate effect, when it gets added in al
 
 Yes. The more Blurt Power you have, the more influence your votes will have.
 
-The platform does not require that anybody purchase BP in order to participate, and there are many users who have earned a lot of Blurt Power without spending any of their own money. You have the option of purchasing more Blurt Power through your Blurt.blog wallet.
+The platform does not require that anybody purchase BP in order to participate, and there are many users who have earned a lot of Blurt Power without spending any of their own money. You have the option of purchasing more Blurt Power through your blurt.blog wallet by powering up.
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
-## <span id="What_are_the_valid_reasons_for_downvoting">What are the valid reasons for downvoting?</span>
-
-Users are allowed to downvote for any reason that they want. There are many users in the community who recommend only using the downvote on posts that are abusive. It is up to you if you want to follow this etiquette.
-
-<a href="#Table_of_Contents_Voting_and_Curating">^</a>
-
-## <span id="Does_a_downvote_mean_that_I_did_something_wrong">Does a downvote mean that I did something wrong?</span>
-
-Just because you received a downvote does not mean that you did something wrong. The downvoting person may have just been voting to reallocate the rewards in a way that they felt was more beneficial to the other active posts in the platform. Often users will leave a comment explaining why they downvoted, but sometimes they might not. If they left a reason, it is up to you to determine if you did anything wrong, and if there is anything you want to change.
-
-<a href="#Table_of_Contents_Voting_and_Curating">^</a>
-
-## <span id="Will_a_downvote_hurt_my_reputation">Will a downvote hurt my reputation?</span>
-
-Not necessarily. See: <a href="#What_causes_my_reputation_score_to_go_down">What causes my reputation score to go down?</a>
-
-<a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
 # Plagiarism, Spam, and Abuse
 
@@ -877,7 +851,7 @@ Not necessarily. See: <a href="#What_causes_my_reputation_score_to_go_down">What
 
 ## <span id="What_are_Blurt_s_policies_on_plagiarism">What are Blurt.blog's policies on plagiarism?</span>
 
-If you are posting plagiarized or copied content, you can get in legal trouble for violating copyright laws. Plagiarized posts and spam are seen as abuse and will be downvoted by community members. If you are posting or using someone else’s content, you must ensure that you have the rights to use the content, and properly reference the sources where you got the material from.
+If you are posting plagiarized or copied content, you can get in legal trouble for violating copyright laws. Plagiarized posts and spam are seen as abuse by community members. If you are posting or using someone else’s content, you must ensure that you have the rights to use the content, and properly reference the sources where you got the material from.
 
 <a href="#Table_of_Contents_Plagiarism__Spam__and_Abuse">^</a>
 
@@ -895,59 +869,12 @@ You can report any abusive content to the <a href="https://discord.blurt.world">
 
 <a href="#Table_of_Contents_Plagiarism__Spam__and_Abuse">^</a>
 
-# Reputation
 
-## <span id="What_is_Reputation">What is Reputation?</span>
+# Followers, Feeds, and Reblurting
 
-Every user has a reputation score next to their name. The reputation score is one way Blurt measures the amount of value you have brought to the community. It is also a mechanism that is designed to help reduce abuse of the Blurt platform.
+## <span id="What_is_Reblurting">What is Reblurting?</span>
 
-Your reputation goes up when accounts vote on your content. Getting downvoted by someone with a higher reputation can push your reputation down and make your posts less visible.
-
-Users with a lower reputation score are unable to affect your reputation.
-
-<a href="#Table_of_Contents_Reputation">^</a>
-
-## <span id="How_is_the_Reputation_score_measured">How is the Reputation score measured?</span>
-
-Every new user starts off with a reputation score of 25.
-
-The reputation score is based off of a `log10` system, which means that a score of 40 is about 10x better than a score of 30.
-
-More information about the calculation of the reputation score can be found in this post from @digitalnotvir:
-https://blurt.blog/steemit/@digitalnotvir/how-reputation-scores-are-calculated-the-details-explained-with-simple-math
-
-<a href="#Table_of_Contents_Reputation">^</a>
-
-## <span id="How_do_I_improve_my_reputation_score">How do I improve my reputation score?</span>
-
-Every time another user upvotes one of your posts or comments, it increases your reputation score. The more Blurt Power that the voter has, the larger the effect is. The best way to earn upvotes is by adding value to the Blurt community.
-
-<a href="#Table_of_Contents_Reputation">^</a>
-
-## <span id="What_causes_my_reputation_score_to_go_down">What causes my reputation score to go down?</span>
-
-The only way for your reputation score to go down is to be downvoted by another user. Not all downvotes will cause a reputation loss though.
-
--   Downvotes from users with a lower reputation score than you will not hurt your score.
--   If your post or comment that was downvoted still received more upvotes than downvotes (weighted by BP), then the net effect on your reputation score will still be positive.
-
-<a href="#Table_of_Contents_Reputation">^</a>
-
-## <span id="Why_does_my_reputation_score_matter">Why does my reputation score matter?</span>
-
-A reputation score is one way Blurt measures the amount of value you have brought to the community. In real estate, they say there are three variables of the utmost importance: location, location, location. On Blurt, those things are: reputation, reputation, reputation. It’s not to say other variables aren’t important, but reputation will be an enormous factor in your level of success.
-
-Many users glance at other users’ reputation scores when deciding which articles to read because they know higher reputation scores means it is much more likely quality content. Furthermore, the higher your rep, the more effect your vote will have on the reputation of others.
-
-It is worth noting that if your reputation score goes below 0, Blurt.blog will hide your posts and comments making it very difficult to gain monetary rewards and followers. This incentivizes online etiquette and respect for your fellow users.
-
-<a href="#Table_of_Contents_Reputation">^</a>
-
-# Followers, Feeds, and Rehiving
-
-## <span id="What_is_Rehiving">What is Rehiving?</span>
-
-This is like reblogging or sharing posts on other platforms. Once you reblurt a post it will appear in your feed and in your followers' feeds as if you had posted it yourself. Use it conservatively and with caution. It is great to want to share content you like and appreciate with people you follow, but you don't want to overwhelm your followers either.
+This is like reblogging or sharing posts on other platforms. Once you reblurt a post it will appear in your feed and in your followers' feeds as if you had posted it yourself. Use it conservatively and with caution. It is great to want to share content you like and appreciate with people who follow you, but you don't want to overwhelm your followers either or bury your own posts.
 
 <a href="#Table_of_Contents_Followers__Feeds_and_Reblurt">^</a>
 
@@ -968,25 +895,6 @@ A blockchain is a public ledger of all transactions ever executed. All of the tr
 ## <span id="What_is_the_Blurt_blockchain">What is the Blurt blockchain?</span>
 
 The Blurt blockchain is the publicly accessible distributed database, which records all posts and votes, and distributes the rewards across the network. It is where all of the text content and voting data is stored, and it is where all of the reward calculations and payouts are performed.
-
-<a href="#Table_of_Contents_Blockchain">^</a>
-
-## <span id="How_do_Resource_Credits_work_on_the_Blurt_blockchain">How do Resource Credits work on the Blurt blockchain?</span>
-
-Since transacting on the Blurt blockchain has zero fees, transaction rate-limiting is employed to safeguard the blockchain from spam attacks. Everything action that you take on the blockchain will consume a small amount of Resource Credits. This includes posting, commenting, voting, transferring tokens, etc. Viewing content does not consume Resource Credits.
-
-Every user has a limited amount of Resource Credits to use each week. The more transactions a user does, the less Resource Credits they will have left (until they recharge). Users with more Blurt Power will have more Resource Credits.
-
-When the blockchain becomes busy (due to heavy use), the Resource Credit cost of transactions may become higher than during times when the blockchain is less busy.
-
-You can check how many Resource Credits you currently have at:
-https://blocks.blurtwallet.com/#/@youraccount
-
-If users do not have enough Resource Credits, they will be unable to transact with the blockchain until their Resource Credits recharge or they acquire additional Blurt Power to increase their Resource Credit balance.
-
-If you get an error that you have exceeded your Resource Credit allowance, it is normally best to just wait and try again later. Usually if you wait and try again later, the transaction will go through.
-
-If you are unable to transact for extended periods of time, or you are frequently running into Resource Credit limits, then you will either need to reduce your usage to stay within your limit, or purchase more Blurt Power for your account.
 
 <a href="#Table_of_Contents_Blockchain">^</a>
 
@@ -1048,8 +956,8 @@ No. Proof of work mining has been removed from Blurt.
 
 Only log into your account using the key with the appropriate permissions for what you are doing:
 
--   Posting key for every day logins
--   Active key when necessary for transfers, power ups, etc.
+-   Posting key for every day logins, posting and voting
+-   Active key when necessary for financial transactions such as transfers, power ups, etc.
 -   Master password or owner key when changing the password
 
 Again, <b>save your master password</b> and keep it safe! If logging in with your post key, make sure you don't overwrite or misplace your original master password.
@@ -1074,7 +982,7 @@ The password has to be long and random for maximum account security.
 
 **Posting key** - The posting key allows accounts to post, comment, edit, vote, reblog, and follow or mute other accounts. Most users should be logging into Blurt every day with the posting key. You are more likely to have your password or key compromised the more you use it so a limited posting key exists to restrict the damage that a compromised account key would cause.
 
-**Active key** - The active key is meant for more sensitive tasks such as transferring funds, power up/down transactions, converting Blurt Dollars, voting for witnesses, updating profile details and avatar, and placing a market order.
+**Active key** - The active key is meant for more sensitive tasks such as transferring funds, power up/down transactions, voting for witnesses, updating profile details and avatar.
 
 **Memo key** - Currently the memo key is not used.
 
@@ -1090,17 +998,17 @@ It is strongly recommended that you store an offline copy of your password somew
 
 <a href="#Table_of_Contents_Security">^</a>
 
-## <span id="Are_my_BLURT_and_Blurt_Dollar_tokens_insured_in_the_event_of_a_hack_or_if_someone_takes_over_my_account">Are my BLURT and Blurt Dollar tokens insured in the event of a hack or if someone takes over my account?</span>
+## <span id="Are_my_BLURT_tokens_insured_in_the_event_of_a_hack_or_if_someone_takes_over_my_account">Are my BLURT tokens insured in the event of a hack or if someone takes over my account?</span>
 
 No, liquid tokens can not be taken back if stolen or sent to the wrong account.
 
-If your tokens are in Blurt Power, it is impossible for a hacker to take out more than 1/13 per week. If your tokens are in savings, there is a three-day wait period for them to become transferable.
+If your tokens are in Blurt Power, it is impossible for a hacker to take out more than 1/4 per week. If your tokens are in savings, there is a three-day wait period for them to become transferable.
 
 <a href="#Table_of_Contents_Security">^</a>
 
 ## <span id="How_do_I_report_a_security_vulnerability">How do I report a security vulnerability?</span>
 
-If you find a security issue please report the details to privacy@blurt.io.
+If you find a security issue please report the details to us in the <a href="https://discord.blurt.world">Blurt Discord</a> channel.
 
 <a href="#Table_of_Contents_Security">^</a>
 
@@ -1114,15 +1022,15 @@ Developers should however avoid the use of the term "Blurt.blog" in their own pr
 
 <a href="#Table_of_Contents_Developers">^</a>
 
-## <span id="Is_there_a_Github_page_for_Blurt_blog">Is there a Github page for blurt.blog?</span>
+## <span id="Is_there_a_Gitlab_page_for_Blurt_blog">Is there a Gitlab page for blurt.blog?</span>
 
-Yes. Will be made public after launch
+Yes. The public repository can be found at https://gitlab.com/blurt/blurt.
 
 <a href="#Table_of_Contents_Developers">^</a>
 
 ## <span id="Is_there_a_Github_page_for_the_Blurt_blockchain">Is there a Github page for the Blurt blockchain?</span>
 
-Yes. Will be made public after launch
+Yes. The public repository can be found at https://gitlab.com/blurt/blurt.
 
 <a href="#Table_of_Contents_Developers">^</a>
 
@@ -1130,7 +1038,7 @@ Yes. Will be made public after launch
 
 Many software engineers are currently leveraging the open-source code to build their applications on Blurt
 
-The [Blurt Developer Portal](https://developers.blurt.io/) also contains documents and resources for developing tools and applications for the Blurt blockchain.
+The Blurt Developer Channel can be found within our <a href="https://discord.blurt.world">Blurt Discord</a> server .
 
 <a href="#Table_of_Contents_Developers">^</a>
 

@@ -210,7 +210,7 @@ You can earn digital tokens on Blurt by:
 
 **Voting and curating** - If you discover and like a post, you can show your appreciation by voting on it. Your votes generate "curation rewards" that are distributed back to you. The amount of such rewards will depend on the size of your vote. Curation rewards are currently set to 50% of your total vote value and are distributed as Blurt Power.
 
-**Purchasing and Vesting** - Users can purchase BLURT tokens through various exchanges and then transfer them into your account. Such BLURT tokens can then be powered up, becoming Blurt Power (BP). Such BP will increase in value even without earning voting rewards. The current earning rate is set by witnesses and can be found in your Blurt Wallet.
+**Purchasing and Vesting** - Users can purchase BLURT tokens through various exchanges and then transfer them into your account. Such BLURT tokens can then be powered up, becoming Blurt Power (BP). Such BP will increase in value even without earning voting rewards. The current earning rate is set at 15% of the inflation rate and divided equally between all BP holders. The current rate can be found in your Blurt Wallet.
 
 <a href="#Table_of_Contents_General">^</a>
 
@@ -410,7 +410,7 @@ Yes. You can see the list of followers or people you are following by clicking o
 
 ## <span id="What_languages_are_supported">What languages are supported?</span>
 
-Currently blurt.blog supports English, Spanish, Russian, French, Italian, Korean, Polish, and Chinese. There are also many communities using the platform that speak other languages. If you are interested in joining our translation team to add additional languages or help support the ones we have, please email us at translate@blurt.io.
+Currently blurt.blog supports English, Spanish, Russian, French, Italian, Korean, Polish, and Chinese. There are also many communities using the platform that speak other languages. If you are interested in joining our translation team to add additional languages or help support the ones we have, please join our Discord server.
 
 <a href="#Table_of_Contents_Site_Navigation">^</a>
 
@@ -704,7 +704,7 @@ A VEST is a unit of measurement for Blurt Power. When Blurt was created, the val
 
 The way it achieves this is that the APR calculates a slowly increasing value for BLURT/VESTS (without creating any new tokens) and you only see this when powering down into liquid BLURT. At the same time, the actual VESTS remain fixed and can hence calculate the value of votes. Without this extra token, a vote already cast could decrease in value just because that voter is then powering down - this doesn't happen.
 
-As of writing, the internal exchange is about 1 VEST = 1.0390 BLURT, and this reflects the APR of about 18 months. The BP APR is set by the witnesses.
+As of writing, the internal exchange is about 1 VEST = 1.0390 BLURT, and this reflects the APR of about 18 months. The BP APR is set by the Blurt blockchain.
 
 <a href="#Table_of_Contents_Economics">^</a>
 
@@ -762,11 +762,12 @@ Every 100% vote you cast will use 2% of your remaining voting mana. Your voting 
 
 ## <span id="Can_I_vote_with_less_than_100__of_my_voting_strength">Can I vote with less than 100% of my voting strength?</span>
 
-Users with low Blurt Power can only upvote with 100% voting weight. This is done automatically to avoid worthless dust votes.
+Users with low Blurt Power can only upvote with 100% voting weight. This is done automatically to avoid worthless dust votes. Note that this also happens if you have a high BP but have depleted your voting power.
 
-Once you reach about 500 Blurt Power, you will see a vote slider appear when you vote. You can use the slider to adjust the weight of your vote, between 1% and 100% voting strength. Voting with less than 100% voting weight will use up less voting mana, but it will also have less of an influence on the post or comment's rewards.
+Once you reach about 50 Blurt Power, you will see a vote slider appear when you vote. You can use the slider to adjust the weight of your vote, between 1% and 100% voting strength. Voting with less than 100% voting weight will use up less voting mana, but it will also have less of an influence on the post or comment's rewards.
 
 <img src="https://images.hive.blog/DQmV6c21tzSrgXwPHx4tvuc1UiCXBEvzkLBH9QCZHtVN6Ma/image.png">
+
 
 <a href="#Table_of_Contents_Voting_and_Curating">^</a>
 
@@ -949,7 +950,7 @@ No. Proof of work mining has been removed from Blurt.
 
 Only log into your account using the key with the appropriate permissions for what you are doing:
 
--   Posting key for every day logins, posting and voting
+-   Posting key for everyday logins, posting and voting
 -   Active key when necessary for financial transactions such as transfers, power ups, etc.
 -   Master password or owner key when changing the password
 

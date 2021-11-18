@@ -8,6 +8,10 @@ hitbtc-exchange
 poloniex
 upbit-exchange
 onepagex
+ionomy
+probitblurt
+blurtlink
+stexofficial
 `
     .trim()
     .split('\n');

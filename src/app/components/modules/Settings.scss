@@ -90,3 +90,20 @@
         }
     }
 }
+
+.Avatar-iframe {
+    margin-top: 10px;
+    border: none;
+    width: 100%;
+    height: calc(100%);
+
+    @media only screen and (max-width: 720px) {
+        height: 640px;
+        width: 400px;
+    }
+
+    @media only screen and (min-width: 721px) {
+        height: 640px;
+        width: 400px;
+    }
+}

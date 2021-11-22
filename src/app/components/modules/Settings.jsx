@@ -120,20 +120,67 @@ class Settings extends React.Component {
         });
     };
 
+    // eslint-disable-next-line class-methods-use-this
+    recieveAvatarUrl = (e) => {
+        const url = e.data;
+
+        if (
+            (typeof url === 'string' || url instanceof String) &&
+            url.includes('http')
+        ) {
+            const { account, updateAvatar } = this.props;
+            let { metaData } = this.props;
+            this.setState({ loading: true });
+            // set avatar url in metadata
+            if (!metaData) metaData = {};
+            if (!metaData.profile) metaData.profile = {};
+            metaData.profile.avatarUrl = url;
+
+            updateAvatar({
+                json_metadata: JSON.stringify(metaData),
+                account: account.name,
+                extensions: [],
+                posting_json_metadata: '',
+                errorCallback: (e) => {
+                    if (e === 'Canceled') {
+                        this.setState({
+                            loading: false,
+                            errorMessage: '',
+                        });
+                    } else {
+                        console.log('updateAccount ERROR', e);
+                        this.setState({
+                            loading: false,
+                            changed: false,
+                            errorMessage: tt('g.server_returned_error'),
+                        });
+                    }
+                },
+                successCallback: () => {
+                    this.setState({
+                        loading: false,
+                        changed: false,
+                        errorMessage: '',
+                        successMessage: 'Avatar Saved Succesfully !',
+                    });
+                    // remove successMessage after a while
+                    setTimeout(
+                        () => this.setState({ successMessage: '' }),
+                        4000
+                    );
+                },
+            });
+        }
+    };
+
     handleSubmit = ({ updateInitialValues }) => {
         let { metaData } = this.props;
         if (!metaData) metaData = {};
         if (!metaData.profile) metaData.profile = {};
         delete metaData.user_image; // old field... cleanup
 
-        const {
-            profile_image,
-            cover_image,
-            name,
-            about,
-            location,
-            website,
-        } = this.state;
+        const { profile_image, cover_image, name, about, location, website } =
+            this.state;
 
         // Update relevant fields
         metaData.profile.profile_image = profile_image.value;
@@ -244,6 +291,16 @@ class Settings extends React.Component {
         }
     };
 
+    componentDidMount() {
+        // to catch avatar url on creation
+        window.addEventListener('message', this.recieveAvatarUrl);
+    }
+
+    componentWillUnmount() {
+        // to remove avatar url listener
+        window.removeEventListener('message', this.recieveAvatarUrl);
+    }
+
     render() {
         const { state, props } = this;
         const { submitting, valid, touched } = this.state.accountSettings;
@@ -264,173 +321,215 @@ class Settings extends React.Component {
         return (
             <div className="Settings">
                 <div className="row">
-                    <div className="small-12 medium-6 large-4 columns">
-                        <h4>{tt('settings_jsx.preferences')}</h4>
-                        {tt('g.choose_language')}
-                        <select
-                            defaultValue={user_preferences.locale}
-                            onChange={this.handleLanguageChange}
-                        >
-                            <option value="en">English</option>
-                            <option value="es">Spanish Español</option>
-                            <option value="ru">Russian русский</option>
-                            <option value="fr">French français</option>
-                            <option value="it">Italian italiano</option>
-                            <option value="ko">Korean 한국어</option>
-                            <option value="ja">Japanese 日本語</option>
-                            <option value="pl">Polish</option>
-                            <option value="zh">Chinese 简体中文</option>
-                        </select>
+                    <div className="small-12 medium-6 large-6 columns">
+                        <div className="row">
+                            <div className="small-12 medium-8 large-10 columns">
+                                <h4>{tt('settings_jsx.preferences')}</h4>
+                                {tt('g.choose_language')}
+                                <select
+                                    defaultValue={user_preferences.locale}
+                                    onChange={this.handleLanguageChange}
+                                >
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish Español</option>
+                                    <option value="ru">Russian русский</option>
+                                    <option value="fr">French français</option>
+                                    <option value="it">Italian italiano</option>
+                                    <option value="ko">Korean 한국어</option>
+                                    <option value="ja">Japanese 日本語</option>
+                                    <option value="pl">Polish</option>
+                                    <option value="zh">Chinese 简体中文</option>
+                                </select>
 
-                        {tt('g.choose_preferred_endpoint')}
-                        <select
-                            defaultValue={preferred_api_endpoint}
-                            onChange={this.handlePreferredAPIEndpointChange}
-                        >
-                            <option value={preferred_api_endpoint}>
-                                {preferred_api_endpoint}
-                            </option>
+                                {tt('g.choose_preferred_endpoint')}
+                                <select
+                                    defaultValue={preferred_api_endpoint}
+                                    onChange={
+                                        this.handlePreferredAPIEndpointChange
+                                    }
+                                >
+                                    <option value={preferred_api_endpoint}>
+                                        {preferred_api_endpoint}
+                                    </option>
 
-                            {this.generateAPIEndpointOptions()}
-                        </select>
-                    </div>
-                </div>
-                <div className="row">
-                    <form
-                        onSubmit={this.handleSubmitForm}
-                        className="small-12 medium-6 large-4 columns"
-                    >
-                        <h4>{tt('settings_jsx.public_profile_settings')}</h4>
-                        {progress.message && (
-                            <div className="info">{progress.message}</div>
-                        )}
-                        {progress.error && (
-                            <div className="error">
-                                {tt('reply_editor.image_upload')}
-                                {': '}
-                                {progress.error}
+                                    {this.generateAPIEndpointOptions()}
+                                </select>
                             </div>
-                        )}
-                        <label>
-                            {tt('settings_jsx.profile_image_url')}
-                            <Dropzone
-                                onDrop={this.onDrop}
-                                className={'none'}
-                                disableClick
-                                multiple={false}
-                                accept="image/*"
-                                ref={(node) => {
-                                    this.dropzone = node;
-                                }}
+                        </div>
+                        <div className="row">
+                            <form
+                                onSubmit={this.handleSubmitForm}
+                                className="small-12 medium-8 large-10 columns"
                             >
-                                <input
-                                    type="url"
-                                    {...profile_image.props}
-                                    autoComplete="off"
-                                />
-                            </Dropzone>
-                            <a
-                                onClick={() =>
-                                    this.onOpenClick('profile_image')
-                                }
-                            >
-                                {tt('settings_jsx.upload_image')}
-                            </a>
-                        </label>
-                        <div className="error">
-                            {profile_image.blur &&
-                                profile_image.touched &&
-                                profile_image.error}
-                        </div>
-                        <label>
-                            {tt('settings_jsx.cover_image_url')}
-                            <input
-                                type="url"
-                                {...cover_image.props}
-                                autoComplete="off"
-                            />
-                            <a onClick={() => this.onOpenClick('cover_image')}>
-                                {tt('settings_jsx.upload_image')}
-                            </a>
-                        </label>
-                        <div className="error">
-                            {cover_image.blur &&
-                                cover_image.touched &&
-                                cover_image.error}
-                        </div>
-                        <label>
-                            {tt('settings_jsx.profile_name')}
-                            <input
-                                type="text"
-                                {...name.props}
-                                maxLength="20"
-                                autoComplete="off"
-                            />
-                        </label>
-                        <div className="error">
-                            {name.touched && name.error}
-                        </div>
-                        <label>
-                            {tt('settings_jsx.profile_about')}
-                            <input
-                                type="text"
-                                {...about.props}
-                                maxLength="160"
-                                autoComplete="off"
-                            />
-                        </label>
-                        <div className="error">
-                            {about.touched && about.error}
-                        </div>
-                        <label>
-                            {tt('settings_jsx.profile_location')}
-                            <input
-                                type="text"
-                                {...location.props}
-                                maxLength="30"
-                                autoComplete="off"
-                            />
-                        </label>
-                        <div className="error">
-                            {location.touched && location.error}
-                        </div>
-                        <label>
-                            {tt('settings_jsx.profile_website')}
-                            <input
-                                type="url"
-                                {...website.props}
-                                maxLength="100"
-                                autoComplete="off"
-                            />
-                        </label>
-                        <div className="error">
-                            {website.blur && website.touched && website.error}
-                        </div>
-                        <br />
-                        {state.loading && (
-                            <span>
-                                <LoadingIndicator type="circle" />
+                                <h4>
+                                    {tt('settings_jsx.public_profile_settings')}
+                                </h4>
+                                {progress.message && (
+                                    <div className="info">
+                                        {progress.message}
+                                    </div>
+                                )}
+                                {progress.error && (
+                                    <div className="error">
+                                        {tt('reply_editor.image_upload')}
+                                        {': '}
+                                        {progress.error}
+                                    </div>
+                                )}
+                                <label>
+                                    {tt('settings_jsx.profile_image_url')}
+                                    <Dropzone
+                                        onDrop={this.onDrop}
+                                        className={'none'}
+                                        disableClick
+                                        multiple={false}
+                                        accept="image/*"
+                                        ref={(node) => {
+                                            this.dropzone = node;
+                                        }}
+                                    >
+                                        <input
+                                            type="url"
+                                            {...profile_image.props}
+                                            autoComplete="off"
+                                        />
+                                    </Dropzone>
+                                    <a
+                                        onClick={() =>
+                                            this.onOpenClick('profile_image')
+                                        }
+                                    >
+                                        {tt('settings_jsx.upload_image')}
+                                    </a>
+                                </label>
+                                <div className="error">
+                                    {profile_image.blur &&
+                                        profile_image.touched &&
+                                        profile_image.error}
+                                </div>
+                                <label>
+                                    {tt('settings_jsx.cover_image_url')}
+                                    <input
+                                        type="url"
+                                        {...cover_image.props}
+                                        autoComplete="off"
+                                    />
+                                    <a
+                                        onClick={() =>
+                                            this.onOpenClick('cover_image')
+                                        }
+                                    >
+                                        {tt('settings_jsx.upload_image')}
+                                    </a>
+                                </label>
+                                <div className="error">
+                                    {cover_image.blur &&
+                                        cover_image.touched &&
+                                        cover_image.error}
+                                </div>
+                                <label>
+                                    {tt('settings_jsx.profile_name')}
+                                    <input
+                                        type="text"
+                                        {...name.props}
+                                        maxLength="20"
+                                        autoComplete="off"
+                                    />
+                                </label>
+                                <div className="error">
+                                    {name.touched && name.error}
+                                </div>
+                                <label>
+                                    {tt('settings_jsx.profile_about')}
+                                    <input
+                                        type="text"
+                                        {...about.props}
+                                        maxLength="160"
+                                        autoComplete="off"
+                                    />
+                                </label>
+                                <div className="error">
+                                    {about.touched && about.error}
+                                </div>
+                                <label>
+                                    {tt('settings_jsx.profile_location')}
+                                    <input
+                                        type="text"
+                                        {...location.props}
+                                        maxLength="30"
+                                        autoComplete="off"
+                                    />
+                                </label>
+                                <div className="error">
+                                    {location.touched && location.error}
+                                </div>
+                                <label>
+                                    {tt('settings_jsx.profile_website')}
+                                    <input
+                                        type="url"
+                                        {...website.props}
+                                        maxLength="100"
+                                        autoComplete="off"
+                                    />
+                                </label>
+                                <div className="error">
+                                    {website.blur &&
+                                        website.touched &&
+                                        website.error}
+                                </div>
                                 <br />
-                            </span>
-                        )}
-                        {!state.loading && (
-                            <input
-                                type="submit"
-                                className="button"
-                                value={tt('settings_jsx.update')}
-                                disabled={disabled}
-                            />
-                        )}{' '}
-                        {state.errorMessage ? (
-                            <small className="error">
-                                {state.errorMessage}
-                            </small>
-                        ) : state.successMessage ? (
-                            <small className="success uppercase">
-                                {state.successMessage}
-                            </small>
-                        ) : null}
-                    </form>
+                                {state.loading && (
+                                    <span>
+                                        <LoadingIndicator type="circle" />
+                                        <br />
+                                    </span>
+                                )}
+                                {!state.loading && (
+                                    <input
+                                        type="submit"
+                                        className="button"
+                                        value={tt('settings_jsx.update')}
+                                        disabled={disabled}
+                                    />
+                                )}{' '}
+                                {state.errorMessage ? (
+                                    <small className="error">
+                                        {state.errorMessage}
+                                    </small>
+                                ) : state.successMessage ? (
+                                    <small className="success uppercase">
+                                        {state.successMessage}
+                                    </small>
+                                ) : null}
+                            </form>
+                        </div>
+                    </div>
+                    <div className="small-12 medium-6 large-6 columns">
+                        <div className="row">
+                            <div className="small-12 medium-12 large-12 columns">
+                                <h4>
+                                    Add a Ready Player Me Avatar to your profile
+                                </h4>
+
+                                <div>
+                                    <iframe
+                                        ref={(elem) =>
+                                            (this.avatarIFrame = elem)
+                                        }
+                                        className="Avatar-iframe"
+                                        title="Ready Player Avatar"
+                                        src="https://blurt.readyplayer.me"
+                                    />
+                                </div>
+
+                                <small>
+                                    Your avatar will be saved to your profile
+                                    after you create one, just come here again
+                                    and edit to change avatar
+                                </small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -470,6 +569,15 @@ export default connect(
         uploadImage: (file, progress) =>
             dispatch(userActions.uploadImage({ file, progress })),
         updateAccount: ({ successCallback, errorCallback, ...operation }) => {
+            const options = {
+                type: 'account_update',
+                operation,
+                successCallback,
+                errorCallback,
+            };
+            dispatch(transactionActions.broadcastOperation(options));
+        },
+        updateAvatar: ({ successCallback, errorCallback, ...operation }) => {
             const options = {
                 type: 'account_update',
                 operation,

@@ -11,6 +11,7 @@ onepagex
 ionomy
 probitblurt
 blurtlink
+blurt-swap
 stexofficial
 `
     .trim()

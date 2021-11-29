@@ -107,17 +107,22 @@ const SidePanel = ({
             {
                 value: 'hive-engine',
                 label: 'Hive Engine',
-                link: 'https://hive-engine.com/?p=market&t=BLURT',
+                link: 'https://hive-engine.com/?p=market&t=SWAP.BLURT',
             },
             // {
             //     value: 'steem-engine',
             //     label: 'Steem Engine',
-            //     link: 'https://steem-engine.com/?p=market&t=BLURT',
+            //     link: 'https://steem-engine.net/?p=market&t=BLURT',
             // },
             {
                 value: 'leodex',
                 label: 'Leodex',
-                link: 'https://leodex.io/market/BLURT',
+                link: 'https://leodex.io/market/SWAP.BLURT',
+            },
+            {
+                value: 'tribaldex',
+                label: 'Tribaldex',
+                link: 'https://tribaldex.com/trade/SWAP.BLURT',
             },
         ],
         external: [

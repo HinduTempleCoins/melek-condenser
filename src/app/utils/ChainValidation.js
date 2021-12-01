@@ -1,6 +1,7 @@
 import tt from 'counterpart';
 import BadActorList from 'app/utils/BadActorList';
 import VerifiedExchangeList from 'app/utils/VerifiedExchangeList';
+import SuspendedExchangeList from 'app/utils/SuspendedExchangeList';
 import { PrivateKey, PublicKey } from '@blurtfoundation/blurtjs/lib/auth/ecc';
 
 export function validate_account_name(value) {
@@ -62,6 +63,12 @@ export function validate_account_name(value) {
 export function validate_account_name_with_memo(name, memo) {
     if (VerifiedExchangeList.includes(name) && !memo) {
         return tt('chainvalidation_js.verified_exchange_no_memo');
+    }
+    if (SuspendedExchangeList.includes(name)) {
+        return tt('chainvalidation_js.suspended_exchange');
+    }
+    if (name == 'blurt-swap' && memo && !memo.startsWith('SWAP.BLURT')) {
+        return tt('chainvalidation_js.invalid_memo');
     }
     return validate_account_name(name);
 }

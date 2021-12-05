@@ -633,6 +633,8 @@
         "each_account_segment_should_end_with_a_letter_or_digit": "Each account segment should end with a letter or digit.",
         "each_account_segment_should_be_longer": "Each account segment should be longer.",
         "verified_exchange_no_memo": "Для перевода на биржу Вы должны указать примечание.",
+        "suspended_exchange": "This exchange account is no longer active.",
+        "invalid_memo": "Memo for deposits to Hive-Engine/Tribaldex should start with SWAP.BLURT.",
         "badactor": "Use caution sending to this account. Please double check your spelling for possible phishing.",
         "memo_has_privatekey": "Please do not include what appears to be a private key or password.",
         "memo_is_privatekey": "Do not use private keys in memos.",

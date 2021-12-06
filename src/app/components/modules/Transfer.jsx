@@ -172,13 +172,15 @@ class TransferForm extends Component {
                     : !values.asset
                     ? tt('g.required')
                     : null;
+                const { transferType } = this.props.initialValues;
 
                 const validationResult = {
                     to: !values.to
                         ? tt('g.required')
                         : validate_account_name_with_memo(
                               values.to,
-                              values.memo
+                              values.memo,
+                              transferType
                           ),
                     amount: !values.amount
                         ? 'Required'

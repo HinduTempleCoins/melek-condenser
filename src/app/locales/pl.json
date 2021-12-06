@@ -623,7 +623,7 @@
         "each_account_segment_should_be_longer": "Each account segment should be longer.",
         "verified_exchange_no_memo": "Musisz dodać memo w swoim transferze.",
         "suspended_exchange": "This exchange account is no longer active.",
-        "delegation_blocked": "This account has been detected to upvote plagiarized content. Delegations are blocked.",
+        "delegation_blocked": "This account has been reported for unfiltered vote-for-delegation. Delegations are blocked.",
         "invalid_memo": "Memo for deposits to Hive-Engine/Tribaldex should start with SWAP.BLURT.",
         "badactor": "Use caution sending to this account. Please double check your spelling for possible phishing.",
         "memo_has_privatekey": "Please do not include what appears to be a private key or password.",

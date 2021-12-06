@@ -59,9 +59,16 @@ export function validate_account_name(value) {
  *
  * @param {string} name
  * @param {string} memo
+ * @param {string} transferType
+ * @param {string} amount
  * @returns {null|string} string if there's a validation error
  */
-export function validate_account_name_with_memo(name, memo, transferType) {
+export function validate_account_name_with_memo(
+    name,
+    memo,
+    transferType,
+    amount
+) {
     if (VerifiedExchangeList.includes(name) && !memo) {
         return tt('chainvalidation_js.verified_exchange_no_memo');
     }
@@ -73,6 +80,7 @@ export function validate_account_name_with_memo(name, memo, transferType) {
     }
     if (
         transferType === 'Delegate to Account' &&
+        parseFloat(amount) > 0 &&
         DelegationBlockedList.includes(name)
     ) {
         return tt('chainvalidation_js.delegation_blocked');

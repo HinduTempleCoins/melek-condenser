@@ -180,7 +180,8 @@ class TransferForm extends Component {
                         : validate_account_name_with_memo(
                               values.to,
                               values.memo,
-                              transferType
+                              transferType,
+                              values.amount
                           ),
                     amount: !values.amount
                         ? 'Required'

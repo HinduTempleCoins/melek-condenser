@@ -10,6 +10,8 @@ import reactForm from 'app/utils/ReactForm';
 import UserList from 'app/components/elements/UserList';
 import Dropzone from 'react-dropzone';
 import * as blurt from '@blurtfoundation/blurtjs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Settings extends React.Component {
     constructor(props) {
@@ -163,6 +165,9 @@ class Settings extends React.Component {
                         errorMessage: '',
                         successMessage: 'Avatar Saved Succesfully !',
                     });
+                    toast.success('Avatar Saved Successfully', {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
                     // remove successMessage after a while
                     setTimeout(
                         () => this.setState({ successMessage: '' }),
@@ -171,6 +176,54 @@ class Settings extends React.Component {
                 },
             });
         }
+    };
+
+    // eslint-disable-next-line class-methods-use-this
+    removeAvatarUrl = () => {
+        const { account, updateAvatar } = this.props;
+        let { metaData } = this.props;
+        this.setState({ loading: true });
+        // set avatar url in metadata
+        if (!metaData) metaData = {};
+        if (!metaData.profile) metaData.profile = {};
+
+        // Remove avatar URL
+        if (metaData.profile.avatarUrl) delete metaData.profile.avatarUrl;
+
+        updateAvatar({
+            json_metadata: JSON.stringify(metaData),
+            account: account.name,
+            extensions: [],
+            posting_json_metadata: '',
+            errorCallback: (e) => {
+                if (e === 'Canceled') {
+                    this.setState({
+                        loading: false,
+                        errorMessage: '',
+                    });
+                } else {
+                    console.log('updateAccount ERROR', e);
+                    this.setState({
+                        loading: false,
+                        changed: false,
+                        errorMessage: tt('g.server_returned_error'),
+                    });
+                }
+            },
+            successCallback: () => {
+                this.setState({
+                    loading: false,
+                    changed: false,
+                    errorMessage: '',
+                    successMessage: 'Avatar Removed Succesfully !',
+                });
+                toast.success('Avatar Removed Successfully', {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                // remove successMessage after a while
+                setTimeout(() => this.setState({ successMessage: '' }), 4000);
+            },
+        });
     };
 
     handleSubmit = ({ updateInitialValues }) => {
@@ -315,6 +368,10 @@ class Settings extends React.Component {
             progress,
         } = this.state;
 
+        let { metaData } = this.props;
+        if (!metaData) metaData = {};
+        if (!metaData.profile) metaData.profile = {};
+
         const { user_preferences } = this.props;
         const preferred_api_endpoint = this.getPreferredApiEndpoint();
 
@@ -322,6 +379,7 @@ class Settings extends React.Component {
             <div className="Settings">
                 <div className="row">
                     <div className="small-12 medium-6 large-6 columns">
+                        <ToastContainer />
                         <div className="row">
                             <div className="small-12 medium-8 large-10 columns">
                                 <h4>{tt('settings_jsx.preferences')}</h4>
@@ -527,6 +585,21 @@ class Settings extends React.Component {
                                     after you create one, just come here again
                                     and edit to change avatar
                                 </small>
+
+                                <br />
+                                <br />
+                                <button
+                                    onClick={this.removeAvatarUrl}
+                                    disabled={
+                                        state.loading ||
+                                        submitting ||
+                                        !metaData.profile.avatarUrl
+                                    }
+                                    type="button"
+                                    className="button"
+                                >
+                                    Remove Avatar
+                                </button>
                             </div>
                         </div>
                     </div>

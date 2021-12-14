@@ -240,6 +240,7 @@
         "currency_market": "거래소",
         "stolen_account_recovery": "도난 계정 복구",
         "change_account_password": "비밀번호 변경",
+        "account_recovery_tools": "계정 복구 도구",
         "witnesses": "증인",
         "vote_for_witnesses": "증인 투표",
         "privacy_policy": "개인정보 방침",

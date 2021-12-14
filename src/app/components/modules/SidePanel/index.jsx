@@ -73,6 +73,11 @@ const SidePanel = ({
                 link: 'https://ericet.github.io/BlurtAccountRecovery/',
             },
             {
+                value: 'account_recovery_tools',
+                label: tt('navigation.account_recovery_tools'),
+                link: 'https://recovery.blurtwallet.com',
+            },
+            {
                 value: 'vote_for_witnesses',
                 label: tt('navigation.vote_for_witnesses'),
                 link: '/~witnesses',

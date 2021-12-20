@@ -670,6 +670,7 @@
     "transfer_jsx": {
         "amount_is_in_form": "Podana kwota musi być w formacie 99999.999",
         "insufficient_funds": "Niewystarczające fundusze",
+        "leave_1_blurt": "Leave at least 1 BLURT for transaction fees.",
         "use_only_3_digits_of_precison": "Używaj tylko 3 cyfr po przecinku",
         "send_to_account": "Wyślij na konto",
         "asset": "Aktywa",

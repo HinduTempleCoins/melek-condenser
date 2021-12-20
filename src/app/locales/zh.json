@@ -669,6 +669,7 @@
     "transfer_jsx": {
         "amount_is_in_form": "金额以99999.999的形式出现",
         "insufficient_funds": "资金不足",
+        "leave_1_blurt": "Leave at least 1 BLURT for transaction fees.",
         "use_only_3_digits_of_precison": "只能使用3位数的精度",
         "send_to_account": "发送到账户",
         "asset": "资产",

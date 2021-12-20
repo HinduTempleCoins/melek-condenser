@@ -151,6 +151,24 @@ class TransferForm extends Component {
             const balance = balanceValue.split(' ')[0];
             return parseFloat(amount) > parseFloat(balance);
         };
+        const lessThan1Blurt = (asset, amount) => {
+            const { currentAccount } = props;
+            const isWithdraw =
+                transferType && transferType === 'Savings Withdraw';
+            const balanceValue =
+                !asset || asset === 'BLURT'
+                    ? isWithdraw
+                        ? currentAccount.get('savings_balance')
+                        : currentAccount.get('balance')
+                    : asset === 'HBD'
+                    ? isWithdraw
+                        ? currentAccount.get('savings_sbd_balance')
+                        : currentAccount.get('sbd_balance')
+                    : null;
+            if (!balanceValue) return false;
+            const balance = balanceValue.split(' ')[0];
+            return !(parseFloat(balance) - parseFloat(amount) > 1);
+        };
         const { toVesting, toDelegate } = props;
         const fields = toVesting ? ['to', 'amount'] : ['to', 'amount', 'asset'];
         if (
@@ -189,6 +207,8 @@ class TransferForm extends Component {
                         ? tt('transfer_jsx.amount_is_in_form')
                         : insufficientFunds(values.asset, values.amount)
                         ? tt('transfer_jsx.insufficient_funds')
+                        : lessThan1Blurt(values.asset, values.amount)
+                        ? tt('transfer_jsx.leave_1_blurt')
                         : countDecimals(values.amount) > 3
                         ? tt('transfer_jsx.use_only_3_digits_of_precison')
                         : null,
@@ -264,7 +284,9 @@ class TransferForm extends Component {
     assetBalanceClick = (e) => {
         e.preventDefault();
         const { state } = this;
-        state.amount.props.onChange(parseFloat(this.balanceValue()).toFixed(3));
+        state.amount.props.onChange(
+            (parseFloat(this.balanceValue()) - 1).toFixed(3)
+        );
     };
 
     render() {
@@ -769,10 +791,8 @@ export default connect(
                 memo: toVesting ? undefined : memo ? memo : '',
             };
 
-            let size = JSON.stringify(operation).replace(
-                /[\[\]\,\"]/g,
-                ''
-            ).length;
+            let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
+                .length;
             let bw_fee = Math.max(
                 0.001,
                 ((size / 1024) * bandwidthKbytesFee).toFixed(3)
@@ -807,10 +827,8 @@ export default connect(
                         ' ' +
                         asset2,
                 };
-                let size = JSON.stringify(operation).replace(
-                    /[\[\]\,\"]/g,
-                    ''
-                ).length;
+                let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
+                    .length;
                 let bw_fee = Math.max(
                     0.001,
                     ((size / 1024) * bandwidthKbytesFee).toFixed(3)

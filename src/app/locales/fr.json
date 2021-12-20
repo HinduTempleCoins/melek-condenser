@@ -669,6 +669,7 @@
     "transfer_jsx": {
         "amount_is_in_form": "Montant dans le format 99999.999",
         "insufficient_funds": "Fonds insuffisants",
+        "leave_1_blurt": "Leave at least 1 BLURT for transaction fees.",
         "use_only_3_digits_of_precison": "Utiliser au maximum 3 décimales pour la précision",
         "send_to_account": "Envoyer au compte",
         "asset": "Actif",

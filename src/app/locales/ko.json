@@ -668,6 +668,7 @@
     "transfer_jsx": {
         "amount_is_in_form": "Amount is in the form 99999.999",
         "insufficient_funds": "잔고 부족",
+        "leave_1_blurt": "Leave at least 1 BLURT for transaction fees.",
         "use_only_3_digits_of_precison": "최대 소수점 3자리까지 입력 가능",
         "send_to_account": "Send to account",
         "asset": "Asset",

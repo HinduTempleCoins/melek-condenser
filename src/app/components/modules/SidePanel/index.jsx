@@ -68,11 +68,6 @@ const SidePanel = ({
         link: '/change_password'
       },
       {
-        value: 'change_recovery_account',
-        label: tt('navigation.change_recovery_account'),
-        link: 'https://ericet.github.io/BlurtAccountRecovery/'
-      },
-      {
         value: 'account_recovery_tools',
         label: tt('navigation.account_recovery_tools'),
         link: 'https://recovery.blurtwallet.com'

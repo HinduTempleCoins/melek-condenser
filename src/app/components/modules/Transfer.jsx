@@ -160,10 +160,6 @@ class TransferForm extends Component {
                     ? isWithdraw
                         ? currentAccount.get('savings_balance')
                         : currentAccount.get('balance')
-                    : asset === 'HBD'
-                    ? isWithdraw
-                        ? currentAccount.get('savings_sbd_balance')
-                        : currentAccount.get('sbd_balance')
                     : null;
             if (!balanceValue) return false;
             const balance = balanceValue.split(' ')[0];

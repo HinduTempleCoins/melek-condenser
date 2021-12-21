@@ -790,8 +790,10 @@ export default connect(
                 memo: toVesting ? undefined : memo ? memo : '',
             };
 
-            let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
-                .length;
+            let size = JSON.stringify(operation).replace(
+                /[\[\]\,\"]/g,
+                ''
+            ).length;
             let bw_fee = Math.max(
                 0.001,
                 ((size / 1024) * bandwidthKbytesFee).toFixed(3)
@@ -826,8 +828,10 @@ export default connect(
                         ' ' +
                         asset2,
                 };
-                let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
-                    .length;
+                let size = JSON.stringify(operation).replace(
+                    /[\[\]\,\"]/g,
+                    ''
+                ).length;
                 let bw_fee = Math.max(
                     0.001,
                     ((size / 1024) * bandwidthKbytesFee).toFixed(3)

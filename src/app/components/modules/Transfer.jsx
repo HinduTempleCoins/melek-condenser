@@ -167,7 +167,7 @@ class TransferForm extends Component {
                     : null;
             if (!balanceValue) return false;
             const balance = balanceValue.split(' ')[0];
-            return !(parseFloat(balance) - parseFloat(amount) > 1);
+            return !(parseFloat(balance) - parseFloat(amount) >= 1);
         };
         const { toVesting, toDelegate } = props;
         const fields = toVesting ? ['to', 'amount'] : ['to', 'amount', 'asset'];
@@ -284,9 +284,13 @@ class TransferForm extends Component {
     assetBalanceClick = (e) => {
         e.preventDefault();
         const { state } = this;
-        state.amount.props.onChange(
-            (parseFloat(this.balanceValue()) - 1).toFixed(3)
-        );
+        const balance = parseFloat(this.balanceValue());
+
+        let assetBalance = 0;
+        if (balance - 1 > 1) {
+            assetBalance = balance - 1;
+        }
+        state.amount.props.onChange(assetBalance.toFixed(3));
     };
 
     render() {
@@ -791,10 +795,8 @@ export default connect(
                 memo: toVesting ? undefined : memo ? memo : '',
             };
 
-            let size = JSON.stringify(operation).replace(
-                /[\[\]\,\"]/g,
-                ''
-            ).length;
+            let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
+                .length;
             let bw_fee = Math.max(
                 0.001,
                 ((size / 1024) * bandwidthKbytesFee).toFixed(3)
@@ -829,10 +831,8 @@ export default connect(
                         ' ' +
                         asset2,
                 };
-                let size = JSON.stringify(operation).replace(
-                    /[\[\]\,\"]/g,
-                    ''
-                ).length;
+                let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
+                    .length;
                 let bw_fee = Math.max(
                     0.001,
                     ((size / 1024) * bandwidthKbytesFee).toFixed(3)

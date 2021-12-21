@@ -281,8 +281,11 @@ class TransferForm extends Component {
         e.preventDefault();
         const { state } = this;
         const { toDelegate } = this.props;
+        const { transferType } = this.props.initialValues;
+        const isWithdraw = transferType && transferType === 'Savings Withdraw';
+
         let balance = parseFloat(this.balanceValue());
-        if (!toDelegate && balance - 1 > 1) {
+        if (!toDelegate && !isWithdraw && balance - 1 > 1) {
             balance = balance - 1;
         }
         state.amount.props.onChange(balance.toFixed(3));

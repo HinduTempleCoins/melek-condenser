@@ -161,7 +161,7 @@ class TransferForm extends Component {
                         ? currentAccount.get('savings_balance')
                         : currentAccount.get('balance')
                     : null;
-            if (!balanceValue) return false;
+            if (!balanceValue || isWithdraw) return false;
             const balance = balanceValue.split(' ')[0];
             return !(parseFloat(balance) - parseFloat(amount) >= 1);
         };
@@ -280,13 +280,12 @@ class TransferForm extends Component {
     assetBalanceClick = (e) => {
         e.preventDefault();
         const { state } = this;
-        const balance = parseFloat(this.balanceValue());
-
-        let assetBalance = 0;
-        if (balance - 1 > 1) {
-            assetBalance = balance - 1;
+        const { toDelegate } = this.props;
+        let balance = parseFloat(this.balanceValue());
+        if (!toDelegate && balance - 1 > 1) {
+            balance = balance - 1;
         }
-        state.amount.props.onChange(assetBalance.toFixed(3));
+        state.amount.props.onChange(balance.toFixed(3));
     };
 
     render() {
@@ -791,10 +790,8 @@ export default connect(
                 memo: toVesting ? undefined : memo ? memo : '',
             };
 
-            let size = JSON.stringify(operation).replace(
-                /[\[\]\,\"]/g,
-                ''
-            ).length;
+            let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
+                .length;
             let bw_fee = Math.max(
                 0.001,
                 ((size / 1024) * bandwidthKbytesFee).toFixed(3)
@@ -829,10 +826,8 @@ export default connect(
                         ' ' +
                         asset2,
                 };
-                let size = JSON.stringify(operation).replace(
-                    /[\[\]\,\"]/g,
-                    ''
-                ).length;
+                let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
+                    .length;
                 let bw_fee = Math.max(
                     0.001,
                     ((size / 1024) * bandwidthKbytesFee).toFixed(3)

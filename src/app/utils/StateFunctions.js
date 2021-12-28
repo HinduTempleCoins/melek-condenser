@@ -94,6 +94,13 @@ export function powerdownBlurt(account, gprops) {
     return powerdown_blurtf;
 }
 
+export function remainingPowerdowns(account) {
+    const to_withdraw = parseFloat(account.to_withdraw);
+    const withdrawn = parseFloat(account.withdrawn);
+    const remaining = 4 - Math.floor((withdrawn / to_withdraw) * 4);
+    return remaining;
+}
+
 export function assetFloat(str, asset) {
     try {
         assert.equal(typeof str, 'string');

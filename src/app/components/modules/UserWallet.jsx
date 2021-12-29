@@ -30,7 +30,6 @@ import * as transactionActions from 'app/redux/TransactionReducer';
 import * as globalActions from 'app/redux/GlobalReducer';
 import DropdownMenu from 'app/components/elements/DropdownMenu';
 
-
 const assetPrecision = 1000;
 
 class UserWallet extends React.Component {
@@ -116,11 +115,8 @@ class UserWallet extends React.Component {
     };
 
     render() {
-        const {
-            onShowDepositBlurt,
-            onShowWithdrawBlurt,
-            onShowDepositPower,
-        } = this;
+        const { onShowDepositBlurt, onShowWithdrawBlurt, onShowDepositPower } =
+            this;
         const {
             convertToBlurt,
             price_per_blurt,
@@ -248,11 +244,11 @@ class UserWallet extends React.Component {
             !open_orders || !isMyAccount
                 ? 0
                 : open_orders.reduce((o, order) => {
-                    if (order.sell_price.base.indexOf('BLURT') !== -1) {
-                        o += order.for_sale;
-                    }
-                    return o;
-                }, 0) / assetPrecision;
+                      if (order.sell_price.base.indexOf('BLURT') !== -1) {
+                          o += order.for_sale;
+                      }
+                      return o;
+                  }, 0) / assetPrecision;
 
         // set displayed estimated value
 
@@ -365,7 +361,9 @@ class UserWallet extends React.Component {
         const powerdown_balance_str = numberWithCommas(
             powerdown_blurt.toFixed(3)
         );
-        const powerdowns_remaining_str = `${remaining_powerdowns.toString()} ${tt('userwallet_jsx.powerdowns_remaining')}`;
+        const powerdowns_remaining_str = `${remaining_powerdowns.toString()} ${tt(
+            'userwallet_jsx.powerdowns_remaining'
+        )}`;
         const savings_balance_str = numberWithCommas(
             saving_balance_blurt.toFixed(3) + ' BLURT'
         );
@@ -434,7 +432,7 @@ class UserWallet extends React.Component {
             // TODO: occasionally fails. grops not loaded yet?
             console.log(gprops);
             hpApr = this.getCurrentApr(gprops);
-        } catch (e) { }
+        } catch (e) {}
 
         return (
             <div className="UserWallet">
@@ -594,7 +592,12 @@ class UserWallet extends React.Component {
                                         'next_vesting_withdrawal'
                                     )}
                                 />{' '}
-                                {'(~' + powerdown_balance_str + ' BLURT, ' + powerdowns_remaining_str +')'}.
+                                {'(~' +
+                                    powerdown_balance_str +
+                                    ' BLURT, ' +
+                                    powerdowns_remaining_str +
+                                    ')'}
+                                .
                             </span>
                         )}
                     </div>

@@ -263,6 +263,10 @@ class Witnesses extends React.Component {
             const runningVersion = item.get('running_version');
             const noBlock7days = (head_block - lastBlock) * 3 > 604800;
             const isDisabled = signingKey == DISABLED_SIGNING_KEY;
+            const accountCreationFee = item.getIn(['props', 'account_creation_fee']);
+            const operationFlatFee = item.getIn(['props', 'operation_flat_fee']);
+            const bandwidthFee = item.getIn(['props', 'bandwidth_kbytes_fee']);
+            const missedBlocks = item.get('total_missed');
             const votingActive = witnessVotesInProgress.has(owner);
             const classUp =
                 'Voting__button Voting__button-up' +
@@ -426,6 +430,22 @@ class Witnesses extends React.Component {
                         </div>
                     </td>
                     <td>
+                        <small>
+                            <div>
+                                {`Account Creation Fee: ${accountCreationFee}`}
+                            </div>
+                            <div>
+                                {`Operation Flat Fee: ${operationFlatFee}`}
+                            </div>
+                            <div>
+                                {`Bandwidth Fee: ${bandwidthFee} per kB`}
+                            </div>
+                        </small>
+                    </td>
+                    <td>
+                        {missedBlocks.toString()}
+                    </td>
+                    <td>
                         {`${totalVotesHp} BP`}
                         {!isDisabled && <div>{requiredHpToRankUp}</div>}
                     </td>
@@ -516,8 +536,10 @@ class Witnesses extends React.Component {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Rank</th>
+                                        <th>{tt('witnesses_jsx.rank')}</th>
                                         <th>{tt('witnesses_jsx.witness')}</th>
+                                        <th>{tt('witnesses_jsx.fees')}</th>
+                                        <th>{tt('witnesses_jsx.missed_blocks')}</th>
                                         <th className="Witnesses__votes">
                                             {tt('witnesses_jsx.votes_received')}
                                         </th>
@@ -570,8 +592,8 @@ class Witnesses extends React.Component {
                                                 customUsername,
                                                 !(witness_votes
                                                     ? witness_votes.has(
-                                                          customUsername
-                                                      )
+                                                        customUsername
+                                                    )
                                                     : null)
                                             )}
                                         >

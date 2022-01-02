@@ -41,6 +41,9 @@ export const UPLOAD_IMAGE = 'user/UPLOAD_IMAGE';
 export const GET_VESTING_DELEGATIONS = 'user/GET_VESTING_DELEGATIONS';
 export const SET_VESTING_DELEGATIONS = 'user/SET_VESTING_DELEGATIONS';
 export const VESTING_DELEGATIONS_LOADING = 'user/VESTING_DELEGATIONS_LOADING';
+export const GET_EXPIRING_VESTING_DELEGATIONS = 'user/GET_EXPIRING_VESTING_DELEGATIONS';
+export const SET_EXPIRING_VESTING_DELEGATIONS = 'user/SET_EXPIRING_VESTING_DELEGATIONS';
+export const EXPIRING_VESTING_DELEGATIONS_LOADING = 'user/EXPIRING_VESTING_DELEGATIONS_LOADING';
 
 const defaultState = fromJS({
     current: null,
@@ -53,6 +56,7 @@ const defaultState = fromJS({
     show_side_panel: false,
     maybeLoggedIn: false,
     vestingDelegations: null,
+    expiringVestingDelegations: null,
 });
 
 export default function reducer(state = defaultState, action) {
@@ -112,6 +116,12 @@ export default function reducer(state = defaultState, action) {
 
         case VESTING_DELEGATIONS_LOADING:
             return state.set('vestingDelegationsLoading', payload);
+
+        case SET_EXPIRING_VESTING_DELEGATIONS:
+            return state.set('expiringVestingDelegations', payload);
+            
+        case EXPIRING_VESTING_DELEGATIONS_LOADING:
+            return state.set('expiringDelegationsLoading', payload);
 
         case REMOVE_HIGH_SECURITY_KEYS: {
             if (!state.hasIn(['current', 'private_keys'])) return state;
@@ -445,7 +455,25 @@ export const setVestingDelegations = (payload) => ({
     type: SET_VESTING_DELEGATIONS,
     payload,
 });
+
 export const vestingDelegationsLoading = (payload) => ({
     type: VESTING_DELEGATIONS_LOADING,
+    payload,
+});
+
+export const getExpiringVestingDelegations = (payload) => {
+    return {
+        type: GET_EXPIRING_VESTING_DELEGATIONS,
+        payload,
+    };
+};
+
+export const setExpiringVestingDelegations = (payload) => ({
+    type: SET_EXPIRING_VESTING_DELEGATIONS,
+    payload,
+});
+
+export const expiringVestingDelegationsLoading = (payload) => ({
+    type: EXPIRING_VESTING_DELEGATIONS_LOADING,
     payload,
 });

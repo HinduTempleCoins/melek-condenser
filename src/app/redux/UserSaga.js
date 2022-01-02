@@ -37,6 +37,7 @@ export const userWatches = [
     takeLatest(userActions.SAVE_LOGIN, saveLogin_localStorage),
     takeLatest(userActions.LOGOUT, logout),
     takeLatest(userActions.GET_VESTING_DELEGATIONS, getVestingDelegationsSaga),
+    takeLatest(userActions.GET_EXPIRING_VESTING_DELEGATIONS, getExpiringVestingDelegationsSaga),
     takeLatest(userActions.LOGIN_ERROR, loginError),
     takeLatest(userActions.LOAD_SAVINGS_WITHDRAW, loadSavingsWithdraw),
     takeLatest(userActions.UPLOAD_IMAGE, uploadImage),
@@ -75,6 +76,19 @@ function* getVestingDelegationsSaga(action) {
             action.payload.successCallback
         );
     } catch (error) {}
+}
+
+function* getExpiringVestingDelegationsSaga(action) {
+    const now = new Date();
+    const timestamp = now.toISOString().replace("Z", "");
+    try {
+        const expiringVestingDelegations = yield call(
+            [api, api.getExpiringVestingDelegations],
+            action.payload.account,
+            timestamp,
+            action.payload.successCallback
+        );
+    } catch(error) {}
 }
 
 function* loadSavingsWithdraw() {

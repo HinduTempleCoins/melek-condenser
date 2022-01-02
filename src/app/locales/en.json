@@ -695,7 +695,14 @@
     },
     "delegations_jsx": {
         "revoke": "Revoke",
-        "delegations": "Delegations"
+        "delegations": "Delegations",
+        "outgoing_delegations": "Outgoing Delegations",
+        "incoming_delegations": "Incoming Delegations",
+        "expiring_delegations": "Expiring Delegations",
+        "amount": "Amount",
+        "recipient": "Recipient",
+        "delegation_start_time": "Delegation Start Date",
+        "expiration": "Date of Expiration"
     },
     "userwallet_jsx": {
         "transfer": "Transfer",

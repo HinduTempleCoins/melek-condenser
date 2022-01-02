@@ -20,9 +20,14 @@ class Delegations extends React.Component {
     componentWillMount() {
         const { props } = this;
         props.vestingDelegationsLoading(true);
+        props.expiringVestingDelegationsLoading(true);
         props.getVestingDelegations(props.account.get('name'), (err, res) => {
             props.setVestingDelegations(res);
             props.vestingDelegationsLoading(false);
+        });
+        props.getExpiringVestingDelegations(props.account.get('name'), (err, res) => {
+            props.setExpiringVestingDelegations(res);
+            props.expiringVestingDelegationsLoading(false);
         });
     }
 
@@ -31,19 +36,24 @@ class Delegations extends React.Component {
             account,
             currentUser,
             vestingDelegations,
+            expiringVestingDelegations,
             totalVestingFund,
             totalVestingShares,
             vestingDelegationsPending,
+            expiringVestingDelegationsPending,
             revokeDelegation,
             getVestingDelegations,
+            getExpiringVestingDelegations,
             setVestingDelegations,
+            setExpiringVestingDelegations,
             vestingDelegationsLoading,
+            expiringVestingDelegationsLoading,
             operationFlatFee,
             bandwidthKbytesFee,
         } = this.props;
 
         const convertVestsToBlurt = (vests) => {
-            return ((vests * totalVestingFund) / totalVestingShares).toFixed(2);
+            return ((vests * totalVestingFund) / totalVestingShares).toFixed(3);
         };
 
         const isMyAccount =
@@ -56,11 +66,19 @@ class Delegations extends React.Component {
         const showTransferHandler = (delegatee) => {
             const refetchCB = () => {
                 vestingDelegationsLoading(true);
+                expiringVestingDelegationsLoading(true);
                 getVestingDelegations(
                     this.props.account.get('name'),
                     (err, res) => {
                         setVestingDelegations(res);
                         vestingDelegationsLoading(false);
+                    }
+                );
+                getExpiringVestingDelegations(
+                    this.props.account.get('name'),
+                    (err, res) => {
+                        setExpiringVestingDelegations(res);
+                        expiringVestingDelegationsLoading(false);
                     }
                 );
             };
@@ -73,7 +91,7 @@ class Delegations extends React.Component {
             );
         };
 
-        const delegation_log = vestingDelegations ? (
+        const outgoing_delegation_log = vestingDelegations ? (
             vestingDelegations.map((item) => {
                 const vestsAsBlurt = convertVestsToBlurt(
                     parseFloat(item.vesting_shares)
@@ -108,7 +126,28 @@ class Delegations extends React.Component {
             })
         ) : (
             <tr>
-                <td>No Delegations Found</td>
+                <td>No Outgoing Delegations Found</td>
+            </tr>
+        );
+
+        const expiring_delegation_log = expiringVestingDelegations ? (
+            expiringVestingDelegations.map((item) => {
+                const vestsAsBlurt = convertVestsToBlurt(
+                    parseFloat(item.vesting_shares)
+                );
+                return (
+                    <tr
+                        key={`${item.delegator}--${item.expiration.replace(" ", "T")}`}
+                    >
+                        <td className="red">{vestsAsBlurt} BP</td>
+                        <td></td>
+                        <td>{item.expiration.replace("T", " ")}</td>
+                    </tr>
+                );
+            })
+        ) : (
+            <tr>
+                <td>No Expiring Delegations Found</td>
             </tr>
         );
 
@@ -124,12 +163,53 @@ class Delegations extends React.Component {
                 </div>
                 <div className="row">
                     <div className="column small-12">
-                        <h4>{tt('delegations_jsx.delegations')}</h4>
+                        <h4>{tt('delegations_jsx.outgoing_delegations')}</h4>
                         {vestingDelegationsPending && (
                             <LoadingIndicator type="circle" />
                         )}
                         <table>
-                            <tbody>{delegation_log}</tbody>
+                            {!!vestingDelegations && (
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            {tt('delegations_jsx.amount')}
+                                        </th>
+                                        <th>
+                                            {tt('delegations_jsx.recipient')}
+                                        </th>
+                                        <th>
+                                            {tt('delegations_jsx.delegation_start_time')}
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            )}
+                            <tbody>{outgoing_delegation_log}</tbody>
+                        </table>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column small-12">
+                        <h4>{tt('delegations_jsx.expiring_delegations')}</h4>
+                        {expiringVestingDelegationsPending && (
+                            <LoadingIndicator type="circle" />
+                        )}
+                        <table>
+                        {!!expiringVestingDelegations && (
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {tt('delegations_jsx.amount')}
+                                    </th>
+                                    <th></th>
+                                    <th>
+                                        {tt('delegations_jsx.expiration')}
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        )}
+                            <tbody>{expiring_delegation_log}</tbody>
                         </table>
                     </div>
                 </div>
@@ -141,19 +221,24 @@ export default connect(
     // mapStateToProps
     (state, ownProps) => {
         const vestingDelegations = state.user.get('vestingDelegations');
+        const expiringVestingDelegations = state.user.get('expiringVestingDelegations');
 
         const vestingDelegationsPending = state.user.get(
             'vestingDelegationsLoading'
         );
+        const expiringVestingDelegationsPending = state.user.get(
+            'expiringVestingDelegationsLoading'
+        );
+
         const totalVestingShares = state.global.getIn([
             'props',
             'total_vesting_shares',
         ])
             ? parseFloat(
-                  state.global
-                      .getIn(['props', 'total_vesting_shares'])
-                      .split(' ')[0]
-              )
+                state.global
+                    .getIn(['props', 'total_vesting_shares'])
+                    .split(' ')[0]
+            )
             : 0;
 
         const totalVestingFund = state.global.getIn([
@@ -161,37 +246,39 @@ export default connect(
             'total_vesting_fund_blurt',
         ])
             ? parseFloat(
-                  state.global
-                      .getIn(['props', 'total_vesting_fund_blurt'])
-                      .split(' ')[0]
-              )
+                state.global
+                    .getIn(['props', 'total_vesting_fund_blurt'])
+                    .split(' ')[0]
+            )
             : 0;
         const operationFlatFee = state.global.getIn([
             'props',
             'operation_flat_fee',
         ])
             ? parseFloat(
-                  state.global
-                      .getIn(['props', 'operation_flat_fee'])
-                      .split(' ')[0]
-              )
+                state.global
+                    .getIn(['props', 'operation_flat_fee'])
+                    .split(' ')[0]
+            )
             : 0.001;
         const bandwidthKbytesFee = state.global.getIn([
             'props',
             'bandwidth_kbytes_fee',
         ])
             ? parseFloat(
-                  state.global
-                      .getIn(['props', 'bandwidth_kbytes_fee'])
-                      .split(' ')[0]
-              )
+                state.global
+                    .getIn(['props', 'bandwidth_kbytes_fee'])
+                    .split(' ')[0]
+            )
             : 0.1;
         return {
             ...ownProps,
             vestingDelegations,
+            expiringVestingDelegations,
             totalVestingShares,
             totalVestingFund,
             vestingDelegationsPending,
+            expiringVestingDelegationsPending,
             operationFlatFee,
             bandwidthKbytesFee,
         };
@@ -203,11 +290,22 @@ export default connect(
                 userActions.getVestingDelegations({ account, successCallback })
             );
         },
+        getExpiringVestingDelegations: (account, successCallback) => {
+            dispatch(
+                userActions.getExpiringVestingDelegations({ account, successCallback })
+            );
+        },
         setVestingDelegations: (payload) => {
             dispatch(userActions.setVestingDelegations(payload));
         },
+        setExpiringVestingDelegations: (payload) => {
+            dispatch(userActions.setExpiringVestingDelegations(payload));
+        },
         vestingDelegationsLoading: (payload) => {
             dispatch(userActions.vestingDelegationsLoading(payload));
+        },
+        expiringVestingDelegationsLoading: (payload) => {
+            dispatch(userActions.expiringVestingDelegationsLoading(payload));
         },
         revokeDelegation: (
             username,

@@ -41,9 +41,12 @@ export const UPLOAD_IMAGE = 'user/UPLOAD_IMAGE';
 export const GET_VESTING_DELEGATIONS = 'user/GET_VESTING_DELEGATIONS';
 export const SET_VESTING_DELEGATIONS = 'user/SET_VESTING_DELEGATIONS';
 export const VESTING_DELEGATIONS_LOADING = 'user/VESTING_DELEGATIONS_LOADING';
-export const GET_EXPIRING_VESTING_DELEGATIONS = 'user/GET_EXPIRING_VESTING_DELEGATIONS';
-export const SET_EXPIRING_VESTING_DELEGATIONS = 'user/SET_EXPIRING_VESTING_DELEGATIONS';
-export const EXPIRING_VESTING_DELEGATIONS_LOADING = 'user/EXPIRING_VESTING_DELEGATIONS_LOADING';
+export const GET_EXPIRING_VESTING_DELEGATIONS =
+    'user/GET_EXPIRING_VESTING_DELEGATIONS';
+export const SET_EXPIRING_VESTING_DELEGATIONS =
+    'user/SET_EXPIRING_VESTING_DELEGATIONS';
+export const EXPIRING_VESTING_DELEGATIONS_LOADING =
+    'user/EXPIRING_VESTING_DELEGATIONS_LOADING';
 
 const defaultState = fromJS({
     current: null,
@@ -119,7 +122,7 @@ export default function reducer(state = defaultState, action) {
 
         case SET_EXPIRING_VESTING_DELEGATIONS:
             return state.set('expiringVestingDelegations', payload);
-            
+
         case EXPIRING_VESTING_DELEGATIONS_LOADING:
             return state.set('expiringDelegationsLoading', payload);
 

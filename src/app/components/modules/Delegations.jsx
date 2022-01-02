@@ -25,10 +25,13 @@ class Delegations extends React.Component {
             props.setVestingDelegations(res);
             props.vestingDelegationsLoading(false);
         });
-        props.getExpiringVestingDelegations(props.account.get('name'), (err, res) => {
-            props.setExpiringVestingDelegations(res);
-            props.expiringVestingDelegationsLoading(false);
-        });
+        props.getExpiringVestingDelegations(
+            props.account.get('name'),
+            (err, res) => {
+                props.setExpiringVestingDelegations(res);
+                props.expiringVestingDelegationsLoading(false);
+            }
+        );
     }
 
     render() {
@@ -137,11 +140,14 @@ class Delegations extends React.Component {
                 );
                 return (
                     <tr
-                        key={`${item.delegator}--${item.expiration.replace(" ", "T")}`}
+                        key={`${item.delegator}--${item.expiration.replace(
+                            ' ',
+                            'T'
+                        )}`}
                     >
                         <td className="red">{vestsAsBlurt} BP</td>
-                        <td></td>
-                        <td>{item.expiration.replace("T", " ")}</td>
+                        <td />
+                        <td>{item.expiration.replace('T', ' ')}</td>
                     </tr>
                 );
             })
@@ -171,16 +177,16 @@ class Delegations extends React.Component {
                             {!!vestingDelegations && (
                                 <thead>
                                     <tr>
-                                        <th>
-                                            {tt('delegations_jsx.amount')}
-                                        </th>
+                                        <th>{tt('delegations_jsx.amount')}</th>
                                         <th>
                                             {tt('delegations_jsx.recipient')}
                                         </th>
                                         <th>
-                                            {tt('delegations_jsx.delegation_start_time')}
+                                            {tt(
+                                                'delegations_jsx.delegation_start_time'
+                                            )}
                                         </th>
-                                        <th></th>
+                                        <th />
                                     </tr>
                                 </thead>
                             )}
@@ -195,20 +201,18 @@ class Delegations extends React.Component {
                             <LoadingIndicator type="circle" />
                         )}
                         <table>
-                        {!!expiringVestingDelegations && (
-                            <thead>
-                                <tr>
-                                    <th>
-                                        {tt('delegations_jsx.amount')}
-                                    </th>
-                                    <th></th>
-                                    <th>
-                                        {tt('delegations_jsx.expiration')}
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                        )}
+                            {!!expiringVestingDelegations && (
+                                <thead>
+                                    <tr>
+                                        <th>{tt('delegations_jsx.amount')}</th>
+                                        <th />
+                                        <th>
+                                            {tt('delegations_jsx.expiration')}
+                                        </th>
+                                        <th />
+                                    </tr>
+                                </thead>
+                            )}
                             <tbody>{expiring_delegation_log}</tbody>
                         </table>
                     </div>
@@ -221,7 +225,9 @@ export default connect(
     // mapStateToProps
     (state, ownProps) => {
         const vestingDelegations = state.user.get('vestingDelegations');
-        const expiringVestingDelegations = state.user.get('expiringVestingDelegations');
+        const expiringVestingDelegations = state.user.get(
+            'expiringVestingDelegations'
+        );
 
         const vestingDelegationsPending = state.user.get(
             'vestingDelegationsLoading'
@@ -235,10 +241,10 @@ export default connect(
             'total_vesting_shares',
         ])
             ? parseFloat(
-                state.global
-                    .getIn(['props', 'total_vesting_shares'])
-                    .split(' ')[0]
-            )
+                  state.global
+                      .getIn(['props', 'total_vesting_shares'])
+                      .split(' ')[0]
+              )
             : 0;
 
         const totalVestingFund = state.global.getIn([
@@ -246,30 +252,30 @@ export default connect(
             'total_vesting_fund_blurt',
         ])
             ? parseFloat(
-                state.global
-                    .getIn(['props', 'total_vesting_fund_blurt'])
-                    .split(' ')[0]
-            )
+                  state.global
+                      .getIn(['props', 'total_vesting_fund_blurt'])
+                      .split(' ')[0]
+              )
             : 0;
         const operationFlatFee = state.global.getIn([
             'props',
             'operation_flat_fee',
         ])
             ? parseFloat(
-                state.global
-                    .getIn(['props', 'operation_flat_fee'])
-                    .split(' ')[0]
-            )
+                  state.global
+                      .getIn(['props', 'operation_flat_fee'])
+                      .split(' ')[0]
+              )
             : 0.001;
         const bandwidthKbytesFee = state.global.getIn([
             'props',
             'bandwidth_kbytes_fee',
         ])
             ? parseFloat(
-                state.global
-                    .getIn(['props', 'bandwidth_kbytes_fee'])
-                    .split(' ')[0]
-            )
+                  state.global
+                      .getIn(['props', 'bandwidth_kbytes_fee'])
+                      .split(' ')[0]
+              )
             : 0.1;
         return {
             ...ownProps,
@@ -292,7 +298,10 @@ export default connect(
         },
         getExpiringVestingDelegations: (account, successCallback) => {
             dispatch(
-                userActions.getExpiringVestingDelegations({ account, successCallback })
+                userActions.getExpiringVestingDelegations({
+                    account,
+                    successCallback,
+                })
             );
         },
         setVestingDelegations: (payload) => {
@@ -323,8 +332,10 @@ export default connect(
                 vesting_shares: `${vests} VESTS`,
             };
             // Calculate transaction fee
-            const size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '')
-                .length;
+            const size = JSON.stringify(operation).replace(
+                /[\[\]\,\"]/g,
+                ''
+            ).length;
             const bw_fee = Math.max(
                 0.001,
                 ((size / 1024) * bandwidthKbytesFee).toFixed(3)

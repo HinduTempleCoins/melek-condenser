@@ -37,7 +37,10 @@ export const userWatches = [
     takeLatest(userActions.SAVE_LOGIN, saveLogin_localStorage),
     takeLatest(userActions.LOGOUT, logout),
     takeLatest(userActions.GET_VESTING_DELEGATIONS, getVestingDelegationsSaga),
-    takeLatest(userActions.GET_EXPIRING_VESTING_DELEGATIONS, getExpiringVestingDelegationsSaga),
+    takeLatest(
+        userActions.GET_EXPIRING_VESTING_DELEGATIONS,
+        getExpiringVestingDelegationsSaga
+    ),
     takeLatest(userActions.LOGIN_ERROR, loginError),
     takeLatest(userActions.LOAD_SAVINGS_WITHDRAW, loadSavingsWithdraw),
     takeLatest(userActions.UPLOAD_IMAGE, uploadImage),
@@ -80,7 +83,7 @@ function* getVestingDelegationsSaga(action) {
 
 function* getExpiringVestingDelegationsSaga(action) {
     const now = new Date();
-    const timestamp = now.toISOString().replace("Z", "");
+    const timestamp = now.toISOString().replace('Z', '');
     try {
         const expiringVestingDelegations = yield call(
             [api, api.getExpiringVestingDelegations],
@@ -88,7 +91,7 @@ function* getExpiringVestingDelegationsSaga(action) {
             timestamp,
             action.payload.successCallback
         );
-    } catch(error) {}
+    } catch (error) {}
 }
 
 function* loadSavingsWithdraw() {
@@ -482,17 +485,13 @@ function* saveLogin_localStorage() {
         return;
     }
     localStorage.removeItem('autopost2');
-    const [
-        username,
-        private_keys,
-        login_owner_pubkey,
-        login_with_keychain,
-    ] = yield select((state) => [
-        state.user.getIn(['current', 'username']),
-        state.user.getIn(['current', 'private_keys']),
-        state.user.getIn(['current', 'login_owner_pubkey']),
-        state.user.getIn(['current', 'login_with_keychain']),
-    ]);
+    const [username, private_keys, login_owner_pubkey, login_with_keychain] =
+        yield select((state) => [
+            state.user.getIn(['current', 'username']),
+            state.user.getIn(['current', 'private_keys']),
+            state.user.getIn(['current', 'login_owner_pubkey']),
+            state.user.getIn(['current', 'login_with_keychain']),
+        ]);
     if (!login_with_keychain && !private_keys) {
         console.info('No private keys. May be a username login.');
         return;

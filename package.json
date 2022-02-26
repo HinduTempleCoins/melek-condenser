@@ -10,7 +10,7 @@
     "author": "Blurt",
     "main": "index.js",
     "scripts": {
-        "prebuild": "mkdir tmp || true",
+        "prebuild": "mkdir -p tmp",
         "build": "NODE_ENV=production webpack --config ./webpack/prod.config.js && babel src --out-dir lib -D",
         "clean": "rm -rf node_modules dist lib tmp",
         "checktranslations": "node scripts/check_translations.js",
@@ -19,7 +19,6 @@
         "debug": "NODE_ENV=development webpack --config ./webpack/debug.config.js && babel src --source-maps --out-dir lib -D && node --inspect-brk lib/server/index.js",
         "eslint": "LIST=`git diff-index --name-only HEAD | grep .*\\.js | grep -v json`; if [ \"$LIST\" ]; then eslint $LIST; fi",
         "fmt": "prettier --config .prettierrc --write 'src/**/*.js*'",
-        "precommit": "lint-staged",
         "production": "NODE_ENV=production node lib/server/index.js",
         "start": "NODE_ENV=development babel-node ./webpack/dev-server.js",
         "storybook": "start-storybook -p 9001 -c .storybook",

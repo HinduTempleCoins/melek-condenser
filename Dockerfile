@@ -8,9 +8,9 @@ COPY . /app
 
 WORKDIR /app
 
-RUN mkdir tmp && \
-    yarn install && \
-    yarn run build
+ENV PYTHON python3
+
+RUN npm install && npm run build
 
 ENV PORT 8080
 ENV NODE_ENV production

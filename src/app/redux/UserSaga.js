@@ -41,7 +41,10 @@ export const userWatches = [
         userActions.GET_EXPIRING_VESTING_DELEGATIONS,
         getExpiringVestingDelegationsSaga
     ),
-    takeLatest(userActions.GET_INCOMING_VESTING_DELEGATIONS, getIncomingVestingDelegationsSaga),
+    takeLatest(
+        userActions.GET_INCOMING_VESTING_DELEGATIONS,
+        getIncomingVestingDelegationsSaga
+    ),
     takeLatest(userActions.LOGIN_ERROR, loginError),
     takeLatest(userActions.LOAD_SAVINGS_WITHDRAW, loadSavingsWithdraw),
     takeLatest(userActions.UPLOAD_IMAGE, uploadImage),

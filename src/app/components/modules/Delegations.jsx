@@ -131,7 +131,7 @@ class Delegations extends React.Component {
                             <TimeAgoWrapper date={item.min_delegation_time} />
                         </td>
                         <td>
-                        {isMyAccount && (
+                            {isMyAccount && (
                                 <button
                                     className="delegations__revoke button hollow"
                                     onClick={(e) => {
@@ -143,7 +143,7 @@ class Delegations extends React.Component {
                                     {' '}
                                     {tt('delegations_jsx.revoke')}{' '}
                                 </button>
-                        )}
+                            )}
                         </td>
                     </tr>
                 );
@@ -298,9 +298,7 @@ class Delegations extends React.Component {
 export default connect(
     // mapStateToProps
     (state, ownProps) => {
-        const vestingDelegations = state.user.get(
-            'vestingDelegations'
-        );
+        const vestingDelegations = state.user.get('vestingDelegations');
         const expiringVestingDelegations = state.user.get(
             'expiringVestingDelegations'
         );
@@ -390,7 +388,10 @@ export default connect(
         },
         getIncomingVestingDelegations: (account, successCallback) => {
             dispatch(
-                userActions.getIncomingVestingDelegations({ account, successCallback })
+                userActions.getIncomingVestingDelegations({
+                    account,
+                    successCallback,
+                })
             );
         },
 

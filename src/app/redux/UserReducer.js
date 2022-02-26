@@ -47,7 +47,10 @@ export const SET_EXPIRING_VESTING_DELEGATIONS =
     'user/SET_EXPIRING_VESTING_DELEGATIONS';
 export const EXPIRING_VESTING_DELEGATIONS_LOADING =
     'user/EXPIRING_VESTING_DELEGATIONS_LOADING';
-
+export const GET_INCOMING_VESTING_DELEGATIONS = 'user/GET_INCOMING_VESTING_DELEGATIONS';
+export const SET_INCOMING_VESTING_DELEGATIONS = 'user/SET_INCOMING_VESTING_DELEGATIONS';
+export const INCOMING_VESTING_DELEGATIONS_LOADING = 'user/INCOMING_VESTING_DELEGATIONS_LOADING';
+    
 const defaultState = fromJS({
     current: null,
     show_login_modal: false,
@@ -60,6 +63,7 @@ const defaultState = fromJS({
     maybeLoggedIn: false,
     vestingDelegations: null,
     expiringVestingDelegations: null,
+    incomingVestingDelegations: null,
 });
 
 export default function reducer(state = defaultState, action) {
@@ -125,6 +129,12 @@ export default function reducer(state = defaultState, action) {
 
         case EXPIRING_VESTING_DELEGATIONS_LOADING:
             return state.set('expiringDelegationsLoading', payload);
+
+        case SET_INCOMING_VESTING_DELEGATIONS:
+            return state.set('incomingVestingDelegations', payload);
+
+        case INCOMING_VESTING_DELEGATIONS_LOADING:
+            return state.set('incomingVestingDelegationsLoading', payload);
 
         case REMOVE_HIGH_SECURITY_KEYS: {
             if (!state.hasIn(['current', 'private_keys'])) return state;
@@ -478,5 +488,22 @@ export const setExpiringVestingDelegations = (payload) => ({
 
 export const expiringVestingDelegationsLoading = (payload) => ({
     type: EXPIRING_VESTING_DELEGATIONS_LOADING,
+    payload,
+});
+
+export const getIncomingVestingDelegations = (payload) => {
+    return {
+        type: GET_INCOMING_VESTING_DELEGATIONS,
+        payload,
+    };
+};
+
+export const setIncomingVestingDelegations = (payload) => ({
+    type: SET_INCOMING_VESTING_DELEGATIONS,
+    payload,
+});
+
+export const incomingVestingDelegationsLoading = (payload) => ({
+    type: INCOMING_VESTING_DELEGATIONS_LOADING,
     payload,
 });

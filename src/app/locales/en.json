@@ -700,6 +700,7 @@
         "incoming_delegations": "Incoming Delegations",
         "expiring_delegations": "Expiring Delegations",
         "amount": "Amount",
+        "delegator": "Delegator",
         "recipient": "Recipient",
         "delegation_start_time": "Delegation Start Date",
         "expiration": "Date of Expiration"

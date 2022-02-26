@@ -41,6 +41,7 @@ export const userWatches = [
         userActions.GET_EXPIRING_VESTING_DELEGATIONS,
         getExpiringVestingDelegationsSaga
     ),
+    takeLatest(userActions.GET_INCOMING_VESTING_DELEGATIONS, getIncomingVestingDelegationsSaga),
     takeLatest(userActions.LOGIN_ERROR, loginError),
     takeLatest(userActions.LOAD_SAVINGS_WITHDRAW, loadSavingsWithdraw),
     takeLatest(userActions.UPLOAD_IMAGE, uploadImage),
@@ -89,6 +90,18 @@ function* getExpiringVestingDelegationsSaga(action) {
             [api, api.getExpiringVestingDelegations],
             action.payload.account,
             timestamp,
+            action.payload.successCallback
+        );
+    } catch (error) {}
+}
+
+function* getIncomingVestingDelegationsSaga(action) {
+    try {
+        const incomingVestingDelegations = yield call(
+            [api, api.getIncomingVestingDelegations],
+            action.payload.account,
+            '',
+            1000,
             action.payload.successCallback
         );
     } catch (error) {}

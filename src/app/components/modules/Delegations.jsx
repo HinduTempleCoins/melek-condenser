@@ -21,6 +21,7 @@ class Delegations extends React.Component {
         const { props } = this;
         props.vestingDelegationsLoading(true);
         props.expiringVestingDelegationsLoading(true);
+        props.incomingVestingDelegationsLoading(true);
         props.getVestingDelegations(props.account.get('name'), (err, res) => {
             props.setVestingDelegations(res);
             props.vestingDelegationsLoading(false);
@@ -32,6 +33,13 @@ class Delegations extends React.Component {
                 props.expiringVestingDelegationsLoading(false);
             }
         );
+        props.getIncomingVestingDelegations(
+            props.account.get('name'),
+            (err, res) => {
+                props.setIncomingVestingDelegations(res);
+                props.incomingVestingDelegationsLoading(false);
+            }
+        );
     }
 
     render() {
@@ -40,17 +48,22 @@ class Delegations extends React.Component {
             currentUser,
             vestingDelegations,
             expiringVestingDelegations,
+            incomingVestingDelegations,
             totalVestingFund,
             totalVestingShares,
             vestingDelegationsPending,
             expiringVestingDelegationsPending,
+            incomingVestingDelegationsPending,
             revokeDelegation,
             getVestingDelegations,
             getExpiringVestingDelegations,
+            getIncomingVestingDelegations,
             setVestingDelegations,
             setExpiringVestingDelegations,
+            setIncomingVestingDelegations,
             vestingDelegationsLoading,
             expiringVestingDelegationsLoading,
+            incomingVestingDelegationsLoading,
             operationFlatFee,
             bandwidthKbytesFee,
         } = this.props;
@@ -70,6 +83,7 @@ class Delegations extends React.Component {
             const refetchCB = () => {
                 vestingDelegationsLoading(true);
                 expiringVestingDelegationsLoading(true);
+                incomingVestingDelegationsLoading(true);
                 getVestingDelegations(
                     this.props.account.get('name'),
                     (err, res) => {
@@ -82,6 +96,13 @@ class Delegations extends React.Component {
                     (err, res) => {
                         setExpiringVestingDelegations(res);
                         expiringVestingDelegationsLoading(false);
+                    }
+                );
+                getIncomingVestingDelegations(
+                    this.props.account.get('name'),
+                    (err, res) => {
+                        setIncomingVestingDelegations(res);
+                        incomingVestingDelegationsLoading(false);
                     }
                 );
             };
@@ -109,8 +130,8 @@ class Delegations extends React.Component {
                         <td>
                             <TimeAgoWrapper date={item.min_delegation_time} />
                         </td>
+                        <td>
                         {isMyAccount && (
-                            <td>
                                 <button
                                     className="delegations__revoke button hollow"
                                     onClick={(e) => {
@@ -122,8 +143,8 @@ class Delegations extends React.Component {
                                     {' '}
                                     {tt('delegations_jsx.revoke')}{' '}
                                 </button>
-                            </td>
                         )}
+                        </td>
                     </tr>
                 );
             })
@@ -148,12 +169,38 @@ class Delegations extends React.Component {
                         <td className="red">{vestsAsBlurt} BP</td>
                         <td />
                         <td>{item.expiration.replace('T', ' ')}</td>
+                        <td />
                     </tr>
                 );
             })
         ) : (
             <tr>
                 <td>No Expiring Delegations Found</td>
+            </tr>
+        );
+
+        const incoming_delegation_log = incomingVestingDelegations ? (
+            incomingVestingDelegations.map((item) => {
+                const vestsAsBlurt = convertVestsToBlurt(
+                    parseFloat(item.vesting_shares)
+                );
+                return (
+                    <tr
+                        key={`${item.delegator}--${item.delegatee}--${item.min_delegation_time}`}
+                    >
+                        <td className="red">{vestsAsBlurt} BP</td>
+
+                        <td>{item.delegator}</td>
+                        <td>
+                            <TimeAgoWrapper date={item.min_delegation_time} />
+                        </td>
+                        <td />
+                    </tr>
+                );
+            })
+        ) : (
+            <tr>
+                <td>No Incoming Delegations Found</td>
             </tr>
         );
 
@@ -217,6 +264,33 @@ class Delegations extends React.Component {
                         </table>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="column small-12">
+                        <h4>{tt('delegations_jsx.incoming_delegations')}</h4>
+                        {incomingVestingDelegationsPending && (
+                            <LoadingIndicator type="circle" />
+                        )}
+                        <table>
+                            {!!incomingVestingDelegations && (
+                                <thead>
+                                    <tr>
+                                        <th>{tt('delegations_jsx.amount')}</th>
+                                        <th>
+                                            {tt('delegations_jsx.delegator')}
+                                        </th>
+                                        <th>
+                                            {tt(
+                                                'delegations_jsx.delegation_start_time'
+                                            )}
+                                        </th>
+                                        <th />
+                                    </tr>
+                                </thead>
+                            )}
+                            <tbody>{incoming_delegation_log}</tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -224,9 +298,14 @@ class Delegations extends React.Component {
 export default connect(
     // mapStateToProps
     (state, ownProps) => {
-        const vestingDelegations = state.user.get('vestingDelegations');
+        const vestingDelegations = state.user.get(
+            'vestingDelegations'
+        );
         const expiringVestingDelegations = state.user.get(
             'expiringVestingDelegations'
+        );
+        const incomingVestingDelegations = state.user.get(
+            'incomingVestingDelegations'
         );
 
         const vestingDelegationsPending = state.user.get(
@@ -234,6 +313,9 @@ export default connect(
         );
         const expiringVestingDelegationsPending = state.user.get(
             'expiringVestingDelegationsLoading'
+        );
+        const incomingVestingDelegationsPending = state.user.get(
+            'incomingVestingDelegationsLoading'
         );
 
         const totalVestingShares = state.global.getIn([
@@ -281,10 +363,12 @@ export default connect(
             ...ownProps,
             vestingDelegations,
             expiringVestingDelegations,
+            incomingVestingDelegations,
             totalVestingShares,
             totalVestingFund,
             vestingDelegationsPending,
             expiringVestingDelegationsPending,
+            incomingVestingDelegationsPending,
             operationFlatFee,
             bandwidthKbytesFee,
         };
@@ -304,18 +388,32 @@ export default connect(
                 })
             );
         },
+        getIncomingVestingDelegations: (account, successCallback) => {
+            dispatch(
+                userActions.getIncomingVestingDelegations({ account, successCallback })
+            );
+        },
+
         setVestingDelegations: (payload) => {
             dispatch(userActions.setVestingDelegations(payload));
         },
         setExpiringVestingDelegations: (payload) => {
             dispatch(userActions.setExpiringVestingDelegations(payload));
         },
+        setIncomingVestingDelegations: (payload) => {
+            dispatch(userActions.setIncomingVestingDelegations(payload));
+        },
+
         vestingDelegationsLoading: (payload) => {
             dispatch(userActions.vestingDelegationsLoading(payload));
         },
         expiringVestingDelegationsLoading: (payload) => {
             dispatch(userActions.expiringVestingDelegationsLoading(payload));
         },
+        incomingVestingDelegationsLoading: (payload) => {
+            dispatch(userActions.incomingVestingDelegationsLoading(payload));
+        },
+
         revokeDelegation: (
             username,
             to,

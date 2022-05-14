@@ -129,7 +129,6 @@
 -   <a href="#What_is_the_difference_between_Proof_of_Work__Proof_of_Stake__and_Delegated_Proof_of_Stake">What is the difference between Proof of Work, Proof of Stake, and Delegated Proof of Stake?</a>
 -   <a href="#How_often_does_the_Blurt_blockchain_produce_a_new_block">How often does the Blurt blockchain produce a new block?</a>
 -   <a href="#Is_there_a_way_to_see_the_raw_data_that_is_stored_in_the_blockchain">Is there a way to see the raw data that is stored in the blockchain?</a>
--   <a href="#Where_can_I_find_the_information_for_the_official_launch_of_the_blockchain">Where can I find the information for the official launch of the blockchain?</a>
 -   <a href="#Can_I_mine_BLURT">Can I mine BLURT?</a>
 
 ### <span id="Table_of_Contents_Security">Security</span>
@@ -929,12 +928,6 @@ Yes. The blockchain data can be viewed in different ways with third-party tools 
 
 <a href="#Table_of_Contents_Blockchain">^</a>
 
-## <span id="Where_can_I_find_the_information_for_the_official_launch_of_the_blockchain">Where can I find the information for the official launch of the blockchain?</span>
-
-See this post by @blurtio - <a href="https://blurt.blog/communityfork/@blurtio/announcing-the-launch-of-blurt-blockchain">Announcing the Launch of Blurt Blockchain</a>
-
-<a href="#Table_of_Contents_Blockchain">^</a>
-
 ## <span id="Can_I_mine_BLURT">Can I mine BLURT?</span>
 
 No. Proof of work mining has been removed from Blurt.
@@ -1038,7 +1031,7 @@ The Blurt Developer Channel can be found within our <a href="https://discord.blu
 ## <span id="How_do_I_use_cli_wallet">How do I use cli_wallet?</span>
 
 Here is a guide from the user @pfunk explaining how to use the cli_wallet:
-https://blurt.blog/steemhelp/@pfunk/a-learner-s-guide-to-using-steem-s-cliwallet-part-1
+https://hive.blog/steemhelp/@pfunk/a-learner-s-guide-to-using-steem-s-cliwallet-part-1
 
 <a href="#Table_of_Contents_Developers">^</a>
 

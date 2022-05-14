@@ -57,8 +57,6 @@ currency used by the Blurt Blockchain. More information
 
 ##### Additional resources
 
--   [FAQ](https://blurt.blog/faq.html) - Answers to commonly asked questions
--   [Blurt Bluepaper](https://blurt.io/blurt-bluepaper.pdf) - Explanation of how the platform works
--   [Blurt Whitepaper](https://blurt.io/blurt-whitepaper.pdf) - Technical details of the Blurt blockchain
--   [Apps Built on Blurt](https://blurtrojects.com/) - Directory of apps, sites and tools built by Blurt community
+-   [FAQ](https://blurtwallet.com/faq.html) - Answers to commonly asked questions
+-   [Apps Built on Blurt](https://blurt.blog/dapps) - Directory of apps, sites and tools built by Blurt community
 -   [Blurt Block Explorer](https://blocks.blurtwallet.com/) - Shows the raw Blurt blockchain data

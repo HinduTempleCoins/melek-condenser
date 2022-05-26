@@ -113,7 +113,8 @@ class Witnesses extends React.Component {
             ns.filterEnabledWitness !== this.state.filterEnabledWitness ||
             ns.filterByVotes !== this.state.filterByVotes ||
             ns.showOnlyLatestVersion !== this.state.showOnlyLatestVersion ||
-            ns.filterEnabledWithBlocksWitness !== this.state.filterEnabledWithBlocksWitness
+            ns.filterEnabledWithBlocksWitness !==
+                this.state.filterEnabledWithBlocksWitness
         );
     }
 
@@ -197,19 +198,34 @@ class Witnesses extends React.Component {
     }
 
     toggleEnabledWitness() {
-        this.setState({ filterEnabledWitness: !this.state.filterEnabledWitness, filterDisabledWitness: false, filterEnabledWithBlocksWitness: false });
+        this.setState({
+            filterEnabledWitness: !this.state.filterEnabledWitness,
+            filterDisabledWitness: false,
+            filterEnabledWithBlocksWitness: false,
+        });
     }
 
     toggleEnabledWithBlocksWitness() {
-        this.setState({ filterEnabledWithBlocksWitness: !this.state.filterEnabledWithBlocksWitness, filterDisabledWitness: false, filterEnabledWitness: false });
+        this.setState({
+            filterEnabledWithBlocksWitness:
+                !this.state.filterEnabledWithBlocksWitness,
+            filterDisabledWitness: false,
+            filterEnabledWitness: false,
+        });
     }
 
     toggleDisabledWitness() {
-        this.setState({ filterDisabledWitness: !this.state.filterDisabledWitness, filterEnabledWitness: false, filterEnabledWithBlocksWitness: false });
+        this.setState({
+            filterDisabledWitness: !this.state.filterDisabledWitness,
+            filterEnabledWitness: false,
+            filterEnabledWithBlocksWitness: false,
+        });
     }
 
     toggleLatestVersion() {
-        this.setState({ showOnlyLatestVersion: !this.state.showOnlyLatestVersion });
+        this.setState({
+            showOnlyLatestVersion: !this.state.showOnlyLatestVersion,
+        });
     }
 
     toggleMyVotes() {
@@ -217,18 +233,24 @@ class Witnesses extends React.Component {
     }
 
     filterWitnessesByFlags(sorted_witnesses, witness_votes) {
-        const { filterDisabledWitness, filterEnabledWitness, showOnlyLatestVersion, filterByVotes,filterEnabledWithBlocksWitness } = this.state;
+        const {
+            filterDisabledWitness,
+            filterEnabledWitness,
+            showOnlyLatestVersion,
+            filterByVotes,
+            filterEnabledWithBlocksWitness,
+        } = this.state;
         if (filterDisabledWitness) {
             sorted_witnesses = sorted_witnesses.filter((item) => {
                 const signingKey = item.get('signing_key');
-                const isDisabled = (signingKey === DISABLED_SIGNING_KEY) ? true: false;
+                const isDisabled = signingKey === DISABLED_SIGNING_KEY;
                 return isDisabled;
-             });
+            });
         }
         if (filterEnabledWitness) {
             sorted_witnesses = sorted_witnesses.filter((item) => {
                 const signingKey = item.get('signing_key');
-                const isDisabled = (signingKey === DISABLED_SIGNING_KEY) ? true: false;
+                const isDisabled = signingKey === DISABLED_SIGNING_KEY;
                 return !isDisabled;
             });
         }
@@ -241,7 +263,9 @@ class Witnesses extends React.Component {
 
         if (filterByVotes) {
             sorted_witnesses = sorted_witnesses.filter((item) => {
-                const myVote = witness_votes ? witness_votes.has(item.get("owner")) : null;
+                const myVote = witness_votes
+                    ? witness_votes.has(item.get('owner'))
+                    : null;
                 return myVote === true;
             });
         }
@@ -250,7 +274,7 @@ class Witnesses extends React.Component {
             sorted_witnesses = sorted_witnesses.filter((item) => {
                 const signingKey = item.get('signing_key');
                 const isDisabled = signingKey == DISABLED_SIGNING_KEY;
-                return (item.get('last_confirmed_block_num') > 0 && !isDisabled);
+                return item.get('last_confirmed_block_num') > 0 && !isDisabled;
             });
         }
         return sorted_witnesses;
@@ -284,11 +308,14 @@ class Witnesses extends React.Component {
 
         const rankMap = new Map();
         sorted_witnesses.map((item, index) => {
-            rankMap.set(item.get("owner"), index + 1);
+            rankMap.set(item.get('owner'), index + 1);
         });
         this.rankMap = rankMap;
 
-        sorted_witnesses = this.filterWitnessesByFlags(sorted_witnesses, witness_votes);
+        sorted_witnesses = this.filterWitnessesByFlags(
+            sorted_witnesses,
+            witness_votes
+        );
 
         let witness_vote_count = 30;
         let rank = 1;
@@ -382,14 +409,14 @@ class Witnesses extends React.Component {
                     witness_link = '(No URL provided)';
                 } else if (links.remote.test(thread)) {
                     witness_link = (
-                        <a href={thread} target="_blank">
+                        <a href={thread} target="_blank" rel="noreferrer">
                             {tt('witnesses_jsx.external_site')}&nbsp;
                             <Icon name="extlink" />
                         </a>
                     );
                 } else {
                     witness_link = (
-                        <a href={thread} target="_blank">
+                        <a href={thread} target="_blank" rel="noreferrer">
                             {tt('witnesses_jsx.witness_thread')}&nbsp;
                             <Icon name="extlink" />
                         </a>
@@ -411,10 +438,10 @@ class Witnesses extends React.Component {
                     <td>
                         {rank < 10 && '0'}
                         {rank++}
-                        </td>
+                    </td>
                     <td className="Witnesses__rank">
                         {this.rankMap.get(owner) < 10 && '0'}
-                         {this.rankMap.get(owner)}
+                        {this.rankMap.get(owner)}
                         &nbsp;&nbsp;
                         <span className={classUp}>
                             {votingActive ? (
@@ -578,7 +605,7 @@ class Witnesses extends React.Component {
                         <div className="row" key={item}>
                             <div className="column small-12">
                                 <span>
-                                    {/*className="Voting"*/}
+                                    {/* className="Voting" */}
                                     <span className={classUp}>
                                         {votingActive ? (
                                             up
@@ -652,23 +679,60 @@ class Witnesses extends React.Component {
                             </table>
                         </div>
                         <div className="columns small-12 medium-3 large-2 hide-for-small-only">
-                            <div style={{marginLeft: '20px'}} className="panel callout radius">
+                            <div
+                                style={{ marginLeft: '20px' }}
+                                className="panel callout radius"
+                            >
                                 <h3>Filters</h3>
                                 <hr />
-                                <input checked={this.state.filterEnabledWithBlocksWitness}
-                                    onChange={() => this.toggleEnabledWithBlocksWitness()} id="enabled_blocks" type="checkbox" /><label htmlFor="enabled_blocks">Active (Blocks)</label>
+                                <input
+                                    checked={
+                                        this.state
+                                            .filterEnabledWithBlocksWitness
+                                    }
+                                    onChange={() =>
+                                        this.toggleEnabledWithBlocksWitness()
+                                    }
+                                    id="enabled_blocks"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="enabled_blocks">
+                                    Active (Blocks)
+                                </label>
                                 <br />
-                                <input checked={this.state.filterEnabledWitness}
-                                    onChange={() => this.toggleEnabledWitness()} id="enabled" type="checkbox" /><label htmlFor="enabled">Active</label>
+                                <input
+                                    checked={this.state.filterEnabledWitness}
+                                    onChange={() => this.toggleEnabledWitness()}
+                                    id="enabled"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="enabled">Active</label>
                                 <br />
-                                <input checked={this.state.filterDisabledWitness}
-                                    onChange={() => this.toggleDisabledWitness()} id="disabled" type="checkbox" /><label htmlFor="disabled">Disabled</label>
+                                <input
+                                    checked={this.state.filterDisabledWitness}
+                                    onChange={() =>
+                                        this.toggleDisabledWitness()
+                                    }
+                                    id="disabled"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="disabled">Disabled</label>
                                 <br />
-                                <input checked={this.state.showOnlyLatestVersion}
-                                    onChange={() => this.toggleLatestVersion()} id="version" type="checkbox" /><label htmlFor="version">Latest Version</label>
+                                <input
+                                    checked={this.state.showOnlyLatestVersion}
+                                    onChange={() => this.toggleLatestVersion()}
+                                    id="version"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="version">Latest Version</label>
                                 <br />
-                                <input checked={this.state.filterByVotes}
-                                    onChange={() => this.toggleMyVotes()} id="myVotes" type="checkbox" /><label htmlFor="myVotes">My Votes</label>
+                                <input
+                                    checked={this.state.filterByVotes}
+                                    onChange={() => this.toggleMyVotes()}
+                                    id="myVotes"
+                                    type="checkbox"
+                                />
+                                <label htmlFor="myVotes">My Votes</label>
                             </div>
                         </div>
                     </div>

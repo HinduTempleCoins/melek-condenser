@@ -8,7 +8,7 @@ export async function getStateAsync(url) {
 
     const raw = await api.getStateAsync(path);
 
-    const witness_list = await api.getWitnessesByVoteAsync('', 250)
+    const witness_list = await api.getWitnessesByVoteAsync('', 250);
 
     raw.witness_list = witness_list;
 

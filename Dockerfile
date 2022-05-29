@@ -1,4 +1,4 @@
-FROM node:erbium-alpine3.14
+FROM node:fermium-alpine3.15
 
 LABEL maintainer jacob@blurt.foundation
 

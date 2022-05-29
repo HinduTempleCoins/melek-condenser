@@ -13,6 +13,11 @@ import * as blurt from '@blurtfoundation/blurtjs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const DISPLAY_NAME_MAX_LENGTH = 20;
+const ABOUT_SECTION_MAX_LENGTH = 160;
+const LOCATION_MAX_LENGTH = 30;
+const WEBSITE_MAX_LENGTH = 100;
+
 class Settings extends React.Component {
     constructor(props) {
         super(props);
@@ -48,21 +53,21 @@ class Settings extends React.Component {
                         ? tt('settings_jsx.invalid_url')
                         : null,
                 name:
-                    values.name && values.name.length > 20
+                    values.name && values.name.length > DISPLAY_NAME_MAX_LENGTH
                         ? tt('settings_jsx.name_is_too_long')
                         : values.name && /^\s*@/.test(values.name)
                         ? tt('settings_jsx.name_must_not_begin_with')
                         : null,
                 about:
-                    values.about && values.about.length > 160
+                    values.about && values.about.length > ABOUT_SECTION_MAX_LENGTH
                         ? tt('settings_jsx.about_is_too_long')
                         : null,
                 location:
-                    values.location && values.location.length > 30
+                    values.location && values.location.length > LOCATION_MAX_LENGTH
                         ? tt('settings_jsx.location_is_too_long')
                         : null,
                 website:
-                    values.website && values.website.length > 100
+                    values.website && values.website.length > WEBSITE_MAX_LENGTH
                         ? tt('settings_jsx.website_url_is_too_long')
                         : values.website && !/^https?:\/\//.test(values.website)
                         ? tt('settings_jsx.invalid_url')
@@ -490,7 +495,7 @@ class Settings extends React.Component {
                                     <input
                                         type="text"
                                         {...name.props}
-                                        maxLength="20"
+                                        maxLength={DISPLAY_NAME_MAX_LENGTH}
                                         autoComplete="off"
                                     />
                                 </label>
@@ -502,7 +507,7 @@ class Settings extends React.Component {
                                     <input
                                         type="text"
                                         {...about.props}
-                                        maxLength="160"
+                                        maxLength={ABOUT_SECTION_MAX_LENGTH}
                                         autoComplete="off"
                                     />
                                 </label>
@@ -514,7 +519,7 @@ class Settings extends React.Component {
                                     <input
                                         type="text"
                                         {...location.props}
-                                        maxLength="30"
+                                        maxLength={LOCATION_MAX_LENGTH}
                                         autoComplete="off"
                                     />
                                 </label>
@@ -526,7 +531,7 @@ class Settings extends React.Component {
                                     <input
                                         type="url"
                                         {...website.props}
-                                        maxLength="100"
+                                        maxLength={WEBSITE_MAX_LENGTH}
                                         autoComplete="off"
                                     />
                                 </label>

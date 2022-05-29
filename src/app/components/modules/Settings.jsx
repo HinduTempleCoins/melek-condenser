@@ -13,9 +13,9 @@ import * as blurt from '@blurtfoundation/blurtjs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const DISPLAY_NAME_MAX_LENGTH = 20;
-const ABOUT_SECTION_MAX_LENGTH = 160;
-const LOCATION_MAX_LENGTH = 30;
+const DISPLAY_NAME_MAX_LENGTH = 36;
+const ABOUT_SECTION_MAX_LENGTH = 240;
+const LOCATION_MAX_LENGTH = 36;
 const WEBSITE_MAX_LENGTH = 100;
 
 class Settings extends React.Component {

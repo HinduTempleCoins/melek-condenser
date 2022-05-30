@@ -195,7 +195,7 @@ class OffsetScrollBehavior extends ScrollBehavior {
 
 const bindMiddleware = (middleware) => {
     if (process.env.BROWSER && process.env.NODE_ENV === 'development') {
-        const { composeWithDevTools } = require('redux-devtools-extension');
+        const { composeWithDevTools } = require('@redux-devtools/extension');
         return composeWithDevTools(applyMiddleware(...middleware));
     }
     return applyMiddleware(...middleware);

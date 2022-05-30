@@ -11,7 +11,8 @@ import UserList from 'app/components/elements/UserList';
 import Dropzone from 'react-dropzone';
 import * as blurt from '@blurtfoundation/blurtjs';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 
 const DISPLAY_NAME_MAX_LENGTH = 36;
 const ABOUT_SECTION_MAX_LENGTH = 240;

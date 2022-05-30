@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('config');
 const db = {};
 
-const sequelize = new Sequelize(config.get('database_url'));
+const sequelize = env === 'development'? new Sequelize('sqlite::memory:') : new Sequelize(config.get('database_url'));
 
 fs.readdirSync(__dirname)
     .filter((file) => {
@@ -17,7 +17,8 @@ fs.readdirSync(__dirname)
         );
     })
     .forEach((file) => {
-        const model = sequelize.import(path.join(__dirname, file));
+        // const model = sequelize.import(path.join(__dirname, file));
+        const model = require(path.join(__dirname, file))(sequelize, Sequelize);
         db[model.name] = model;
     });
 
@@ -32,7 +33,12 @@ db.Sequelize = Sequelize;
 
 if (env === 'development') {
     // in dev, sync all table schema automatically for convenience
-    sequelize.sync();
+    // (async()=>{
+    //    await sequelize.sync();
+    // })
+    sequelize.sync()
+        .then(() => console.log('DB sync done'))
+
 }
 
 function esc(value, max_length = 256) {

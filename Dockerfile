@@ -1,4 +1,4 @@
-FROM node:fermium-alpine3.15
+FROM node:lts-alpine3.14
 
 LABEL maintainer jacob@blurt.foundation
 

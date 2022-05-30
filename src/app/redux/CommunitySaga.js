@@ -3,11 +3,15 @@ import { api, broadcast, auth } from '@blurtfoundation/blurtjs';
 import { PrivateKey } from '@blurtfoundation/blurtjs/lib/auth/ecc';
 import * as communityActions from './CommunityReducer';
 import * as transactionActions from './TransactionReducer';
-import { wait } from './MarketSaga';
 
 const activeKeySelector = (state) => {
     return state.user.getIn(['pub_keys_used']).active;
 };
+
+const wait = (ms) =>
+    new Promise((resolve) => {
+        setTimeout(() => resolve(), ms);
+    });
 
 const generateAuth = (user, pass, type) => {
     const key = auth.getPrivateKeys(user, pass, [type]);

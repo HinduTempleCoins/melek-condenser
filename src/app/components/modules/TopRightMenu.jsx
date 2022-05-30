@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import tt from 'counterpart';
 import DropdownMenu from 'app/components/elements/DropdownMenu';
@@ -161,16 +162,16 @@ function TopRightMenu({
 }
 
 TopRightMenu.propTypes = {
-    username: React.PropTypes.string,
-    loggedIn: React.PropTypes.bool,
-    probablyLoggedIn: React.PropTypes.bool,
-    showLogin: React.PropTypes.func.isRequired,
-    logout: React.PropTypes.func.isRequired,
-    vertical: React.PropTypes.bool,
-    navigate: React.PropTypes.func,
-    toggleOffCanvasMenu: React.PropTypes.func,
-    nightmodeEnabled: React.PropTypes.bool,
-    toggleNightmode: React.PropTypes.func,
+    username: PropTypes.string,
+    loggedIn: PropTypes.bool,
+    probablyLoggedIn: PropTypes.bool,
+    showLogin: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    vertical: PropTypes.bool,
+    navigate: PropTypes.func,
+    toggleOffCanvasMenu: PropTypes.func,
+    nightmodeEnabled: PropTypes.bool,
+    toggleNightmode: PropTypes.func,
 };
 
 export default connect(

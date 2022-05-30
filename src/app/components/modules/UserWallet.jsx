@@ -123,7 +123,6 @@ class UserWallet extends React.Component {
             savings_withdraws,
             account,
             currentUser,
-            open_orders,
         } = this.props;
         const gprops = this.props.gprops.toJS();
 
@@ -240,20 +239,11 @@ class UserWallet extends React.Component {
         const divesting =
             parseFloat(account.get('vesting_withdraw_rate').split(' ')[0]) >
             0.0;
-        const blurtOrders =
-            !open_orders || !isMyAccount
-                ? 0
-                : open_orders.reduce((o, order) => {
-                      if (order.sell_price.base.indexOf('BLURT') !== -1) {
-                          o += order.for_sale;
-                      }
-                      return o;
-                  }, 0) / assetPrecision;
 
         // set displayed estimated value
 
         const total_blurt =
-            vesting_blurt + balance_blurt + saving_balance_blurt + blurtOrders;
+            vesting_blurt + balance_blurt + saving_balance_blurt;
         const total_value =
             '$' + numberWithCommas((total_blurt * price_per_blurt).toFixed(2));
 
@@ -351,9 +341,6 @@ class UserWallet extends React.Component {
         }
 
         const blurt_balance_str = numberWithCommas(balance_blurt.toFixed(3));
-        const blurt_orders_balance_str = numberWithCommas(
-            blurtOrders.toFixed(3)
-        );
         const power_balance_str = numberWithCommas(vesting_blurt.toFixed(3));
         const received_power_balance_str =
             (delegated_blurt < 0 ? '+' : '') +
@@ -430,7 +417,7 @@ class UserWallet extends React.Component {
         let hpApr;
         try {
             // TODO: occasionally fails. grops not loaded yet?
-            console.log(gprops);
+            // console.log(gprops);
             hpApr = this.getCurrentApr(gprops);
         } catch (e) {}
 
@@ -479,21 +466,6 @@ class UserWallet extends React.Component {
                         ) : (
                             blurt_balance_str + ' BLURT'
                         )}
-                        {blurtOrders ? (
-                            <div
-                                style={{
-                                    paddingRight: isMyAccount
-                                        ? '0.85rem'
-                                        : null,
-                                }}
-                            >
-                                <Link to="/market">
-                                    <Tooltip t={tt('market_jsx.open_orders')}>
-                                        (+{blurt_orders_balance_str} BLURT)
-                                    </Tooltip>
-                                </Link>
-                            </div>
-                        ) : null}
                     </div>
                 </div>
                 <div className="UserWallet__balance row zebra">
@@ -656,7 +628,6 @@ export default connect(
         const gprops = state.global.get('props');
         return {
             ...ownProps,
-            open_orders: state.market.get('open_orders'),
             price_per_blurt,
             savings_withdraws,
             gprops,

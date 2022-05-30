@@ -48,10 +48,6 @@ export default {
             cb(null, [require('app/components/pages/Proposals')]);
         } else if (route.page === 'UserProfile') {
             cb(null, [require('app/components/pages/UserProfile')]);
-        } else if (route.page === 'Market') {
-            require.ensure([], (require) => {
-                cb(null, [require('app/components/pages/Market')]);
-            });
         } else if (route.page === 'WalletIndex') {
             cb(null, [WalletIndex]);
         } else {

@@ -31,7 +31,6 @@ describe('resolveRoute', () => {
         ['/approval', { page: 'Approval' }],
         ['/recover_account_step_1', { page: 'RecoverAccountStep1' }],
         ['/recover_account_step_2', { page: 'RecoverAccountStep2' }],
-        ['/market', { page: 'Market' }],
         ['/~witnesses', { page: 'Witnesses' }],
         ['/proposals', { page: 'Proposals' }],
         ['/@gdpr/nice345', { page: 'NotFound' }],

@@ -253,28 +253,6 @@ class TransferHistoryRow extends React.Component {
                 amount_out: data.amount_out,
             });
             // `Fill convert request: ${data.amount_in} for ${ data.amount_out }`;
-        } else if (type === 'fill_order') {
-            if (data.open_owner == context) {
-                // my order was filled by data.current_owner
-                message = tt(
-                    'transferhistoryrow_jsx.fill_order.filled_by_current_owner',
-                    {
-                        open_pays: data.open_pays,
-                        current_pays: data.current_pays,
-                    }
-                );
-                // `Paid ${data.open_pays} for ${  data.current_pays }`
-            } else {
-                // data.open_owner filled my order
-                message = tt(
-                    'transferhistoryrow_jsx.fill_order.open_owner_filled_my_order',
-                    {
-                        open_pays: data.open_pays,
-                        current_pays: data.current_pays,
-                    }
-                );
-                // `Paid ${data.current_pays} for ${ data.open_pays }`;
-            }
         } else if (type === 'comment_benefactor_reward') {
             message = tt('transferhistoryrow_jsx.comment_benefactor_reward', {
                 benefactor_reward,

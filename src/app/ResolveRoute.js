@@ -52,8 +52,9 @@ export default function resolveRoute(path) {
     if (path === '/recover_account_step_2') {
         return { page: 'RecoverAccountStep2' };
     }
+    // As the market page is removed
     if (path === '/market') {
-        return { page: 'Market' };
+        return { page: 'WalletIndex' };
     }
     if (path === '/~witnesses') {
         return { page: 'Witnesses' };

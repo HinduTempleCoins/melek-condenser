@@ -68,7 +68,6 @@ export const userWatches = [
 ];
 
 const highSecurityPages = [
-    /\/market/,
     /\/@.+\/(transfers|permissions|password|communities|delegations)/,
     /\/~witnesses/,
     /\/proposals/,

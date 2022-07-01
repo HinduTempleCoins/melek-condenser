@@ -18,10 +18,10 @@ class ProposalCreatorModal extends React.Component {
                 startDate: moment().utc().format('YYYY-MM-DD HH:mm:ss'),
                 endDate: moment().utc().format('YYYY-MM-DD HH:mm:ss'),
                 title: '',
-                permalink: '',
+                permlink: '',
                 creator: '',
                 receiver: '',
-                dailyAmount: 0,
+                dailyAmount: 0.000,
             },
         };
     }
@@ -33,10 +33,10 @@ class ProposalCreatorModal extends React.Component {
         this.setState({ proposalForm: proposalFormValue });
     };
 
-    handlePermalinkChange = (e) => {
+    handlePermlinkChange = (e) => {
         const proposalFormValue = this.state.proposalForm;
-        const permalink = e.target.value;
-        proposalFormValue.permalink = permalink;
+        const permlink = e.target.value;
+        proposalFormValue.permlink = permlink;
         this.setState({ proposalForm: proposalFormValue });
     };
 
@@ -139,10 +139,10 @@ class ProposalCreatorModal extends React.Component {
                                 />
                                 <br />
 
-                                <label>Daily requested amount in Blurt</label>
+                                <label>Daily requested amount in BLURT</label>
                                 <input
                                     onChange={this.handleDailyAmountChange}
-                                    placeholder="100"
+                                    placeholder="100.000"
                                     type="text"
                                     pattern="[0-9.]+"
                                 />
@@ -172,21 +172,21 @@ class ProposalCreatorModal extends React.Component {
                                 />
                                 <br />
 
-                                <label>Proposal Permalink</label>
+                                <label>Proposal Permlink</label>
                                 <input
-                                    onChange={this.handlePermalinkChange}
-                                    placeholder="permalink"
+                                    onChange={this.handlePermlinkChange}
+                                    placeholder="permlink"
                                     type="text"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Permalink is a URL from proposal
+                                    * Permlink is a URL from proposal
                                     description (Blurt post), i.e
                                     create-cool-app
                                 </small>
                                 <br />
 
                                 <label>
-                                    Proposal Creator (10 BLURT submission fee
+                                    Proposal Creator (10.000 BLURT submission fee
                                     required)
                                 </label>
                                 <input
@@ -195,8 +195,8 @@ class ProposalCreatorModal extends React.Component {
                                     placeholder="Creator username"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Creator is a Blurt account that publishes
-                                    a proposal
+                                    * Creator is the Blurt account that is creating and publishing
+                                    the proposal
                                 </small>
                                 <br />
 
@@ -207,14 +207,14 @@ class ProposalCreatorModal extends React.Component {
                                     type="text"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Receiver is a Blurt account that receives
-                                    funding for proposal
+                                    * Receiver is the Blurt account that will receive
+                                    funding from the proposal
                                 </small>
                                 <br />
 
                                 <div className="text-center">
                                     <button
-                                        type="button"
+                                        type="submit"
                                         className="button primary"
                                         onClick={() =>
                                             submit_proposal(

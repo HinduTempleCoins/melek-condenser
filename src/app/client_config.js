@@ -50,3 +50,6 @@ export const SITE_DESCRIPTION =
 
 // various
 export const SUPPORT_EMAIL = 'support@' + APP_DOMAIN;
+
+export const REFUND_ACCOUNTS = ['socialgraph', 'blurt.dao'];
+export const BURN_ACCOUNTS = ['null'];

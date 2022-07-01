@@ -1,5 +1,5 @@
 import { fromJS, Set, List } from 'immutable'
-import { call, put, select, fork, takeLatest } from 'redux-saga/effects'
+import { call, put, select, fork, takeLatest, all } from 'redux-saga/effects'
 import { api } from '@blurtfoundation/blurtjs'
 import {
   PrivateKey,
@@ -166,8 +166,10 @@ function * usernamePasswordLogin ({
   const current = yield select((state) => state.user.get('current'))
   if (current) {
     const currentUsername = current.get('username')
-    yield fork(loadFollows, currentUsername, 'blog')
-    yield fork(loadFollows, currentUsername, 'ignore')
+    yield all([
+      fork(loadFollows, currentUsername, 'blog'),
+      fork(loadFollows, currentUsername, 'ignore')
+    ])
   }
 
   const user = yield select((state) => state.user)

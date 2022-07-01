@@ -810,6 +810,25 @@
         "by": "by",
         "for": "for",
         "daily": "Daily",
-        "duration": "Duration"
+        "duration": "Duration",
+        "days": "days",
+        "title": "Proposals",
+        "status": "Status",
+        "order": "Order by",
+        "refund": "refund",
+        "burn": "burn",
+        "status_options": {
+            "all": "All",
+            "active": "Active",
+            "inactive": "Inactive",
+            "expired": "Expired",
+            "votable": "Votable"
+        },
+        "order_options": {
+            "creator": "Creator",
+            "start_date": "Start Date",
+            "end_date": "End Date",
+            "total_votes": "Total Votes"
+        }
     }
 }

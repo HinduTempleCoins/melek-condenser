@@ -3,116 +3,165 @@ import PropTypes from 'prop-types';
 import Moment from 'moment';
 import NumAbbr from 'number-abbreviate';
 import tt from 'counterpart';
+import cx from 'classnames';
 import Userpic from 'app/components/elements/Userpic';
 import { numberWithCommas, vestsToHpf } from 'app/utils/StateFunctions';
+
+import { APP_URL, REFUND_ACCOUNTS, BURN_ACCOUNTS } from 'app/client_config';
 
 import Icon from 'app/components/elements/Icon';
 
 const numAbbr = new NumAbbr();
 
-export default function Proposal(props) {
-    const {
-        id,
-        creator,
-        receiver,
-        daily_pay,
-        subject,
-        total_votes,
-        permlink,
-        onVote,
-        isVoting,
-        voteFailed,
-        voteSucceeded,
-        isUpVoted,
-        total_vesting_shares,
-        total_vesting_fund_blurt,
-    } = props;
+function getFundingType(account) {
+    if (REFUND_ACCOUNTS.includes(account)) return 'refund';
 
-    const start = new Date(props.start_date);
-    const end = new Date(props.end_date);
-    const durationInDays = Moment(end).diff(Moment(start), 'days');
-    const totalPayout = durationInDays * daily_pay.split(' BLURT')[0]; // ¯\_(ツ)_/¯
+    if (BURN_ACCOUNTS.includes(account)) return 'burn';
 
-    const classUp =
-        'Voting__button Voting__button-up' +
-        (isUpVoted ? ' Voting__button--upvoted' : '') +
-        (voteFailed ? ' Voting__button--downvoted' : '') +
-        (isVoting ? ' votingUp' : '');
-    return (
-        <div className="proposals__row">
-            <div className="proposals__votes">
-                <span>
-                    {abbreviateNumber(
-                        simpleVotesToHp(
-                            total_votes,
-                            total_vesting_shares,
-                            total_vesting_fund_blurt
-                        )
-                    )}
-                </span>
-                <a onClick={onVote}>
-                    <span className={classUp}>
-                        <Icon
-                            name={isVoting ? 'empty' : 'chevron-up-circle'}
-                            className="upvote"
-                        />
+    return null;
+}
+
+export default class Proposal extends React.Component {
+    // console.log('props', props);
+    // console.log(this.props);
+
+    render() {
+        const {
+            id,
+            start_date,
+            end_date,
+            creator,
+            receiver,
+            daily_pay,
+            subject,
+            total_votes,
+            permlink,
+            onVote,
+            isVoting,
+            voteFailed,
+            voteSucceeded,
+            isUpVoted,
+            total_vesting_shares,
+            total_vesting_fund_blurt,
+            triggerModal,
+            getNewId,
+        } = this.props;
+    
+        // const { id } = props;
+    
+        const start = new Date(start_date);
+        const end = new Date(end_date);
+        const durationInDays = Moment(end).diff(Moment(start), 'days');
+        const totalPayout = durationInDays * daily_pay.split(' BLURT')[0]; // ¯\_(ツ)_/¯
+    
+        const fundingType = getFundingType(receiver);
+    
+        const handleVoteClick = () => {
+            getNewId(id);
+            triggerModal();
+        };
+    
+        // const classUp =
+        //     'Voting__button Voting__button-up' +
+        //     (isUpVoted ? ' Voting__button--upvoted' : '') +
+        //     (voteFailed ? ' Voting__button--downvoted' : '') +
+        //     (isVoting ? ' votingUp' : '');
+
+        const classUp = cx('Voting__button', 'Voting__button-up', {
+            'Voting__button--upvoted': isUpVoted,
+            'Voting__button--downvoted': voteFailed,
+            votingUp: isVoting,
+            });
+        return (
+            <div className="proposals__row">
+                <div className="proposals__votes">
+                    <div onClick={handleVoteClick}>
+                    <span>
+                        {abbreviateNumber(
+                            simpleVotesToHp(
+                                total_votes,
+                                total_vesting_shares,
+                                total_vesting_fund_blurt
+                            )
+                        )}
                     </span>
-                </a>
-            </div>
-            <div className="proposals__avatar">
-                <Userpic account={creator} />
-            </div>
-            <div className="proposals__description">
-                <span>
-                    <a
-                        href={urlifyPermlink(creator, permlink)}
-                        target="_blank"
-                        alt={startedOrFinishedInWordsLongVersion(start, end)}
-                        title={startedOrFinishedInWordsLongVersion(start, end)}
-                    >
-                        {subject}
-                        <span
-                            className="proposals__statusTag"
-                            title={startedOrFinishedInWordsLongVersion(
-                                start,
-                                end
-                            )}
-                        >
-                            {startedOrFinished(start, end)}
+                    </div>
+                    <a onClick={onVote}>
+                        <span className={classUp}>
+                            <Icon
+                                name={isVoting ? 'empty' : 'chevron-up-circle'}
+                                className="upvote"
+                            />
                         </span>
                     </a>
-                </span>
-                <br />
-                <small className="date">
-                    {formatDate(start)} through {formatDate(end)}
-                </small>
-                <br />
-                <small>
-                    {tt('proposals.by')} {linkifyUsername(creator)}
-                    {creator != receiver ? ` ${tt('proposals.for')} ` : null}
-                    {creator != receiver
-                        ? linkifyUsername(
-                              checkIfSameUser(creator, receiver, 'themselves.'),
-                              receiver
-                          )
-                        : null}
-                </small>
-            </div>
-            <div className="proposals__amount">
-                <span>
-                    <a href="#" title={formatCurrency(totalPayout)}>
-                        <em>{abbreviateNumber(totalPayout)} BLURT</em>
-                    </a>
-                </span>
-                <small>
-                    {tt('proposals.daily')}:{' '}
-                    {abbreviateNumber(daily_pay.split(' BLURT')[0])} BLURT
+                </div>
+                <div className="proposals__avatar">
+                    <Userpic account={creator} />
+                </div>
+                <div className="proposals__description">
+                    <span>
+                        <a
+                            href={urlifyPermlink(creator, permlink)}
+                            target="_blank"
+                            alt={startedOrFinishedInWordsLongVersion(start, end)}
+                            title={startedOrFinishedInWordsLongVersion(start, end)}
+                        >
+                            {subject}
+                            <span
+                                className="proposals__statusTag"
+                                title={startedOrFinishedInWordsLongVersion(
+                                    start,
+                                    end
+                                )}
+                            >
+                                {startedOrFinished(start, end)}
+                            </span>
+                            {fundingType && (
+                                <span
+                                    className={cx(
+                                        'status',
+                                        'funding-type',
+                                        fundingType
+                                    )}
+                                    title={tt(`proposals.${fundingType}`)}
+                                >
+                                    {tt(`proposals.${fundingType}`)}
+                                </span>
+                            )}
+                        </a>
+                    </span>
                     <br />
-                    {tt('proposals.duration')}: {durationInDays} days
-                </small>
+                    <small className="date">
+                        {formatDate(start)} through {formatDate(end)}
+                    </small>
+                    <br />
+                    <small>
+                        {tt('proposals.by')} {linkifyUsername(creator)}
+                        {creator != receiver ? ` ${tt('proposals.for')} ` : null}
+                        {creator != receiver
+                            ? linkifyUsername(
+                                  checkIfSameUser(creator, receiver, 'themselves.'),
+                                  receiver
+                              )
+                            : null}
+                    </small>
+                </div>
+                <div className="proposals__amount">
+                    <span>
+                        <a href="#" title={formatCurrency(totalPayout)}>
+                            <em>{abbreviateNumber(totalPayout)} BLURT</em>
+                        </a>
+                    </span>
+                    <small>
+                        {tt('proposals.daily')}:{' '}
+                        {abbreviateNumber(daily_pay.split(' BLURT')[0])} BLURT
+                        <br />
+                        {tt('proposals.duration')}: {durationInDays} days
+                    </small>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 // TODO: Move Proposal type to a proptypes file and use where we need it.
 Proposal.propTypes = {
@@ -139,7 +188,7 @@ Proposal.propTypes = {
  * @returns {string} - return a fancy string
  */
 function formatCurrency(amount = 0) {
-    return numberWithCommas(Number.parseFloat(amount).toFixed(2) + 'HBD');
+    return numberWithCommas(Number.parseFloat(amount).toFixed(2) + 'BP');
 }
 
 /**
@@ -259,7 +308,7 @@ function checkIfSameUser(usernamea, usernameb, valueIfSame = true) {
 function linkifyUsername(linkText, username = '') {
     if (username == '') username = linkText;
     return (
-        <a href={`https://blurt.blog/@${username}`} target="_blank">
+        <a href={`${APP_URL}/@${username}`} target="_blank">
             {linkText}
         </a>
     );
@@ -272,7 +321,7 @@ function linkifyUsername(linkText, username = '') {
  * @returns {string} - return a URL string
  */
 function urlifyPermlink(username, permlink) {
-    return `https://blurt.blog/@${username}/${permlink}`;
+    return `${APP_URL}/@${username}/${permlink}`;
 }
 
 /**
@@ -288,8 +337,8 @@ function simpleVotesToHp(
     total_vesting_fund_blurt
 ) {
     const total_vests = parseFloat(total_vesting_shares);
-    const total_vest_steem = parseFloat(total_vesting_fund_blurt);
-    return (total_vest_steem * (total_votes / total_vests) * 0.000001).toFixed(
+    const total_vest_blurt = parseFloat(total_vesting_fund_blurt);
+    return (total_vest_blurt * (total_votes / total_vests) * 0.000001).toFixed(
         2
     );
 }

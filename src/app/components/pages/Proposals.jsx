@@ -207,10 +207,10 @@ class Proposals extends React.Component {
                 proposal.title,
                 proposal.permlink,
                 async () => {
-                    if (onSuccess) onSuccess()
+                    if (onSuccess) onSuccess();
                 },
                 () => {
-                    if (onFailure) onFailure()
+                    if (onFailure) onFailure();
                 }
             );
         }

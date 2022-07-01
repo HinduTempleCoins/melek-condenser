@@ -21,7 +21,7 @@ class ProposalCreatorModal extends React.Component {
                 permlink: '',
                 creator: '',
                 receiver: '',
-                dailyAmount: 0.000,
+                dailyAmount: 0.0,
             },
         };
     }
@@ -186,8 +186,8 @@ class ProposalCreatorModal extends React.Component {
                                 <br />
 
                                 <label>
-                                    Proposal Creator (10.000 BLURT submission fee
-                                    required)
+                                    Proposal Creator (10.000 BLURT submission
+                                    fee required)
                                 </label>
                                 <input
                                     onChange={this.handleCreatorChange}
@@ -195,8 +195,8 @@ class ProposalCreatorModal extends React.Component {
                                     placeholder="Creator username"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Creator is the Blurt account that is creating and publishing
-                                    the proposal
+                                    * Creator is the Blurt account that is
+                                    creating and publishing the proposal
                                 </small>
                                 <br />
 
@@ -207,8 +207,8 @@ class ProposalCreatorModal extends React.Component {
                                     type="text"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Receiver is the Blurt account that will receive
-                                    funding from the proposal
+                                    * Receiver is the Blurt account that will
+                                    receive funding from the proposal
                                 </small>
                                 <br />
 

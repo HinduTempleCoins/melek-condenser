@@ -184,7 +184,7 @@ class Proposals extends React.Component {
         });
     };
 
-    submitProposal = (proposal) => {
+    submitProposal = (proposal, onSuccess, onFailure) => {
         if (
             !proposal.creator ||
             !proposal.receiver ||
@@ -194,27 +194,23 @@ class Proposals extends React.Component {
             !proposal.permlink ||
             !proposal.title
         ) {
-            window.alert('Please fill all fields');
+            window.alert('Please fill-in all fields!');
         } else {
             // we are ready to submit proposal
-
-            // need to add keychain check here and related logic
 
             this.props.createProposal(
                 this.props.currentUser || proposal.creator, // if we have current user or check from input as user may login with different keychain user
                 proposal.receiver,
                 proposal.startDate,
                 proposal.endDate,
-                proposal.dailyAmount,
+                `${parseFloat(proposal.dailyAmount).toFixed(3)} BLURT`,
                 proposal.title,
                 proposal.permlink,
                 async () => {
-                    if (onSuccess) {
-                        window.alert('Proposal created successfully');
-                    }
+                    if (onSuccess) onSuccess()
                 },
                 () => {
-                    if (onFailure) window.alert('Proposal creation failed');
+                    if (onFailure) onFailure()
                 }
             );
         }
@@ -509,11 +505,11 @@ module.exports = {
                             operation: {
                                 creator,
                                 receiver,
-                                start_date: '2019-07-20T11:22:39',
-                                end_date: '2019-08-30T11:22:39',
-                                daily_pay: '3000.000 TBD',
-                                subject: 'Test Proposal',
-                                permlink: 'remove-delegations',
+                                start_date,
+                                end_date,
+                                daily_pay,
+                                subject,
+                                permlink,
                             },
                             successCallback,
                             errorCallback,

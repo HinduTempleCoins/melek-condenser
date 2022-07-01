@@ -86,6 +86,7 @@ class VotersModal extends React.Component {
                                                         style={{ color: 'red' }}
                                                         href={`${APP_URL}/@${each[0]}`}
                                                         target="_blank"
+                                                        rel="noreferrer"
                                                     >
                                                         {userInfo.name}
                                                     </a>
@@ -97,7 +98,7 @@ class VotersModal extends React.Component {
                                                         '0.00' &&
                                                         ` + ${userInfo.proxyHp} Proxy`}
                                                 </div>
-                                                <hr></hr>
+                                                <hr />
                                             </div>
                                         );
                                     })}

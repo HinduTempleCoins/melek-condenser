@@ -46,21 +46,21 @@ export default class Proposal extends React.Component {
             triggerModal,
             getNewId,
         } = this.props;
-    
+
         // const { id } = props;
-    
+
         const start = new Date(start_date);
         const end = new Date(end_date);
         const durationInDays = Moment(end).diff(Moment(start), 'days');
         const totalPayout = durationInDays * daily_pay.split(' BLURT')[0]; // ¯\_(ツ)_/¯
-    
+
         const fundingType = getFundingType(receiver);
-    
+
         const handleVoteClick = () => {
             getNewId(id);
             triggerModal();
         };
-    
+
         // const classUp =
         //     'Voting__button Voting__button-up' +
         //     (isUpVoted ? ' Voting__button--upvoted' : '') +
@@ -71,20 +71,20 @@ export default class Proposal extends React.Component {
             'Voting__button--upvoted': isUpVoted,
             'Voting__button--downvoted': voteFailed,
             votingUp: isVoting,
-            });
+        });
         return (
             <div className="proposals__row">
                 <div className="proposals__votes">
                     <div onClick={handleVoteClick}>
-                    <span>
-                        {abbreviateNumber(
-                            simpleVotesToHp(
-                                total_votes,
-                                total_vesting_shares,
-                                total_vesting_fund_blurt
-                            )
-                        )}
-                    </span>
+                        <span>
+                            {abbreviateNumber(
+                                simpleVotesToHp(
+                                    total_votes,
+                                    total_vesting_shares,
+                                    total_vesting_fund_blurt
+                                )
+                            )}
+                        </span>
                     </div>
                     <a onClick={onVote}>
                         <span className={classUp}>
@@ -103,8 +103,15 @@ export default class Proposal extends React.Component {
                         <a
                             href={urlifyPermlink(creator, permlink)}
                             target="_blank"
-                            alt={startedOrFinishedInWordsLongVersion(start, end)}
-                            title={startedOrFinishedInWordsLongVersion(start, end)}
+                            alt={startedOrFinishedInWordsLongVersion(
+                                start,
+                                end
+                            )}
+                            title={startedOrFinishedInWordsLongVersion(
+                                start,
+                                end
+                            )}
+                            rel="noreferrer"
                         >
                             {subject}
                             <span
@@ -137,10 +144,16 @@ export default class Proposal extends React.Component {
                     <br />
                     <small>
                         {tt('proposals.by')} {linkifyUsername(creator)}
-                        {creator != receiver ? ` ${tt('proposals.for')} ` : null}
+                        {creator != receiver
+                            ? ` ${tt('proposals.for')} `
+                            : null}
                         {creator != receiver
                             ? linkifyUsername(
-                                  checkIfSameUser(creator, receiver, 'themselves.'),
+                                  checkIfSameUser(
+                                      creator,
+                                      receiver,
+                                      'themselves.'
+                                  ),
                                   receiver
                               )
                             : null}
@@ -308,7 +321,7 @@ function checkIfSameUser(usernamea, usernameb, valueIfSame = true) {
 function linkifyUsername(linkText, username = '') {
     if (username == '') username = linkText;
     return (
-        <a href={`${APP_URL}/@${username}`} target="_blank">
+        <a href={`${APP_URL}/@${username}`} target="_blank" rel="noreferrer">
             {linkText}
         </a>
     );

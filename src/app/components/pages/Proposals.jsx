@@ -10,7 +10,6 @@ import ProposalListContainer from 'app/components/modules/ProposalList/ProposalL
 import VotersModal from '../elements/VotersModal';
 import ProposalCreatorModal from '../elements/ProposalCreatorModal';
 class Proposals extends React.Component {
-
     startValueByOrderType = {
         by_total_votes: {
             ascending: [0],
@@ -97,9 +96,10 @@ class Proposals extends React.Component {
             limit = this.state.limit + this.state.proposals.length;
         }
 
-        const start = this.startValueByOrderType[
-            order_by || this.state.order_by
-        ][order_direction || this.state.order_direction];
+        const start =
+            this.startValueByOrderType[order_by || this.state.order_by][
+                order_direction || this.state.order_direction
+            ];
 
         const proposals =
             (await this.getAllProposals(
@@ -120,7 +120,7 @@ class Proposals extends React.Component {
             proposals,
             loading: false,
             last_proposal,
-            limit
+            limit,
         });
     }
 
@@ -139,7 +139,14 @@ class Proposals extends React.Component {
         await this.load(false, { order_direction });
     };
 
-    getAllProposals(last_proposal, order_by, order_direction, limit, status, start) {
+    getAllProposals(
+        last_proposal,
+        order_by,
+        order_direction,
+        limit,
+        status,
+        start
+    ) {
         return this.props.listProposals({
             voter_id: this.props.currentUser,
             last_proposal,
@@ -165,7 +172,6 @@ class Proposals extends React.Component {
         );
     };
 
-
     triggerCreatorsModal = () => {
         this.setState({
             open_creators_modal: !this.state.open_creators_modal,
@@ -179,7 +185,15 @@ class Proposals extends React.Component {
     };
 
     submitProposal = (proposal) => {
-        if(!proposal.creator || !proposal.receiver || !proposal.dailyAmount || !proposal.startDate || !proposal.endDate || !proposal.permlink || !proposal.title) {
+        if (
+            !proposal.creator ||
+            !proposal.receiver ||
+            !proposal.dailyAmount ||
+            !proposal.startDate ||
+            !proposal.endDate ||
+            !proposal.permlink ||
+            !proposal.title
+        ) {
             window.alert('Please fill all fields');
         } else {
             // we are ready to submit proposal
@@ -195,17 +209,19 @@ class Proposals extends React.Component {
                 proposal.title,
                 proposal.permlink,
                 async () => {
-                    if (onSuccess) window.alert('Proposal created successfully');
+                    if (onSuccess) {
+                        window.alert('Proposal created successfully');
+                    }
                 },
                 () => {
                     if (onFailure) window.alert('Proposal creation failed');
                 }
             );
         }
-    }
+    };
 
     getVoters(voters, lastVoter) {
-        this.setState({voters, lastVoter});
+        this.setState({ voters, lastVoter });
     }
 
     loadMore = (load2000Voters, lastVoterFor2000) => {
@@ -249,9 +265,15 @@ class Proposals extends React.Component {
     }
 
     fetchVoters() {
-        api.listProposalVotesAsync([this.state.new_id], 1000, 'by_proposal_voter', 'ascending', 'active')
+        api.listProposalVotesAsync(
+            [this.state.new_id],
+            1000,
+            'by_proposal_voter',
+            'ascending',
+            'active'
+        )
             .then((res) => {
-                this.getVoters(res, ...res.slice(-1))
+                this.getVoters(res, ...res.slice(-1));
             })
             .catch((err) => console.log(err));
     }
@@ -268,19 +290,17 @@ class Proposals extends React.Component {
         const voters = this.state.voters;
         const new_id = this.state.new_id;
 
-        const mergeVoters = [
-            ...voters
-        ];
+        const mergeVoters = [...voters];
 
         const selected_proposal_voters = mergeVoters.filter(
             (v) => v.proposal.proposal_id === new_id
         );
         const voters_map = selected_proposal_voters.map((name) => name.voter);
         api.getAccountsAsync(voters_map)
-            .then((res)=> {
+            .then((res) => {
                 this.getVotersAccounts(res);
             })
-            .catch(err => console.log('err', err))
+            .catch((err) => console.log('err', err));
     }
 
     render() {
@@ -297,20 +317,17 @@ class Proposals extends React.Component {
             total_vests,
             total_vest_blurt,
             is_voters_data_loaded,
-            new_id
+            new_id,
         } = this.state;
 
-        const mergeVoters = [
-            ...voters
-        ];
+        const mergeVoters = [...voters];
 
         const { nightmodeEnabled } = this.props;
-    
+
         let showBottomLoading = false;
         if (loading && proposals && proposals.length > 0) {
             showBottomLoading = true;
         }
-
 
         const selected_proposal_voters = mergeVoters.filter(
             (v) => v.proposal.proposal_id === new_id
@@ -325,9 +342,9 @@ class Proposals extends React.Component {
                     .reduce((a, b) => a + b, 0) // proxied blurt power
         );
 
-        let blurt_power = [];
+        const blurt_power = [];
         const calculateBlurtPower = () => {
-            //loop through each account vesting shares to calculate blurt power
+            // loop through each account vesting shares to calculate blurt power
             for (let i = 0; i < accounts_map.length; i++) {
                 const vests = parseFloat(accounts_map[i].split(' ')[0]);
                 const total_vestsNew = parseFloat(total_vests.split(' ')[0]);
@@ -342,7 +359,7 @@ class Proposals extends React.Component {
         };
         calculateBlurtPower();
 
-        let proxy_bp = [];
+        const proxy_bp = [];
         const calculateProxyBp = () => {
             for (let i = 0; i < acc_proxied_vests.length; i++) {
                 const vests = acc_proxied_vests[i];
@@ -358,8 +375,8 @@ class Proposals extends React.Component {
         calculateProxyBp();
 
         const total_bp = blurt_power.map((num, index) => num + proxy_bp[index]);
-        //create object of total, bp and proxy bp values
-        let total_acc_bp_obj = {};
+        // create object of total, bp and proxy bp values
+        const total_acc_bp_obj = {};
 
         voters_map.forEach(
             (voter, i) =>
@@ -369,13 +386,13 @@ class Proposals extends React.Component {
                     proxy_bp[i],
                 ])
         );
-        let sort_merged_total_bp = [];
+        const sort_merged_total_bp = [];
 
-        //push object to array
-        for (let value in total_acc_bp_obj) {
+        // push object to array
+        for (const value in total_acc_bp_obj) {
             sort_merged_total_bp.push([value, ...total_acc_bp_obj[value]]); // total = bp + proxy
         }
-        //sort acount names by total bp count
+        // sort acount names by total bp count
         sort_merged_total_bp.sort((a, b) => b[1] - a[1]); // total = bp + proxy
 
         return (
@@ -393,7 +410,7 @@ class Proposals extends React.Component {
                     close_modal={this.triggerCreatorsModal}
                     submit_proposal={this.submitProposal}
                     nightmodeEnabled={nightmodeEnabled}
-                 />
+                />
                 <ProposalListContainer
                     voteOnProposal={this.voteOnProposal}
                     proposals={proposals}
@@ -412,11 +429,11 @@ class Proposals extends React.Component {
                 <center style={{ paddingTop: '1em', paddingBottom: '1em' }}>
                     {!loading ? (
                         <a href="#" onClick={this.onClickLoadMoreProposals}>
-                            {`Load more...`}
+                            Load more...
                         </a>
                     ) : null}
 
-                    {showBottomLoading ? <a>{`Loading more...`}</a> : null}
+                    {showBottomLoading ? <a>Loading more...</a> : null}
                 </center>
             </div>
         );

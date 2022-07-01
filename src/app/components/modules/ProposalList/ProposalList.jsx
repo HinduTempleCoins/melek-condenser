@@ -26,7 +26,13 @@ export default function ProposalList(props) {
         <div className="ProposalsList">
             <div className="proposals__header">
                 <div className="proposals__title">{tt('proposals.title')}</div>
-                <div role="button" onClick={() => triggerCreatorsModal()} className="button primary">Create</div>
+                <div
+                    role="button"
+                    onClick={() => triggerCreatorsModal()}
+                    className="button primary"
+                >
+                    Create
+                </div>
                 <div className="proposals__filters">
                     <label className="proposals__select">
                         {tt('proposals.status')}
@@ -137,7 +143,7 @@ export default function ProposalList(props) {
 }
 
 ProposalList.propTypes = {
-    proposals: PropTypes.array.isRequired, //TODO: Specify Shape
+    proposals: PropTypes.array.isRequired, // TODO: Specify Shape
     voteOnProposal: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     onFilter: PropTypes.func.isRequired,

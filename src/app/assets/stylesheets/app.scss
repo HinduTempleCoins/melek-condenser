@@ -117,6 +117,19 @@ a.ptc {
     margin: 5px;
 }
 
+.link-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    @include themify($themes) {
+        color: themed('textColorAccent');
+    }
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
 @keyframes loading {
     0% {
         transform: rotate(0deg);

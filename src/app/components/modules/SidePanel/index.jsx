@@ -80,7 +80,7 @@ const SidePanel = ({
             {
                 value: 'vote_for_proposals',
                 label: tt('navigation.vote_for_proposals'),
-                link: 'https://ecosynthesizer.com/blurt/proposals',
+                link: '/proposals',
             },
         ],
         exchanges: [

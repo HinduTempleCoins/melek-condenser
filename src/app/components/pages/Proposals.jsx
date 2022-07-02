@@ -286,17 +286,17 @@ class Proposals extends React.Component {
         const voters = this.state.voters;
         const new_id = this.state.new_id;
 
-        const mergeVoters = [...voters];
-
-        const selected_proposal_voters = mergeVoters.filter(
-            (v) => v.proposal.proposal_id === new_id
-        );
-        const voters_map = selected_proposal_voters.map((name) => name.voter);
-        api.getAccountsAsync(voters_map)
-            .then((res) => {
-                this.getVotersAccounts(res);
-            })
-            .catch((err) => console.log('err', err));
+        if(voters.length > 0) {
+            const selected_proposal_voters = voters.filter(
+                (v) => v.proposal.proposal_id === new_id
+            );
+            const voters_map = selected_proposal_voters.map((name) => name.voter);
+            api.getAccountsAsync(voters_map)
+                .then((res) => {
+                    this.getVotersAccounts(res);
+                })
+                .catch((err) => console.log('err', err));
+        }
     }
 
     render() {

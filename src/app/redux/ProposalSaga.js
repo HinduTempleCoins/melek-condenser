@@ -1,4 +1,5 @@
 import { api } from '@blurtfoundation/blurtjs';
+import { concat } from 'bytebuffer';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import * as proposalActions from './ProposalReducer';
 
@@ -26,10 +27,11 @@ export function* listProposals({
     order_direction,
     limit,
     status,
+    start,
     resolve,
     reject,
 }) {
-    const start = [-1, 0];
+    start = [-1, 0];
 
     const proposals = yield call(
         [api, api.listProposalsAsync],
@@ -64,6 +66,7 @@ export function* listProposals({
                     'all'
                 );
                 votes = votes.concat(nextVotes);
+                if (nextVotes.length === 0) return votes;
                 lastVoter = nextVotes[nextVotes.length - 1].voter;
                 if (nextVotes.length < maxVotes) return votes;
                 beyondThisProposal = false;

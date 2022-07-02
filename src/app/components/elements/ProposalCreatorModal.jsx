@@ -21,10 +21,12 @@ class ProposalCreatorModal extends React.Component {
                 permlink: '',
                 creator: '',
                 receiver: '',
-                dailyAmount: 0.0,
+                dailyAmount: 0.000,
             },
         };
     }
+
+
 
     handleTitleChange = (e) => {
         const proposalFormValue = this.state.proposalForm;
@@ -75,6 +77,12 @@ class ProposalCreatorModal extends React.Component {
         this.setState({ proposalForm: proposalFormValue });
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {submit_proposal} = this.props;
+        submit_proposal( this.state.proposalForm );
+    };
+
     render() {
         const {
             open_modal,
@@ -83,7 +91,6 @@ class ProposalCreatorModal extends React.Component {
             // is_voters_data_loaded,
             // new_id,
             nightmodeEnabled,
-            submit_proposal,
         } = this.props;
 
         const modalStyles = {
@@ -125,7 +132,7 @@ class ProposalCreatorModal extends React.Component {
                 >
                     <div className="row">
                         <div className="columns">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <h3 className="text-center">
                                     Submit your proposal to the blockchain
                                 </h3>
@@ -216,11 +223,6 @@ class ProposalCreatorModal extends React.Component {
                                     <button
                                         type="submit"
                                         className="button primary"
-                                        onClick={() =>
-                                            submit_proposal(
-                                                this.state.proposalForm
-                                            )
-                                        }
                                     >
                                         Submit
                                     </button>

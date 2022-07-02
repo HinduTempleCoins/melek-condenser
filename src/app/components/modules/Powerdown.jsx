@@ -16,8 +16,8 @@ import {
 } from 'app/utils/StateFunctions';
 
 class Powerdown extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
         let new_withdraw;
         if (props.to_withdraw - props.withdrawn > 0) {
             new_withdraw = props.to_withdraw - props.withdrawn;
@@ -35,6 +35,36 @@ class Powerdown extends React.Component {
             new_withdraw,
         };
     }
+
+    powerDown = (event,new_withdraw) => {
+        const { vesting_shares, delegated_vesting_shares } = this.props; 
+        event.preventDefault();
+        this.setState({ broadcasting: true, error_message: undefined });
+        const successCallback = this.props.successCallback;
+        const errorCallback = (error) => {
+            this.setState({
+                broadcasting: false,
+                error_message: String(error),
+            });
+        };
+        // workaround bad math in react-rangeslider
+        const { account } = this.props;
+        let withdraw = new_withdraw;
+        if(vesting_shares && vesting_shares > 0 && delegated_vesting_shares) {
+            if (withdraw > (vesting_shares - delegated_vesting_shares)) {
+                withdraw = vesting_shares - delegated_vesting_shares;
+            }
+            const vesting_shares_new = `${withdraw.toFixed(6)} ${VEST_TICKER}`;
+            this.props.withdrawVesting({
+                account,
+                vesting_shares: vesting_shares_new,
+                errorCallback,
+                successCallback,
+            });
+        } else {
+            console.log('error', available_shares, delegated_vesting_shares);
+        }
+    };
 
     render() {
         const { broadcasting, new_withdraw, manual_entry } = this.state;
@@ -63,29 +93,6 @@ class Powerdown extends React.Component {
             this.setState({
                 new_withdraw: value,
                 manual_entry: event.target.value,
-            });
-        };
-        const powerDown = (event) => {
-            event.preventDefault();
-            this.setState({ broadcasting: true, error_message: undefined });
-            const successCallback = this.props.successCallback;
-            const errorCallback = (error) => {
-                this.setState({
-                    broadcasting: false,
-                    error_message: String(error),
-                });
-            };
-            // workaround bad math in react-rangeslider
-            let withdraw = new_withdraw;
-            if (withdraw > vesting_shares - delegated_vesting_shares) {
-                withdraw = vesting_shares - delegated_vesting_shares;
-            }
-            const vesting_shares = `${withdraw.toFixed(6)} ${VEST_TICKER}`;
-            this.props.withdrawVesting({
-                account,
-                vesting_shares,
-                errorCallback,
-                successCallback,
             });
         };
 
@@ -172,7 +179,7 @@ class Powerdown extends React.Component {
                 <button
                     type="submit"
                     className="button"
-                    onClick={powerDown}
+                    onClick={(e) => this.powerDown(e, new_withdraw)}
                     disabled={broadcasting}
                 >
                     {tt('powerdown_jsx.power_down')}

@@ -21,12 +21,10 @@ class ProposalCreatorModal extends React.Component {
                 permlink: '',
                 creator: '',
                 receiver: '',
-                dailyAmount: 0.000,
+                dailyAmount: 0.0,
             },
         };
     }
-
-
 
     handleTitleChange = (e) => {
         const proposalFormValue = this.state.proposalForm;
@@ -79,8 +77,8 @@ class ProposalCreatorModal extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {submit_proposal} = this.props;
-        submit_proposal( this.state.proposalForm );
+        const { submit_proposal } = this.props;
+        submit_proposal(this.state.proposalForm);
     };
 
     render() {

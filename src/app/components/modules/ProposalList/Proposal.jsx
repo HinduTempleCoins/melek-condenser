@@ -75,7 +75,7 @@ export default class Proposal extends React.Component {
         return (
             <div className="proposals__row">
                 <div className="proposals__votes">
-                    <div onClick={handleVoteClick}>
+                    <div className="link-button" onClick={handleVoteClick}>
                         <span>
                             {abbreviateNumber(
                                 simpleVotesToHp(
@@ -114,33 +114,33 @@ export default class Proposal extends React.Component {
                             rel="noreferrer"
                         >
                             {subject}
-                            <span
-                                className="proposals__statusTag"
-                                title={startedOrFinishedInWordsLongVersion(
-                                    start,
-                                    end
-                                )}
-                            >
-                                {startedOrFinished(start, end)}
-                            </span>
-                            {fundingType && (
-                                <span
-                                    className={cx(
-                                        'status',
-                                        'funding-type',
-                                        fundingType
-                                    )}
-                                    title={tt(`proposals.${fundingType}`)}
-                                >
-                                    {tt(`proposals.${fundingType}`)}
-                                </span>
-                            )}
                         </a>
                     </span>
                     <br />
                     <small className="date">
                         {formatDate(start)} through {formatDate(end)}
                     </small>
+                    <span
+                        className="proposals__statusTag"
+                        title={startedOrFinishedInWordsLongVersion(
+                            start,
+                            end
+                        )}
+                    >
+                        {startedOrFinished(start, end)}
+                    </span>
+                    {fundingType && (
+                        <span
+                            className={cx(
+                                'proposals__statusTag',
+                                'funding-type',
+                                fundingType
+                            )}
+                            title={tt(`proposals.${fundingType}`)}
+                        >
+                            {tt(`proposals.${fundingType}`)}
+                        </span>
+                    )}
                     <br />
                     <small>
                         {tt('proposals.by')} {linkifyUsername(creator)}
@@ -149,21 +149,19 @@ export default class Proposal extends React.Component {
                             : null}
                         {creator != receiver
                             ? linkifyUsername(
-                                  checkIfSameUser(
-                                      creator,
-                                      receiver,
-                                      'themselves.'
-                                  ),
-                                  receiver
-                              )
+                                checkIfSameUser(
+                                    creator,
+                                    receiver,
+                                    'themselves.'
+                                ),
+                                receiver
+                            )
                             : null}
                     </small>
                 </div>
                 <div className="proposals__amount">
-                    <span>
-                        <a href="#" title={formatCurrency(totalPayout)}>
-                            <em>{abbreviateNumber(totalPayout)} BLURT</em>
-                        </a>
+                    <span title={formatCurrency(totalPayout)}>
+                        <em>{abbreviateNumber(totalPayout)} BLURT</em>
                     </span>
                     <small>
                         {tt('proposals.daily')}:{' '}

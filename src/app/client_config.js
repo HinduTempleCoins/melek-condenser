@@ -7,9 +7,9 @@ export const APP_NAME_UPPERCASE = 'BLURT';
 export const APP_ICON = 'blurt';
 // FIXME figure out best way to do this on both client and server from env
 // vars. client should read $STM_Config, server should read config package.
-export const APP_URL = 'https://blurt.blog';
-export const APP_DOMAIN = 'blurt.blog';
-export const LIQUID_TOKEN = 'Blurt';
+export const APP_DOMAIN ='blurt.blog';
+export const APP_URL = `https://${APP_DOMAIN}`;
+export const LIQUID_TOKEN = 'BLURT';
 // sometimes it's impossible to use html tags to style coin name, hence usage of _UPPERCASE modifier
 export const LIQUID_TOKEN_UPPERCASE = 'BLURT';
 export const VESTING_TOKEN = 'BLURT POWER';
@@ -19,7 +19,7 @@ export const DEBT_TOKEN = 'BLURT DOLLAR';
 export const DEBT_TOKENS = 'BLURT DOLLARS';
 export const CURRENCY_SIGN = '$';
 export const WIKI_URL = ''; // https://wiki.golos.io/
-export const LANDING_PAGE_URL = 'https://blurt.io/';
+export const LANDING_PAGE_URL = 'https://blurt.blog/';
 export const TERMS_OF_SERVICE_URL = 'https://' + APP_DOMAIN + '/tos.html';
 export const PRIVACY_POLICY_URL = 'https://' + APP_DOMAIN + '/privacy.html';
 export const WHITEPAPER_URL = 'https://blurt.io/blurt-whitepaper.pdf';
@@ -51,5 +51,5 @@ export const SITE_DESCRIPTION =
 // various
 export const SUPPORT_EMAIL = 'support@' + APP_DOMAIN;
 
-export const REFUND_ACCOUNTS = ['socialgraph', 'blurt.dao'];
+export const REFUND_ACCOUNTS = ['blurt.dao'];
 export const BURN_ACCOUNTS = ['null'];

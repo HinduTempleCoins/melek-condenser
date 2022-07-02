@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.14
+FROM node:gallium-alpine3.15
 
 LABEL maintainer jacob@blurt.foundation
 

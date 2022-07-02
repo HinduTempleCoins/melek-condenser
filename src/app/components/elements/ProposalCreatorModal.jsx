@@ -44,14 +44,14 @@ class ProposalCreatorModal extends React.Component {
 
     handleStartDateChange = (date) => {
         const proposalFormValue = this.state.proposalForm;
-        const startDate = date.utc().format('YYYY-MM-DD HH:mm:ss');
+        const startDate = moment(date).format('YYYY-MM-DD HH:mm:ss');
         proposalFormValue.startDate = startDate;
         this.setState({ proposalForm: proposalFormValue });
     };
 
     handleEndDateChange = (date) => {
         const proposalFormValue = this.state.proposalForm;
-        const endDate = date.utc().format('YYYY-MM-DD HH:mm:ss');
+        const endDate = moment(date).format('YYYY-MM-DD HH:mm:ss');
         proposalFormValue.endDate = endDate;
         this.setState({ proposalForm: proposalFormValue });
     };

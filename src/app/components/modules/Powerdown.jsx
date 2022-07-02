@@ -36,8 +36,8 @@ class Powerdown extends React.Component {
         };
     }
 
-    powerDown = (event,new_withdraw) => {
-        const { vesting_shares, delegated_vesting_shares } = this.props; 
+    powerDown = (event, new_withdraw) => {
+        const { vesting_shares, delegated_vesting_shares } = this.props;
         event.preventDefault();
         this.setState({ broadcasting: true, error_message: undefined });
         const successCallback = this.props.successCallback;
@@ -50,8 +50,8 @@ class Powerdown extends React.Component {
         // workaround bad math in react-rangeslider
         const { account } = this.props;
         let withdraw = new_withdraw;
-        if(vesting_shares && vesting_shares > 0 && delegated_vesting_shares) {
-            if (withdraw > (vesting_shares - delegated_vesting_shares)) {
+        if (vesting_shares && vesting_shares > 0 && delegated_vesting_shares) {
+            if (withdraw > vesting_shares - delegated_vesting_shares) {
                 withdraw = vesting_shares - delegated_vesting_shares;
             }
             const vesting_shares_new = `${withdraw.toFixed(6)} ${VEST_TICKER}`;

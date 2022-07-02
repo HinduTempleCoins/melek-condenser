@@ -7,7 +7,7 @@ export const APP_NAME_UPPERCASE = 'BLURT';
 export const APP_ICON = 'blurt';
 // FIXME figure out best way to do this on both client and server from env
 // vars. client should read $STM_Config, server should read config package.
-export const APP_DOMAIN ='blurt.blog';
+export const APP_DOMAIN = 'blurt.blog';
 export const APP_URL = `https://${APP_DOMAIN}`;
 export const LIQUID_TOKEN = 'BLURT';
 // sometimes it's impossible to use html tags to style coin name, hence usage of _UPPERCASE modifier

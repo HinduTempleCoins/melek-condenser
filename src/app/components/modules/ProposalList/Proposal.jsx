@@ -122,10 +122,7 @@ export default class Proposal extends React.Component {
                     </small>
                     <span
                         className="proposals__statusTag"
-                        title={startedOrFinishedInWordsLongVersion(
-                            start,
-                            end
-                        )}
+                        title={startedOrFinishedInWordsLongVersion(start, end)}
                     >
                         {startedOrFinished(start, end)}
                     </span>
@@ -149,13 +146,13 @@ export default class Proposal extends React.Component {
                             : null}
                         {creator != receiver
                             ? linkifyUsername(
-                                checkIfSameUser(
-                                    creator,
-                                    receiver,
-                                    'themselves.'
-                                ),
-                                receiver
-                            )
+                                  checkIfSameUser(
+                                      creator,
+                                      receiver,
+                                      'themselves.'
+                                  ),
+                                  receiver
+                              )
                             : null}
                     </small>
                 </div>

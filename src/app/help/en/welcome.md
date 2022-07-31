@@ -12,7 +12,7 @@ Now that you have an account, here's how to get started.
 
 Unlike centralized web services, **it is not possible to recover lost passwords on the Blurt blockchain**.
 
-You are entirely responsible for saving your password, backing it up, and keeping it secure.  
+You are entirely responsible for saving your password, backing it up, and keeping it secure.
 Never put your password into unverified third party websites as they may steal your account.
 
 ### 2. Really, backup your password!
@@ -53,7 +53,7 @@ and voters ("curators").
 
 BLURT, and Blurt Power (BP) are the two forms of digital
 currency used by the Blurt Blockchain. More information
-[here](https://blurt.world/faq.html#What_is_the_difference_between_BLURT__BLURT_Power__and_Blurt_Dollars).
+[here](https://blurtwallet.com/faq.html#What_is_the_difference_between_BLURT__BLURT_Power__and_Blurt_Dollars).
 
 ##### Additional resources
 

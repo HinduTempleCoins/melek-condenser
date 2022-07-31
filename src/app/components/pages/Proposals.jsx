@@ -98,7 +98,7 @@ class Proposals extends React.Component {
 
         const start =
             this.startValueByOrderType[order_by || this.state.order_by][
-            order_direction || this.state.order_direction
+                order_direction || this.state.order_direction
             ];
 
         const proposals =
@@ -318,7 +318,6 @@ class Proposals extends React.Component {
             new_id,
         } = this.state;
 
-
         const mergeVoters = [...voters];
 
         const { proposal_fee, nightmodeEnabled } = this.props;
@@ -379,11 +378,11 @@ class Proposals extends React.Component {
 
         voters_map.forEach(
             (voter, i) =>
-            (total_acc_bp_obj[voter] = [
-                total_bp[i],
-                blurt_power[i],
-                proxy_bp[i],
-            ])
+                (total_acc_bp_obj[voter] = [
+                    total_bp[i],
+                    blurt_power[i],
+                    proxy_bp[i],
+                ])
         );
         const sort_merged_total_bp = [];
 
@@ -463,10 +462,7 @@ module.exports = {
             return {
                 currentUser,
                 proposals: newProposals,
-                proposal_fee: state.global.getIn([
-                    'props',
-                    'proposal_fee',
-                ]),
+                proposal_fee: state.global.getIn(['props', 'proposal_fee']),
                 last_id,
                 nightmodeEnabled: state.app.getIn([
                     'user_preferences',

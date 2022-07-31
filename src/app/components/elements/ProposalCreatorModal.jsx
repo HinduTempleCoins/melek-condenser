@@ -92,7 +92,7 @@ class ProposalCreatorModal extends React.Component {
             nightmodeEnabled,
         } = this.props;
 
-        const proposalFeeMessage = `(creator pays the ${proposal_fee} submission fee)`
+        const proposalFeeMessage = `(creator pays the ${proposal_fee} submission fee)`;
 
         const modalStyles = {
             content: {
@@ -194,9 +194,7 @@ class ProposalCreatorModal extends React.Component {
                                 <br />
 
                                 <label>
-                                    Proposal Creator
-                                    {' '}
-                                    {proposalFeeMessage}
+                                    Proposal Creator {proposalFeeMessage}
                                 </label>
                                 <input
                                     onChange={this.handleCreatorChange}

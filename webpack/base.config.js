@@ -66,8 +66,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: '[name].[hash].js',
-        chunkFilename: '[id].[hash].js',
+        filename: `[name].[contenthash].js`,
+        chunkFilename: `[id].[contenthash].js`,
         publicPath: '/assets/',
     },
     module: {
@@ -120,7 +120,7 @@ module.exports = {
             this.plugin('done', writeStats);
         },
         webpack_isomorphic_tools_plugin,
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({filename: `[name]-[contenthash].css`})
     ],
     resolve: {
         alias: {

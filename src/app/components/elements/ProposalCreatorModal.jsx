@@ -85,11 +85,14 @@ class ProposalCreatorModal extends React.Component {
         const {
             open_modal,
             close_modal,
+            proposal_fee,
             // sort_merged_total_bp,
             // is_voters_data_loaded,
             // new_id,
             nightmodeEnabled,
         } = this.props;
+
+        const proposalFeeMessage = `(creator pays the ${proposal_fee} submission fee)`
 
         const modalStyles = {
             content: {
@@ -191,8 +194,9 @@ class ProposalCreatorModal extends React.Component {
                                 <br />
 
                                 <label>
-                                    Proposal Creator (10.000 BLURT submission
-                                    fee required)
+                                    Proposal Creator
+                                    {' '}
+                                    {proposalFeeMessage}
                                 </label>
                                 <input
                                     onChange={this.handleCreatorChange}

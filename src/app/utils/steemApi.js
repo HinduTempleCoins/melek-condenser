@@ -26,6 +26,7 @@ export async function getStateAsync(url) {
     if (chainProperties) {
         raw.props.operation_flat_fee = chainProperties.operation_flat_fee;
         raw.props.bandwidth_kbytes_fee = chainProperties.bandwidth_kbytes_fee;
+        raw.props.proposal_fee = chainProperties.proposal_fee;
     }
 
     const cleansed = stateCleaner(raw);

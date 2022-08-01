@@ -409,14 +409,22 @@ class Witnesses extends React.Component {
                     witness_link = '(No URL provided)';
                 } else if (links.remote.test(thread)) {
                     witness_link = (
-                        <a href={thread} target="_blank" rel="noopener noreferrer">
+                        <a
+                            href={thread}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             {tt('witnesses_jsx.external_site')}&nbsp;
                             <Icon name="extlink" />
                         </a>
                     );
                 } else {
                     witness_link = (
-                        <a href={thread} target="_blank" rel="noopener noreferrer">
+                        <a
+                            href={thread}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             {tt('witnesses_jsx.witness_thread')}&nbsp;
                             <Icon name="extlink" />
                         </a>

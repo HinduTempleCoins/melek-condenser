@@ -316,7 +316,11 @@ function checkIfSameUser(usernamea, usernameb, valueIfSame = true) {
 function linkifyUsername(linkText, username = '') {
     if (username == '') username = linkText;
     return (
-        <a href={`${APP_URL}/@${username}`} target="_blank" rel="noopener noreferrer">
+        <a
+            href={`${APP_URL}/@${username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
             {linkText}
         </a>
     );

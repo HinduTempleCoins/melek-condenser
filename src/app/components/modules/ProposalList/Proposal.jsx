@@ -111,7 +111,7 @@ export default class Proposal extends React.Component {
                                 start,
                                 end
                             )}
-                            rel="noreferrer"
+                            rel="noopener noreferrer"
                         >
                             {subject}
                         </a>
@@ -316,7 +316,7 @@ function checkIfSameUser(usernamea, usernameb, valueIfSame = true) {
 function linkifyUsername(linkText, username = '') {
     if (username == '') username = linkText;
     return (
-        <a href={`${APP_URL}/@${username}`} target="_blank" rel="noreferrer">
+        <a href={`${APP_URL}/@${username}`} target="_blank" rel="noopener noreferrer">
             {linkText}
         </a>
     );

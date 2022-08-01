@@ -237,6 +237,7 @@ export default class UserProfile extends React.Component {
                             <a
                                 href={`${socialUrl}/@${accountname}`}
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 {tt('g.blog')}
                             </a>

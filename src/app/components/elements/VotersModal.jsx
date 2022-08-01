@@ -86,7 +86,7 @@ class VotersModal extends React.Component {
                                                         style={{ color: 'red' }}
                                                         href={`${APP_URL}/@${each[0]}`}
                                                         target="_blank"
-                                                        rel="noreferrer"
+                                                        rel="noopener noreferrer"
                                                     >
                                                         {userInfo.name}
                                                     </a>

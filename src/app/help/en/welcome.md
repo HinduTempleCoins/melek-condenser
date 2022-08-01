@@ -22,7 +22,7 @@ Consider using a flash drive, secure cloud storage, or simply print it on paper.
 
 ### 3. Some ground rules
 
-1. It is free to post, comment, and vote on all content at <a target="_blank" href="https://blurt.blog">blurt.blog</a>.
+1. It is free to post, comment, and vote on all content at <a target="_blank" rel="noopener noreferrer" href="https://blurt.blog">blurt.blog</a>.
 2. Do not plagiarize, and be sure to cite sources, including copyrighted images.
 
 ### 3. Update your profile

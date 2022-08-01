@@ -26,7 +26,7 @@ export default class Link extends React.Component {
         } = this;
         if (this.localLink) return <a onClick={onLocalClick}>{children}</a>;
         return (
-            <a target="_blank" rel="noopener" href={href}>
+            <a target="_blank" rel="noopener noreferrer" href={href}>
                 {children}
             </a>
         );

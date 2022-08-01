@@ -66,7 +66,7 @@ function runApp(initial_state) {
     initial_state.user.maybeLoggedIn =
         store.get('autopost2') || sessionStorage.getItem('username');
     if (initial_state.user.maybeLoggedIn) {
-        const username = new Buffer(store.get('autopost2'), 'hex')
+        const username = Buffer.from(store.get('autopost2'), 'hex')
             .toString()
             .split('\t')[0];
         initial_state.user.current = {

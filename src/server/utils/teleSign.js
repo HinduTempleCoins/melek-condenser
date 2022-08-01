@@ -8,7 +8,7 @@ const customer_id = config.get('telesign.customer_id');
 let api_key = '';
 
 if (config.get('telesign.rest_api_key')) {
-    api_key = new Buffer(config.get('telesign.rest_api_key'), 'base64');
+    api_key = Buffer.from(config.get('telesign.rest_api_key'), 'base64');
 }
 
 const use_case_code = 'BACS'; // Use Case: avoid bulk attack and spammers

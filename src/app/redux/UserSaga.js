@@ -674,7 +674,7 @@ function* uploadImage({
         const reader = new FileReader();
         data = yield new Promise((resolve) => {
             reader.addEventListener('load', () => {
-                const result = new Buffer(reader.result, 'binary');
+                const result = Buffer.from(reader.result, 'binary');
                 resolve(result);
             });
             reader.readAsBinaryString(file);
@@ -683,10 +683,10 @@ function* uploadImage({
         // recover from preview
         const commaIdx = dataUrl.indexOf(',');
         dataBs64 = dataUrl.substring(commaIdx + 1);
-        data = new Buffer(dataBs64, 'base64');
+        data = Buffer.from(dataBs64, 'base64');
     }
     // The challenge needs to be prefixed with a constant (both on the server and checked on the client) to make sure the server can't easily make the client sign a transaction doing something else.
-    const prefix = new Buffer('ImageSigningChallenge');
+    const prefix = Buffer.from('ImageSigningChallenge');
     const buf = Buffer.concat([prefix, data]);
     const bufSha = hash.sha256(buf);
 

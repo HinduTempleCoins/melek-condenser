@@ -9,6 +9,7 @@ export default class Link extends React.Component {
         // HTML properties
         href: PropTypes.string,
     };
+
     constructor(props) {
         super();
         const { href } = props;
@@ -19,6 +20,7 @@ export default class Link extends React.Component {
             browserHistory.push(this.props.href);
         };
     }
+
     render() {
         const {
             props: { href, children },

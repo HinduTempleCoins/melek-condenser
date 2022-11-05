@@ -183,7 +183,7 @@
     }
     &__reveal {
         @include MQ(M) {
-            flex: 0 0 75px;
+            flex: 0 0 150px;
         }
     }
 }

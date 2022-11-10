@@ -6,7 +6,7 @@
     "helmet": {
         "directives": {
             "childSrc": "'self'",
-            "connectSrc": "'self' blurt.blog https://blurt.readyplayer.me https://blurt.world https://img.blurt.world https://imgp.blurt.world https://img-upload.blurt.world https://rpc.blurt.world https://blurt-rpc.saboin.com https://kentzz.blurt.world https://rpc.nerdtopia.de https://rpc.dotwin1981.de https://rpc.blurtlatam.com https://blurt.ecosynthesizer.com https://api.blurt.world wss://notifications.blurt.world",
+            "connectSrc": "'self' blurt.blog https://blurt.readyplayer.me https://blurt.world https://img.blurt.world https://imgp.blurt.world https://img-upload.blurt.world https://rpc.blurt.world https://blurt-rpc.saboin.com https://kentzz.blurt.world https://blurt.ecosynthesizer.com https://api.blurt.world wss://notifications.blurt.world https://rpc.blurt.live https://rpc.blurt.one/ https://blurt-rpc.sagarkothari88.one/",
             "defaultSrc": "'self'",
             "frameSrc": "https://blurt.readyplayer.me",
             "fontSrc": "data: fonts.gstatic.com",
@@ -74,7 +74,7 @@
     "blurtd_connection_server": "https://rpc.blurt.world",
     "blurtd_use_appbase": true,
     "chain_id": "cd8d90f29ae273abec3eaa7731e25934c63eb654d55080caff2ebb7f5df6381f",
-    "alternative_api_endpoints": "https://rpc.blurt.world https://blurt-rpc.saboin.com https://rpc.nerdtopia.de https://rpc.dotwin1981.de https://kentzz.blurt.world/ https://rpc.blurtlatam.com/ https://blurt.ecosynthesizer.com/",
+    "alternative_api_endpoints": "https://rpc.blurt.world https://blurt-rpc.saboin.com https://rpc.blurt.live https://kentzz.blurt.world/ https://rpc.blurt.one/ https://blurt-rpc.sagarkothari88.one/ https://blurt.ecosynthesizer.com/",
     "failover_threshold": 3,
     "address_prefix": "BLT",
     "conveyor_posting_wif": false,

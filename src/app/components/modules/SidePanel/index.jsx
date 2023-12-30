@@ -60,7 +60,7 @@ const SidePanel = ({
             {
                 value: 'faq',
                 label: tt('navigation.faq'),
-                link: 'https://blurtwallet.com/faq.html',
+                link: '/faq.html',
             },
             {
                 value: 'change_password',
@@ -96,18 +96,8 @@ const SidePanel = ({
             },
             {
                 value: 'robiniaswap',
-                label: 'Robinia Swap',
-                link: 'https://robiniaswap.com/',
-            },
-            {
-                value: 'beldex',
-                label: 'Beldex',
-                link: 'https://www.beldex.io/tradeAdvance?pair=BLURT_BTC',
-            },
-            {
-                value: 'stex',
-                label: 'Stex',
-                link: 'https://app.stex.com/en/trade/pair/BTC/BLURT/1D',
+                label: 'Robinia BLURT:BSC Bridge',
+                link: 'https://bridge.blokfield.io/',
             },
             {
                 value: 'hive-engine',
@@ -137,8 +127,8 @@ const SidePanel = ({
                 link: 'https://gitlab.com/blurt/blurt/',
             },
             {
-                value: 'chat',
-                label: tt('navigation.chat'),
+                value: 'discord',
+                label: tt('navigation.discord'),
                 link: 'https://discord.blurt.world/',
             },
         ],

@@ -15,7 +15,7 @@ function addSiteMeta(metas) {
     metas.push({ property: 'og:description', content: site_desc });
     metas.push({
         property: 'og:image',
-        content: 'https://blurtwallet.com/images/blurt-blog-share.png',
+        content: 'https://blurtwallet.com/images/blurt-wallet-logo-v2.png',
     });
     metas.push({ property: 'fb:app_id', content: $STM_Config.fb_app });
     metas.push({ name: 'twitter:card', content: 'summary' });
@@ -24,7 +24,7 @@ function addSiteMeta(metas) {
     metas.push({ name: 'twitter:description', site_desc });
     metas.push({
         name: 'twitter:image',
-        content: 'https://blurtwallet.com/images/blurt-blog-share.png',
+        content: 'https://blurtwallet.com/images/blurt-wallet-logo-v2.png',
     });
 }
 
@@ -59,7 +59,7 @@ export default function extractMeta(chain_data, rp) {
                 name: 'og:image',
                 content:
                     image ||
-                    'https://blurtwallet.com/images/blurt-blog-share.png',
+                    'https://blurtwallet.com/images/blurt-wallet-logo-v2.png',
             });
             metas.push({ name: 'og:description', content: desc });
             metas.push({ name: 'og:site_name', content: 'Blurt Wallet' });
@@ -76,13 +76,13 @@ export default function extractMeta(chain_data, rp) {
                 content: image ? 'summary_large_image' : 'summary',
             });
             metas.push({ name: 'twitter:site', content: '@blurtblocks' });
-            metas.push({ name: 'twitter:title', content: 'Blurt.io' });
+            metas.push({ name: 'twitter:title', content: 'Blurt Wallet' });
             metas.push({ name: 'twitter:description', content: desc });
             metas.push({
                 name: 'twitter:image',
                 content:
                     image ||
-                    'https://blurtwallet.com/images/blurt-blog-twshare.png',
+                    'https://blurtwallet.com/images/blurt-wallet-logo-v2.png',
             });
         } else {
             addSiteMeta(metas);
@@ -98,7 +98,7 @@ export default function extractMeta(chain_data, rp) {
         }
         if (profile_image == null) {
             profile_image =
-                'https://blurtwallet.com/images/blurt-blog-twshare.png';
+                'https://blurtwallet.com/images/blurt-wallet-logo-v2.png';
         }
         // Set profile tags
         const title = `@${account.name}`;

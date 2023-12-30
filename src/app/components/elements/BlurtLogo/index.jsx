@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const BlurtLogo = ({ nightmodeEnabled }) => {
     const logo = nightmodeEnabled
-        ? '/images/blurt-wallet-logo.png'
-        : '/images/blurt-wallet-logo.png';
+        ? '/images/blurt-wallet-logo-v2.png'
+        : '/images/blurt-wallet-logo-v2.png';
 
     return (
         <span className="logo">

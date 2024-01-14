@@ -85,6 +85,10 @@
     margin: 0.5rem 0 1rem;
 }
 
+.menu, .menu.horizontal {
+    flex-wrap: wrap;
+}
+
 // protect for foundation bug for collapsed state drop-downs
 @media only screen and (max-width: 40em) {
     .Wallet_dropdown {

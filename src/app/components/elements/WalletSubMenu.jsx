@@ -42,13 +42,23 @@ export default ({ accountname, isMyAccount }) => {
                     </Link>
                 </li>
             ) : null}
-            {/* {isMyAccount ? (
+            {isMyAccount ? (
                 <li>
                     <Link
                         to={`/@${accountname}/communities`}
                         activeClassName="active"
                     >
                         {tt('g.communities')}
+                    </Link>
+                </li>
+            ) : null}
+            {/* {isMyAccount ? (
+                <li>
+                    <Link
+                        to={`/@${accountname}/privacy`}
+                        activeClassName="active"
+                    >
+                        {tt('g.privacy')}
                     </Link>
                 </li>
             ) : null} */}

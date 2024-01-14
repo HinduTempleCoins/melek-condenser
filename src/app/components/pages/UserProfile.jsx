@@ -11,6 +11,7 @@ import { actions as fetchDataSagaActions } from 'app/redux/FetchDataSaga';
 import Icon from 'app/components/elements/Icon';
 import UserKeys from 'app/components/elements/UserKeys';
 import PasswordReset from 'app/components/elements/PasswordReset';
+import AccountPrivacy from 'app/components/elements/AccountPrivacy';
 import CreateCommunity from 'app/components/elements/CreateCommunity';
 import UserWallet from 'app/components/modules/UserWallet';
 import Delegations from 'app/components/modules/Delegations';
@@ -174,8 +175,24 @@ export default class UserProfile extends React.Component {
                     <PasswordReset account={accountImm} />
                 </div>
             );
-        }
-        // else if (section === 'communities') {
+        } else if (section === 'communities') {
+            walletClass = 'active';
+            tab_content = (
+                <div>
+                    <div className="row">
+                        <div className="column">
+                            <WalletSubMenu
+                                accountname={account.name}
+                                isMyAccount={isMyAccount}
+                            />
+                        </div>
+                    </div>
+                    <br />
+                    <CreateCommunity account={accountImm} />
+                </div>
+            );
+        } 
+        // else if (section === 'privacy') {
         //     walletClass = 'active';
         //     tab_content = (
         //         <div>
@@ -188,10 +205,10 @@ export default class UserProfile extends React.Component {
         //                 </div>
         //             </div>
         //             <br />
-        //             <CreateCommunity account={accountImm} />
+        //             <AccountPrivacy account={accountImm} />
         //         </div>
         //     );
-        // }
+        // } 
         else {
             console.log('no matches. section:', section);
             tab_content = <div>Invalid Page</div>;

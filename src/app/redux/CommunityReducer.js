@@ -16,6 +16,13 @@ export const CREATE_COMMUNITY_ACCOUNT_ERROR =
     'community/CREATE_COMMUNITY_ACCOUNT_ERROR';
 export const CREATE_COMMUNITY_SUCCESS = 'community/CREATE_COMMUNITY_SUCCESS';
 
+export const COMMUNITY_TRANSFER_OPERATION =
+    'community/COMMUNITY_TRANSFER_OPERATION'; // Has saga.
+const COMMUNITY_TRANSFER_OPERATION_PENDING =
+    'community/COMMUNITY_TRANSFER_OPERATION_PENDING';
+const COMMUNITY_TRANSFER_OPERATION_ERROR =
+    'community/COMMUNITY_TRANSFER_OPERATION_ERROR';
+
 export const COMMUNITY_BLURTMIND_OPERATION =
     'community/COMMUNITY_BLURTMIND_OPERATION'; // Has saga.
 const COMMUNITY_BLURTMIND_OPERATION_PENDING =
@@ -31,13 +38,15 @@ const defaultState = fromJS({
     communityOwnerWifPassword: '',
     communityCreatePending: false,
     communityCreateError: false,
+    communityTransferPending: false,
+    communityTransferError: false,
     communityBlurtmindOperationPending: false,
     communityBlurtmindOperationError: false,
     communityCreateSuccess: false,
 });
 
 export default function reducer(state = defaultState, action) {
-    const payload = action.payload;
+    const { payload } = action;
     switch (action.type) {
         case SET_COMMUNITY_TITLE: {
             const title = fromJS(payload);
@@ -72,6 +81,21 @@ export default function reducer(state = defaultState, action) {
             const success = fromJS(payload);
             return state.merge({ communityCreateSuccess: success });
         }
+        // Has a saga watcher.
+        case COMMUNITY_TRANSFER_OPERATION: {
+            return state;
+        }
+        case COMMUNITY_TRANSFER_OPERATION_PENDING: {
+            const pending = fromJS(payload);
+            return state.merge({
+                communityTransferOperationPending: pending,
+            });
+        }
+        case COMMUNITY_TRANSFER_OPERATION_ERROR: {
+            const err = fromJS(payload);
+            return state.merge({ communityTransferOperationError: err });
+        }
+
         // Has a saga watcher.
         case COMMUNITY_BLURTMIND_OPERATION: {
             return state;
@@ -128,6 +152,23 @@ export const createCommunityAccountError = (payload) => ({
 });
 export const createCommunitySuccess = (payload) => ({
     type: CREATE_COMMUNITY_SUCCESS,
+    payload,
+});
+
+// Has a saga watcher
+export const communityTransferOperation = (payload) => {
+    return {
+        type: COMMUNITY_TRANSFER_OPERATION,
+        payload,
+    };
+};
+export const communityTransferOperationPending = (payload) => ({
+    type: COMMUNITY_TRANSFER_OPERATION_PENDING,
+    payload,
+});
+
+export const communityTransferOperationError = (payload) => ({
+    type: COMMUNITY_TRANSFER_OPERATION_ERROR,
     payload,
 });
 

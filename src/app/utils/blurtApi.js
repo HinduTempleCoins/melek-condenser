@@ -33,7 +33,7 @@ async function callCondenser(method, params, pre = 'condenser_api.') {
     return new Promise(function(resolve, reject) {
         api.call(pre + method, params, function(err, data) {
             if (err) {
-                console.error('~~ apii.callCondenser error ~~~>', method, params, err);
+                console.error('~~ api.callCondenser error ~~~>', method, params, err);
                 reject(err);
             } else resolve(data);
         });
@@ -134,7 +134,7 @@ export async function getAllTransferHistory(
     }
 
     const transactions = await callCondenser(
-        'get_account_history', 
+        'get_account_history',
         [account, start, start < 0 ? 1000 : Math.min(start, 1000)]
     );
 
@@ -177,7 +177,7 @@ async function getTransferHistory(account) {
 
     try {
         transfer_history = await callCondenser(
-            'get_account_history', 
+            'get_account_history',
             [account, start_sequence, 500, wallet_operations_bitmask[0]]
         );
     } catch (err) {
@@ -193,7 +193,7 @@ async function getTransferHistory(account) {
                 );
             try {
                 transfer_history = await callCondenser(
-                    'get_account_history', 
+                    'get_account_history',
                     [account, start_sequence, 500, wallet_operations_bitmask[0]]
                 );
             } catch (err) {
@@ -214,6 +214,9 @@ async function getTransferHistory(account) {
 }
 
 function verifyLocalStorageData(propertyDate, propertyValue, maxSecondsSinceUpdate = 300) {
+    if (!process.env.BROWSER) {
+        return { result: false}
+    }
     try {
         const consultationDate = localStorage.getItem(propertyDate);
         const value = localStorage.getItem(propertyValue);
@@ -233,6 +236,9 @@ function verifyLocalStorageData(propertyDate, propertyValue, maxSecondsSinceUpda
 }
 
 function saveDataToLocalStorage(dataObject) {
+    if (!process.env.BROWSER) {
+        return
+    }
     try {
         if (typeof dataObject === 'object' && dataObject !== null) {
             Object.entries(dataObject).forEach(([key, value]) => {

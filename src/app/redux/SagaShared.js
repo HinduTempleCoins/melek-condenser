@@ -6,7 +6,7 @@ import * as globalActions from './GlobalReducer';
 import * as appActions from './AppReducer';
 import * as transactionActions from './TransactionReducer';
 import { setUserPreferences } from 'app/utils/ServerApiClient';
-import { getStateAsync } from 'app/utils/steemApi';
+import { getStateAsync } from 'app/utils/blurtApi';
 
 const wait = (ms) =>
     new Promise((resolve) => {

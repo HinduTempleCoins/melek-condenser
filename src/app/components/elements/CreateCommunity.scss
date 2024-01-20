@@ -21,3 +21,12 @@
 .community--error {
     color: rgb(199, 37, 78);
 }
+
+.community--form {
+    .CreateCommunity__btn-container {
+        .button {
+            @extend .e-btn;
+            margin-bottom: 2em;
+        }
+    }
+}

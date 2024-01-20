@@ -256,6 +256,20 @@ function* broadcastPayload({
     {
         const newOps = [];
         for (const [type, operation] of operations) {
+            if (type === 'account_create') {
+                console.log(type);
+                try {
+                    const chainProperties = yield call([api, api.getChainPropertiesAsync]);
+                    const accountCreationFee = chainProperties.account_creation_fee
+                    if (accountCreationFee) {
+                        operation.fee = accountCreationFee
+                    }
+                } catch (error) {
+                    console.log('====================================');
+                    console.log(error);
+                    console.log('====================================');
+                }
+            }
             makeSteemCompatible(type, operation);
             if (hook['preBroadcast_' + type]) {
                 const op = yield call(hook['preBroadcast_' + type], {

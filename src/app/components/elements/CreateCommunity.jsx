@@ -1,5 +1,4 @@
 import React from 'react';
-import { APP_NAME } from 'app/client_config';
 import { connect } from 'react-redux';
 import * as communityActions from 'app/redux/CommunityReducer';
 import tt from 'counterpart';
@@ -13,7 +12,9 @@ class CreateCommunity extends React.Component {
         this.state = {
             accountError: false,
             broadcastOpsError: false,
+            transferError: false,
             accountCreated: false,
+            amountTransfer: false
         };
     }
 
@@ -38,6 +39,9 @@ class CreateCommunity extends React.Component {
             socialUrl,
         } = this.props;
 
+        const markdownRegex = /(?:\*[\w\s]*\*|\#[\w\s]*\#|_[\w\s]*_|~[\w\s]*~|\]\s*\(|\]\s*\[)/;
+        const htmlTagRegex = /<\/?[\w\s="/.':;#-\/\?]+>/gi;
+
         const handleAccountCreateError = (error) => {
             // If the user cancels the account creation do not show an error.
             if (error === undefined || error === 'Canceled') {
@@ -45,14 +49,6 @@ class CreateCommunity extends React.Component {
                 return;
             }
             this.setState({ accountError: true });
-        };
-
-        const handleAccountCreateSuccess = () => {
-            this.setState({ accountCreated: true });
-        };
-
-        const handleBroadcastOpsError = () => {
-            this.setState({ broadcastOpsError: false });
         };
 
         const handleCommunityTitleInput = (e) => {
@@ -77,32 +73,30 @@ class CreateCommunity extends React.Component {
                 communityDescription,
                 communityOwnerName,
                 communityOwnerWifPassword,
-                createAccountSuccessCB: handleAccountCreateSuccess,
+                createAccountSuccessCB: () => { this.setState({ accountCreated: true }); },
                 createAccountErrorCB: handleAccountCreateError,
-                broadcastOpsErrorCB: handleBroadcastOpsError,
+                amountTransferSuccessCB: () => { this.setState({ amountTransfer: true }); },
+                amountTransferErrorCB: () => { this.setState({ amountTransfer: false }) },
+                broadcastOpsErrorCB: () => { this.setState({ broadcastOpsError: false }) },
             };
             if (!this.state.accountCreated) {
                 createCommunity(createCommunityPayload);
+            } else if (this.state.amountTransfer) {
+                communityTransferOperation(createCommunityPayload)
             } else {
                 broadcastOps(createCommunityPayload);
             }
         };
 
-        const generateCommunityOwnerName = () => {
-            return `blurt-${Math.floor(Math.random() * 100000) + 100000}`;
-        };
-
-        const generateCreatorWifPassword = () => {
-            return 'P' + key_utils.get_random_key().toWif();
-        };
-
         const generateWif = () => {
-            const wif = generateCreatorWifPassword();
+            // Generate creator Wif Password
+            const wif = 'P' + key_utils.get_random_key().toWif();
             updateCommunityOwnerWifPassword(wif);
         };
 
         const generateUsername = () => {
-            const ownerUsername = generateCommunityOwnerName();
+            // Generate community Owner Name
+            const ownerUsername = `blurt-${Math.floor(Math.random() * 100000) + 100000}`;
             updateCommunityOwnerAccountName(ownerUsername);
         };
 
@@ -149,13 +143,27 @@ class CreateCommunity extends React.Component {
         const rx = new RegExp('^[' + Unicode.L + ']');
         if (!rx.test(communityTitle) && (communityTitle || hasPass)) {
             formError = 'Must start with a letter.';
+        } else if (
+            markdownRegex.test(communityTitle) ||
+            markdownRegex.test(communityDescription)
+        ) {
+            formError = 'Title and description must not contain markdown';
+        } else if (
+            htmlTagRegex.test(communityTitle) ||
+            htmlTagRegex.test(communityDescription)
+        ) {
+            formError = 'Title and description must not contain HTML';
         }
 
         const form = (
             <form className="community--form" onSubmit={handleCommunitySubmit}>
-                <div>{tt('g.community_create')}</div>
+                <div>
+                    <h4>
+                        {tt('g.community_create')}
+                    </h4>
+                </div>
                 <label>
-                    Title
+                    {tt('g.community_title')}
                     <input
                         id="community_title"
                         type="text"
@@ -166,7 +174,6 @@ class CreateCommunity extends React.Component {
                         required
                     />
                 </label>
-                {formError && <span className="error">{formError}</span>}
                 <label>
                     {tt('g.community_description')}
                     <input
@@ -175,16 +182,20 @@ class CreateCommunity extends React.Component {
                         maxLength="120"
                         onChange={handleCommunityDescriptionInput}
                         value={communityDescription}
-                    />
+                        />
                 </label>
-                {!hasPass && generateCommunityCredentialsButton}
-                {hasPass && credentialsPane}
-                {hasPass && submitCreateCommunityFormButton(formError)}
+                <div className="CreateCommunity__btn-container">
+                    {formError && <span className="error">{formError}</span>}
+                    {!hasPass && generateCommunityCredentialsButton}
+                    {hasPass && credentialsPane}
+                    {hasPass && submitCreateCommunityFormButton(formError)}
+                </div>
             </form>
         );
 
         const accountCreated = this.state.accountCreated;
         const accountError = this.state.accountError;
+        const transferError = this.state.transferError;
         const settingsError = this.state.broadcastOpsError;
         const errored = accountError || settingsError;
         const pending = communityCreatePending && !errored;
@@ -199,7 +210,7 @@ class CreateCommunity extends React.Component {
                         Your community was created!
                         <br />
                         <strong>
-                            <a href={url}>Get started.</a>
+                            <a href={url} target='_blank'>Get started.</a>
                         </strong>
                     </div>
                 </div>
@@ -214,6 +225,7 @@ class CreateCommunity extends React.Component {
                 <div className="column large-6 small-12">
                     {accountError && showErr('Account creation failed.')}
                     {settingsError && showErr('Update settings failed.')}
+                    {transferError && showErr('Transfer error')}
                     {sagaError && showErr('Failed. Please report this issue.')}
                     {accountCreated && <div>{adminMsg}</div>}
                     {pending ? <LoadingIndicator type="circle" /> : form}
@@ -260,17 +272,37 @@ export default connect(
                 );
             },
             createCommunity: (createCommunityPayload) => {
-                const successCallback = () =>
+                const successTransfer = () =>
                     dispatch(
                         communityActions.communityBlurtmindOperation(
                             createCommunityPayload
                         )
                     );
+                const successCallback = () =>
+                    dispatch(
+                        communityActions.communityTransferOperation({
+                            broadcastOpsCb: successTransfer,
+                            ...createCommunityPayload
+                        })
+                    );
                 const payload = {
-                    broadcastOpsCb: successCallback,
+                    broadcastOpsTransfer: successCallback,
                     ...createCommunityPayload,
                 };
                 dispatch(communityActions.createCommunity(payload));
+            },
+            communityTransferOperation: (createCommunityPayload) => {
+               const successCallback = () =>
+                   dispatch(
+                       communityActions.communityBlurtmindOperation(
+                           createCommunityPayload
+                       )
+                   );
+               const payload = {
+                   broadcastOpsCb: successCallback,
+                   ...createCommunityPayload,
+               };
+                dispatch(communityActions.communityTransferOperation(payload));
             },
             broadcastOps: (createCommunityPayload) => {
                 dispatch(

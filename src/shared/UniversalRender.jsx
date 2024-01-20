@@ -29,7 +29,7 @@ import Translator from 'app/Translator';
 import { routeRegex } from 'app/ResolveRoute';
 import { contentStats } from 'app/utils/StateFunctions';
 import ScrollBehavior from 'scroll-behavior';
-import { getStateAsync } from 'app/utils/steemApi';
+import { getStateAsync } from 'app/utils/blurtApi';
 
 let get_state_perf;
 let get_content_perf = false;
@@ -433,6 +433,12 @@ function getUrlFromLocation(location) {
     if (url.indexOf('/delegations') !== -1) {
         url = url.replace(/\/delegations$/, '/transfers');
     }
+    if (url.indexOf('/communities') !== -1) {
+        url = url.replace(/\/communities$/, '/transfers');
+    }
+    // if (url.indexOf('/privacy') !== -1) {
+    //     url = url.replace(/\/privacy$/, '/transfers');
+    // }
 
     return url;
 }

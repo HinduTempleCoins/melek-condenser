@@ -68,7 +68,7 @@ export const userWatches = [
 ];
 
 const highSecurityPages = [
-    /\/@.+\/(transfers|permissions|password|communities|delegations)/,
+    /\/@.+\/(transfers|permissions|password|communities|delegations|privacy)/,
     /\/~witnesses/,
     /\/proposals/,
 ];

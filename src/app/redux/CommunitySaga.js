@@ -1,6 +1,5 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects'
 import { api, broadcast, auth } from '@blurtfoundation/blurtjs'
-import { PrivateKey } from '@blurtfoundation/blurtjs/lib/auth/ecc'
 import * as communityActions from './CommunityReducer'
 import * as transactionActions from './TransactionReducer'
 
@@ -8,8 +7,7 @@ const activeKeySelector = (state) => {
   return state.user.getIn(['pub_keys_used']).active
 }
 
-const wait = (ms) =>
-  new Promise((resolve) => {
+const wait = (ms) => new Promise((resolve) => {
     setTimeout(() => resolve(), ms)
   })
 
@@ -41,6 +39,7 @@ export const communityWatches = [
     communityActions.CREATE_COMMUNITY_ACCOUNT,
     createCommunityAccount
   ),
+  takeLatest(communityActions.COMMUNITY_TRANSFER_OPERATION, transferCommunityAccount),
   takeLatest(communityActions.COMMUNITY_BLURTMIND_OPERATION, customOps)
 ]
 
@@ -124,6 +123,7 @@ export function * customOps (action) {
         },
         errorCallback: (res) => {
           console.log('subscribe error', res)
+          broadcastOpsErrorCB()
         }
       })
     )
@@ -142,11 +142,63 @@ export function * customOps (action) {
       type: communityActions.CREATE_COMMUNITY_ACCOUNT_ERROR,
       payload: true
     })
+    yield put({
+      type: communityActions.CREATE_COMMUNITY_ACCOUNT_PENDING,
+      payload: false
+    })
   }
+}
+
+export function * transferCommunityAccount (createCommunityAction) {
   yield put({
     type: communityActions.CREATE_COMMUNITY_ACCOUNT_PENDING,
-    payload: false
+    payload: true
   })
+  const {
+    accountName,
+    communityTitle,
+    communityOwnerName,
+    broadcastOpsCb,
+    amountTransferSuccessCB,
+    amountTransferErrorCB
+  } = createCommunityAction.payload
+  
+  const operation = {
+    from: accountName,
+    to: communityOwnerName,
+    amount: '10.000 BLURT',
+    memo: `Create community ${communityTitle}`,
+  };
+  // wait 4s for account creation to settle
+  yield call(wait, 4000)
+  try {
+    // transfer blurt to the new account
+    yield put(
+      transactionActions.broadcastOperation({
+        type: 'transfer',
+        operation,
+        successCallback: (res) => {
+          amountTransferSuccessCB()
+          broadcastOpsCb()
+        },
+        errorCallback: (res) => {
+          console.log('error transfer', res)
+          amountTransferErrorCB()
+        }
+      })
+    )
+  } catch (error) {
+    console.log(error)
+    amountTransferErrorCB()
+    yield put({
+      type: communityActions.CREATE_COMMUNITY_ACCOUNT_ERROR,
+      payload: true
+    })
+    yield put({
+      type: communityActions.CREATE_COMMUNITY_ACCOUNT_PENDING,
+      payload: false
+    })
+  }
 }
 
 export function * createCommunityAccount (createCommunityAction) {
@@ -160,7 +212,7 @@ export function * createCommunityAccount (createCommunityAction) {
     communityDescription,
     communityOwnerName,
     communityOwnerWifPassword,
-    broadcastOpsCb,
+    broadcastOpsTransfer,
     createAccountSuccessCB,
     createAccountErrorCB,
     broadcastOpsErrorCB
@@ -172,8 +224,10 @@ export function * createCommunityAccount (createCommunityAction) {
     ['posting']
   )
   try {
+    const chainProperties = yield call([api, api.getChainPropertiesAsync]);
+    const accountCreationFee = chainProperties.account_creation_fee
     const op = {
-      fee: '10.000 BLURT',
+      fee: accountCreationFee,
       creator: accountName,
       new_account_name: communityOwnerName,
       owner: generateAuth(
@@ -202,12 +256,11 @@ export function * createCommunityAccount (createCommunityAction) {
     yield put(
       transactionActions.broadcastOperation({
         type: 'account_create',
-        confirm:
-                    'This operation will cost 10 BLURT. Would you like to proceed?',
+        confirm: `This operation will cost ${parseFloat(accountCreationFee.split(' ')[0]) + 10} BLURT. Would you like to proceed?`,
         operation: op,
         successCallback: (res) => {
           createAccountSuccessCB()
-          broadcastOpsCb()
+          broadcastOpsTransfer()
         },
         errorCallback: (res) => {
           console.log('error', res)

@@ -89,16 +89,16 @@ const SidePanel = ({
                 label: 'Probit',
                 link: 'https://www.probit.com/app/exchange/BLURT-BTC/r/54051558',
             },
-            {
-                value: 'ionomy',
-                label: 'Ionomy',
-                link: 'https://exchange.ionomy.com/en/markets/btc-blurt',
-            },
-            {
-                value: 'robiniaswap',
-                label: 'Robinia BLURT:BSC Bridge',
-                link: 'https://bridge.blokfield.io/',
-            },
+            // {
+            //     value: 'ionomy',
+            //     label: 'Ionomy',
+            //     link: 'https://exchange.ionomy.com/en/markets/btc-blurt',
+            // },
+            // {
+            //     value: 'robiniaswap',
+            //     label: 'Robinia BLURT:BSC Bridge',
+            //     link: 'https://bridge.blokfield.io/',
+            // },
             {
                 value: 'hive-engine',
                 label: 'Hive Engine',

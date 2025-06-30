@@ -43,7 +43,7 @@ class UserWallet extends React.Component {
       const new_window = window.open()
       new_window.opener = null
       new_window.location =
-                'https://www.probit.com/app/exchange/BLURT-BTC/r/54051558'
+                'https://www.probit.com/app/exchange/BLURT-BTC'
     }
     this.onShowDepositBlurt = (e) => {
       if (e && e.preventDefault) e.preventDefault()

@@ -1,4 +1,4 @@
-FROM node:14.21
+FROM node:14.21-alpine3.17
 
 LABEL maintainer=gitlab.com/@Saboin
 

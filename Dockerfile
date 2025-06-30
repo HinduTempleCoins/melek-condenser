@@ -1,6 +1,6 @@
-FROM node:14.21-alpine3.16 
+FROM node:14.21
 
-LABEL maintainer jacob@blurt.foundation
+LABEL maintainer=gitlab.com/@Saboin
 
 RUN apk -U add git build-base python3 libtool libsodium autoconf automake gnupg gcc g++ make
 
@@ -8,11 +8,11 @@ COPY . /app
 
 WORKDIR /app
 
-ENV PYTHON python3
+ENV PYTHON=python3
 
 RUN npm install && npm run build
 
-ENV PORT 8080
-ENV NODE_ENV production
+ENV PORT=8080
+ENV NODE_ENV=production
 
-CMD npm run production
+CMD ["npm", "run", "production"]

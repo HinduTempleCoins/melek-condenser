@@ -416,7 +416,7 @@ class UserWallet extends React.Component {
 
     let hpApr
     try {
-      // TODO: occasionally fails. grops not loaded yet?
+      // TODO: occasionally fails. gprops not loaded yet?
       // console.log(gprops);
       hpApr = this.getCurrentApr(gprops)
     } catch (e) {}
@@ -431,6 +431,7 @@ class UserWallet extends React.Component {
               isMyAccount={isMyAccount}
             />
           </div>
+          {false &&
           <div className='columns shrink'>
             {isMyAccount && (
               <button
@@ -441,6 +442,7 @@ class UserWallet extends React.Component {
               </button>
             )}
           </div>
+          }
         </div>
         <div className='UserWallet__balance row'>
           <div className='column small-12 medium-8'>

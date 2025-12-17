@@ -14,8 +14,8 @@ const SidePanel = ({
     walletUrl,
 }) => {
     if (process.env.BROWSER) {
-        visible && document.addEventListener('click', hideSidePanel);
-        !visible && document.removeEventListener('click', hideSidePanel);
+        if (visible) {document.addEventListener('click', hideSidePanel);}
+        else {document.removeEventListener('click', hideSidePanel);}
     }
 
     const loggedIn =
@@ -40,14 +40,13 @@ const SidePanel = ({
                     </a>
                 </li>
             );
-        } else {
-            const cn = ix === arr.length - 1 ? 'last' : null;
-            return (
-                <li key={i.value} className={cn}>
-                    <Link to={i.link}>{i.label}</Link>
-                </li>
-            );
         }
+        const cn = ix === arr.length - 1 ? 'last' : null;
+        return (
+            <li key={i.value} className={cn}>
+                <Link to={i.link}>{i.label}</Link>
+            </li>
+        );
     };
 
     const sidePanelLinks = {
@@ -85,40 +84,20 @@ const SidePanel = ({
         ],
         exchanges: [
             {
-                value: 'probit',
-                label: 'Probit',
-                link: 'https://www.probit.com/app/exchange/BLURT-BTC/r/54051558',
-            },
-            // {
-            //     value: 'ionomy',
-            //     label: 'Ionomy',
-            //     link: 'https://exchange.ionomy.com/en/markets/btc-blurt',
-            // },
-            // {
-            //     value: 'robiniaswap',
-            //     label: 'Robinia BLURT:BSC Bridge',
-            //     link: 'https://bridge.blokfield.io/',
-            // },
-            {
                 value: 'hive-engine',
                 label: 'Hive Engine',
                 link: 'https://hive-engine.com/?p=market&t=SWAP.BLURT',
-            },
-            // {
-            //     value: 'steem-engine',
-            //     label: 'Steem Engine',
-            //     link: 'https://steem-engine.net/?p=market&t=BLURT',
-            // },
-            {
-                value: 'leodex',
-                label: 'Leodex',
-                link: 'https://leodex.io/market/SWAP.BLURT',
             },
             {
                 value: 'tribaldex',
                 label: 'Tribaldex',
                 link: 'https://tribaldex.com/trade/SWAP.BLURT',
             },
+            {
+                value: 'beeswap',
+                label: 'BeeSwap',
+                link: 'https://beeswap.dcity.io/swap?input=SWAP.HIVE&output=SWAP.BLURT'
+            }
         ],
         external: [
             {
@@ -165,12 +144,12 @@ const SidePanel = ({
             //     label: tt('navigation.whitepaper'),
             //     link: 'https://steem.io/SteemWhitePaper.pdf',
             // },
-            {
-                value: 'about',
-                label: tt('navigation.about'),
-                link: '/about.html',
-                internal: true,
-            },
+            // {
+            //     value: 'about',
+            //     label: tt('navigation.about'),
+            //     link: '/about.html',
+            //     internal: true,
+            // },
         ],
         legal: [
             {

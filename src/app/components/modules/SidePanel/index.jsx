@@ -92,11 +92,6 @@ const SidePanel = ({
                 value: 'tribaldex',
                 label: 'Tribaldex',
                 link: 'https://tribaldex.com/trade/SWAP.BLURT',
-            },
-            {
-                value: 'beeswap',
-                label: 'BeeSwap',
-                link: 'https://beeswap.dcity.io/swap?input=SWAP.HIVE&output=SWAP.BLURT'
             }
         ],
         external: [

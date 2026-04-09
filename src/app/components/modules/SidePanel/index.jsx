@@ -84,6 +84,11 @@ const SidePanel = ({
         ],
         exchanges: [
             {
+                value: 'klingex',
+                label: 'KlingEx',
+                link: 'https://klingex.io/trade/BLURT-USDT?ref=1BE81556',
+            },
+            {
                 value: 'hive-engine',
                 label: 'Hive Engine',
                 link: 'https://hive-engine.com/?p=market&t=SWAP.BLURT',

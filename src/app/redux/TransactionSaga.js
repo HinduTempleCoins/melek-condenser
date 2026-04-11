@@ -57,6 +57,21 @@ const hook = {
     accepted_withdraw_vesting,
 };
 
+const getPreferredApiEndpoint = () => {
+        let preferred_api_endpoint = $STM_Config.blurtd_connection_client;
+
+        if (
+            typeof window !== 'undefined'
+            && localStorage.getItem('user_preferred_api_endpoint')
+        ) {
+            preferred_api_endpoint = localStorage.getItem(
+                'user_preferred_api_endpoint'
+            );
+        }
+
+        return preferred_api_endpoint;
+};
+
 export function* preBroadcast_transfer({ operation }) {
     let memoStr = operation.memo;
     if (memoStr) {
@@ -347,6 +362,7 @@ function* broadcastPayload({
                     );
                 } else {
                     const authType = needsActiveAuth ? 'active' : 'posting';
+                    const preferred_api_endpoint = getPreferredApiEndpoint()
                     window.blurt_keychain.requestBroadcast(
                         username,
                         operations,
@@ -358,7 +374,8 @@ function* broadcastPayload({
                                 broadcastedEvent();
                                 resolve();
                             }
-                        }
+                        },
+                        preferred_api_endpoint,
                     );
                 }
             }

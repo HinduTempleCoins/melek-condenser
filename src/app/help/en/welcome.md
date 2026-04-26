@@ -39,10 +39,10 @@ from those profiles.
 
 ### 5. Sign up for Blurt Chat
 
-A lot of users mingle and chat in [Blurt Discord](https://discord.blurt.world). It is a
+A lot of users mingle and chat in [Blurt Discord](https://discord.blurt.blog). It is a
 great place to meet people!
 
-Ask questions in the [\#helpdesk](https://discord.blurt.world) channel.
+Ask questions in the [\#helpdesk](https://discord.blurt.blog) channel.
 
 ### 6. Voting and Tokens
 

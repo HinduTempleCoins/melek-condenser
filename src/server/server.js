@@ -109,12 +109,16 @@ const statsLoggerClient = new StatsLoggerClient(process.env.STATSD_IP);
 app.use(requestTime(statsLoggerClient));
 
 app.keys = [config.get('session_key')];
+app.proxy = true;
 
 const crypto_key = config.get('server_session_secret');
 session(app, {
     maxAge: 1000 * 3600 * 24 * 60,
     crypto_key,
     key: config.get('session_cookie_key'),
+    httpOnly: true,
+    secure: env === 'production',
+    sameSite: 'lax',
 });
 csrf(app);
 

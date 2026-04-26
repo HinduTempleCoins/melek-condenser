@@ -1,0 +1,28 @@
+diff --git a/node_modules/@blurtfoundation/blurtjs/lib/api/transports/http.js b/node_modules/@blurtfoundation/blurtjs/lib/api/transports/http.js
+index 612c131..cf5743a 100644
+--- a/node_modules/@blurtfoundation/blurtjs/lib/api/transports/http.js
++++ b/node_modules/@blurtfoundation/blurtjs/lib/api/transports/http.js
+@@ -77,14 +77,19 @@ function jsonRpc(uri, _ref) {
+         fetchMethod = _ref$fetchMethod === undefined ? _crossFetch2.default : _ref$fetchMethod;
+ 
+     var payload = { id: id, jsonrpc: "2.0", method: method, params: params };
++    var headers = {
++        Accept: "application/json, text/plain, */*",
++        "Content-Type": "application/json"
++    };
++    if (typeof window === 'undefined') {
++        headers["User-Agent"] = "curl/8.5.0";
++    }
++
+     return fetchMethod(uri, {
+         body: JSON.stringify(payload),
+         method: "post",
+         mode: "cors",
+-        headers: {
+-            Accept: "application/json, text/plain, */*",
+-            "Content-Type": "application/json"
+-        }
++        headers: headers
+     }).then(function (res) {
+         if (!res.ok) {
+             throw new Error("HTTP " + res.status + ": " + res.statusText);

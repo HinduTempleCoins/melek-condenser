@@ -858,7 +858,7 @@ Using random pictures from the internet without giving credit is discouraged. Yo
 
 ## <span id="Where_do_I_report_a_post_or_comment_that_contains_plagiarism__spam__or_abuse">Where do I report a post or comment that contains plagiarism, spam, or abuse?</span>
 
-You can report any abusive content to the <a href="https://discord.blurt.world">#blurtabuse</a> channel on <a href="https://discord.blurt.world">OpenBlurt.Chat</a>.
+You can report any abusive content to the <a href="https://discord.blurt.blog">#blurtabuse</a> channel on <a href="https://discord.blurt.blog">OpenBlurt.Chat</a>.
 
 <a href="#Table_of_Contents_Plagiarism__Spam__and_Abuse">^</a>
 
@@ -994,7 +994,7 @@ If your tokens are in Blurt Power, it is impossible for a hacker to take out mor
 
 ## <span id="How_do_I_report_a_security_vulnerability">How do I report a security vulnerability?</span>
 
-If you find a security issue please report the details to us in the <a href="https://discord.blurt.world">Blurt Discord</a> channel.
+If you find a security issue please report the details to us in the <a href="https://discord.blurt.blog">Blurt Discord</a> channel.
 
 <a href="#Table_of_Contents_Security">^</a>
 
@@ -1024,7 +1024,7 @@ Yes. The public repository can be found at https://gitlab.com/blurt/blurt.
 
 Many software engineers are currently leveraging the open-source code to build their applications on Blurt
 
-The Blurt Developer Channel can be found within our <a href="https://discord.blurt.world">Blurt Discord</a> server .
+The Blurt Developer Channel can be found within our <a href="https://discord.blurt.blog">Blurt Discord</a> server .
 
 <a href="#Table_of_Contents_Developers">^</a>
 
@@ -1059,7 +1059,7 @@ Each account can vote for up to 30 witnesses.
 
 ## <span id="Where_can_I_ask_for_help_if_my_question_was_not_answered_here">Where can I ask for help if my question was not answered here?</span>
 
-If you post your question in the <a href="https://discord.blurt.world">#helpdesk</a> channel on <a href="https://discord.blurt.world">Blurt Discord</a>, the users there may be able to help.
+If you post your question in the <a href="https://discord.blurt.blog">#helpdesk</a> channel on <a href="https://discord.blurt.blog">Blurt Discord</a>, the users there may be able to help.
 
 You can also create a post on blurt.blog with the tag #help, and someone in the community may be able to answer it.
 

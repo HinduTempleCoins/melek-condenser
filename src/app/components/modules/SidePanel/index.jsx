@@ -108,7 +108,7 @@ const SidePanel = ({
             {
                 value: 'discord',
                 label: tt('navigation.discord'),
-                link: 'https://discord.blurt.world/',
+                link: 'https://discord.blurt.blog/',
             },
         ],
         block_explorers: [

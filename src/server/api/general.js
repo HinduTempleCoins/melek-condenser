@@ -526,8 +526,7 @@ export default function useGeneralApi(app) {
             payload
         );
         if (!this.session.a) {
-            this.body = 'missing logged in account';
-            this.status = 500;
+            this.body = JSON.stringify({ status: 'ok', guest: true });
             return;
         }
         try {
@@ -556,8 +555,7 @@ export default function useGeneralApi(app) {
         this.status = 200;
 
         if (!this.session.a) {
-            this.body = 'missing username';
-            this.status = 500;
+            this.body = 'false';
             return;
         }
 
@@ -588,8 +586,8 @@ export default function useGeneralApi(app) {
         if (!checkCSRF(this, csrf)) return;
 
         if (!this.session.a) {
-            this.body = 'missing logged in account';
-            this.status = 500;
+            this.body = JSON.stringify({ error: 'Unauthorized' });
+            this.status = 401;
             return;
         }
         try {

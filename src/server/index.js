@@ -50,6 +50,16 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(
 );
 
 global.webpackIsomorphicTools.server(ROOT, () => {
+    const customFetch = (url, options) => {
+        const fetch = require('cross-fetch');
+        options = options || {};
+        options.headers = options.headers || {};
+        if (typeof window === 'undefined') {
+            options.headers['User-Agent'] = 'curl/8.5.0';
+        }
+        return fetch(url, options);
+    };
+
     blurt.api.setOptions({
         url: config.blurtd_connection_server,
         retry: {
@@ -62,6 +72,7 @@ global.webpackIsomorphicTools.server(ROOT, () => {
         useAppbaseApi: !!config.blurtd_use_appbase,
         alternative_api_endpoints: alternativeApiEndpoints,
         failover_threshold: config.get('failover_threshold'),
+        fetchMethod: customFetch,
     });
     blurt.config.set('address_prefix', config.get('address_prefix'));
     blurt.config.set('chain_id', config.get('chain_id'));

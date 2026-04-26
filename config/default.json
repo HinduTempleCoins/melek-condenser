@@ -6,14 +6,14 @@
     "helmet": {
         "directives": {
             "childSrc": "'self'",
-            "connectSrc": "'self' blurt.blog https://blurt.readyplayer.me https://blurt.blog https://img.blurt.blog https://imgp.blurt.blog https://img-upload.blurt.blog https://rpc.blurt.blog https://blurt-rpc.saboin.com https://rpc.beblurt.com https://rpc.drakernoise.com https://blurtrpc.dagobert.uk",
+            "connectSrc": "'self' blurt.blog https://blurt.readyplayer.me https://blurt.blog https://img.blurt.blog https://imgp.blurt.blog https://img-upload.blurt.blog https://rpc.blurt.blog https://blurt-rpc.saboin.com https://rpc.beblurt.com https://rpc.drakernoise.com https://blurtrpc.dagobert.uk https://www.google-analytics.com https://region1.analytics.google.com https://static.a-ads.com https://www.googletagmanager.com",
             "defaultSrc": "'self'",
             "frameSrc": "https://blurt.readyplayer.me",
             "fontSrc": "data: fonts.gstatic.com",
             "frameAncestors": "'none'",
             "imgSrc": "* data:",
             "objectSrc": "'self' application/pdf",
-            "scriptSrc": "'self' www.google-analytics.com",
+            "scriptSrc": "'self' www.google-analytics.com www.googletagmanager.com",
             "styleSrc": "'self' 'unsafe-inline' fonts.googleapis.com",
             "reportUri": "/api/v1/csp_violation"
         },
@@ -52,7 +52,7 @@
         }
     },
     "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
-    "session_cookie_key": "blurtwallet-cookie-key",
+    "session_cookie_key": "__Host-blurtwallet",
     "session_key": "blurtwallet-session-key",
     "site_domain": "blurtwallet.com",
     "tarantool": {

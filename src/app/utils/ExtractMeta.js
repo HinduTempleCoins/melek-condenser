@@ -39,7 +39,7 @@ export default function extractMeta(chain_data, rp) {
         if (content && content.id !== '0.0.0') {
             // API currently returns 'false' data with id 0.0.0 for posts that do not exist
             const d = extractContent(objAccessor, content, false);
-            const url = 'https://blurt.world' + d.link;
+            const url = 'https://blurt.blog' + d.link;
             const canonicalUrl = makeCanonicalLink(d);
             const title = d.title + ' — Blurt Wallet';
             const desc = d.desc + ' by ' + d.author;

@@ -31,7 +31,7 @@ module.exports = {
                 'Please wait for app server startup (~60s)' +
                     ' after webpack server startup...'
             );
-            this.plugin('done', startKoa);
+            // SSR app is forked from webpack/dev-server.js directly — no done-hook fork here.
         },
     ],
 };

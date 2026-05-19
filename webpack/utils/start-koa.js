@@ -23,7 +23,10 @@ const startServer = () => {
         BABEL_ENV: 'server',
     };
     // start the server procress
-    server = cp.fork(KOA_PATH, { env });
+    server = cp.fork(KOA_PATH, {
+        env,
+        stdio: ['inherit', 'inherit', 'inherit', 'ipc'],
+    });
     // when server is `online`
     server.once('message', (message) => {
         if (message.match(/^online$/)) {
@@ -57,5 +60,6 @@ const startServer = () => {
 process.on('exit', () => server.kill('SIGTERM'));
 
 module.exports = function () {
+    console.log('[start-koa] done hook fired, forking', KOA_PATH);
     return !server ? startServer() : () => ({});
 };

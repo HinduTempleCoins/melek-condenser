@@ -5,23 +5,12 @@ import { Client } from '@busyorg/busyjs';
 import stateCleaner from 'app/redux/stateCleaner';
 
 export async function getStateAsync(url) {
-    // if configured, completely bypass get_state
-    if (typeof window !== 'undefined' && window.$STM_Config?.disable_get_state) {
-        console.warn('getStateAsync disabled — returning empty state for:', url);
-        return {
-            content: {},
-            accounts: {},
-            props: {},
-            reward_fund: {},
-        };
-    }
-
     // strip off query string
     url = url.split('?')[0];
 
     // strip off leading and trailing slashes
-    if (url.length > 0 && url[0] === '/') url = url.substring(1, url.length);
-    if (url.length > 0 && url[url.length - 1] === '/') {
+    if (url.length > 0 && url[0] == '/') url = url.substring(1, url.length);
+    if (url.length > 0 && url[url.length - 1] == '/') {
         url = url.substring(0, url.length - 1);
     }
 
@@ -37,7 +26,6 @@ export async function getStateAsync(url) {
     }
 
     const raw = await api.getStateAsync(url);
-
     const chainProperties = await getChainProperties();
     if (chainProperties) {
         raw.props.operation_flat_fee = parseFloat(
@@ -47,7 +35,6 @@ export async function getStateAsync(url) {
             chainProperties.bandwidth_kbytes_fee
         );
     }
-
     const rewardFund = await getRewardFund();
     if (rewardFund) {
         raw.reward_fund = rewardFund;
@@ -68,7 +55,6 @@ function getChainProperties() {
         });
     });
 }
-
 function getRewardFund() {
     return new Promise((resolve) => {
         api.getRewardFund('post', (err, result) => {
@@ -80,7 +66,6 @@ function getRewardFund() {
         });
     });
 }
-
 export async function callNotificationsApi(account) {
     console.log('call notifications api', account);
     return new Promise((resolve, reject) => {
@@ -91,4 +76,3 @@ export async function callNotificationsApi(account) {
         });
     });
 }
-

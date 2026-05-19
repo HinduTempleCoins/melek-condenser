@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import i500 from 'app/assets/images/500.png';
 
 class ServerError extends Component {
     render() {
@@ -8,7 +7,7 @@ class ServerError extends Component {
                 className="float-center"
                 style={{ width: '640px', textAlign: 'center' }}
             >
-                <img width="640px" height="480px" src={i500} />
+                <img width="640px" height="480px" src="/images/500.jpg" />
                 <div
                     style={{
                         width: '300px',

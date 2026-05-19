@@ -1,7 +1,7 @@
 {
-    "facebook_app_id": "793237358168604",
-    "google_analytics_id": "UA-179023138-1",
-    "img_proxy_prefix": "https://images.blurt.blog/",
+    "facebook_app_id": false,
+    "google_analytics_id": false,
+    "img_proxy_prefix": false,
     "ipfs_prefix": false,
     "notify": {
         "gcm_key": "google secret key"
@@ -17,9 +17,9 @@
         "templates": {}
     },
     "server_session_secret": "HusUOYIruoK1yeYR/4QRuybQZP1UpkNaRkegTEN9u8w=",
-    "session_cookie_key": "blurt-dev",
-    "session_key": "blurt_session_key",
-    "site_domain": "rpc.blurt.world",
+    "session_cookie_key": "melek-dev",
+    "session_key": "melek_session_key",
+    "site_domain": "melek.salon",
     "telesign": {
         "customer_id": false,
         "rest_api_key": false
@@ -28,20 +28,20 @@
         "account_sid": false,
         "auth_token": false
     },
-    "upload_image": "https://images.blurt.blog",
-    "blurtd_connection_client": "https://rpc.blurt.world",
-    "blurtd_connection_server": "https://rpc.blurt.world",
+    "upload_image": "",
+    "blurtd_connection_client": "",
+    "blurtd_connection_server": "",
     "blurtd_use_appbase": true,
-    "chain_id": "cd8d90f29ae273abec3eaa7731e25934c63eb654d55080caff2ebb7f5df6381f",
-    "alternative_api_endpoints": "https://api.blurt.blog https://blurtd.privex.io",
+    "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
+    "alternative_api_endpoints": "",
     "failover_threshold": 3,
-    "address_prefix": "BLT",
+    "address_prefix": "MELEK",
     "conveyor_posting_wif": false,
     "conveyor_username": false,
-    "special_posts_url": "https://gitlab.com/blurt/openblurt/condenser-pinned/-/raw/master/pinned-posts.json",
-    "wallet_url": "https://blurtwallet.com",
+    "special_posts_url": false,
+    "wallet_url": "",
     "gpt_banned_tags": ["nsfw", "tante"],
-    "google_ad_enabled": true,
+    "google_ad_enabled": false,
     "google_ad_test": false,
     "google_ad_client": "ca-pub-8228818602519714",
     "google_ad_slots": {

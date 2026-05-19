@@ -2,11 +2,11 @@
     "name": "condenser",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.com/blurt/blurt.git"
+        "url": "https://github.com/hindutemplecoins/melek-condenser.git"
     },
     "version": "1.0.0",
-    "homepage": "https://puncakbukit.github.io/blurt-condenser",
-    "description": "the koa web server & middleware and react.js in-browser code for Blurt blockchain",
+    "homepage": "https://melek.salon",
+    "description": "the koa web server & middleware and react.js in-browser code for the MELEK blockchain",
     "main": "index.js",
     "scripts": {
         "prebuild": "mkdir tmp || true",
@@ -25,7 +25,7 @@
         "storybook-build": "build-storybook -c .storybook -o docs",
         "postinstall": "npx npm-force-resolutions"
     },
-    "author": "Blurt",
+    "author": "MELEK",
     "license": "MIT",
     "dependencies": {
         "@babel/cli": "^7.13.10",

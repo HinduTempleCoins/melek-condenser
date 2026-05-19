@@ -10,7 +10,7 @@ Full architectural context lives in **HinduTempleCoins/MELEK** (`CLAUDE.md`) —
 
 | Parameter | Value |
 |---|---|
-| Address prefix | `MLK` |
+| Address prefix | `MELEK` |
 | Liquid token | `MELEK` |
 | Vesting token | `MELEK POWER` |
 | Block time | 4 seconds |

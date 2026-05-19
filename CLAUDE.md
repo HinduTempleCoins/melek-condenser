@@ -13,6 +13,12 @@ Full architectural context lives in **HinduTempleCoins/MELEK** (`CLAUDE.md`) —
 | Address prefix | `MLK` |
 | Liquid token | `MELEK` |
 | Vesting token | `MELEK POWER` |
+| Block time | 4 seconds |
+| Block reward | 1 MELEK per block (flat, no decay) |
+| Emission ceiling | 270 years (hard stop, no tail emission) |
+| Power-down period | 13 weeks |
+| Premine | None — fresh genesis |
+| AI witness | First-class DPoS member (same vote mechanism as humans) |
 | Chain ID | TBD — set in `config/default.json` → `chain_id` |
 | RPC endpoint | TBD — set in `config/default.json` → `blurtd_connection_client` / `blurtd_connection_server` |
 | App domain | TBD — set in `config/default.json` → `site_domain` |

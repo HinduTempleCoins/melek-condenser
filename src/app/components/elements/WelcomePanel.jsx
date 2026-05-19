@@ -19,7 +19,7 @@ export default class WelcomePanel extends React.Component {
                         <div className="text-center welcomeImage small-12 show-for-small-only">
                             <img
                                 className="heroImage"
-                                src={require('app/assets/images/blurtgirlsplash.png')}
+                                src={require('app/assets/images/melek-angel.jpg').default}
                             />
                         </div>
                     </div>
@@ -52,7 +52,7 @@ export default class WelcomePanel extends React.Component {
                         <div className="text-center welcomeImage medium-6 large-5 show-for-medium">
                             <img
                                 className="heroImage"
-                                src={require('app/assets/images/blurtgirlsplash.png')}
+                                src={require('app/assets/images/melek-angel.jpg').default}
                             />
                         </div>
                     </div>

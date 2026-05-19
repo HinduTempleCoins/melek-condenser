@@ -380,12 +380,12 @@ class Voting extends React.Component {
                     {currentVp ? (
                         <div className="voting-power-display">
                             {tt('voting_jsx.vote_value')}:{' '}
-                            {voteValue.toFixed(2)} BLURT
+                            {voteValue.toFixed(2)} MELEK
                             <br />
                             {tt('voting_jsx.voting_power')}:{' '}
                             {currentVp.toFixed(1)}%
                             <br />
-                            {tt('g.transaction_fee')}: {fee} BLURT
+                            {tt('g.transaction_fee')}: {fee} MELEK
                         </div>
                     ) : (
                         ''
@@ -563,7 +563,7 @@ class Voting extends React.Component {
                 <span style={payout_limit_hit ? { opacity: '0.5' } : {}}>
                     <FormattedAsset
                         amount={payout}
-                        asset="BLURT"
+                        asset="MELEK"
                         classname={max_payout === 0 ? 'strikethrough' : ''}
                     />
                     {payoutItems.length > 0 && <Icon name="dropdown-arrow" />}
@@ -600,7 +600,7 @@ class Voting extends React.Component {
                         voter +
                         ': ' +
                         ((payout * rshares) / total_rshares).toFixed(3) +
-                        ' BLURT (' +
+                        ' MELEK (' +
                         percent / 100 +
                         '%)',
                     link: '/@' + voter,

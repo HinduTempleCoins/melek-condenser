@@ -86,7 +86,7 @@ class Modals extends React.Component {
             //     'https://blocktrades.us/?input_coin_type=eth&output_coin_type=steem_power&receive_address=' +
             //     username;
         };
-        const buyBlurt = (e) => {
+        const buyMELEK = (e) => {
             if (e && e.preventDefault) e.preventDefault();
             const new_window = window.open();
             new_window.opener = null;
@@ -170,7 +170,7 @@ class Modals extends React.Component {
                                     )}
                                 </li>
                             </ol>
-                            <button className="button" onClick={buyBlurt}>
+                            <button className="button" onClick={buyMELEK}>
                                 {tt('g.buy_blurt')}
                             </button>
                         </div>

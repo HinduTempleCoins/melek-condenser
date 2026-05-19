@@ -5,14 +5,14 @@ class Privacy extends React.Component {
         return (
             <div className="Privacy row">
                 <div className="column large-12">
-                    <h1>Blurt Privacy Policy</h1>
+                    <h1>MELEK Privacy Policy</h1>
                     <h2>Effective: July 4, 2020</h2>
                     <p className="c0">
                         <span className="c1" />
                     </p>
                     <p className="c2">
                         <span>
-                            This Privacy Policy describes how Blurt collects,
+                            This Privacy Policy describes how MELEK collects,
                             uses and discloses information, and what choices you
                             have with respect to the information. This Policy
                             applies to the
@@ -33,7 +33,7 @@ class Privacy extends React.Component {
                     </p>
                     <p className="c2">
                         <span className="c1">
-                            When we refer to &ldquo;Blurt Foundation&rdquo;, we
+                            When we refer to &ldquo;MELEK Foundation&rdquo;, we
                             mean the entity that acts as the controller of your
                             information.
                         </span>

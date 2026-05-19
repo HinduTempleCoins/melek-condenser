@@ -184,7 +184,7 @@ export default class PdfDownload extends Component {
         );
 
         offset += 0.265;
-        offset += this.renderText(ctx, `Blurt keys for @${this.props.name}`, {
+        offset += this.renderText(ctx, `MELEK keys for @${this.props.name}`, {
             scale,
             x: margin,
             y: offset,
@@ -238,7 +238,7 @@ export default class PdfDownload extends Component {
         offset += 0.2;
         offset += this.renderText(
             ctx,
-            'blurt.world is powered by Blurt and uses its hierarchical key ' +
+            'blurt.world is powered by MELEK and uses its hierarchical key ' +
                 'system to keep you and your tokens safe. Print this out and ' +
                 'keep it somewhere safe. When in doubt, use your Private ' +
                 'Posting Key as your password, not your Master Password which ' +
@@ -453,7 +453,7 @@ export default class PdfDownload extends Component {
         offset += this.renderText(
             ctx,
             'Used for monetary and wallet related actions, such as ' +
-                'transferring tokens or powering BLURT up and down.',
+                'transferring tokens or powering MELEK up and down.',
             {
                 scale,
                 x: margin + qrSize + 0.1,

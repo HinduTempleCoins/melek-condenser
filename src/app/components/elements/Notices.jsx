@@ -49,7 +49,7 @@ const Notice = ({ notice }) => {
     );
 };
 
-const BlurtNotices = ({ notices }) => {
+const MELEKNotices = ({ notices }) => {
     if (!notices || notices.length === 0) {
         return null;
     }
@@ -70,4 +70,4 @@ const BlurtNotices = ({ notices }) => {
     );
 };
 
-export default BlurtNotices;
+export default MELEKNotices;

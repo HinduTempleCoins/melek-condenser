@@ -87,7 +87,7 @@ const SidePanel = ({
             {
                 value: 'probit',
                 label: 'Probit',
-                link: 'https://www.probit.com/app/exchange/BLURT-BTC',
+                link: 'https://www.probit.com/app/exchange/MELEK-BTC',
             },
             {
                 value: 'ionomy',
@@ -97,22 +97,22 @@ const SidePanel = ({
             {
                 value: 'beldex',
                 label: 'Beldex',
-                link: 'https://www.beldex.io/tradeAdvance?pair=BLURT_BTC',
+                link: 'https://www.beldex.io/tradeAdvance?pair=MELEK_BTC',
             },
             {
                 value: 'stex',
                 label: 'Stex',
-                link: 'https://app.stex.com/en/trade/pair/BTC/BLURT/1D',
+                link: 'https://app.stex.com/en/trade/pair/BTC/MELEK/1D',
             },
             {
                 value: 'hive-engine',
                 label: 'Hive Engine',
-                link: 'https://hive-engine.com/?p=market&t=BLURT',
+                link: 'https://hive-engine.com/?p=market&t=MELEK',
             },
             {
                 value: 'steem-engine',
                 label: 'Steem Engine',
-                link: 'https://steem-engine.com/?p=market&t=BLURT',
+                link: 'https://steem-engine.com/?p=market&t=MELEK',
             },
             {
                 value: 'leodex',
@@ -146,7 +146,7 @@ const SidePanel = ({
             // },
             {
                 value: 'tools',
-                label: 'Blurt Tools',
+                label: 'Tools',
                 link: 'https://blurt.tools/',
             },
             // {
@@ -246,7 +246,7 @@ const SidePanel = ({
                 </ul>
                 <ul className="vertical menu">
                     <li>
-                        <a className="menu-section">Wrapped BLURT</a>
+                        <a className="menu-section">Wrapped MELEK</a>
                     </li>
                     {sidePanelLinks.wrapped.map(makeLink)}
                 </ul>

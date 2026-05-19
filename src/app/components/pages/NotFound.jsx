@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'app/components/elements/Icon';
-import BlurtLogo from 'app/components/elements/BlurtLogo';
+import MELEKLogo from 'app/components/elements/MELEKLogo';
 
 class NotFound extends React.Component {
     render() {
@@ -9,7 +9,7 @@ class NotFound extends React.Component {
                 <div className="row Header__nav">
                     <div className="small-5 large-4 columns Header__logotype">
                         <a href="/">
-                            <BlurtLogo />
+                            <MELEKLogo />
                         </a>
                     </div>
                 </div>

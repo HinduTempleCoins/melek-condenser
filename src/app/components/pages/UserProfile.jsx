@@ -634,7 +634,7 @@ export default class UserProfile extends React.Component {
                                     </Link>
                                 </span>
                                 <span>{accountBp} BP</span>
-                                <span>{parseInt(account.balance)} BLURT</span>
+                                <span>{parseInt(account.balance)} MELEK</span>
                             </div>
                             <p className="UserProfile__info">
                                 {location && (

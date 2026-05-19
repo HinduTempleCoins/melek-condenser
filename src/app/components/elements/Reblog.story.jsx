@@ -17,6 +17,6 @@ storiesOf('Elements', module)
         <Reblog
             permlink="foo/bar"
             author="maitland"
-            reblog={() => alert('BLURT WAZ HERE')}
+            reblog={() => alert('MELEK WAZ HERE')}
         />
     ));

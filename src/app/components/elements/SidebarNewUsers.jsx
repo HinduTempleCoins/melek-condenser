@@ -5,7 +5,7 @@ import { SIGNUP_URL } from 'shared/constants';
 const SidebarNewUsers = () => (
     <div className="c-sidebar__module">
         <div className="c-sidebar__header">
-            <h3 className="c-sidebar__h3">Explore Blurt?</h3>
+            <h3 className="c-sidebar__h3">Explore MELEK?</h3>
         </div>
         <div className="c-sidebar__content">
             <ul className="c-sidebar__list">
@@ -35,7 +35,7 @@ const SidebarNewUsers = () => (
                         className="c-sidebar__link"
                         href="https://blurtwallet.com/proposals"
                     >
-                        Blurt Proposals
+                        Proposals
                     </a>
                 </li>
                 {/* <li className="c-sidebar__list-item"> */}

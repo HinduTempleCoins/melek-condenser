@@ -17,7 +17,7 @@ import * as userActions from 'app/redux/UserReducer';
 import * as appActions from 'app/redux/AppReducer';
 import Userpic from 'app/components/elements/Userpic';
 import { SIGNUP_URL } from 'shared/constants';
-import BlurtLogo from 'app/components/elements/BlurtLogo';
+import MELEKLogo from 'app/components/elements/MELEKLogo';
 import normalizeProfile from 'app/utils/NormalizeProfile';
 import Announcement from 'app/components/elements/Announcement';
 import GptAd from 'app/components/elements/GptAd';
@@ -368,7 +368,7 @@ class Header extends React.Component {
                         <div className="small-5 large-4 columns Header__logotype">
                             {/*LOGO*/}
                             <Link to={logo_link}>
-                                <BlurtLogo />
+                                <MELEKLogo />
                             </Link>
                         </div>
 

@@ -1,7 +1,7 @@
 import { Map, OrderedMap } from 'immutable';
 import tt from 'counterpart';
 
-const BLURT_API_ERROR = 'app/BLURT_API_ERROR';
+const MELEK_API_ERROR = 'app/MELEK_API_ERROR';
 const FETCH_DATA_BEGIN = 'app/FETCH_DATA_BEGIN';
 const FETCH_DATA_END = 'app/FETCH_DATA_END';
 const ADD_NOTIFICATION = 'app/ADD_NOTIFICATION';
@@ -32,7 +32,7 @@ export default function reducer(state = defaultState, action = {}) {
     switch (action.type) {
         case '@@router/LOCATION_CHANGE':
             return state.set('location', { pathname: action.payload.pathname });
-        case BLURT_API_ERROR:
+        case MELEK_API_ERROR:
             // Until we figure out how to better handle these errors, let em slide.
             // This action is the only part of the app that marks an error in state.app.error,
             // and the only part of the app which pays attn to this part of the state is in App.jsx.
@@ -84,7 +84,7 @@ export default function reducer(state = defaultState, action = {}) {
 }
 
 export const steemApiError = (error) => ({
-    type: BLURT_API_ERROR,
+    type: MELEK_API_ERROR,
     error,
 });
 

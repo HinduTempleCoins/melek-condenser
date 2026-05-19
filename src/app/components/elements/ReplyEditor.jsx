@@ -1051,7 +1051,7 @@ export default (formId) =>
                     switch (payoutType) {
                         case '0%': // decline payout
                             __config.comment_options = {
-                                max_accepted_payout: '0.000 BLURT',
+                                max_accepted_payout: '0.000 MELEK',
                             };
                             break;
                         default: // 100% steem power payout

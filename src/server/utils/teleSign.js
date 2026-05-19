@@ -100,7 +100,7 @@ function verifySms({ mobile, confirmation_code, ip }) {
         language: 'en-US',
         ucid: use_case_code,
         verify_code: confirmation_code,
-        template: '$$CODE$$ is your Blurt confirmation code',
+        template: '$$CODE$$ is your MELEK confirmation code',
     };
     if (ip) f.originating_ip = ip;
     const fields = urlencode(f);

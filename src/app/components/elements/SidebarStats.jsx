@@ -15,7 +15,7 @@ const SidebarStats = ({ operationFlatFee, bandwidthKbytesFee }) => (
                         }}
                     >
                         <div>Operation Flat Fee</div>
-                        <span>{operationFlatFee} BLURT</span>
+                        <span>{operationFlatFee} MELEK</span>
                     </div>
                 </li>
                 <li className="c-sidebar__list-item">
@@ -26,7 +26,7 @@ const SidebarStats = ({ operationFlatFee, bandwidthKbytesFee }) => (
                         }}
                     >
                         <div>Bandwidth Fee</div>
-                        <span>{bandwidthKbytesFee} BLURT</span>
+                        <span>{bandwidthKbytesFee} MELEK</span>
                     </div>
                 </li>
             </ul>

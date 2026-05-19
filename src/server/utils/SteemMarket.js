@@ -23,7 +23,7 @@ SteemMarket.prototype.storeEmpty = function () {
     const key = config.steem_market_cache.key;
     return new Promise((res, rej) => {
         this.cache.set(key, {}, (err, success) => {
-            console.info('Storing empty Blurt Market data...');
+            console.info('Storing empty MELEK Market data...');
             res();
         });
     });
@@ -34,7 +34,7 @@ SteemMarket.prototype.get = async function () {
         const key = config.steem_market_cache.key;
         this.cache.get(key, (err, value) => {
             if (err) {
-                console.error('Could not retrieve Blurt Market data');
+                console.error('Could not retrieve MELEK Market data');
                 res({});
                 return;
             }
@@ -44,13 +44,13 @@ SteemMarket.prototype.get = async function () {
 };
 
 SteemMarket.prototype.refresh = async function () {
-    console.info('Refreshing Blurt Market data...');
+    console.info('Refreshing MELEK Market data...');
 
     const url = config.steem_market_endpoint;
     const token = config.steem_market_token;
     const key = config.steem_market_cache.key;
     if (!url) {
-        console.info('No Blurt Market endpoint provided...');
+        console.info('No MELEK Market endpoint provided...');
         return this.storeEmpty();
     }
 
@@ -62,17 +62,17 @@ SteemMarket.prototype.refresh = async function () {
         },
     })
         .then((response) => {
-            console.info('Received Blurt Market data from endpoint...');
+            console.info('Received MELEK Market data from endpoint...');
             this.cache.set(key, response.data, (err, success) => {
                 if (err) {
                     rej(err);
                     return;
                 }
-                console.info('Blurt Market data refreshed...');
+                console.info('MELEK Market data refreshed...');
             });
         })
         .catch((err) => {
-            console.error('Could not fetch Blurt Market data', err);
+            console.error('Could not fetch MELEK Market data', err);
             return this.storeEmpty();
         });
 };

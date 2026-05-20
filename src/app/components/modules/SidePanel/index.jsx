@@ -118,9 +118,9 @@ const SidePanel = ({
                 link: 'https://blocks.blurtwallet.com',
             },
             {
-                value: 'ecosynthesizer',
-                label: 'Ecosynthesizer',
-                link: 'https://ecosynthesizer.com/blurt/',
+                value: 'blurtscan',
+                label: 'Blurtscan',
+                link: 'https://blurtscan.com/',
             },
             // {
             //     value: 'api_docs',

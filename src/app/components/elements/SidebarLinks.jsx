@@ -44,6 +44,16 @@ const SidebarLinks = ({ username }) => (
                     </a>
                 </li>
                 <li className="c-sidebar__list-item">
+                    <a
+                        className="c-sidebar__link"
+                        href={$STM_Config.wiki_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Wiki / FAQ
+                    </a>
+                </li>
+                <li className="c-sidebar__list-item">
                     {/* <a className="c-sidebar__link" href="/@steemitblog"> */}
                     {/*    {tt('g.read_offical_blog')} */}
                     {/* </a> */}

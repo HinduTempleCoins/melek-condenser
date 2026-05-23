@@ -32,6 +32,7 @@ global.$STM_Config = {
     site_domain: config.get('site_domain'),
     google_analytics_id: config.get('google_analytics_id'),
     wallet_url: config.get('wallet_url'),
+    wiki_url: config.get('wiki_url'),
     failover_threshold: config.get('failover_threshold'),
     alternative_api_endpoints: alternativeApiEndpoints,
 };

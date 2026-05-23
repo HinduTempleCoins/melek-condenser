@@ -74,6 +74,14 @@
                 padding: 0.6rem;
                 text-transform: none;
                 margin: 0 0.75rem 0 0.5rem;
+                @media screen and (max-width: 39.9375em) {
+                    // No login link to its left on small; tighten left margin
+                    // and slim down padding so logo + signup + search + burger
+                    // all fit comfortably at 375px
+                    padding: 0.4rem 0.6rem;
+                    font-size: 1rem;
+                    margin: 0 0.25rem 0 0;
+                }
             }
             &.Header__login-link {
                 @extend .link;

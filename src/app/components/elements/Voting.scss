@@ -220,6 +220,12 @@ a.confirm_weight:hover {
 
 .DropdownMenu.Voting__voters_list ul {
     left: -60px;
+    // On small screens, the -60px nudge pushes the voters dropdown
+    // off the left edge of a 375px viewport; pin it to the trigger instead
+    @media screen and (max-width: 39.9375em) {
+        left: auto;
+        right: 0;
+    }
     li > a {
         //font-weight: 200;
     }
@@ -289,6 +295,15 @@ a.confirm_weight:hover {
     width: 350px;
     min-width: 320px;
     overflow: hidden;
+    // On small screens the 350px fixed width would push off the viewport edge
+    // at 375px once you account for parent offset; cap it to fit comfortably
+    @media screen and (max-width: 39.9375em) {
+        width: auto;
+        max-width: calc(100vw - 20px);
+        min-width: 0;
+        margin-right: 0;
+        padding: 16px;
+    }
     .Icon:hover {
         animation: none !important;
     }

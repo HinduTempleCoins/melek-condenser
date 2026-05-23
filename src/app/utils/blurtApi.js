@@ -396,7 +396,7 @@ export async function getAllTransferHistory(
         const lastTransaction = transactions[0];
         const lastTransactionTimestamp = lastTransaction[1].timestamp;
         const lastTransactionTime = Moment.utc(lastTransactionTimestamp);
-        const now = Moment(Date.now());
+        const now = Moment.utc();
         const daysAgo = now.diff(lastTransactionTime, 'days');
         const filteredTransactions = transactions.filter((transaction) => {
             const opType = transaction[1].op[0];
@@ -429,7 +429,7 @@ async function getTransferHistory(account, { fetchDays = 30, historyMode = 'wall
     let transfer_history = [];
     const limit = 1000;
     const maxRpcCalls = historyMode === 'wallet' ? 96 : 48;
-    const now = Moment(Date.now());
+    const now = Moment.utc();
     const operationSet = getHistoryModeOperationSet(historyMode);
     const operationFilter = getHistoryModeOperationFilter(historyMode);
     const isInsideFetchWindow = (timestamp) =>
@@ -471,41 +471,33 @@ async function getTransferHistory(account, { fetchDays = 30, historyMode = 'wall
             requestCount < maxRpcCalls && shouldContinue;
             requestCount++
         ) {
-            const page = await callAccountHistoryWithRetry(historyStart, limit);
+            const rawPage = await callAccountHistoryWithRetry(
+                historyStart,
+                limit,
+                null
+            );
 
-            if (page.nextStart !== null) {
-                historyStart = page.nextStart;
+            if (rawPage.nextStart !== null) {
+                historyStart = rawPage.nextStart;
                 continue;
             }
 
-            if (!page.history.length) {
-                const rawPage = await callAccountHistoryWithRetry(
-                    historyStart,
-                    limit,
-                    null
-                );
+            if (!rawPage.history.length) break;
 
-                if (rawPage.nextStart !== null) {
-                    historyStart = rawPage.nextStart;
-                    continue;
-                }
+            const oldestRawEntry = rawPage.history[0];
+            const oldestRawTimestamp =
+                oldestRawEntry && oldestRawEntry[1] && oldestRawEntry[1].timestamp;
+            const page =
+                historyMode === 'wallet'
+                    ? rawPage
+                    : await callAccountHistoryWithRetry(
+                          historyStart,
+                          limit,
+                          operationFilter
+                      );
 
-                if (!rawPage.history.length) break;
-
-                const oldestRawEntry = rawPage.history[0];
-                const oldestRawTimestamp =
-                    oldestRawEntry && oldestRawEntry[1] && oldestRawEntry[1].timestamp;
-
-                historyStart = Math.max(oldestRawEntry[0] - 1, 0);
-
-                if (
-                    !oldestRawTimestamp ||
-                    !isInsideFetchWindow(oldestRawTimestamp) ||
-                    historyStart === 0
-                ) {
-                    shouldContinue = false;
-                }
-
+            if (page.nextStart !== null) {
+                historyStart = page.nextStart;
                 continue;
             }
 
@@ -525,8 +517,15 @@ async function getTransferHistory(account, { fetchDays = 30, historyMode = 'wall
                 transfer_history.push(entry);
             });
 
-            historyStart = Math.max(page.history[0][0] - 1, 0);
-            if (historyStart === 0) shouldContinue = false;
+            historyStart = Math.max(oldestRawEntry[0] - 1, 0);
+
+            if (
+                !oldestRawTimestamp ||
+                !isInsideFetchWindow(oldestRawTimestamp) ||
+                historyStart === 0
+            ) {
+                shouldContinue = false;
+            }
         }
     } catch (err) {
         console.log(err);

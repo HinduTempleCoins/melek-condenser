@@ -178,9 +178,29 @@
         padding: 8px;
     }
 
+    div.UserProfile__top-nav div.UserProfile__top-menu {
+        align-items: center;
+        column-gap: 0.75rem;
+        justify-content: space-between;
+        row-gap: 0.25rem;
+    }
+
     .UserProfile__top-menu > div.columns {
+        flex: 0 1 auto;
+        max-width: none;
         padding-left: 0;
         padding-right: 0;
+        width: auto;
+    }
+
+    .UserProfile__top-menu > div.columns .menu {
+        flex-wrap: nowrap !important;
+        white-space: nowrap;
+    }
+
+    .UserProfile__top-menu > div.columns .menu > li,
+    .UserProfile__top-menu > div.columns .menu > .DropdownMenu {
+        flex: 0 0 auto;
     }
 
     .UserProfile__banner .Userpic {

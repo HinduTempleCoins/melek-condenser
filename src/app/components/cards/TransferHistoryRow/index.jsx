@@ -176,13 +176,19 @@ class TransferHistoryRow extends React.Component {
       if (data.to === context) {
         message = (
           <span>
-            Receive savings withdrawal of {data.amount} from {otherAccountLink(data.from)}
+            {tt('transferhistoryrow_jsx.fill_transfer_from_savings.to_self', {
+              amount: data.amount
+            })}
+            {otherAccountLink(data.from)}
           </span>
         )
       } else {
         message = (
           <span>
-            Send savings withdrawal of {data.amount} to {otherAccountLink(data.to)}
+            {tt('transferhistoryrow_jsx.fill_transfer_from_savings.from_self', {
+              amount: data.amount
+            })}
+            {otherAccountLink(data.to)}
           </span>
         )
       }
@@ -199,18 +205,25 @@ class TransferHistoryRow extends React.Component {
       if (data.to_account === context) {
         message = (
           <span>
-            Receive power down payment of {powerdown_payment || data.deposited}
+            {tt(
+              data.from_account && data.from_account !== context
+                ? 'transferhistoryrow_jsx.fill_vesting_withdraw.to_self_from'
+                : 'transferhistoryrow_jsx.fill_vesting_withdraw.to_self',
+              { amount: powerdown_payment || data.deposited }
+            )}
             {data.from_account && data.from_account !== context && (
-              <span> from {otherAccountLink(data.from_account)}</span>
+              <span>{otherAccountLink(data.from_account)}</span>
             )}
           </span>
         )
       } else {
         message = (
           <span>
-            Send power down payment of {powerdown_payment || data.deposited}
+            {tt('transferhistoryrow_jsx.fill_vesting_withdraw.from_self', {
+              amount: powerdown_payment || data.deposited
+            })}
             {data.to_account && (
-              <span> to {otherAccountLink(data.to_account)}</span>
+              <span>{otherAccountLink(data.to_account)}</span>
             )}
           </span>
         )
@@ -220,35 +233,47 @@ class TransferHistoryRow extends React.Component {
         if (parseFloat(data.vesting_shares) === 0) {
           message = (
             <span>
-              Revoke delegation to {otherAccountLink(data.delegatee)}
+              {tt('transferhistoryrow_jsx.delegate_vesting_shares.revoke')}
+              {otherAccountLink(data.delegatee)}
             </span>
           )
         } else {
           message = (
             <span>
-              Delegate {delegated_reward} BLURT POWER to {otherAccountLink(data.delegatee)}
+              {tt('transferhistoryrow_jsx.delegate_vesting_shares.from_self', {
+                amount: delegated_reward
+              })}
+              {otherAccountLink(data.delegatee)}
             </span>
           )
         }
       } else if (data.delegatee === context) {
         message = (
           <span>
-            Receive delegation of {delegated_reward} BLURT POWER from {otherAccountLink(data.delegator)}
+            {tt('transferhistoryrow_jsx.delegate_vesting_shares.to_self', {
+              amount: delegated_reward
+            })}
+            {otherAccountLink(data.delegator)}
           </span>
         )
       } else {
         message = (
           <span>
-            Delegate {delegated_reward} BLURT POWER from {data.delegator} to {otherAccountLink(data.delegatee)}
+            {tt(
+              'transferhistoryrow_jsx.delegate_vesting_shares.from_user_to_user',
+              {
+                amount: delegated_reward,
+                from: data.delegator
+              }
+            )}
+            {otherAccountLink(data.delegatee)}
           </span>
         )
       }
     } else if (type === 'return_vesting_delegation') {
-      message = (
-        <span>
-          Receive returned delegation of {returned_delegation} BLURT POWER
-        </span>
-      )
+      message = tt('transferhistoryrow_jsx.return_vesting_delegation', {
+        amount: returned_delegation
+      })
     } else if (type === 'curation_reward') {
       message = rewardHistoryMessage(
         curation_reward,

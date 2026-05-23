@@ -50,6 +50,7 @@
         "links": "Links",
         "joined": "加入",
         "loading": "正在载入",
+        "loading_data": "正在加载数据",
         "login": "登录",
         "logout": "登出",
         "memo": "备注",
@@ -499,6 +500,22 @@
         "to_savings": "到储蓄账户",
         "from_savings": "从储蓄账户",
         "cancel_transfer_from_savings": "取消从储蓄账户转账",
+        "fill_transfer_from_savings": {
+            "to_self": "Receive savings withdrawal of %(amount)s from ",
+            "from_self": "Send savings withdrawal of %(amount)s to "
+        },
+        "fill_vesting_withdraw": {
+            "to_self": "Receive power down payment of %(amount)s",
+            "to_self_from": "Receive power down payment of %(amount)s from ",
+            "from_self": "Send power down payment of %(amount)s to "
+        },
+        "delegate_vesting_shares": {
+            "revoke": "Revoke delegation to ",
+            "from_self": "Delegate %(amount)s BLURT POWER to ",
+            "to_self": "Receive delegation of %(amount)s BLURT POWER from ",
+            "from_user_to_user": "Delegate %(amount)s BLURT POWER from %(from)s to "
+        },
+        "return_vesting_delegation": "Receive returned delegation of %(amount)s BLURT POWER",
         "stop_power_down": "停止Power Down",
         "withdraw_vesting": "Start power down of %(powerdown_vests)s BLURT",
         "start_power_down_of": "开始Power Down",

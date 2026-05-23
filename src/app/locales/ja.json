@@ -51,6 +51,7 @@
         "links": "Links",
         "joined": "登録年月：",
         "loading": "ロード中",
+        "loading_data": "データを読み込み中",
         "login": "ログイン",
         "logout": "ログアウト",
         "memo": "メモ",
@@ -500,6 +501,22 @@
         "to_savings": "貯蓄に",
         "from_savings": "貯蓄から",
         "cancel_transfer_from_savings": "貯蓄からの引き出しをキャンセルしました",
+        "fill_transfer_from_savings": {
+            "to_self": "Receive savings withdrawal of %(amount)s from ",
+            "from_self": "Send savings withdrawal of %(amount)s to "
+        },
+        "fill_vesting_withdraw": {
+            "to_self": "Receive power down payment of %(amount)s",
+            "to_self_from": "Receive power down payment of %(amount)s from ",
+            "from_self": "Send power down payment of %(amount)s to "
+        },
+        "delegate_vesting_shares": {
+            "revoke": "Revoke delegation to ",
+            "from_self": "Delegate %(amount)s BLURT POWER to ",
+            "to_self": "Receive delegation of %(amount)s BLURT POWER from ",
+            "from_user_to_user": "Delegate %(amount)s BLURT POWER from %(from)s to "
+        },
+        "return_vesting_delegation": "Receive returned delegation of %(amount)s BLURT POWER",
         "stop_power_down": "パワーダウンを停止しました",
         "withdraw_vesting": "Start power down of %(powerdown_vests)s BLURT",
         "start_power_down_of": "パワーダウンを開始しました：",

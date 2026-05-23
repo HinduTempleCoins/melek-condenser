@@ -29,6 +29,7 @@ import {
 import * as transactionActions from 'app/redux/TransactionReducer'
 import * as globalActions from 'app/redux/GlobalReducer'
 import DropdownMenu from 'app/components/elements/DropdownMenu'
+import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import {
   WALLET_HISTORY_DAYS,
   WALLET_HISTORY_PAGE_SIZE
@@ -41,8 +42,11 @@ class UserWallet extends React.Component {
     super()
     this.state = {
       claimInProgress: false,
-      historyIndex: 0
+      historyIndex: 0,
+      historyTransitionDirection: null
     }
+    this.historyTouchStartX = null
+    this.historyTouchStartY = null
     this.onShowBuyBlurt = (e) => {
       e.preventDefault()
       const new_window = window.open()
@@ -83,8 +87,8 @@ class UserWallet extends React.Component {
     const nextAccountName =
       nextProps.account && nextProps.account.get && nextProps.account.get('name')
 
-    if (nextAccountName !== currentAccountName && this.state.historyIndex !== 0) {
-      this.setState({ historyIndex: 0 })
+    if (nextAccountName !== currentAccountName) {
+      this.setState({ historyIndex: 0, historyTransitionDirection: null })
     }
   }
 
@@ -95,6 +99,59 @@ class UserWallet extends React.Component {
     )
 
     return Math.min(this.state.historyIndex, maxHistoryIndex)
+  }
+
+  canUseSwipePagination () {
+    return (
+      process.env.BROWSER &&
+      typeof window !== 'undefined' &&
+      window.innerWidth <= 640
+    )
+  }
+
+  handleHistoryTouchStart = (event) => {
+    if (
+      !this.canUseSwipePagination() ||
+      !event.touches ||
+      event.touches.length !== 1
+    ) {
+      return
+    }
+
+    const touch = event.touches[0]
+    this.historyTouchStartX = touch.clientX
+    this.historyTouchStartY = touch.clientY
+  }
+
+  handleHistoryTouchEnd = (event, totalEntries, historyPageSize) => {
+    if (
+      !this.canUseSwipePagination() ||
+      this.historyTouchStartX === null ||
+      this.historyTouchStartY === null ||
+      !event.changedTouches ||
+      event.changedTouches.length !== 1
+    ) {
+      this.historyTouchStartX = null
+      this.historyTouchStartY = null
+      return
+    }
+
+    const touch = event.changedTouches[0]
+    const deltaX = touch.clientX - this.historyTouchStartX
+    const deltaY = touch.clientY - this.historyTouchStartY
+
+    this.historyTouchStartX = null
+    this.historyTouchStartY = null
+
+    if (
+      totalEntries <= historyPageSize ||
+      Math.abs(deltaX) < 36 ||
+      Math.abs(deltaX) <= Math.abs(deltaY)
+    ) {
+      return
+    }
+
+    this._setHistoryPage(deltaX < 0, totalEntries, historyPageSize)
   }
 
   handleClaimRewards = (account) => {
@@ -114,7 +171,8 @@ class UserWallet extends React.Component {
     const nextHistoryIndex = currentHistoryIndex + (back ? 1 : -1)
 
     this.setState({
-      historyIndex: Math.max(0, Math.min(maxHistoryIndex, nextHistoryIndex))
+      historyIndex: Math.max(0, Math.min(maxHistoryIndex, nextHistoryIndex)),
+      historyTransitionDirection: back ? 'older' : 'newer'
     })
   }
 
@@ -162,15 +220,23 @@ class UserWallet extends React.Component {
       price_per_blurt,
       savings_withdraws,
       account,
-      currentUser
+      currentUser,
+      isLoading
     } = this.props
     const gprops = this.props.gprops.toJS()
 
+    const loadingState = (
+      <div className='UserWallet__loading-state'>
+        <LoadingIndicator type='circle' />
+        <span>{tt('g.loading_data')}...</span>
+      </div>
+    )
+
     // do not render if account is not loaded or available
-    if (!account) return null
+    if (!account) return isLoading ? <div className='UserWallet'>{loadingState}</div> : null
 
     // do not render if state appears to contain only lite account info
-    if (!account.has('vesting_shares')) return null
+    if (!account.has('vesting_shares')) return isLoading ? <div className='UserWallet'>{loadingState}</div> : null
 
     const vesting_blurt = vestingBlurt(account.toJS(), gprops)
     const delegated_blurt = delegatedBlurt(account.toJS(), gprops)
@@ -337,8 +403,12 @@ class UserWallet extends React.Component {
     const hasOlderHistory =
             (historyIndex + 1) * historyPageSize <
             transfer_entries.length
+    const showHistoryLoadingState = isLoading && transfer_entries.length === 0
+    const historyTableAnimationClass = this.state.historyTransitionDirection
+      ? ` UserWallet__history-table--slide-${this.state.historyTransitionDirection}`
+      : ''
     const historyNavButtons = (
-      <nav className='UserWallet__history-pager'>
+      <nav className='UserWallet__history-pager UserWallet__history-pager--swipe'>
         <ul className='pager'>
           <li>
             <div
@@ -362,6 +432,11 @@ class UserWallet extends React.Component {
                 &larr; {tt('g.newer')}
               </span>
             </div>
+          </li>
+          <li className='UserWallet__history-swipe-hint' aria-hidden='true'>
+            <span className='UserWallet__history-swipe-hint-chevron UserWallet__history-swipe-hint-chevron--left'>‹</span>
+            <span className='UserWallet__history-swipe-hint-track' />
+            <span className='UserWallet__history-swipe-hint-chevron UserWallet__history-swipe-hint-chevron--right'>›</span>
           </li>
           <li>
             <div
@@ -722,14 +797,35 @@ class UserWallet extends React.Component {
                 )}
               </span>
             </div>
-            <div
-              className='UserWallet__history-table-wrap'
-              style={{ '--wallet-history-row-count': historyPageSize }}
-            >
-              <table className='UserWallet__history-table'>
-                <tbody>{transfer_log}</tbody>
-              </table>
-            </div>
+            {showHistoryLoadingState
+              ? <div className='UserWallet__loading-state UserWallet__loading-state--history'>{loadingState.props.children}</div>
+              : (
+                <div
+                  className={
+                    'UserWallet__history-table-wrap' +
+                    ((hasNewerHistory || hasOlderHistory)
+                      ? ' UserWallet__history-table-wrap--swipe'
+                      : '')
+                  }
+                  onTouchEnd={(event) =>
+                    this.handleHistoryTouchEnd(
+                      event,
+                      transfer_entries.length,
+                      historyPageSize
+                    )}
+                  onTouchStart={this.handleHistoryTouchStart}
+                  style={{ '--wallet-history-row-count': historyPageSize }}
+                >
+                  <table
+                    className={
+                      'UserWallet__history-table' + historyTableAnimationClass
+                    }
+                    key={`wallet-history-${historyIndex}`}
+                  >
+                    <tbody>{transfer_log}</tbody>
+                  </table>
+                </div>
+                )}
             {(hasNewerHistory || hasOlderHistory) && historyNavButtons}
           </div>
         </div>

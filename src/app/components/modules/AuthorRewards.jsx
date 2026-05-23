@@ -2,12 +2,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TransferHistoryRow from 'app/components/cards/TransferHistoryRow';
+import LoadingIndicator from 'app/components/elements/LoadingIndicator';
 import {
     numberWithCommas,
     vestsToHp,
     assetFloat,
 } from 'app/utils/StateFunctions';
 import tt from 'counterpart';
+import Moment from 'moment';
 import {
     LIQUID_TICKER,
     VEST_TICKER,
@@ -26,9 +28,12 @@ class AuthorRewards extends React.Component {
         this.state = {
             historyIndex: 0,
             historyPageSize: getDefaultRewardsPageSize(),
+            historyTransitionDirection: null,
         };
         this.historyWrapNode = null;
         this.historyPagerNode = null;
+        this.historyTouchStartX = null;
+        this.historyTouchStartY = null;
         this.historyPageSizeTimers = [];
         this.onShowDeposit = () => {
             this.setState({ showDeposit: !this.state.showDeposit });
@@ -52,6 +57,9 @@ class AuthorRewards extends React.Component {
             this.scheduleHistoryPageSizeUpdate.bind(this);
         this.clearHistoryPageSizeTimers =
             this.clearHistoryPageSizeTimers.bind(this);
+        this.handleHistoryTouchStart =
+            this.handleHistoryTouchStart.bind(this);
+        this.handleHistoryTouchEnd = this.handleHistoryTouchEnd.bind(this);
         // this.onShowDeposit = this.onShowDeposit.bind(this)
     }
 
@@ -68,7 +76,10 @@ class AuthorRewards extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.account_name !== this.props.account_name) {
-            this.setState({ historyIndex: 0 });
+            this.setState({
+                historyIndex: 0,
+                historyTransitionDirection: null,
+            });
         }
     }
 
@@ -160,6 +171,59 @@ class AuthorRewards extends React.Component {
         return Math.min(this.state.historyIndex, maxHistoryIndex);
     }
 
+    canUseSwipePagination() {
+        return (
+            process.env.BROWSER &&
+            typeof window !== 'undefined' &&
+            window.innerWidth <= 640
+        );
+    }
+
+    handleHistoryTouchStart(event) {
+        if (
+            !this.canUseSwipePagination() ||
+            !event.touches ||
+            event.touches.length !== 1
+        ) {
+            return;
+        }
+
+        const touch = event.touches[0];
+        this.historyTouchStartX = touch.clientX;
+        this.historyTouchStartY = touch.clientY;
+    }
+
+    handleHistoryTouchEnd(event, totalEntries, historyPageSize) {
+        if (
+            !this.canUseSwipePagination() ||
+            this.historyTouchStartX === null ||
+            this.historyTouchStartY === null ||
+            !event.changedTouches ||
+            event.changedTouches.length !== 1
+        ) {
+            this.historyTouchStartX = null;
+            this.historyTouchStartY = null;
+            return;
+        }
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - this.historyTouchStartX;
+        const deltaY = touch.clientY - this.historyTouchStartY;
+
+        this.historyTouchStartX = null;
+        this.historyTouchStartY = null;
+
+        if (
+            totalEntries <= historyPageSize ||
+            Math.abs(deltaX) < 36 ||
+            Math.abs(deltaX) <= Math.abs(deltaY)
+        ) {
+            return;
+        }
+
+        this._setHistoryPage(deltaX < 0, totalEntries, historyPageSize);
+    }
+
     _setHistoryPage(back, totalEntries, historyPageSize) {
         const currentHistoryIndex = this.getEffectiveHistoryIndex(
             totalEntries,
@@ -176,6 +240,7 @@ class AuthorRewards extends React.Component {
                 0,
                 Math.min(maxHistoryIndex, nextHistoryIndex)
             ),
+            historyTransitionDirection: back ? 'older' : 'newer',
         });
     }
 
@@ -183,7 +248,7 @@ class AuthorRewards extends React.Component {
         const {
             state: { historyPageSize: requestedHistoryPageSize },
         } = this;
-        const { account_name, transfer_history } = this.props;
+        const { account_name, transfer_history, isLoading } = this.props;
 
         /// transfer log
         let rewards24Vests = 0;
@@ -195,25 +260,26 @@ class AuthorRewards extends React.Component {
         const rewards24HBD = 0;
         const rewardsWeekHBD = 0;
         const totalRewardsHBD = 0;
-        const today = new Date();
         const oneDay = 86400 * 1000;
-        const yesterday = new Date(today.getTime() - oneDay).getTime();
-        const lastWeek = new Date(
-            today.getTime() - REWARDS_HISTORY_DAYS * oneDay
-        ).getTime();
+        const now = Moment.utc();
+        const yesterday = now.clone().subtract(1, 'day');
+        const lastWeek = now
+            .clone()
+            .subtract(REWARDS_HISTORY_DAYS, 'days');
 
         let firstDate, finalDate;
         let author_log = transfer_history
             .map((item, index) => {
                 // Filter out rewards
                 if (item[1].op[0] === 'author_reward') {
-                    const timestamp = new Date(item[1].timestamp).getTime();
-                    const isLastWeekReward = timestamp >= lastWeek;
+                    const timestamp = Moment.utc(item[1].timestamp);
+                    const timestampMs = timestamp.valueOf();
+                    const isLastWeekReward = timestamp.isSameOrAfter(lastWeek);
 
                     if (!finalDate) {
-                        finalDate = timestamp;
+                        finalDate = timestampMs;
                     }
-                    firstDate = timestamp;
+                    firstDate = timestampMs;
 
                     const vest = assetFloat(
                         item[1].op[1].vesting_payout,
@@ -231,7 +297,7 @@ class AuthorRewards extends React.Component {
                     // );
 
                     if (isLastWeekReward) {
-                        if (timestamp > yesterday) {
+                        if (timestamp.isSameOrAfter(yesterday)) {
                             rewards24Vests += vest;
                             rewards24Blurt += blurt;
                             // rewards24HBD += hbd;
@@ -273,6 +339,7 @@ class AuthorRewards extends React.Component {
         const authorLogNewestFirst = author_log
             .filter((item) => item.isLastWeekReward)
             .reverse();
+        const showHistoryLoadingState = isLoading && authorLogNewestFirst.length === 0;
         const historyPageSize = Math.min(
             requestedHistoryPageSize,
             Math.max(1, authorLogNewestFirst.length)
@@ -286,6 +353,10 @@ class AuthorRewards extends React.Component {
         const hasOlderPage =
             (historyIndex + 1) * historyPageSize <
             authorLogNewestFirst.length;
+        const historyTableAnimationClass = this.state
+            .historyTransitionDirection
+            ? ` UserWallet__history-table--slide-${this.state.historyTransitionDirection}`
+            : '';
 
         author_log = authorLogNewestFirst
             .slice(
@@ -296,7 +367,7 @@ class AuthorRewards extends React.Component {
 
         const navButtons = (
             <nav
-                className="UserWallet__history-pager"
+                className="UserWallet__history-pager UserWallet__history-pager--swipe"
                 ref={this.setHistoryPagerRef}
             >
                 <ul className="pager">
@@ -322,6 +393,15 @@ class AuthorRewards extends React.Component {
                                 &larr; {tt('g.newer')}
                             </span>
                         </div>
+                    </li>
+                    <li className="UserWallet__history-swipe-hint" aria-hidden="true">
+                        <span className="UserWallet__history-swipe-hint-chevron UserWallet__history-swipe-hint-chevron--left">
+                            &#8249;
+                        </span>
+                        <span className="UserWallet__history-swipe-hint-track" />
+                        <span className="UserWallet__history-swipe-hint-chevron UserWallet__history-swipe-hint-chevron--right">
+                            &#8250;
+                        </span>
                     </li>
                     <li>
                         <div
@@ -351,24 +431,38 @@ class AuthorRewards extends React.Component {
         );
         return (
             <div className="UserWallet">
-                <div className="UserWallet__balance UserReward__row row">
-                    <div className="column small-12 medium-8">
+                <div className="UserWallet__balance UserReward__row UserWallet__rewards-summary row">
+                    <div className="column small-12 medium-8 UserWallet__rewards-summary-label">
                         {tt(
                             'authorrewards_jsx.estimated_author_rewards_last_week'
                         )}
                         :
                     </div>
-                    <div className="column small-12 medium-4">
-                        {numberWithCommas(
-                            vestsToHp(
-                                this.props.state,
-                                rewardsWeekVests + ' ' + VEST_TICKER
-                            )
-                        ) +
-                            ' ' +
-                            'BP'}
-                        <br />
-                        {rewardsWeekBlurt.toFixed(3) + ' ' + LIQUID_TICKER}
+                    <div className="column small-12 medium-4 UserWallet__rewards-summary-total">
+                        {showHistoryLoadingState ? (
+                            <span>{tt('g.loading_data')}...</span>
+                        ) : (
+                            <span className="UserWallet__rewards-summary-values">
+                                <span>
+                                    {numberWithCommas(
+                                        vestsToHp(
+                                            this.props.state,
+                                            rewardsWeekVests + ' ' + VEST_TICKER
+                                        )
+                                    ) +
+                                        ' ' +
+                                        'BP'}
+                                </span>
+                                <span className="UserWallet__rewards-summary-separator">
+                                    &middot;
+                                </span>
+                                <span>
+                                    {rewardsWeekBlurt.toFixed(3) +
+                                        ' ' +
+                                        LIQUID_TICKER}
+                                </span>
+                            </span>
+                        )}
                     </div>
                 </div>
 
@@ -384,19 +478,45 @@ class AuthorRewards extends React.Component {
                         <h4>
                             {tt('authorrewards_jsx.author_rewards_history')}
                         </h4>
-                        <div
-                            className="UserWallet__history-table-wrap"
-                            ref={this.setHistoryWrapRef}
-                            style={{
-                                '--wallet-history-row-count': historyPageSize,
-                            }}
-                        >
-                            {author_log.length > 0 && (
-                                <table className="UserWallet__history-table">
-                                    <tbody>{author_log}</tbody>
-                                </table>
-                            )}
-                        </div>
+                        {showHistoryLoadingState ? (
+                            <div className="UserWallet__loading-state UserWallet__loading-state--history">
+                                <LoadingIndicator type="circle" />
+                                <span>{tt('g.loading_data')}...</span>
+                            </div>
+                        ) : (
+                            <div
+                                className={
+                                    'UserWallet__history-table-wrap' +
+                                    (hasMultiplePages
+                                        ? ' UserWallet__history-table-wrap--swipe'
+                                        : '')
+                                }
+                                ref={this.setHistoryWrapRef}
+                                onTouchEnd={(event) =>
+                                    this.handleHistoryTouchEnd(
+                                        event,
+                                        authorLogNewestFirst.length,
+                                        historyPageSize
+                                    )
+                                }
+                                onTouchStart={this.handleHistoryTouchStart}
+                                style={{
+                                    '--wallet-history-row-count': historyPageSize,
+                                }}
+                            >
+                                {author_log.length > 0 && (
+                                    <table
+                                        className={
+                                            'UserWallet__history-table' +
+                                            historyTableAnimationClass
+                                        }
+                                        key={`author-history-${historyIndex}`}
+                                    >
+                                        <tbody>{author_log}</tbody>
+                                    </table>
+                                )}
+                            </div>
+                        )}
                         {hasMultiplePages && navButtons}
                     </div>
                 </div>

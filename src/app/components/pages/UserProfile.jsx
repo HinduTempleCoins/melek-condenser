@@ -116,6 +116,7 @@ export default class UserProfile extends React.Component {
                     <UserWallet
                         key={`wallet:${accountname}`}
                         account={accountImm}
+                        isLoading={fetching}
                         showTransfer={this.props.showTransfer}
                         showPowerdown={this.props.showPowerdown}
                         currentUser={currentUser}
@@ -142,6 +143,7 @@ export default class UserProfile extends React.Component {
                 <CurationRewards
                     key={`curation-rewards:${accountname}`}
                     account={account}
+                    isLoading={fetching}
                 />
             );
         } else if (section === 'author-rewards') {
@@ -150,6 +152,7 @@ export default class UserProfile extends React.Component {
                 <AuthorRewards
                     key={`author-rewards:${accountname}`}
                     account={account}
+                    isLoading={fetching}
                 />
             );
         } else if (section === 'settings') {

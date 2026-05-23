@@ -53,6 +53,7 @@
         "links": "Links",
         "joined": "Joined",
         "loading": "Loading",
+        "loading_data": "Loading data",
         "login": "Login",
         "logout": "Logout",
         "memo": "Memo",
@@ -518,6 +519,22 @@
         "to_savings": "to savings",
         "from_savings": "from savings",
         "cancel_transfer_from_savings": "Cancel transfer from savings (request %(request_id)s)",
+        "fill_transfer_from_savings": {
+            "to_self": "Receive savings withdrawal of %(amount)s from ",
+            "from_self": "Send savings withdrawal of %(amount)s to "
+        },
+        "fill_vesting_withdraw": {
+            "to_self": "Receive power down payment of %(amount)s",
+            "to_self_from": "Receive power down payment of %(amount)s from ",
+            "from_self": "Send power down payment of %(amount)s to "
+        },
+        "delegate_vesting_shares": {
+            "revoke": "Revoke delegation to ",
+            "from_self": "Delegate %(amount)s BLURT POWER to ",
+            "to_self": "Receive delegation of %(amount)s BLURT POWER from ",
+            "from_user_to_user": "Delegate %(amount)s BLURT POWER from %(from)s to "
+        },
+        "return_vesting_delegation": "Receive returned delegation of %(amount)s BLURT POWER",
         "stop_power_down": "Stop power down",
         "withdraw_vesting": "Start power down of %(powerdown_vests)s BLURT",
         "start_power_down_of": "Start power down of",

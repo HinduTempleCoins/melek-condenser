@@ -52,14 +52,8 @@ export function* fetchState(location_change_action) {
         return;
     }
 
-    // Replace /curation-rewards and /author-rewards with /transfers for UserProfile
-    // to resolve data correctly
-    if (url.indexOf('/curation-rewards') !== -1) {
-        url = url.replace(/\/curation-rewards$/, '/transfers');
-    }
-    if (url.indexOf('/author-rewards') !== -1) {
-        url = url.replace(/\/author-rewards$/, '/transfers');
-    }
+    // Keep reward routes intact so getStateAsync can apply the reward-specific
+    // account_history_api filters.
     if (url.indexOf('/permissions') !== -1) {
         url = url.replace(/\/permissions$/, '/transfers');
     }

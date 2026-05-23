@@ -35,6 +35,138 @@
     }
 }
 
+.UserWallet__history-table-wrap {
+    --wallet-history-row-height: 2.75rem;
+    --wallet-history-row-count: 12;
+    min-height: calc(
+        var(--wallet-history-row-height) * var(--wallet-history-row-count)
+    );
+    margin-top: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.UserWallet__history-table {
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 0;
+
+    tbody tr {
+        height: var(--wallet-history-row-height);
+    }
+
+    td {
+        height: var(--wallet-history-row-height);
+        vertical-align: middle;
+    }
+
+    .TransferHistoryRow__date {
+        width: 7.25rem;
+        max-width: 7.25rem;
+        min-width: 7.25rem;
+        white-space: nowrap;
+    }
+
+    td.TransferHistoryRow__date {
+        padding-right: 0.35rem;
+    }
+
+    td.TransferHistoryRow__text {
+        padding-left: 0.35rem;
+    }
+
+    .TransferHistoryRow__text,
+    .TransferHistoryRow__memo {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .TransferHistoryRow__text > a,
+    .TransferHistoryRow__text > span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .TransferHistoryRow__text > .TransferHistoryRow__reward-message {
+        align-items: center;
+        column-gap: 0.16rem;
+        display: grid;
+        grid-template-columns: 5.1rem 1.35rem 1.05rem minmax(0, 1fr);
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .TransferHistoryRow__reward-amount {
+        min-width: 0;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .TransferHistoryRow__reward-unit,
+    .TransferHistoryRow__reward-connector {
+        justify-self: center;
+        white-space: nowrap;
+    }
+
+    .TransferHistoryRow__post-link {
+        display: block;
+        flex: 1 1 auto;
+        margin-left: 0.55rem;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .Trans--reward .show-for-medium {
+        display: none !important;
+    }
+
+    @media only screen and (max-width: 40em) {
+        .TransferHistoryRow__date {
+            width: 6.75rem;
+            max-width: 6.75rem;
+            min-width: 6.75rem;
+        }
+
+        td.TransferHistoryRow__date {
+            padding-right: 0.25rem;
+        }
+
+        td.TransferHistoryRow__text {
+            padding-left: 0.25rem;
+        }
+
+        .TransferHistoryRow__text > .TransferHistoryRow__reward-message {
+            column-gap: 0.14rem;
+            grid-template-columns: 4.55rem 1.2rem 0.95rem minmax(0, 1fr);
+        }
+
+        .TransferHistoryRow__post-link {
+            margin-left: 0.45rem;
+        }
+    }
+}
+
+.UserWallet__history-pager {
+    margin: 0.75rem 0 1.75rem;
+    padding-bottom: 0.5rem;
+
+    .pager {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 40em) {
+    .UserWallet__history-pager {
+        margin-bottom: 1.5rem;
+    }
+}
+
 .UserWallet__buybp {
     margin-right: 0 !important;
     margin-top: 1rem;

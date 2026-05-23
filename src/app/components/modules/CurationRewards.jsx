@@ -14,15 +14,25 @@ import {
     DEBT_TOKEN_SHORT,
     LIQUID_TOKEN,
     CURRENCY_SIGN,
-    VESTING_TOKEN,
     LIQUID_TICKER,
     VEST_TICKER,
 } from 'app/client_config';
+import {
+    getDefaultRewardsPageSize,
+    getRewardsPageSizeFromTop,
+    REWARDS_HISTORY_DAYS,
+} from 'app/utils/historyPageSize';
 
 class CurationRewards extends React.Component {
     constructor() {
         super();
-        this.state = { historyIndex: 0 };
+        this.state = {
+            historyIndex: 0,
+            historyPageSize: getDefaultRewardsPageSize(),
+        };
+        this.historyWrapNode = null;
+        this.historyPagerNode = null;
+        this.historyPageSizeTimers = [];
         this.onShowDeposit = () => {
             this.setState({ showDeposit: !this.state.showDeposit });
         };
@@ -38,25 +48,143 @@ class CurationRewards extends React.Component {
                 depositType: VEST_TICKER,
             });
         };
+        this.setHistoryWrapRef = this.setHistoryWrapRef.bind(this);
+        this.setHistoryPagerRef = this.setHistoryPagerRef.bind(this);
+        this.updateHistoryPageSize = this.updateHistoryPageSize.bind(this);
+        this.scheduleHistoryPageSizeUpdate =
+            this.scheduleHistoryPageSizeUpdate.bind(this);
+        this.clearHistoryPageSizeTimers =
+            this.clearHistoryPageSizeTimers.bind(this);
         // this.onShowDeposit = this.onShowDeposit.bind(this)
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return (
+            nextProps.account_name !== this.props.account_name ||
+            nextProps.transfer_history !== this.props.transfer_history ||
             nextProps.transfer_history.length !==
                 this.props.transfer_history.length ||
-            nextState.historyIndex !== this.state.historyIndex
+            nextState.historyIndex !== this.state.historyIndex ||
+            nextState.historyPageSize !== this.state.historyPageSize
         );
     }
 
-    _setHistoryPage(back) {
-        const newIndex = this.state.historyIndex + (back ? 10 : -10);
-        this.setState({ historyIndex: Math.max(0, newIndex) });
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.account_name !== this.props.account_name) {
+            this.setState({ historyIndex: 0 });
+        }
+    }
+
+    componentDidMount() {
+        if (!process.env.BROWSER || typeof window === 'undefined') return;
+
+        this.scheduleHistoryPageSizeUpdate();
+        window.addEventListener('resize', this.updateHistoryPageSize);
+        window.addEventListener('orientationchange', this.updateHistoryPageSize);
+        window.addEventListener('load', this.updateHistoryPageSize);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (
+            prevProps.account_name !== this.props.account_name ||
+            prevProps.transfer_history !== this.props.transfer_history ||
+            prevState.historyPageSize !== this.state.historyPageSize
+        ) {
+            this.scheduleHistoryPageSizeUpdate();
+        }
+    }
+
+    componentWillUnmount() {
+        if (!process.env.BROWSER || typeof window === 'undefined') return;
+
+        this.clearHistoryPageSizeTimers();
+        window.removeEventListener('resize', this.updateHistoryPageSize);
+        window.removeEventListener(
+            'orientationchange',
+            this.updateHistoryPageSize
+        );
+        window.removeEventListener('load', this.updateHistoryPageSize);
+    }
+
+    setHistoryWrapRef(node) {
+        this.historyWrapNode = node;
+    }
+
+    setHistoryPagerRef(node) {
+        this.historyPagerNode = node;
+    }
+
+    clearHistoryPageSizeTimers() {
+        if (!process.env.BROWSER || typeof window === 'undefined') return;
+
+        this.historyPageSizeTimers.forEach((timerId) =>
+            window.clearTimeout(timerId)
+        );
+        this.historyPageSizeTimers = [];
+    }
+
+    scheduleHistoryPageSizeUpdate() {
+        if (!process.env.BROWSER || typeof window === 'undefined') return;
+
+        this.clearHistoryPageSizeTimers();
+        [0, 250, 1000, 2000].forEach((delay) => {
+            const timerId = window.setTimeout(
+                this.updateHistoryPageSize,
+                delay
+            );
+            this.historyPageSizeTimers.push(timerId);
+        });
+    }
+
+    updateHistoryPageSize() {
+        if (
+            !process.env.BROWSER ||
+            typeof window === 'undefined' ||
+            !this.historyWrapNode
+        ) {
+            return;
+        }
+
+        const historyPageSize = getRewardsPageSizeFromTop(
+            this.historyWrapNode.getBoundingClientRect().top
+        );
+
+        if (historyPageSize !== this.state.historyPageSize) {
+            this.setState({ historyPageSize });
+        }
+    }
+
+    getEffectiveHistoryIndex(totalEntries, historyPageSize) {
+        const maxHistoryIndex = Math.max(
+            0,
+            Math.ceil(totalEntries / historyPageSize) - 1
+        );
+
+        return Math.min(this.state.historyIndex, maxHistoryIndex);
+    }
+
+    _setHistoryPage(back, totalEntries, historyPageSize) {
+        const currentHistoryIndex = this.getEffectiveHistoryIndex(
+            totalEntries,
+            historyPageSize
+        );
+        const maxHistoryIndex = Math.max(
+            0,
+            Math.ceil(totalEntries / historyPageSize) - 1
+        );
+        const nextHistoryIndex = currentHistoryIndex + (back ? 1 : -1);
+
+        this.setState({
+            historyIndex: Math.max(
+                0,
+                Math.min(maxHistoryIndex, nextHistoryIndex)
+            ),
+        });
     }
 
     render() {
         const {
-            state: { historyIndex },
+            state: { historyPageSize: requestedHistoryPageSize },
         } = this;
         const { transfer_history, account_name } = this.props;
 
@@ -67,55 +195,79 @@ class CurationRewards extends React.Component {
         const today = new Date();
         const oneDay = 86400 * 1000;
         const yesterday = new Date(today.getTime() - oneDay).getTime();
-        const lastWeek = new Date(today.getTime() - 7 * oneDay).getTime();
+        const lastWeek = new Date(
+            today.getTime() - REWARDS_HISTORY_DAYS * oneDay
+        ).getTime();
 
         let firstDate, finalDate;
         let curation_log = transfer_history
             .map((item, index) => {
                 // Filter out rewards
                 if (item[1].op[0] === 'curation_reward') {
+                    const timestamp = new Date(item[1].timestamp).getTime();
+                    const isLastWeekReward = timestamp >= lastWeek;
+
                     if (!finalDate) {
-                        finalDate = new Date(item[1].timestamp).getTime();
+                        finalDate = timestamp;
                     }
-                    firstDate = new Date(item[1].timestamp).getTime();
+                    firstDate = timestamp;
                     const vest = assetFloat(item[1].op[1].reward, VEST_TICKER);
-                    if (new Date(item[1].timestamp).getTime() > yesterday) {
+                    if (isLastWeekReward && timestamp > yesterday) {
                         rewards24 += vest;
                         rewardsWeek += vest;
-                    } else if (
-                        new Date(item[1].timestamp).getTime() > lastWeek
-                    ) {
+                    } else if (isLastWeekReward) {
                         rewardsWeek += vest;
                     }
                     totalRewards += vest;
-                    return (
-                        <TransferHistoryRow
-                            key={index}
-                            op={item}
-                            context={account_name}
-                        />
-                    );
+
+                    return {
+                        isLastWeekReward,
+                        row: (
+                            <TransferHistoryRow
+                                key={index}
+                                op={item}
+                                context={account_name}
+                            />
+                        ),
+                    };
                 }
                 return null;
             })
             .filter((el) => !!el);
-        let currentIndex = -1;
-        const curationLength = curation_log.length;
         const daysOfCuration = (firstDate - finalDate) / oneDay || 1;
         const averageCuration = !daysOfCuration
             ? 0
             : totalRewards / daysOfCuration;
         const hasFullWeek = daysOfCuration >= 7;
-        const limitedIndex = Math.min(historyIndex, curationLength - 10);
-        curation_log = curation_log.reverse().filter(() => {
-            currentIndex++;
-            return (
-                currentIndex >= limitedIndex && currentIndex < limitedIndex + 10
-            );
-        });
+        const curationLogNewestFirst = curation_log
+            .filter((item) => item.isLastWeekReward)
+            .reverse();
+        const historyPageSize = Math.min(
+            requestedHistoryPageSize,
+            Math.max(1, curationLogNewestFirst.length)
+        );
+        const historyIndex = this.getEffectiveHistoryIndex(
+            curationLogNewestFirst.length,
+            historyPageSize
+        );
+        const hasMultiplePages =
+            curationLogNewestFirst.length > historyPageSize;
+        const hasOlderPage =
+            (historyIndex + 1) * historyPageSize <
+            curationLogNewestFirst.length;
+
+        curation_log = curationLogNewestFirst
+            .slice(
+                historyIndex * historyPageSize,
+                (historyIndex + 1) * historyPageSize
+            )
+            .map((item) => item.row);
 
         const navButtons = (
-            <nav>
+            <nav
+                className="UserWallet__history-pager"
+                ref={this.setHistoryPagerRef}
+            >
                 <ul className="pager">
                     <li>
                         <div
@@ -123,7 +275,16 @@ class CurationRewards extends React.Component {
                                 'button tiny hollow float-left ' +
                                 (historyIndex === 0 ? ' disabled' : '')
                             }
-                            onClick={this._setHistoryPage.bind(this, false)}
+                            onClick={
+                                historyIndex === 0
+                                    ? null
+                                    : this._setHistoryPage.bind(
+                                          this,
+                                          false,
+                                          curationLogNewestFirst.length,
+                                          historyPageSize
+                                      )
+                            }
                             aria-label="Previous"
                         >
                             <span aria-hidden="true">
@@ -135,14 +296,17 @@ class CurationRewards extends React.Component {
                         <div
                             className={
                                 'button tiny hollow float-right ' +
-                                (historyIndex >= curationLength - 10
-                                    ? ' disabled'
-                                    : '')
+                                (!hasOlderPage ? ' disabled' : '')
                             }
                             onClick={
-                                historyIndex >= curationLength - 10
+                                !hasOlderPage
                                     ? null
-                                    : this._setHistoryPage.bind(this, true)
+                                    : this._setHistoryPage.bind(
+                                          this,
+                                          true,
+                                          curationLogNewestFirst.length,
+                                          historyPageSize
+                                      )
                             }
                             aria-label="Next"
                         >
@@ -172,7 +336,7 @@ class CurationRewards extends React.Component {
                             )
                         ) +
                             ' ' +
-                            VESTING_TOKEN}
+                            'BP'}
                     </div>
                 </div>
                 <div className="row">
@@ -187,10 +351,20 @@ class CurationRewards extends React.Component {
                         <h4>
                             {tt('curationrewards_jsx.curation_rewards_history')}
                         </h4>
-                        <table>
-                            <tbody>{curation_log}</tbody>
-                        </table>
-                        {navButtons}
+                        <div
+                            className="UserWallet__history-table-wrap"
+                            ref={this.setHistoryWrapRef}
+                            style={{
+                                '--wallet-history-row-count': historyPageSize,
+                            }}
+                        >
+                            {curation_log.length > 0 && (
+                                <table className="UserWallet__history-table">
+                                    <tbody>{curation_log}</tbody>
+                                </table>
+                            )}
+                        </div>
+                        {hasMultiplePages && navButtons}
                     </div>
                 </div>
             </div>

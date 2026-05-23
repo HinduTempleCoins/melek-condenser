@@ -23,6 +23,9 @@ export default function resolveRoute(path) {
     if (path === '/welcome') {
         return { page: 'Welcome' };
     }
+    if (path === '/chat') {
+        return { page: 'Chat' };
+    }
     if (path === '/faq.html') {
         return { page: 'Faq' };
     }

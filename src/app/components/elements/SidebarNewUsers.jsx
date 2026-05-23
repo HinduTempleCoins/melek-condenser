@@ -25,6 +25,11 @@ const SidebarNewUsers = () => (
                     </a>
                 </li>
                 <li className="c-sidebar__list-item">
+                    <a className="c-sidebar__link" href="/chat">
+                        Community Chat
+                    </a>
+                </li>
+                <li className="c-sidebar__list-item">
                     <a
                         className="c-sidebar__link"
                         href="https://blocks.blurtwallet.com"

@@ -114,6 +114,7 @@ export default class UserProfile extends React.Component {
             tab_content = (
                 <div>
                     <UserWallet
+                        key={`wallet:${accountname}`}
                         account={accountImm}
                         showTransfer={this.props.showTransfer}
                         showPowerdown={this.props.showPowerdown}
@@ -137,10 +138,20 @@ export default class UserProfile extends React.Component {
             );
         } else if (section === 'curation-rewards') {
             rewardsClass = 'active';
-            tab_content = <CurationRewards account={account} />;
+            tab_content = (
+                <CurationRewards
+                    key={`curation-rewards:${accountname}`}
+                    account={account}
+                />
+            );
         } else if (section === 'author-rewards') {
             rewardsClass = 'active';
-            tab_content = <AuthorRewards account={account} />;
+            tab_content = (
+                <AuthorRewards
+                    key={`author-rewards:${accountname}`}
+                    account={account}
+                />
+            );
         } else if (section === 'settings') {
             tab_content = <Settings routeParams={this.props.routeParams} />;
         } else if (section === 'permissions') {
@@ -251,11 +262,7 @@ export default class UserProfile extends React.Component {
                 <div className="columns small-10 medium-12 medium-expand">
                     <ul className="menu" style={{ flexWrap: 'wrap' }}>
                         <li>
-                            <a
-                                href={`${socialUrl}/@${accountname}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            <a href={`${socialUrl}/@${accountname}`}>
                                 {tt('g.blog')}
                             </a>
                         </li>

@@ -29,6 +29,10 @@ import {
 import * as transactionActions from 'app/redux/TransactionReducer'
 import * as globalActions from 'app/redux/GlobalReducer'
 import DropdownMenu from 'app/components/elements/DropdownMenu'
+import {
+  WALLET_HISTORY_DAYS,
+  WALLET_HISTORY_PAGE_SIZE
+} from 'app/utils/historyPageSize'
 
 const assetPrecision = 1000
 
@@ -36,7 +40,8 @@ class UserWallet extends React.Component {
   constructor () {
     super()
     this.state = {
-      claimInProgress: false
+      claimInProgress: false,
+      historyIndex: 0
     }
     this.onShowBuyBlurt = (e) => {
       e.preventDefault()
@@ -69,13 +74,48 @@ class UserWallet extends React.Component {
                 'https://blocktrades.us/?input_coin_type=eth&output_coin_type=blurt_power&receive_address=' +
                 currentUserName
     }
-
     this.shouldComponentUpdate = shouldComponentUpdate(this, 'UserWallet')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const currentAccountName =
+      this.props.account && this.props.account.get && this.props.account.get('name')
+    const nextAccountName =
+      nextProps.account && nextProps.account.get && nextProps.account.get('name')
+
+    if (nextAccountName !== currentAccountName && this.state.historyIndex !== 0) {
+      this.setState({ historyIndex: 0 })
+    }
+  }
+
+  getEffectiveHistoryIndex (totalEntries, historyPageSize) {
+    const maxHistoryIndex = Math.max(
+      0,
+      Math.ceil(totalEntries / historyPageSize) - 1
+    )
+
+    return Math.min(this.state.historyIndex, maxHistoryIndex)
   }
 
   handleClaimRewards = (account) => {
     this.setState({ claimInProgress: true }) // disable the claim button
     this.props.claimRewards(account)
+  }
+
+  _setHistoryPage (back, totalEntries, historyPageSize) {
+    const currentHistoryIndex = this.getEffectiveHistoryIndex(
+      totalEntries,
+      historyPageSize
+    )
+    const maxHistoryIndex = Math.max(
+      0,
+      Math.ceil(totalEntries / historyPageSize) - 1
+    )
+    const nextHistoryIndex = currentHistoryIndex + (back ? 1 : -1)
+
+    this.setState({
+      historyIndex: Math.max(0, Math.min(maxHistoryIndex, nextHistoryIndex))
+    })
   }
 
   getCurrentApr = (gprops) => {
@@ -259,32 +299,96 @@ class UserWallet extends React.Component {
 
     /// transfer log
     let idx = 0
-    const transfer_log = account
+    const oneDay = 86400000
+    const historyPageSize = WALLET_HISTORY_PAGE_SIZE
+    const historyWindowStart = currentTime - WALLET_HISTORY_DAYS * oneDay
+    const transfer_entries_collection = account
       .get('transfer_history')
       .map((item) => {
-        const data = item.getIn([1, 'op', 1])
-        const type = item.getIn([1, 'op', 0])
-
-        // Filter out rewards
-        if (
-          type === 'curation_reward' ||
-                    type === 'author_reward' ||
-                    type === 'comment_benefactor_reward'
-        ) {
-          return null
+        const timestamp = new Date(item.getIn([1, 'timestamp'])).getTime()
+        if (timestamp < historyWindowStart) return null
+        return {
+          timestamp,
+          row: (
+            <TransferHistoryRow
+              key={idx++}
+              op={item.toJS()}
+              context={account.get('name')}
+            />
+          )
         }
-
-        if (data.vesting_payout === '0.000000 VESTS') return null
-        return (
-          <TransferHistoryRow
-            key={idx++}
-            op={item.toJS()}
-            context={account.get('name')}
-          />
-        )
       })
       .filter((el) => !!el)
       .reverse()
+    const transfer_entries = transfer_entries_collection.toArray
+      ? transfer_entries_collection.toArray()
+      : transfer_entries_collection
+    const historyIndex = this.getEffectiveHistoryIndex(
+      transfer_entries.length,
+      historyPageSize
+    )
+    const transfer_log = transfer_entries
+      .slice(
+        historyIndex * historyPageSize,
+        (historyIndex + 1) * historyPageSize
+      )
+      .map((item) => item.row)
+    const hasNewerHistory = historyIndex > 0
+    const hasOlderHistory =
+            (historyIndex + 1) * historyPageSize <
+            transfer_entries.length
+    const historyNavButtons = (
+      <nav className='UserWallet__history-pager'>
+        <ul className='pager'>
+          <li>
+            <div
+              className={
+                                'button tiny hollow float-left ' +
+                                (!hasNewerHistory ? ' disabled' : '')
+                            }
+              onClick={
+                                !hasNewerHistory
+                                  ? null
+                                  : this._setHistoryPage.bind(
+                                      this,
+                                      false,
+                                      transfer_entries.length,
+                                      historyPageSize
+                                    )
+                            }
+              aria-label='Previous'
+            >
+              <span aria-hidden='true'>
+                &larr; {tt('g.newer')}
+              </span>
+            </div>
+          </li>
+          <li>
+            <div
+              className={
+                                'button tiny hollow float-right ' +
+                                (!hasOlderHistory ? ' disabled' : '')
+                            }
+              onClick={
+                                !hasOlderHistory
+                                  ? null
+                                  : this._setHistoryPage.bind(
+                                      this,
+                                      true,
+                                      transfer_entries.length,
+                                      historyPageSize
+                                    )
+                            }
+              aria-label='Next'
+            >
+              <span aria-hidden='true'>
+                {tt('g.older')} &rarr;
+              </span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    )
 
     const blurt_menu = [
       {
@@ -618,9 +722,15 @@ class UserWallet extends React.Component {
                 )}
               </span>
             </div>
-            <table>
-              <tbody>{transfer_log}</tbody>
-            </table>
+            <div
+              className='UserWallet__history-table-wrap'
+              style={{ '--wallet-history-row-count': historyPageSize }}
+            >
+              <table className='UserWallet__history-table'>
+                <tbody>{transfer_log}</tbody>
+              </table>
+            </div>
+            {(hasNewerHistory || hasOlderHistory) && historyNavButtons}
           </div>
         </div>
       </div>

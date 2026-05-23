@@ -15,7 +15,10 @@ class TransferHistoryRow extends React.Component {
       curation_reward,
       author_reward,
       benefactor_reward,
+      delegated_reward,
+      returned_delegation,
       powerdown_vests,
+      powerdown_payment,
       reward_vests,
       socialUrl
     } = this.props
@@ -169,6 +172,20 @@ class TransferHistoryRow extends React.Component {
         }
       )
       // `${tt('transferhistoryrow_jsx.cancel_transfer_from_savings')} (${tt('g.request')} ${data.request_id})`;
+    } else if (type === 'fill_transfer_from_savings') {
+      if (data.to === context) {
+        message = (
+          <span>
+            Receive savings withdrawal of {data.amount} from {otherAccountLink(data.from)}
+          </span>
+        )
+      } else {
+        message = (
+          <span>
+            Send savings withdrawal of {data.amount} to {otherAccountLink(data.to)}
+          </span>
+        )
+      }
     } else if (type === 'withdraw_vesting') {
       if (data.vesting_shares === '0.000000 VESTS') {
         message = tt('transferhistoryrow_jsx.stop_power_down')
@@ -178,18 +195,64 @@ class TransferHistoryRow extends React.Component {
         })
       }
       // tt('transferhistoryrow_jsx.start_power_down_of') + ' ' + powerdown_vests + ' BLURT';
-    } else if (type === 'curation_reward') {
+    } else if (type === 'fill_vesting_withdraw') {
+      if (data.to_account === context) {
+        message = (
+          <span>
+            Receive power down payment of {powerdown_payment || data.deposited}
+            {data.from_account && data.from_account !== context && (
+              <span> from {otherAccountLink(data.from_account)}</span>
+            )}
+          </span>
+        )
+      } else {
+        message = (
+          <span>
+            Send power down payment of {powerdown_payment || data.deposited}
+            {data.to_account && (
+              <span> to {otherAccountLink(data.to_account)}</span>
+            )}
+          </span>
+        )
+      }
+    } else if (type === 'delegate_vesting_shares') {
+      if (data.delegator === context) {
+        if (parseFloat(data.vesting_shares) === 0) {
+          message = (
+            <span>
+              Revoke delegation to {otherAccountLink(data.delegatee)}
+            </span>
+          )
+        } else {
+          message = (
+            <span>
+              Delegate {delegated_reward} BLURT POWER to {otherAccountLink(data.delegatee)}
+            </span>
+          )
+        }
+      } else if (data.delegatee === context) {
+        message = (
+          <span>
+            Receive delegation of {delegated_reward} BLURT POWER from {otherAccountLink(data.delegator)}
+          </span>
+        )
+      } else {
+        message = (
+          <span>
+            Delegate {delegated_reward} BLURT POWER from {data.delegator} to {otherAccountLink(data.delegatee)}
+          </span>
+        )
+      }
+    } else if (type === 'return_vesting_delegation') {
       message = (
         <span>
-          {tt('transferhistoryrow_jsx.curation_reward', {
-            curation_reward
-          })}
-          {postLink(
-            socialUrl,
-            data.comment_author,
-            data.comment_permlink
-          )}
+          Receive returned delegation of {returned_delegation} BLURT POWER
         </span>
+      )
+    } else if (type === 'curation_reward') {
+      message = rewardHistoryMessage(
+        curation_reward,
+        postLink(socialUrl, data.comment_author, data.comment_permlink)
       )
       // `${curation_reward} BLURT POWER` + tt('g.for');
     } else if (type === 'author_reward') {
@@ -197,13 +260,9 @@ class TransferHistoryRow extends React.Component {
       if (data.steem_payout !== '0.000 BLURT') {
         blurt_payout = ', ' + data.steem_payout
       }
-      message = (
-        <span>
-          {tt('transferhistoryrow_jsx.author_reward', {
-            author_reward
-          })}
-          {postLink(socialUrl, data.author, data.permlink)}
-        </span>
+      message = rewardHistoryMessage(
+        author_reward,
+        postLink(socialUrl, data.author, data.permlink)
       )
       // `${data.sbd_payout}${blurt_payout}, ${tt( 'g.and' )} ${author_reward} BLURT POWER ${tt('g.for')}`;
     } else if (type === 'claim_reward_balance') {
@@ -254,30 +313,34 @@ class TransferHistoryRow extends React.Component {
       })
       // `Fill convert request: ${data.amount_in} for ${ data.amount_out }`;
     } else if (type === 'comment_benefactor_reward') {
-      message = tt('transferhistoryrow_jsx.comment_benefactor_reward', {
+      message = rewardHistoryMessage(
         benefactor_reward,
-        author: data.author,
-        permlink: data.permlink
-      })
+        postLink(socialUrl, data.author, data.permlink)
+      )
       // `${benefactor_reward} BLURT POWER for ${ data.author }/${data.permlink}`;
     } else {
-      message = JSON.stringify({ type, ...data }, null, 2)
+      message = type.replace(/_/g, ' ')
     }
+    const isRewardHistoryRow =
+            type === 'curation_reward' ||
+            type === 'author_reward' ||
+            type === 'comment_benefactor_reward'
+    const messageNode = isRewardHistoryRow
+      ? message
+      : <a href={trxUrl}>{message}</a>
+
     return (
-      <tr key={op[0]} className='Trans'>
-        <td>
+      <tr
+        key={op[0]}
+        className={'Trans' + (isRewardHistoryRow ? ' Trans--reward' : '')}
+      >
+        <td className='TransferHistoryRow__date'>
           <TimeAgoWrapper date={op[1].timestamp} />
         </td>
-        <td
-          className='TransferHistoryRow__text'
-          style={{ maxWidth: '40rem' }}
-        >
-          <a href={trxUrl}>{message}</a>
+        <td className='TransferHistoryRow__text'>
+          {messageNode}
         </td>
-        <td
-          className='show-for-medium'
-          style={{ maxWidth: '40rem', wordWrap: 'break-word' }}
-        >
+        <td className='TransferHistoryRow__memo show-for-medium'>
           <Memo text={data.memo} username={context} />
         </td>
       </tr>
@@ -294,8 +357,18 @@ const otherAccountLink = (username) =>
       <Link to={`/@${username}`}>{username}</Link>
       )
 
+const rewardHistoryMessage = (amount, link) => (
+  <span className='TransferHistoryRow__reward-message'>
+    <span className='TransferHistoryRow__reward-amount'>{amount}</span>
+    <span className='TransferHistoryRow__reward-unit'>BP</span>
+    <span className='TransferHistoryRow__reward-connector'>for</span>
+    {link}
+  </span>
+)
+
 const postLink = (socialUrl, author, permlink) => (
   <a
+    className='TransferHistoryRow__post-link'
     href={`${socialUrl}/@${author}/${permlink}`}
     target='_blank'
     rel='noreferrer'
@@ -314,9 +387,21 @@ export default connect(
             type === 'withdraw_vesting'
               ? numberWithCommas(vestsToHp(state, data.vesting_shares))
               : undefined
+    const powerdown_payment =
+            type === 'fill_vesting_withdraw'
+              ? data.deposited
+              : undefined
     const reward_vests =
             type === 'claim_reward_balance'
               ? numberWithCommas(vestsToHp(state, data.reward_vests))
+              : undefined
+    const delegated_reward =
+            type === 'delegate_vesting_shares'
+              ? numberWithCommas(vestsToHp(state, data.vesting_shares))
+              : undefined
+    const returned_delegation =
+            type === 'return_vesting_delegation'
+              ? numberWithCommas(vestsToHp(state, data.vesting_shares))
               : undefined
     const curation_reward =
             type === 'curation_reward'
@@ -328,7 +413,9 @@ export default connect(
               : undefined
     const benefactor_reward =
             type === 'comment_benefactor_reward'
-              ? numberWithCommas(vestsToHp(state, data.reward))
+              ? numberWithCommas(
+                vestsToHp(state, data.reward || data.vesting_payout)
+              )
               : undefined
     const socialUrl = state.app.get('socialUrl')
     return {
@@ -336,7 +423,10 @@ export default connect(
       curation_reward,
       author_reward,
       benefactor_reward,
+      delegated_reward,
+      returned_delegation,
       powerdown_vests,
+      powerdown_payment,
       reward_vests,
       socialUrl
     }

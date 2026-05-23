@@ -3,29 +3,193 @@ import ChainTypes from '@blurtfoundation/blurtjs/lib/auth/serializer/src/ChainTy
 import Moment from 'moment';
 import axios from 'axios';
 import stateCleaner from 'app/redux/stateCleaner';
-import JSBI from 'jsbi';
 
-let makeBitMaskFilter = (allowedOperations) => {
-  return allowedOperations.reduce(([low, high], allowedOperation) => allowedOperation < 64 ? [JSBI.bitwiseOr(low, JSBI.leftShift(JSBI.BigInt(1), JSBI.BigInt(allowedOperation))), high]
-                                                                                           : [low, JSBI.bitwiseOr(high, JSBI.leftShift(JSBI.BigInt(1), JSBI.BigInt(allowedOperation-64)))],
-                                  [JSBI.BigInt(0), JSBI.BigInt(0)]).map(value => JSBI.notEqual(value, JSBI.BigInt(0)) ? value.toString() : null);
+const ASSET_SYMBOLS = {
+    '@@000000021': 'BLURT',
+    '@@000000037': 'VESTS',
 };
 
+const ACCOUNT_HISTORY_OPERATIONS = ChainTypes.operations || {};
 
+const WALLET_FINANCIAL_OPERATION_TYPES = [
+    'transfer',
+    'transfer_to_savings',
+    'transfer_from_savings',
+    'cancel_transfer_from_savings',
+    'fill_transfer_from_savings',
+    'transfer_to_vesting',
+    'withdraw_vesting',
+    'fill_vesting_withdraw',
+    'delegate_vesting_shares',
+    'return_vesting_delegation',
+    'claim_reward_balance',
+    'interest',
+];
 
-const op = ChainTypes.operations;
-const wallet_operations_bitmask = makeBitMaskFilter([
-    op.transfer,
-    op.transfer_to_vesting,
-    op.transfer_to_savings,
-    op.transfer_from_savings,
-    op.cancel_transfer_from_savings,
-    op.withdraw_vesting,
-    op.comment_benefactor_reward,
-    op.author_reward,
-    op.curation_reward,
-    op.claim_reward_balance,
-]);
+const HISTORY_MODE_OPERATION_TYPES = {
+    wallet: WALLET_FINANCIAL_OPERATION_TYPES,
+    author: ['author_reward'],
+    curation: ['curation_reward'],
+};
+
+const HISTORY_MODE_OPERATION_SETS = Object.keys(
+    HISTORY_MODE_OPERATION_TYPES
+).reduce((result, key) => {
+    result[key] = new Set(HISTORY_MODE_OPERATION_TYPES[key]);
+    return result;
+}, {});
+
+function makeAccountHistoryOperationFilter(operationTypes) {
+    let operationFilterLow = 0;
+    let operationFilterHigh = 0;
+
+    operationTypes.forEach((operationType) => {
+        const operationIndex = ACCOUNT_HISTORY_OPERATIONS[operationType];
+
+        if (
+            operationIndex === undefined ||
+            operationIndex === null ||
+            !Number.isFinite(operationIndex)
+        ) {
+            return;
+        }
+
+        if (operationIndex < 64) {
+            operationFilterLow += Math.pow(2, operationIndex);
+        } else {
+            operationFilterHigh += Math.pow(2, operationIndex - 64);
+        }
+    });
+
+    return [
+        operationFilterLow === 0
+            ? null
+            : operationFilterLow.toString(),
+        operationFilterHigh === 0
+            ? null
+            : operationFilterHigh.toString(),
+    ];
+}
+
+const HISTORY_MODE_OPERATION_FILTERS = Object.keys(
+    HISTORY_MODE_OPERATION_TYPES
+).reduce((result, key) => {
+    result[key] = makeAccountHistoryOperationFilter(
+        HISTORY_MODE_OPERATION_TYPES[key]
+    );
+    return result;
+}, {});
+
+function getHistoryModeOperationSet(historyMode) {
+    return HISTORY_MODE_OPERATION_SETS[historyMode] ||
+        HISTORY_MODE_OPERATION_SETS.wallet;
+}
+
+function getHistoryModeOperationFilter(historyMode) {
+    return HISTORY_MODE_OPERATION_FILTERS[historyMode] ||
+        HISTORY_MODE_OPERATION_FILTERS.wallet;
+}
+
+function formatAccountHistoryAsset(value) {
+    if (
+        !value ||
+        typeof value !== 'object' ||
+        value.amount === undefined ||
+        value.precision === undefined ||
+        value.nai === undefined
+    ) {
+        return value;
+    }
+
+    const precision = Number(value.precision);
+    const amount = Number(value.amount) / Math.pow(10, precision);
+    const symbol = ASSET_SYMBOLS[value.nai] || value.nai;
+    return amount.toFixed(precision) + ' ' + symbol;
+}
+
+function normalizeAccountHistoryValue(value) {
+    const asset = formatAccountHistoryAsset(value);
+    if (asset !== value) return asset;
+
+    if (Array.isArray(value)) return value.map(normalizeAccountHistoryValue);
+    if (value && typeof value === 'object') {
+        return Object.keys(value).reduce((result, key) => {
+            result[key] = normalizeAccountHistoryValue(value[key]);
+            return result;
+        }, {});
+    }
+
+    return value;
+}
+
+function normalizeAccountHistoryEntry(entry) {
+    const history = entry[1];
+    const historyOp = history && history.op;
+
+    if (!historyOp || Array.isArray(historyOp)) return entry;
+
+    const type = historyOp.type
+        ? historyOp.type.replace(/_operation$/, '')
+        : undefined;
+
+    if (!type) return entry;
+
+    return [
+        entry[0],
+        {
+            ...history,
+            op: [type, normalizeAccountHistoryValue(historyOp.value || {})],
+        },
+    ];
+}
+
+function getSafeAccountHistoryLimit(start, limit) {
+    const numericLimit = Number(limit);
+
+    if (!Number.isFinite(numericLimit) || numericLimit < 0) return 0;
+    if (start === -1) return numericLimit;
+
+    const numericStart = Number(start);
+
+    if (!Number.isFinite(numericStart) || numericStart < 0) {
+        return numericLimit;
+    }
+
+    return Math.min(numericLimit, numericStart);
+}
+
+function getConfiguredAccountHistoryEndpoints() {
+    const primaryEndpoint =
+        (api.options && (api.options.url || api.options.uri)) ||
+        (typeof $STM_Config !== 'undefined' &&
+            $STM_Config.blurtd_connection_client);
+    const alternativeEndpoints =
+        (api.options && api.options.alternative_api_endpoints) ||
+        (typeof $STM_Config !== 'undefined' &&
+            $STM_Config.alternative_api_endpoints) ||
+        [];
+
+    return [primaryEndpoint]
+        .concat(alternativeEndpoints)
+        .filter(Boolean)
+        .filter((endpoint, index, list) => list.indexOf(endpoint) === index);
+}
+
+function shouldFailoverAccountHistoryEndpoint(error) {
+    if (!error) return false;
+    if (isRateLimitError(error)) return true;
+
+    const status = error.response && error.response.status;
+    if (status >= 500) return true;
+
+    return (
+        error.code === 'ECONNABORTED' ||
+        error.code === 'ECONNRESET' ||
+        error.code === 'ENOTFOUND' ||
+        error.code === 'ETIMEDOUT' ||
+        !error.response
+    );
+}
 
 async function callCondenser(method, params, pre = 'condenser_api.') {
     // [JES] Hivemind throws an exception if you call for my/[trending/payouts/new/etc] with a null observer
@@ -38,6 +202,96 @@ async function callCondenser(method, params, pre = 'condenser_api.') {
             } else resolve(data);
         });
     });
+}
+
+async function callAccountHistory(account, start, limit, operationFilter) {
+    const safeLimit = getSafeAccountHistoryLimit(start, limit);
+    const params = {
+        account,
+        start,
+        limit: safeLimit,
+    };
+
+    if (operationFilter && operationFilter[0]) {
+        params.operation_filter_low = operationFilter[0];
+    }
+    if (operationFilter && operationFilter[1]) {
+        params.operation_filter_high = operationFilter[1];
+    }
+    const endpoints = getConfiguredAccountHistoryEndpoints();
+    let lastError = null;
+
+    for (let index = 0; index < endpoints.length; index++) {
+        const endpoint = endpoints[index];
+
+        try {
+            const response = await axios.post(endpoint, {
+                id: 1,
+                jsonrpc: '2.0',
+                method: 'account_history_api.get_account_history',
+                params,
+            });
+            const responseData = response.data || {};
+            const continuationStart = getAccountHistoryContinuationStart(
+                responseData.error
+            );
+
+            if (continuationStart !== null) {
+                return { history: [], nextStart: continuationStart };
+            }
+
+            if (responseData.error) {
+                const error = new Error(responseData.error.message);
+                error.rpcError = responseData.error;
+                throw error;
+            }
+
+            const result = responseData.result;
+
+            return {
+                history: ((result && result.history) || []).map(
+                    normalizeAccountHistoryEntry
+                ),
+                nextStart: null,
+            };
+        } catch (error) {
+            lastError = error;
+            if (
+                !shouldFailoverAccountHistoryEndpoint(error) ||
+                index === endpoints.length - 1
+            ) {
+                throw error;
+            }
+        }
+    }
+
+    throw lastError;
+}
+
+function getAccountHistoryContinuationStart(error) {
+    if (!error) return null;
+
+    const stack = error.data && error.data.stack;
+    const sequence =
+        stack &&
+        stack[0] &&
+        stack[0].data &&
+        Number(stack[0].data.sequence);
+
+    if (Number.isFinite(sequence)) return sequence;
+
+    const match =
+        error.message && error.message.match(/set start=([0-9]+)/);
+
+    return match ? Number(match[1]) : null;
+}
+
+function isRateLimitError(error) {
+    return error && error.response && error.response.status === 429;
+}
+
+function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function getStateForTrending() {
@@ -171,46 +425,136 @@ export async function getAllTransferHistory(
     return accountHistory;
 }
 
-async function getTransferHistory(account) {
-    let transfer_history = null;
-    let start_sequence = -1;
+async function getTransferHistory(account, { fetchDays = 30, historyMode = 'wallet' } = {}) {
+    let transfer_history = [];
+    const limit = 1000;
+    const maxRpcCalls = historyMode === 'wallet' ? 96 : 48;
+    const now = Moment(Date.now());
+    const operationSet = getHistoryModeOperationSet(historyMode);
+    const operationFilter = getHistoryModeOperationFilter(historyMode);
+    const isInsideFetchWindow = (timestamp) =>
+        now.diff(Moment.utc(timestamp), 'days', true) < fetchDays;
+    const shouldIncludeEntry = (entry) => {
+        const opType = entry[1] && entry[1].op && entry[1].op[0];
 
-    try {
-        transfer_history = await callCondenser(
-            'get_account_history',
-            [account, start_sequence, 500, wallet_operations_bitmask[0]]
-        );
-    } catch (err) {
-        console.log(err);
-        const error_string = err.toString();
-        if (error_string.includes('start=')) {
-            const index = error_string.indexOf('=');
-            start_sequence = error_string.substr(index + 1);
-            if (start_sequence.indexOf('.') > 0)
-                start_sequence = start_sequence.substr(
-                    0,
-                    start_sequence.length - 1
-                );
+        if (!opType) return false;
+
+        return operationSet.has(opType);
+    };
+    const callAccountHistoryWithRetry = async (
+        historyStart,
+        historyLimit,
+        currentFilter = operationFilter
+    ) => {
+        for (let retry = 0; retry < 3; retry++) {
             try {
-                transfer_history = await callCondenser(
-                    'get_account_history',
-                    [account, start_sequence, 500, wallet_operations_bitmask[0]]
+                return await callAccountHistory(
+                    account,
+                    historyStart,
+                    historyLimit,
+                    currentFilter
                 );
             } catch (err) {
-                console.log(err);
-                console.log(
-                    'Unable to fetch account history for account: ',
-                    account,
-                    err
-                );
-                transfer_history = [];
+                if (!isRateLimitError(err) || retry === 2) throw err;
+                await wait(750 * (retry + 1));
             }
         }
+    };
+
+    try {
+        const seen = {};
+        let historyStart = -1;
+        let shouldContinue = true;
+
+        for (
+            let requestCount = 0;
+            requestCount < maxRpcCalls && shouldContinue;
+            requestCount++
+        ) {
+            const page = await callAccountHistoryWithRetry(historyStart, limit);
+
+            if (page.nextStart !== null) {
+                historyStart = page.nextStart;
+                continue;
+            }
+
+            if (!page.history.length) {
+                const rawPage = await callAccountHistoryWithRetry(
+                    historyStart,
+                    limit,
+                    null
+                );
+
+                if (rawPage.nextStart !== null) {
+                    historyStart = rawPage.nextStart;
+                    continue;
+                }
+
+                if (!rawPage.history.length) break;
+
+                const oldestRawEntry = rawPage.history[0];
+                const oldestRawTimestamp =
+                    oldestRawEntry && oldestRawEntry[1] && oldestRawEntry[1].timestamp;
+
+                historyStart = Math.max(oldestRawEntry[0] - 1, 0);
+
+                if (
+                    !oldestRawTimestamp ||
+                    !isInsideFetchWindow(oldestRawTimestamp) ||
+                    historyStart === 0
+                ) {
+                    shouldContinue = false;
+                }
+
+                continue;
+            }
+
+            page.history.forEach((entry) => {
+                const sequence = entry[0];
+                const timestamp = entry[1] && entry[1].timestamp;
+
+                if (!timestamp) return;
+                if (!isInsideFetchWindow(timestamp)) {
+                    shouldContinue = false;
+                    return;
+                }
+                if (!shouldIncludeEntry(entry)) return;
+                if (seen[sequence]) return;
+
+                seen[sequence] = true;
+                transfer_history.push(entry);
+            });
+
+            historyStart = Math.max(page.history[0][0] - 1, 0);
+            if (historyStart === 0) shouldContinue = false;
+        }
+    } catch (err) {
+        console.log(err);
+        console.log(
+            'Unable to fetch account history for account: ',
+            account,
+            err
+        );
+        transfer_history = transfer_history || [];
     }
 
     if (transfer_history === null || transfer_history === undefined)
         transfer_history = [];
-    return transfer_history;
+    return transfer_history.sort((a, b) => a[0] - b[0]);
+}
+
+function getHistoryFetchDays(url) {
+    if (url.includes('/author-rewards') || url.includes('/curation-rewards')) {
+        return 7;
+    }
+
+    return 30;
+}
+
+function getHistoryMode(url) {
+    if (url.includes('/author-rewards')) return 'author';
+    if (url.includes('/curation-rewards')) return 'curation';
+    return 'wallet';
 }
 
 function verifyLocalStorageData(propertyDate, propertyValue, maxSecondsSinceUpdate = 300) {
@@ -285,9 +629,15 @@ export async function getStateAsync(url) {
         return stateCleaner(await getStateForWitnessesAndProposals());
     }
     // strip off query string
+    const historyFetchDays = getHistoryFetchDays(url);
+    const historyMode = getHistoryMode(url);
     let path = url.split('?')[0];
     let fetch_transfers = false;
-    if (path.includes('transfers')) {
+    if (
+        path.includes('transfers') ||
+        path.includes('author-rewards') ||
+        path.includes('curation-rewards')
+    ) {
         fetch_transfers = true;
         //just convert path to be the username, nexus won't accept the request if transfers is in the path
         const tokens = url.split('/');
@@ -305,7 +655,10 @@ export async function getStateAsync(url) {
         const account_name = path.split('@')[1];
         let account_history = null;
 
-        account_history = await getTransferHistory(account_name);
+        account_history = await getTransferHistory(account_name, {
+            fetchDays: historyFetchDays,
+            historyMode,
+        });
         let account = await api.getAccountsAsync([account_name]);
         account = account[0];
         account.transfer_history = account_history;

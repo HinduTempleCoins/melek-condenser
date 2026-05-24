@@ -6,6 +6,7 @@ import Memo from 'app/components/elements/Memo'
 import { numberWithCommas, vestsToHp } from 'app/utils/StateFunctions'
 import tt from 'counterpart'
 import GDPRUserList from 'app/utils/GDPRUserList'
+import { appendThemeToUrl } from 'app/utils/themePreferences'
 
 class TransferHistoryRow extends React.Component {
   render () {
@@ -394,7 +395,7 @@ const rewardHistoryMessage = (amount, link) => (
 const postLink = (socialUrl, author, permlink) => (
   <a
     className='TransferHistoryRow__post-link'
-    href={`${socialUrl}/@${author}/${permlink}`}
+    href={appendThemeToUrl(`${socialUrl}/@${author}/${permlink}`)}
     target='_blank'
     rel='noreferrer'
   >

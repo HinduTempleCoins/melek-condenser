@@ -11,6 +11,44 @@ import * as appActions from 'app/redux/AppReducer'
 import Userpic from 'app/components/elements/Userpic'
 import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import { SIGNUP_URL } from 'shared/constants'
+import { appendThemeToUrl } from 'app/utils/themePreferences'
+
+const getEffectiveNightmode = (nightmodeEnabled) => {
+  if (typeof nightmodeEnabled === 'boolean') {
+    return nightmodeEnabled
+  }
+  const bodyHasDarkTheme =
+    process.env.BROWSER &&
+    typeof document !== 'undefined' &&
+    document.body &&
+    document.body.classList.contains('theme-dark')
+  const htmlHasDarkTheme =
+    process.env.BROWSER &&
+    typeof document !== 'undefined' &&
+    document.documentElement &&
+    document.documentElement.classList.contains('theme-dark')
+  const bodyHasLightTheme =
+    process.env.BROWSER &&
+    typeof document !== 'undefined' &&
+    document.body &&
+    document.body.classList.contains('theme-light')
+  const htmlHasLightTheme =
+    process.env.BROWSER &&
+    typeof document !== 'undefined' &&
+    document.documentElement &&
+    document.documentElement.classList.contains('theme-light')
+  return !!(
+    bodyHasDarkTheme ||
+    htmlHasDarkTheme ||
+    (
+      !bodyHasLightTheme &&
+      !htmlHasLightTheme &&
+      process.env.BROWSER &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    )
+  )
+}
 
 const defaultNavigate = (e) => {
   if (e.metaKey || e.ctrlKey) {
@@ -36,7 +74,8 @@ function TopRightMenu ({
   probablyLoggedIn,
   nightmodeEnabled,
   toggleNightmode,
-  userPath
+  userPath,
+  socialUrl
 }) {
   const mcn = 'menu' + (vertical ? ' vertical show-for-small-only' : '')
   const mcl = vertical ? '' : ' sub-menu'
@@ -61,14 +100,23 @@ function TopRightMenu ({
       </li>
       )
   const wallet_link = `/@${username}/transfers`
-  const account_link = `/@${username}`
+  const account_link = appendThemeToUrl(
+    `${socialUrl}/@${username}`,
+    nightmodeEnabled
+  )
   const reset_password_link = `/@${username}/password`
   const settings_link = `/@${username}/settings`
   const pathCheck = userPath === '/submit.html' ? true : null
+  const effectiveNightmode = getEffectiveNightmode(nightmodeEnabled)
   if (loggedIn) {
     // change back to if(username) after bug fix:  Clicking on Login does not cause drop-down to close #TEMP!
     const user_menu = [
-      { link: account_link, icon: 'profile', value: tt('g.blog') },
+      {
+        link: account_link,
+        icon: 'profile',
+        value: tt('g.blog'),
+        sameTab: true
+      },
       {
         link: wallet_link,
         icon: 'wallet',
@@ -77,7 +125,7 @@ function TopRightMenu ({
       {
         link: '#',
         icon: 'eye',
-        onClick: toggleNightmode,
+        onClick: (e) => toggleNightmode(e, effectiveNightmode),
         value: tt('g.toggle_nightmode')
       },
       {
@@ -195,10 +243,11 @@ export default connect(
       loggedIn,
       userPath,
       probablyLoggedIn: false,
-      nightmodeEnabled: state.user.getIn([
+      nightmodeEnabled: state.app.getIn([
         'user_preferences',
         'nightmode'
-      ])
+      ]),
+      socialUrl: state.app.get('socialUrl')
     }
   },
   (dispatch) => ({
@@ -210,9 +259,9 @@ export default connect(
       if (e) e.preventDefault()
       dispatch(userActions.logout({ type: 'default' }))
     },
-    toggleNightmode: (e) => {
+    toggleNightmode: (e, currentNightmode) => {
       if (e) e.preventDefault()
-      dispatch(appActions.toggleNightmode())
+      dispatch(appActions.toggleNightmode(currentNightmode))
     }
   })
 )(TopRightMenu)

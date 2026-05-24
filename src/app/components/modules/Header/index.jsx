@@ -16,6 +16,42 @@ import Userpic from 'app/components/elements/Userpic';
 import { SIGNUP_URL } from 'shared/constants';
 import BlurtLogo from 'app/components/elements/BlurtLogo';
 import normalizeProfile from 'app/utils/NormalizeProfile';
+import { appendThemeToUrl } from 'app/utils/themePreferences';
+
+const getEffectiveNightmode = (nightmodeEnabled) => {
+    if (typeof nightmodeEnabled === 'boolean') {
+        return nightmodeEnabled;
+    }
+    const bodyHasDarkTheme =
+        process.env.BROWSER &&
+        typeof document !== 'undefined' &&
+        document.body &&
+        document.body.classList.contains('theme-dark');
+    const htmlHasDarkTheme =
+        process.env.BROWSER &&
+        typeof document !== 'undefined' &&
+        document.documentElement &&
+        document.documentElement.classList.contains('theme-dark');
+    const bodyHasLightTheme =
+        process.env.BROWSER &&
+        typeof document !== 'undefined' &&
+        document.body &&
+        document.body.classList.contains('theme-light');
+    const htmlHasLightTheme =
+        process.env.BROWSER &&
+        typeof document !== 'undefined' &&
+        document.documentElement &&
+        document.documentElement.classList.contains('theme-light');
+    return !!(
+        bodyHasDarkTheme ||
+        htmlHasDarkTheme ||
+        (!bodyHasLightTheme &&
+            !htmlHasLightTheme &&
+            process.env.BROWSER &&
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+    );
+};
 
 class Header extends React.Component {
     static propTypes = {
@@ -56,6 +92,7 @@ class Header extends React.Component {
             showSidePanel,
             navigate,
             account_meta,
+            socialUrl,
         } = this.props;
 
         /*Set the document.title on each header render.*/
@@ -110,12 +147,28 @@ class Header extends React.Component {
                 page_title.charAt(0).toUpperCase() + page_title.slice(1);
         }
 
+        const account_link = appendThemeToUrl(
+            `${socialUrl}/@${username}`,
+            nightmodeEnabled
+        );
+        const blog_home_link = appendThemeToUrl(
+            socialUrl,
+            nightmodeEnabled
+        );
         const wallet_link = `/@${username}/transfers`;
         const reset_password_link = `/@${username}/password`;
         const settings_link = `/@${username}/settings`;
         const pathCheck = userPath === '/submit.html' ? true : null;
+        const effectiveNightmode = getEffectiveNightmode(nightmodeEnabled);
+        const blogLogo = '/images/blurt-logo-2025062801.png';
 
         const user_menu = [
+            {
+                link: account_link,
+                icon: 'profile',
+                value: tt('g.blog'),
+                sameTab: true,
+            },
             {
                 link: wallet_link,
                 icon: 'wallet',
@@ -124,7 +177,7 @@ class Header extends React.Component {
             {
                 link: '#',
                 icon: 'eye',
-                onClick: toggleNightmode,
+                onClick: (e) => toggleNightmode(e, effectiveNightmode),
                 value: tt('g.toggle_nightmode'),
             },
             {
@@ -148,9 +201,22 @@ class Header extends React.Component {
                 <nav className="row Header__nav">
                     <div className="small-5 large-6 columns Header__logotype">
                         {/*LOGO*/}
-                        <Link to="/">
+                        <Link className="Header__wallet-home-link" to="/">
                             <BlurtLogo nightmodeEnabled={nightmodeEnabled} />
                         </Link>
+                        <a
+                            className="Header__blog-logo-link"
+                            href={blog_home_link}
+                            title={tt('g.back_to_blog')}
+                            aria-label={tt('g.back_to_blog')}
+                        >
+                            <img
+                                alt={tt('g.blog')}
+                                src={blogLogo}
+                                width="150"
+                                height="40"
+                            />
+                        </a>
                     </div>
 
                     <div className="small-7 large-6 columns Header__buttons">
@@ -236,6 +302,7 @@ const mapStateToProps = (state, ownProps) => {
         loggedIn,
         userPath,
         nightmodeEnabled: state.app.getIn(['user_preferences', 'nightmode']),
+        socialUrl: state.app.get('socialUrl'),
         account_meta: user_profile,
         current_account_name,
         ...ownProps,
@@ -251,9 +318,9 @@ const mapDispatchToProps = (dispatch) => ({
         if (e) e.preventDefault();
         dispatch(userActions.logout({ type: 'default' }));
     },
-    toggleNightmode: (e) => {
+    toggleNightmode: (e, currentNightmode) => {
         if (e) e.preventDefault();
-        dispatch(appActions.toggleNightmode());
+        dispatch(appActions.toggleNightmode(currentNightmode));
     },
     showSidePanel: () => {
         dispatch(userActions.showSidePanel());

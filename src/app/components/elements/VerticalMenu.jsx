@@ -34,11 +34,28 @@ export default class VerticalMenu extends React.Component {
                     return (
                         <li key={i.value} onClick={this.closeMenu}>
                             {i.link ? (
-                                <Link to={i.link} onClick={i.onClick}>
-                                    {i.icon && <Icon name={i.icon} />}
-                                    {i.label ? i.label : i.value}
-                                    {i.addon}
-                                </Link>
+                                i.link.match(/^http(s?)/) ? (
+                                    <a
+                                        href={i.link}
+                                        onClick={i.onClick}
+                                        target={i.sameTab ? undefined : '_blank'}
+                                        rel={
+                                            i.sameTab
+                                                ? undefined
+                                                : 'noopener noreferrer'
+                                        }
+                                    >
+                                        {i.icon && <Icon name={i.icon} />}
+                                        {i.label ? i.label : i.value}
+                                        {i.addon}
+                                    </a>
+                                ) : (
+                                    <Link to={i.link} onClick={i.onClick}>
+                                        {i.icon && <Icon name={i.icon} />}
+                                        {i.label ? i.label : i.value}
+                                        {i.addon}
+                                    </Link>
+                                )
                             ) : (
                                 <span onClick={i.onClick}>
                                     {i.icon && <Icon name={i.icon} />}

@@ -18,6 +18,7 @@ import Delegations from 'app/components/modules/Delegations';
 import Settings from 'app/components/modules/Settings';
 import CurationRewards from 'app/components/modules/CurationRewards';
 import AuthorRewards from 'app/components/modules/AuthorRewards';
+import { appendThemeToUrl } from 'app/utils/themePreferences';
 import UserList from 'app/components/elements/UserList';
 import LoadingIndicator from 'app/components/elements/LoadingIndicator';
 import { isFetchingOrRecentlyUpdated } from 'app/utils/StateFunctions';
@@ -67,6 +68,7 @@ export default class UserProfile extends React.Component {
                 accountname,
                 isMyAccount,
                 socialUrl,
+                nightmodeEnabled,
             },
             onPrint,
         } = this;
@@ -265,7 +267,12 @@ export default class UserProfile extends React.Component {
                 <div className="columns small-10 medium-12 medium-expand">
                     <ul className="menu" style={{ flexWrap: 'wrap' }}>
                         <li>
-                            <a href={`${socialUrl}/@${accountname}`}>
+                            <a
+                                href={appendThemeToUrl(
+                                    `${socialUrl}/@${accountname}`,
+                                    nightmodeEnabled
+                                )}
+                            >
                                 {tt('g.blog')}
                             </a>
                         </li>
@@ -387,6 +394,7 @@ module.exports = {
                 accountname,
                 isMyAccount,
                 socialUrl,
+                nightmodeEnabled: state.app.getIn(['user_preferences', 'nightmode']),
             };
         },
         (dispatch) => ({

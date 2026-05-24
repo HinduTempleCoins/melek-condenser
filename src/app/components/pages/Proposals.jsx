@@ -472,9 +472,9 @@ module.exports = {
         },
         (dispatch) => {
             return {
-                toggleNightmode: (e) => {
+                toggleNightmode: (e, currentNightmode) => {
                     if (e) e.preventDefault();
-                    dispatch(appActions.toggleNightmode());
+                    dispatch(appActions.toggleNightmode(currentNightmode));
                 },
                 voteOnProposal: (
                     voter,

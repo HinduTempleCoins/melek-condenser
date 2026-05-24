@@ -16,6 +16,12 @@ import { serverApiRecordEvent } from 'app/utils/ServerApiClient';
 import { key_utils } from '@blurtfoundation/blurtjs/lib/auth/ecc';
 import resolveRoute from 'app/ResolveRoute';
 import { VIEW_MODE_WHISTLE } from 'shared/constants';
+import * as appActions from 'app/redux/AppReducer';
+import {
+    getNightmodeFromSearch,
+    getStoredNightmode,
+    NIGHTMODE_STORAGE_KEY,
+} from 'app/utils/themePreferences';
 
 const pageRequiresEntropy = (path) => {
     const { page } = resolveRoute(path);
@@ -34,11 +40,102 @@ const pageRequiresEntropy = (path) => {
 class App extends React.Component {
     constructor(props) {
         super(props);
+        const hasInitialNightmode =
+            process.env.BROWSER &&
+            typeof window !== 'undefined' &&
+            typeof window.__BLURT_INITIAL_NIGHTMODE__ === 'boolean';
+        const initialSystemNightmode =
+            hasInitialNightmode
+                ? window.__BLURT_INITIAL_NIGHTMODE__
+                : process.env.BROWSER &&
+                  typeof window !== 'undefined' &&
+                  window.matchMedia &&
+                  window.matchMedia('(prefers-color-scheme: dark)').matches;
         // TODO: put both of these and associated toggles into Redux Store.
         this.state = {
             showCallout: true,
+            systemNightmode: !!initialSystemNightmode,
         };
         this.listenerActive = null;
+        this.systemThemeQuery = null;
+        this.systemThemeListener = null;
+    }
+
+    getEffectiveNightmode(nightmodeEnabled = this.props.nightmodeEnabled) {
+        if (typeof nightmodeEnabled === 'boolean') return nightmodeEnabled;
+
+        const queryNightmode = getNightmodeFromSearch(
+            process.env.BROWSER && typeof window !== 'undefined'
+                ? window.location.search
+                : ''
+        );
+        if (typeof queryNightmode === 'boolean') return queryNightmode;
+
+        const storedNightmode = getStoredNightmode();
+        if (typeof storedNightmode === 'boolean') return storedNightmode;
+
+        return this.state.systemNightmode;
+    }
+
+    syncNightmodeFromLocation = (props = this.props) => {
+        const queryNightmode = getNightmodeFromSearch(props.locationSearch);
+        if (
+            typeof queryNightmode !== 'boolean' ||
+            props.nightmodeEnabled === queryNightmode
+        ) {
+            return;
+        }
+
+        this.props.setUserPreferences({
+            ...props.userPreferences,
+            nightmode: queryNightmode,
+        });
+    };
+
+    updateSystemNightmode = () => {
+        if (!this.systemThemeQuery) return;
+        this.setState({ systemNightmode: this.systemThemeQuery.matches }, () => {
+            if (typeof this.props.nightmodeEnabled !== 'boolean') {
+                this.toggleBodyNightmode(this.getEffectiveNightmode());
+            }
+        });
+    };
+
+    toggleBodyNightmode(nightmodeEnabled) {
+        const effectiveNightmode = this.getEffectiveNightmode(nightmodeEnabled);
+        const darkClass = 'theme-dark';
+        const lightClass = 'theme-light';
+        const nextClass = effectiveNightmode ? darkClass : lightClass;
+        const previousClass = effectiveNightmode ? lightClass : darkClass;
+        const colorScheme = effectiveNightmode ? 'dark' : 'light';
+
+        if (process.env.BROWSER && typeof nightmodeEnabled === 'boolean') {
+            try {
+                window.localStorage.setItem(
+                    NIGHTMODE_STORAGE_KEY,
+                    String(nightmodeEnabled)
+                );
+            } catch (error) {}
+        }
+
+        [document.documentElement, document.body, this.refs.App_root]
+            .filter(Boolean)
+            .forEach((node) => {
+                node.classList.remove(previousClass);
+                node.classList.add(nextClass);
+                node.setAttribute('data-theme', colorScheme);
+            });
+
+        const backgroundColor = effectiveNightmode ? '#1c252b' : '#fff';
+        document.body.style.colorScheme = colorScheme;
+        document.body.style.backgroundColor = backgroundColor;
+        document.documentElement.style.colorScheme = colorScheme;
+        document.documentElement.style.backgroundColor = backgroundColor;
+
+        if (this.refs.App_root) {
+            this.refs.App_root.style.colorScheme = colorScheme;
+            this.refs.App_root.style.backgroundColor = backgroundColor;
+        }
     }
 
     componentWillMount() {
@@ -47,12 +144,34 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        this.syncNightmodeFromLocation(this.props);
+
+        if (window.matchMedia) {
+            this.systemThemeQuery = window.matchMedia(
+                '(prefers-color-scheme: dark)'
+            );
+            this.systemThemeListener = this.updateSystemNightmode;
+            if (this.systemThemeQuery.addEventListener) {
+                this.systemThemeQuery.addEventListener(
+                    'change',
+                    this.systemThemeListener
+                );
+            } else if (this.systemThemeQuery.addListener) {
+                this.systemThemeQuery.addListener(this.systemThemeListener);
+            }
+            this.updateSystemNightmode();
+        }
+
+        this.toggleBodyNightmode(this.props.nightmodeEnabled);
+
         if (pageRequiresEntropy(this.props.pathname)) {
             this._addEntropyCollector();
         }
     }
 
     componentWillReceiveProps(np) {
+        this.syncNightmodeFromLocation(np);
+        this.toggleBodyNightmode(np.nightmodeEnabled);
         // Add listener if the next page requires entropy and the current page didn't
         if (
             pageRequiresEntropy(np.pathname) &&
@@ -62,6 +181,23 @@ class App extends React.Component {
         } else if (!pageRequiresEntropy(np.pathname)) {
             // Remove if next page does not require entropy
             this._removeEntropyCollector();
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.listenerActive) {
+            this._removeEntropyCollector();
+        }
+
+        if (!this.systemThemeQuery || !this.systemThemeListener) return;
+
+        if (this.systemThemeQuery.removeEventListener) {
+            this.systemThemeQuery.removeEventListener(
+                'change',
+                this.systemThemeListener
+            );
+        } else if (this.systemThemeQuery.removeListener) {
+            this.systemThemeQuery.removeListener(this.systemThemeListener);
         }
     }
 
@@ -93,6 +229,7 @@ class App extends React.Component {
             pathname !== n.pathname ||
             new_visitor !== n.new_visitor ||
             this.state.showCallout !== nextState.showCallout ||
+            this.state.systemNightmode !== nextState.systemNightmode ||
             nightmodeEnabled !== n.nightmodeEnabled
         );
     }
@@ -204,7 +341,12 @@ class App extends React.Component {
             );
         }
 
-        const themeClass = nightmodeEnabled ? ' theme-dark' : ' theme-light';
+        const themeClass =
+            typeof nightmodeEnabled !== 'boolean' && !process.env.BROWSER
+                ? ''
+                : this.getEffectiveNightmode(nightmodeEnabled)
+                    ? ' theme-dark'
+                    : ' theme-light';
 
         return (
             <div
@@ -269,11 +411,15 @@ export default connect(
                 'nightmode',
             ]),
             pathname: ownProps.location.pathname,
+            locationSearch: ownProps.location.search || '',
+            userPreferences: state.app.get('user_preferences').toJS(),
             order: ownProps.params.order,
             category: ownProps.params.category,
         };
     },
     (dispatch) => ({
         loginUser: () => dispatch(userActions.usernamePasswordLogin({})),
+        setUserPreferences: (payload) =>
+            dispatch(appActions.setUserPreferences(payload)),
     })
 )(App);

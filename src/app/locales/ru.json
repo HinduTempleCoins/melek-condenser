@@ -23,6 +23,7 @@
         "collapse_or_expand": "Свернуть/Развернуть",
         "comments": "Комментарии",
         "communities": "Communities",
+        "witness_rewards": "Вознаграждения делегата",
         "community_owner_name_is": "Your community owner name is",
         "community_password_is": "Your password is",
         "community_creating": "Your community is being created...",
@@ -384,6 +385,9 @@
         "estimated_curation_rewards_last_week": "Оценочные кураторские вознаграждения за последнюю неделю",
         "curation_rewards_history": "История кураторских наград"
     },
+    "witnessrewards_jsx": {
+        "estimated_witness_rewards_last_week": "Оценочные вознаграждения делегата за последнюю неделю"
+    },
     "post_jsx": {
         "now_showing_comments_with_low_ratings": "Отображаем комментарии с низким рейтингом",
         "sort_order": "Порядок сортировки",
@@ -603,6 +607,7 @@
         "people_followed_by": "Подписчики",
         "curation_rewards_by": "Награда за курирование",
         "author_rewards_by": "Автор награжден",
+        "witness_rewards_by": "Вознаграждения делегата %(username)s",
         "replies_to": "Ответы на",
         "comments_by": "Комментарии",
         "blurt_proposals": "Blurt Proposals"
@@ -695,7 +700,9 @@
         "profile_about": "О себе",
         "profile_location": "Местоположение",
         "profile_website": "Веб-сайт",
-        "saved": "Saved!"
+        "saved": "Saved!",
+        "ready_player_discontinued_notice": "Ready Player Avatar был отключен его создателями, поэтому мы тоже его отключили. Пожалуйста, удалите свой с помощью кнопки ниже, так как он больше не нужен.",
+        "remove_avatar": "Удалить аватар"
     },
     "transfer_jsx": {
         "amount_is_in_form": "Сумма должна быть в формате 99999.999",

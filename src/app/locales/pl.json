@@ -24,6 +24,7 @@
         "collapse_or_expand": "Zwiń/Rozwiń",
         "comments": "Komentarze",
         "communities": "Communities",
+        "witness_rewards": "Nagrody świadka",
         "community_owner_name_is": "Your community owner name is",
         "community_password_is": "Your password is",
         "community_creating": "Your community is being created...",
@@ -379,6 +380,9 @@
         "estimated_curation_rewards_last_week": "Szacowane wynagrodzenie kuratorskie w ostatnim tygodniu",
         "curation_rewards_history": "Historia wynagrodzeń kuratorskich"
     },
+    "witnessrewards_jsx": {
+        "estimated_witness_rewards_last_week": "Szacowane nagrody świadka w ostatnim tygodniu"
+    },
     "post_jsx": {
         "now_showing_comments_with_low_ratings": "Od teraz komentarze o niskich ocenach będą wyświetlane",
         "sort_order": "Kolejność sortowania",
@@ -590,6 +594,7 @@
         "people_followed_by": "Obserwowani ludzie przez",
         "curation_rewards_by": "Wynagrodzenia kuratorskie",
         "author_rewards_by": "Wynagrodzenia autorskie",
+        "witness_rewards_by": "Nagrody świadka %(username)s",
         "replies_to": "Odpowiedzi do",
         "comments_by": "Komentarze",
         "blurt_proposals": "Blurt Proposals"
@@ -684,7 +689,9 @@
         "profile_about": "Opis",
         "profile_location": "Lokalizacja",
         "profile_website": "Strona www",
-        "saved": "Saved!"
+        "saved": "Saved!",
+        "ready_player_discontinued_notice": "Ready Player Avatar został wycofany przez swoich twórców, więc go wyłączyliśmy. Usuń swój za pomocą poniższego przycisku, ponieważ nie ma już żadnego zastosowania.",
+        "remove_avatar": "Usuń awatar"
     },
     "transfer_jsx": {
         "amount_is_in_form": "Podana kwota musi być w formacie 99999.999",

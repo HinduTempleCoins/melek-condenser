@@ -24,6 +24,7 @@
         "collapse_or_expand": "折りたたみ/展開",
         "comments": "コメント",
         "communities": "Communities",
+        "witness_rewards": "証人報酬",
         "community_owner_name_is": "Your community owner name is",
         "community_password_is": "Your password is",
         "community_creating": "Your community is being created...",
@@ -379,6 +380,9 @@
         "estimated_curation_rewards_last_week": "過去1週間の推定キュレーション報酬",
         "curation_rewards_history": "キュレーション報酬履歴"
     },
+    "witnessrewards_jsx": {
+        "estimated_witness_rewards_last_week": "過去1週間の推定証人報酬"
+    },
     "post_jsx": {
         "now_showing_comments_with_low_ratings": "評価の低いコメントを表示しています。",
         "sort_order": "並べ替え",
@@ -590,6 +594,7 @@
         "people_followed_by": "がフォローしているユーザー",
         "curation_rewards_by": "のキュレーション報酬",
         "author_rewards_by": "の投稿者報酬",
+        "witness_rewards_by": "%(username)s の証人報酬",
         "replies_to": "への返信",
         "comments_by": "のコメント",
         "blurt_proposals": "Blurt Proposals"
@@ -683,6 +688,8 @@
         "profile_location": "場所",
         "profile_website": "ウェブサイト",
         "saved": "Saved!",
+        "ready_player_discontinued_notice": "Ready Player Avatar は開発元によって終了されたため、無効化しました。もう用途がないので、下のボタンを使って削除してください。",
+        "remove_avatar": "アバターを削除",
         "private_post_display_settings": "ローカル表示設定"
     },
     "transfer_jsx": {

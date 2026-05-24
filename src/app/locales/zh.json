@@ -23,6 +23,7 @@
         "collapse_or_expand": "折叠/展开",
         "comments": "评论",
         "communities": "Communities",
+        "witness_rewards": "见证人奖励",
         "community_owner_name_is": "Your community owner name is",
         "community_password_is": "Your password is",
         "community_creating": "Your community is being created...",
@@ -378,6 +379,9 @@
         "estimated_curation_rewards_last_week": "预计上周审查奖励",
         "curation_rewards_history": "审查奖励历史"
     },
+    "witnessrewards_jsx": {
+        "estimated_witness_rewards_last_week": "预计上周见证人奖励"
+    },
     "post_jsx": {
         "now_showing_comments_with_low_ratings": "正在显示低评级的评论",
         "sort_order": "排序",
@@ -589,6 +593,7 @@
         "people_followed_by": "关注 by",
         "curation_rewards_by": "审查收入 by",
         "author_rewards_by": "作者收入 by",
+        "witness_rewards_by": "%(username)s 的见证人奖励",
         "replies_to": "回复",
         "comments_by": "评论",
         "blurt_proposals": "Blurt Proposals"
@@ -683,7 +688,9 @@
         "profile_about": "关于",
         "profile_location": "位置",
         "profile_website": "网站",
-        "saved": "Saved!"
+        "saved": "Saved!",
+        "ready_player_discontinued_notice": "Ready Player Avatar 已被其创建者停止支持，因此我们已将其禁用。它已经没有任何用途，请使用下方按钮将其删除。",
+        "remove_avatar": "删除头像"
     },
     "transfer_jsx": {
         "amount_is_in_form": "金额以99999.999的形式出现",

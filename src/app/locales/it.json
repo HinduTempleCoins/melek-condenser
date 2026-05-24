@@ -24,6 +24,7 @@
         "collapse_or_expand": "Riduci/Espandi",
         "comments": "Commenti",
         "communities": "Communities",
+        "witness_rewards": "Ricompense del testimone",
         "community_owner_name_is": "Your community owner name is",
         "community_password_is": "Your password is",
         "community_creating": "Your community is being created...",
@@ -379,6 +380,9 @@
         "estimated_curation_rewards_last_week": "Ricompense da curatore stimate nell'ultima settimana",
         "curation_rewards_history": "Cronologia ricompense da curatore"
     },
+    "witnessrewards_jsx": {
+        "estimated_witness_rewards_last_week": "Ricompense del testimone stimate nell'ultima settimana"
+    },
     "post_jsx": {
         "now_showing_comments_with_low_ratings": "Commenti con voti bassi rivelati",
         "sort_order": "Ordinamento",
@@ -590,6 +594,7 @@
         "people_followed_by": "Persone seguite da ",
         "curation_rewards_by": "Ricompense da curatore da",
         "author_rewards_by": "Ricompense da autore da",
+        "witness_rewards_by": "Ricompense del testimone di %(username)s",
         "replies_to": "Risposte a ",
         "comments_by": "Commenti di",
         "blurt_proposals": "Blurt Proposals"
@@ -682,7 +687,9 @@
         "profile_about": "About",
         "profile_location": "Località",
         "profile_website": "Sito",
-        "saved": "Saved!"
+        "saved": "Saved!",
+        "ready_player_discontinued_notice": "Ready Player Avatar è stato dismesso dai suoi creatori, quindi lo abbiamo disabilitato. Elimina il tuo usando il pulsante qui sotto, poiché non ha più alcuna utilità.",
+        "remove_avatar": "Rimuovi avatar"
     },
     "transfer_jsx": {
         "amount_is_in_form": "La quantita deve essere della forma 99999.999",

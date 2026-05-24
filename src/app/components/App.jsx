@@ -71,8 +71,10 @@ class App extends React.Component {
         );
         if (typeof queryNightmode === 'boolean') return queryNightmode;
 
-        const storedNightmode = getStoredNightmode();
-        if (typeof storedNightmode === 'boolean') return storedNightmode;
+        if (this.props.canPersistThemePreference) {
+            const storedNightmode = getStoredNightmode();
+            if (typeof storedNightmode === 'boolean') return storedNightmode;
+        }
 
         return this.state.systemNightmode;
     }
@@ -86,10 +88,21 @@ class App extends React.Component {
             return;
         }
 
-        this.props.setUserPreferences({
-            ...props.userPreferences,
-            nightmode: queryNightmode,
-        });
+        if (process.env.BROWSER && props.canPersistThemePreference) {
+            try {
+                window.localStorage.setItem(
+                    NIGHTMODE_STORAGE_KEY,
+                    String(queryNightmode)
+                );
+            } catch (error) {}
+        }
+
+        if (props.canPersistThemePreference) {
+            this.props.setUserPreferences({
+                ...props.userPreferences,
+                nightmode: queryNightmode,
+            });
+        }
     };
 
     updateSystemNightmode = () => {
@@ -109,7 +122,11 @@ class App extends React.Component {
         const previousClass = effectiveNightmode ? lightClass : darkClass;
         const colorScheme = effectiveNightmode ? 'dark' : 'light';
 
-        if (process.env.BROWSER && typeof nightmodeEnabled === 'boolean') {
+        if (
+            process.env.BROWSER &&
+            this.props.canPersistThemePreference &&
+            typeof nightmodeEnabled === 'boolean'
+        ) {
             try {
                 window.localStorage.setItem(
                     NIGHTMODE_STORAGE_KEY,
@@ -170,7 +187,9 @@ class App extends React.Component {
     }
 
     componentWillReceiveProps(np) {
-        this.syncNightmodeFromLocation(np);
+        if (np.locationSearch !== this.props.locationSearch) {
+            this.syncNightmodeFromLocation(np);
+        }
         this.toggleBodyNightmode(np.nightmodeEnabled);
         // Add listener if the next page requires entropy and the current page didn't
         if (
@@ -415,6 +434,7 @@ export default connect(
             userPreferences: state.app.get('user_preferences').toJS(),
             order: ownProps.params.order,
             category: ownProps.params.category,
+            canPersistThemePreference: !!current_account_name,
         };
     },
     (dispatch) => ({

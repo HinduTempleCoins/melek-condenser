@@ -249,6 +249,9 @@ class AuthorRewards extends React.Component {
             state: { historyPageSize: requestedHistoryPageSize },
         } = this;
         const { account_name, transfer_history, isLoading } = this.props;
+        const pricePerBlurt = parseFloat(
+            this.props.state.global.get('blurt_price') || 0
+        );
 
         /// transfer log
         let rewards24Vests = 0;
@@ -357,6 +360,11 @@ class AuthorRewards extends React.Component {
             .historyTransitionDirection
             ? ` UserWallet__history-table--slide-${this.state.historyTransitionDirection}`
             : '';
+        const rewardsWeekPower = Number(
+            vestsToHp(this.props.state, rewardsWeekVests + ' ' + VEST_TICKER)
+        );
+        const rewardsWeekUsd =
+            (rewardsWeekPower + rewardsWeekBlurt) * pricePerBlurt;
 
         author_log = authorLogNewestFirst
             .slice(
@@ -445,13 +453,8 @@ class AuthorRewards extends React.Component {
                             <span className="UserWallet__rewards-summary-values">
                                 <span>
                                     {numberWithCommas(
-                                        vestsToHp(
-                                            this.props.state,
-                                            rewardsWeekVests + ' ' + VEST_TICKER
-                                        )
-                                    ) +
-                                        ' ' +
-                                        'BP'}
+                                        rewardsWeekPower.toFixed(3)
+                                    ) + ' BP'}
                                 </span>
                                 <span className="UserWallet__rewards-summary-separator">
                                     &middot;
@@ -461,6 +464,16 @@ class AuthorRewards extends React.Component {
                                         ' ' +
                                         LIQUID_TICKER}
                                 </span>
+                                {pricePerBlurt > 0 && (
+                                    <span className="UserWallet__rewards-summary-separator">
+                                        &middot;
+                                    </span>
+                                )}
+                                {pricePerBlurt > 0 && (
+                                    <span>
+                                        ${numberWithCommas(rewardsWeekUsd.toFixed(2))}
+                                    </span>
+                                )}
                             </span>
                         )}
                     </div>

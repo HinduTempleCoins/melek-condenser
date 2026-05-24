@@ -2,8 +2,8 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import { api } from '@blurtfoundation/blurtjs';
 
-import classnames from 'classnames';
 import * as globalActions from 'app/redux/GlobalReducer';
 import * as transactionActions from 'app/redux/TransactionReducer';
 import * as userActions from 'app/redux/UserReducer';
@@ -18,6 +18,7 @@ import Delegations from 'app/components/modules/Delegations';
 import Settings from 'app/components/modules/Settings';
 import CurationRewards from 'app/components/modules/CurationRewards';
 import AuthorRewards from 'app/components/modules/AuthorRewards';
+import WitnessRewards from 'app/components/modules/WitnessRewards';
 import { appendThemeToUrl } from 'app/utils/themePreferences';
 import UserList from 'app/components/elements/UserList';
 import LoadingIndicator from 'app/components/elements/LoadingIndicator';
@@ -38,10 +39,179 @@ import DropdownMenu from 'app/components/elements/DropdownMenu';
 export default class UserProfile extends React.Component {
     constructor() {
         super();
+        this.state = {
+            resolvedIsActiveWitness: false,
+            resolvedWitnessAccount: null,
+        };
+        this._isMounted = false;
+        this._witnessLookupId = 0;
         this.onPrint = () => {
             window.print();
         };
     }
+
+    componentDidMount() {
+        this._isMounted = true;
+        this.resolveWitnessStatus(this.props);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.accountname !== this.props.accountname ||
+            prevProps.account !== this.props.account
+        ) {
+            this.resolveWitnessStatus(this.props);
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+        this.props.clearTransferDefaults();
+        this.props.clearPowerdownDefaults();
+    }
+
+    getIsActiveWitness = (witness) =>
+        !!(
+            witness &&
+            witness.owner &&
+            witness.signing_key &&
+            witness.signing_key !== 'BLT1111111111111111111111111111111114T1Anm'
+        );
+
+    resolveWitnessStatus = (props) => {
+        const { account, accountname } = props;
+        if (!accountname) return;
+
+        const normalizedAccountName = accountname.toLowerCase();
+        const accountData = account && account.toJS ? account.toJS() : account;
+
+        if (accountData && accountData.is_active_witness === true) {
+            if (
+                !this.state.resolvedIsActiveWitness ||
+                this.state.resolvedWitnessAccount !== normalizedAccountName
+            ) {
+                this.setState({
+                    resolvedIsActiveWitness: true,
+                    resolvedWitnessAccount: normalizedAccountName,
+                });
+            }
+            return;
+        }
+
+        if (this.state.resolvedWitnessAccount === normalizedAccountName) {
+            return;
+        }
+
+        if (this.state.resolvedIsActiveWitness) {
+            this.setState({ resolvedIsActiveWitness: false });
+        }
+
+        const witnessLookupId = ++this._witnessLookupId;
+
+        api.callAsync('condenser_api.get_witness_by_account', [normalizedAccountName])
+            .then((witness) => {
+                if (!this._isMounted || witnessLookupId !== this._witnessLookupId) {
+                    return;
+                }
+
+                this.setState({
+                    resolvedIsActiveWitness: this.getIsActiveWitness(witness),
+                    resolvedWitnessAccount: normalizedAccountName,
+                });
+            })
+            .catch(() => {
+                if (!this._isMounted || witnessLookupId !== this._witnessLookupId) {
+                    return;
+                }
+
+                this.setState({
+                    resolvedIsActiveWitness: false,
+                    resolvedWitnessAccount: normalizedAccountName,
+                });
+            });
+    };
+
+    calculateVotingPower = (account) => {
+        const {
+            BLURT_VOTING_MANA_REGENERATION_SECONDS = 432000,
+        } = this.props;
+
+        if (
+            !account ||
+            !account.voting_manabar ||
+            !BLURT_VOTING_MANA_REGENERATION_SECONDS
+        ) {
+            return 0;
+        }
+
+        const current_mana = parseInt(
+            account.voting_manabar.current_mana || 0,
+            10
+        );
+        const last_update_time = account.voting_manabar.last_update_time || 0;
+        const vesting_shares = Number(
+            (account.vesting_shares || '0.000000 VESTS').split(' ')[0]
+        );
+        const delegated_vesting_shares = Number(
+            (account.delegated_vesting_shares || '0.000000 VESTS').split(' ')[0]
+        );
+        const received_vesting_shares = Number(
+            (account.received_vesting_shares || '0.000000 VESTS').split(' ')[0]
+        );
+        const vesting_withdraw_rate = Number(
+            (account.vesting_withdraw_rate || '0.000000 VESTS').split(' ')[0]
+        );
+
+        const net_vesting_shares =
+            vesting_shares - delegated_vesting_shares + received_vesting_shares;
+        const maxMana =
+            (net_vesting_shares - vesting_withdraw_rate) * 1000000;
+
+        if (maxMana <= 0) {
+            return 0;
+        }
+
+        const now = Math.round(Date.now() / 1000);
+        const elapsed = now - last_update_time;
+        const regenerated_mana =
+            (elapsed * maxMana) / BLURT_VOTING_MANA_REGENERATION_SECONDS;
+
+        let currentMana = current_mana + regenerated_mana;
+        if (currentMana >= maxMana) {
+            currentMana = maxMana;
+        }
+
+        return (currentMana * 100) / maxMana;
+    };
+
+    votingPowerPoint = (centerX, centerY, radius, angle) => {
+        const radians = (angle * Math.PI) / 180;
+
+        return {
+            x: centerX + radius * Math.sin(radians),
+            y: centerY - radius * Math.cos(radians),
+        };
+    };
+
+    votingPowerArc = (centerX, centerY, radius, startAngle, endAngle) => {
+        const start = this.votingPowerPoint(centerX, centerY, radius, startAngle);
+        const end = this.votingPowerPoint(centerX, centerY, radius, endAngle);
+        const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
+
+        return [
+            'M',
+            start.x,
+            start.y,
+            'A',
+            radius,
+            radius,
+            0,
+            largeArcFlag,
+            1,
+            end.x,
+            end.y,
+        ].join(' ');
+    };
 
     shouldComponentUpdate(np, ns) {
         return (
@@ -50,13 +220,10 @@ export default class UserProfile extends React.Component {
             np.wifShown !== this.props.wifShown ||
             np.globalStatus !== this.props.globalStatus ||
             np.loading !== this.props.loading ||
-            np.location.pathname !== this.props.location.pathname
+            np.location.pathname !== this.props.location.pathname ||
+            ns.resolvedIsActiveWitness !== this.state.resolvedIsActiveWitness ||
+            ns.resolvedWitnessAccount !== this.state.resolvedWitnessAccount
         );
-    }
-
-    componentWillUnmount() {
-        this.props.clearTransferDefaults();
-        this.props.clearPowerdownDefaults();
     }
 
     render() {
@@ -153,6 +320,15 @@ export default class UserProfile extends React.Component {
             tab_content = (
                 <AuthorRewards
                     key={`author-rewards:${accountname}`}
+                    account={account}
+                    isLoading={fetching}
+                />
+            );
+        } else if (section === 'witness-rewards') {
+            rewardsClass = 'active';
+            tab_content = (
+                <WitnessRewards
+                    key={`witness-rewards:${accountname}`}
                     account={account}
                     isLoading={fetching}
                 />
@@ -262,6 +438,18 @@ export default class UserProfile extends React.Component {
             },
         ];
 
+        if (
+            section === 'witness-rewards' ||
+            account.is_active_witness ||
+            this.state.resolvedIsActiveWitness
+        ) {
+            rewardsMenu.push({
+                link: `/@${accountname}/witness-rewards`,
+                label: tt('g.witness_rewards'),
+                value: tt('g.witness_rewards'),
+            });
+        }
+
         const top_menu = (
             <div className="row UserProfile__top-menu">
                 <div className="columns small-10 medium-12 medium-expand">
@@ -333,9 +521,11 @@ export default class UserProfile extends React.Component {
             <div className="UserProfile">
                 <div className="UserProfile__banner row expanded">
                     <div className="column" style={cover_image_style}>
-                        <h1>
-                            <Userpic account={account.name} hideIfDefault />
-                            {name || account.name}
+                        <h1 className="UserProfile__identity">
+                            <span className="UserProfile__identity-main">
+                                <Userpic account={account.name} hideIfDefault />
+                                <span>{name || account.name}</span>
+                            </span>
                         </h1>
 
                         <div>
@@ -394,6 +584,15 @@ module.exports = {
                 accountname,
                 isMyAccount,
                 socialUrl,
+                BLURT_VOTING_MANA_REGENERATION_SECONDS: state.global.getIn([
+                    'props',
+                    'BLURT_VOTING_MANA_REGENERATION_SECONDS',
+                ]) ||
+                state.global.getIn([
+                    'blurt_config',
+                    'BLURT_VOTING_MANA_REGENERATION_SECONDS',
+                ]) ||
+                432000,
                 nightmodeEnabled: state.app.getIn(['user_preferences', 'nightmode']),
             };
         },

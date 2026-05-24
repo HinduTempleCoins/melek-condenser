@@ -9,6 +9,7 @@ import Icon from 'app/components/elements/Icon'
 import * as userActions from 'app/redux/UserReducer'
 import * as appActions from 'app/redux/AppReducer'
 import Userpic from 'app/components/elements/Userpic'
+import VotingPowerIndicator from 'app/components/elements/VotingPowerIndicator'
 import LoadingIndicator from 'app/components/elements/LoadingIndicator'
 import { SIGNUP_URL } from 'shared/constants'
 import { appendThemeToUrl } from 'app/utils/themePreferences'
@@ -75,7 +76,9 @@ function TopRightMenu ({
   nightmodeEnabled,
   toggleNightmode,
   userPath,
-  socialUrl
+  socialUrl,
+  currentAccount,
+  BLURT_VOTING_MANA_REGENERATION_SECONDS
 }) {
   const mcn = 'menu' + (vertical ? ' vertical show-for-small-only' : '')
   const mcl = vertical ? '' : ' sub-menu'
@@ -147,6 +150,14 @@ function TopRightMenu ({
       <ul className={mcn + mcl}>
         {!pathCheck ? submit_story : null}
         {!vertical && submit_icon}
+        {!vertical && loggedIn && (
+          <VotingPowerIndicator
+            account={currentAccount}
+            BLURT_VOTING_MANA_REGENERATION_SECONDS={
+              BLURT_VOTING_MANA_REGENERATION_SECONDS
+            }
+          />
+        )}
         {!vertical && (
           <DropdownMenu
             className='Header__usermenu'
@@ -247,7 +258,20 @@ export default connect(
         'user_preferences',
         'nightmode'
       ]),
-      socialUrl: state.app.get('socialUrl')
+      socialUrl: state.app.get('socialUrl'),
+      currentAccount: username
+        ? state.global.getIn(['accounts', username])
+        : null,
+      BLURT_VOTING_MANA_REGENERATION_SECONDS:
+        state.global.getIn([
+          'props',
+          'BLURT_VOTING_MANA_REGENERATION_SECONDS'
+        ]) ||
+        state.global.getIn([
+          'blurt_config',
+          'BLURT_VOTING_MANA_REGENERATION_SECONDS'
+        ]) ||
+        432000
     }
   },
   (dispatch) => ({

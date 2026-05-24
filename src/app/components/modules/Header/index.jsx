@@ -13,6 +13,7 @@ import DropdownMenu from 'app/components/elements/DropdownMenu';
 import * as userActions from 'app/redux/UserReducer';
 import * as appActions from 'app/redux/AppReducer';
 import Userpic from 'app/components/elements/Userpic';
+import VotingPowerIndicator from 'app/components/elements/VotingPowerIndicator';
 import { SIGNUP_URL } from 'shared/constants';
 import BlurtLogo from 'app/components/elements/BlurtLogo';
 import normalizeProfile from 'app/utils/NormalizeProfile';
@@ -93,6 +94,8 @@ class Header extends React.Component {
             navigate,
             account_meta,
             socialUrl,
+            currentAccount,
+            BLURT_VOTING_MANA_REGENERATION_SECONDS,
         } = this.props;
 
         /*Set the document.title on each header render.*/
@@ -134,6 +137,11 @@ class Header extends React.Component {
             }
             if (route.params[1] === 'author-rewards') {
                 page_title = tt('header_jsx.author_rewards_by', {
+                    username: user_title,
+                });
+            }
+            if (route.params[1] === 'witness-rewards') {
+                page_title = tt('header_jsx.witness_rewards_by', {
                     username: user_title,
                 });
             }
@@ -240,6 +248,14 @@ class Header extends React.Component {
                         )}
                         {/*USER AVATAR */}
                         {loggedIn && (
+                            <VotingPowerIndicator
+                                account={currentAccount}
+                                BLURT_VOTING_MANA_REGENERATION_SECONDS={
+                                    BLURT_VOTING_MANA_REGENERATION_SECONDS
+                                }
+                            />
+                        )}
+                        {loggedIn && (
                             <DropdownMenu
                                 className={'Header__usermenu'}
                                 items={user_menu}
@@ -303,6 +319,19 @@ const mapStateToProps = (state, ownProps) => {
         userPath,
         nightmodeEnabled: state.app.getIn(['user_preferences', 'nightmode']),
         socialUrl: state.app.get('socialUrl'),
+        currentAccount: username
+            ? state.global.getIn(['accounts', username])
+            : null,
+        BLURT_VOTING_MANA_REGENERATION_SECONDS:
+            state.global.getIn([
+                'props',
+                'BLURT_VOTING_MANA_REGENERATION_SECONDS',
+            ]) ||
+            state.global.getIn([
+                'blurt_config',
+                'BLURT_VOTING_MANA_REGENERATION_SECONDS',
+            ]) ||
+            432000,
         account_meta: user_profile,
         current_account_name,
         ...ownProps,

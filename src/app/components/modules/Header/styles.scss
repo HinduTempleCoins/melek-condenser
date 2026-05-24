@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 1200;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
     @include themify($themes) {
         background-color: themed('navBackgroundColor');
@@ -21,6 +21,10 @@
 
 .Header__usermenu {
     margin-left: 0.5em;
+
+    > .VerticalMenu {
+        z-index: 1300;
+    }
 }
 
 .ConnectionError {
@@ -109,6 +113,74 @@
     }
 }
 
+@media screen and (max-width: 39.9375em) {
+    .Header__nav {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .Header__logotype,
+    .Header__buttons {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+        min-width: 0;
+    }
+
+    .Header__logotype {
+        gap: 0;
+    }
+
+    .Header__wallet-home-link img {
+        width: 5rem;
+        height: auto;
+    }
+
+    .Header__blog-logo-link {
+        margin-left: 0.35rem;
+    }
+
+    .Header__blog-logo-link img {
+        width: 4.1rem;
+        height: auto;
+    }
+
+    .Header__buttons {
+        margin-left: auto;
+        padding-left: 0.15rem;
+        gap: 0.15rem;
+    }
+
+    .Header__voting-power {
+        width: 1.8rem;
+        height: 1.8rem;
+        margin-left: 0;
+        margin-right: 0.18rem;
+        position: static;
+        transform: none;
+        display: inline-flex;
+        z-index: 1;
+    }
+
+    .Header__voting-power-value {
+        font-size: 0.5rem;
+    }
+
+    .Header__userpic {
+        margin-left: 0.15rem;
+
+        .Userpic {
+            width: 32px !important;
+            height: 32px !important;
+        }
+    }
+
+    span.Header__hamburger.toggle-menu {
+        margin-left: 0.25rem;
+        margin-right: 0.2rem;
+    }
+}
+
 .Header__sort {
     display: flex;
     justify-content: center;
@@ -130,11 +202,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: nowrap;
     flex: 0 0 auto;
     width: auto;
     max-width: none;
     margin-left: auto;
     height: 4rem;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
     > .Header__user-signup {
         > a {
             padding-right: 0.25rem;
@@ -165,10 +241,125 @@
     }
 }
 
+.Header__voting-power {
+    --voting-power-color: #72e21b;
+    --voting-power-track: #8a8a8a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    width: 2.3rem;
+    height: 2.3rem;
+    margin-left: 0.25rem;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+
+    @include MQ(S) {
+        margin-left: 0.5rem;
+    }
+
+    @include MQ(M) {
+        width: 2.55rem;
+        height: 2.55rem;
+    }
+}
+
+.Header__voting-power-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.Header__voting-power-track,
+.Header__voting-power-consumed,
+.Header__voting-power-progress {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+}
+
+.Header__voting-power-track {
+    stroke: var(--voting-power-track);
+    stroke-width: 3.8;
+    stroke-dasharray: 5 5;
+    stroke-linecap: butt;
+    opacity: 0.35;
+}
+
+.Header__voting-power-consumed {
+    stroke: var(--voting-power-track);
+    stroke-width: 4.2;
+    stroke-dasharray: 5 5;
+    stroke-linecap: butt;
+    opacity: 1;
+}
+
+.Header__voting-power-progress {
+    stroke: var(--voting-power-color);
+    stroke-width: 8.5;
+    stroke-linecap: round;
+}
+
+.Header__voting-power--high {
+    --voting-power-color: #72e21b;
+}
+
+.Header__voting-power--medium {
+    --voting-power-color: #ff991f;
+}
+
+.Header__voting-power--low {
+    --voting-power-color: #ef4339;
+}
+
+.Header__voting-power-inner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    width: calc(100% - 0.48rem);
+    height: calc(100% - 0.48rem);
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    background: #f1f1f1;
+    color: #111;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.Header__voting-power-bolt {
+    color: #111;
+    font-size: 0.36rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.02rem;
+
+    @include MQ(M) {
+        font-size: 0.4rem;
+    }
+}
+
+.Header__voting-power-value {
+    color: #111;
+    font-size: 0.58rem;
+    font-weight: 800;
+    line-height: 1;
+
+    @include MQ(M) {
+        font-size: 0.64rem;
+    }
+}
+
 .Header__userpic {
     display: block;
     width: 36px;
     height: 36px;
+    margin-left: 0.35rem;
     .Userpic {
         width: 36px !important;
         height: 36px !important;

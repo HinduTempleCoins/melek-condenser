@@ -24,6 +24,7 @@
         "collapse_or_expand": "닫기/펼치기",
         "comments": "작성한 댓글",
         "communities": "Communities",
+        "witness_rewards": "증인 보상",
         "community_owner_name_is": "Your community owner name is",
         "community_password_is": "Your password is",
         "community_creating": "Your community is being created...",
@@ -379,6 +380,9 @@
         "estimated_curation_rewards_last_week": "이번주 예상 큐레이션 보상금액",
         "curation_rewards_history": "큐레이션 보상 내역"
     },
+    "witnessrewards_jsx": {
+        "estimated_witness_rewards_last_week": "지난주 예상 증인 보상"
+    },
     "post_jsx": {
         "now_showing_comments_with_low_ratings": "Now showing comments with low ratings",
         "sort_order": "정렬 순서",
@@ -590,6 +594,7 @@
         "people_followed_by": "People followed by",
         "curation_rewards_by": "Curation rewards by",
         "author_rewards_by": "Author rewards by",
+        "witness_rewards_by": "Witness rewards by %(username)s",
         "replies_to": "Replies to",
         "comments_by": "Comments by",
         "blurt_proposals": "Blurt Proposals"
@@ -682,7 +687,9 @@
         "profile_about": "한 줄 소개",
         "profile_location": "지역",
         "profile_website": "웹사이트",
-        "saved": "Saved!"
+        "saved": "Saved!",
+        "ready_player_discontinued_notice": "Ready Player Avatar는 제작자에 의해 서비스가 종료되어 비활성화했습니다. 더 이상 쓸모가 없으니 아래 버튼을 사용해 삭제해 주세요.",
+        "remove_avatar": "아바타 삭제"
     },
     "transfer_jsx": {
         "amount_is_in_form": "Amount is in the form 99999.999",

@@ -17,7 +17,7 @@ export const defaultState = Map({
     notifications: null,
     user_preferences: Map({
         locale: null,
-        nightmode: false,
+        nightmode: undefined,
     }),
     featureFlags: Map({}),
 });
@@ -56,6 +56,12 @@ export default function reducer(state = defaultState, action = {}) {
         case SET_USER_PREFERENCES:
             return state.set('user_preferences', Map(action.payload));
         case TOGGLE_NIGHTMODE:
+            if (typeof action.payload === 'boolean') {
+                return state.setIn(
+                    ['user_preferences', 'nightmode'],
+                    !action.payload
+                );
+            }
             return state.setIn(
                 ['user_preferences', 'nightmode'],
                 !state.getIn(['user_preferences', 'nightmode'])
@@ -98,8 +104,9 @@ export const setUserPreferences = (payload) => ({
     payload,
 });
 
-export const toggleNightmode = () => ({
+export const toggleNightmode = (currentNightmode) => ({
     type: TOGGLE_NIGHTMODE,
+    payload: currentNightmode,
 });
 
 export const receiveFeatureFlags = (flags) => ({

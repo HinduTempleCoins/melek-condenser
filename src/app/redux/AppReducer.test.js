@@ -117,6 +117,12 @@ describe('App reducer', () => {
         const after = actual.getIn(['user_preferences', 'nightmode']);
         expect(after).toEqual(!before);
     });
+    it('should invert the provided effective nightmode value', () => {
+        const initial = reducer();
+        const actual = reducer(initial, toggleNightmode(true));
+        const after = actual.getIn(['user_preferences', 'nightmode']);
+        expect(after).toEqual(false);
+    });
     test('should merge in received feature flags', () => {
         // Arrange
         const initial = reducer();

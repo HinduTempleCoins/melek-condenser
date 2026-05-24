@@ -75,7 +75,11 @@ function* showTransactionErrorNotification() {
  */
 function* saveUserPreferences({ payload }) {
     console.log('saveUserPreferences', payload);
-    if (payload) {
+    if (
+        payload &&
+        typeof payload === 'object' &&
+        !Array.isArray(payload)
+    ) {
         yield setUserPreferences(payload);
         return;
     }

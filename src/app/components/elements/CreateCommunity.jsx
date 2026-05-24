@@ -5,6 +5,7 @@ import tt from 'counterpart';
 import { key_utils } from '@blurtfoundation/blurtjs/lib/auth/ecc';
 import LoadingIndicator from 'app/components/elements/LoadingIndicator';
 import Unicode from 'app/utils/Unicode';
+import { appendThemeToUrl } from 'app/utils/themePreferences';
 
 class CreateCommunity extends React.Component {
     constructor() {
@@ -37,6 +38,7 @@ class CreateCommunity extends React.Component {
             broadcastOps,
             communityCreationPending,
             socialUrl,
+            nightmodeEnabled,
         } = this.props;
 
         const markdownRegex = /(?:\*[\w\s]*\*|\#[\w\s]*\#|_[\w\s]*_|~[\w\s]*~|\]\s*\(|\]\s*\[)/;
@@ -203,14 +205,17 @@ class CreateCommunity extends React.Component {
         const sagaError = communityCreateError;
 
         if (finished) {
-            const url = `${socialUrl}/trending/${communityOwnerName}`;
+            const url = appendThemeToUrl(
+                `${socialUrl}/trending/${communityOwnerName}`,
+                nightmodeEnabled
+            );
             return (
                 <div className="row">
                     <div className="column large-6 small-12">
                         Your community was created!
                         <br />
                         <strong>
-                            <a href={url} target='_blank'>Get started.</a>
+                            <a href={url}>Get started.</a>
                         </strong>
                     </div>
                 </div>
@@ -250,6 +255,7 @@ export default connect(
             isMyAccount,
             accountName,
             socialUrl,
+            nightmodeEnabled: state.app.getIn(['user_preferences', 'nightmode']),
         };
     },
     // mapDispatchToProps

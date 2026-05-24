@@ -35,7 +35,16 @@
         }
 
         @media only screen and (max-width: 768px) {
-            padding-left: 1em;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+            margin-bottom: 0.85rem;
+            padding-left: 0;
+
+            .button {
+                align-self: flex-start;
+                margin-bottom: 0;
+            }
         }
 
         .proposals__title {
@@ -81,6 +90,14 @@
             display: flex;
             justify-content: flex-end;
 
+            @media only screen and (max-width: 768px) {
+                width: 100%;
+                justify-content: flex-start;
+                align-items: flex-end;
+                flex-wrap: wrap;
+                gap: 0.65rem;
+            }
+
             .proposals__select {
                 display: flex;
                 flex-direction: column;
@@ -88,6 +105,14 @@
                 font-weight: bold;
                 padding-top: 3px;
                 margin-right: 0.5rem;
+
+                @media only screen and (max-width: 768px) {
+                    flex: 1 1 calc(50% - 0.65rem);
+                    min-width: 8.8rem;
+                    margin-right: 0;
+                    padding-top: 0;
+                }
+
                 select {
                     width: fit-content;
 
@@ -96,6 +121,7 @@
                     }
 
                     @media only screen and (max-width: 768px) {
+                        width: 100%;
                         height: 2rem;
                         padding: 0.3rem;
                     }
@@ -109,6 +135,11 @@
 
                 &:hover {
                     opacity: 0.8;
+                }
+
+                @media only screen and (max-width: 768px) {
+                    min-width: 2.2rem;
+                    align-self: center;
                 }
 
                 .direction {
@@ -134,8 +165,10 @@
         display: flex;
 
         @media only screen and (max-width: 768px) {
-            padding-top: 0.7em;
-            padding-bottom: 0.7em;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
         }
 
         small {
@@ -154,7 +187,11 @@
             padding-left: 15px;
 
             @media only screen and (max-width: 768px) {
-                width: 90px;
+                order: 2;
+                width: 48px;
+                height: 48px;
+                padding-left: 0;
+                margin-right: 0.65rem;
             }
         }
 
@@ -173,16 +210,27 @@
                 width: 15%;
             }
             @media only screen and (max-width: 768px) {
+                order: 1;
                 font-size: 0.8em;
-                flex-direction: row-reverse;
-                justify-content: center;
-                align-items: flex-start;
-                padding-top: 0.1em;
-                width: 20%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                max-width: none;
+                padding: 0 0 0.45rem;
+                margin-bottom: 0.45rem;
+                border-right: 0;
+                @include themify($themes) {
+                    border-bottom: themed('border');
+                }
             }
 
             a {
                 padding-right: 10px;
+
+                @media only screen and (max-width: 768px) {
+                    padding-right: 0;
+                }
             }
         }
         .proposals__amount {
@@ -193,7 +241,15 @@
             align-items: flex-start;
             padding-left: 15px;
             @media only screen and (max-width: 768px) {
-                padding-left: 7px;
+                order: 4;
+                width: 100%;
+                max-width: none;
+                padding-left: 0;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                @include themify($themes) {
+                    border-top: themed('border');
+                }
             }
         }
 
@@ -202,7 +258,11 @@
             width: 60%;
             padding-left: 15px;
             @media only screen and (max-width: 768px) {
-                padding-left: 7px;
+                order: 3;
+                width: calc(100% - 48px - 0.65rem);
+                max-width: none;
+                padding-left: 0;
+                border-right: 0;
             }
             @include themify($themes) {
                 border-right: themed('border');

@@ -114,6 +114,21 @@
             font-size: 1.13095rem !important;
         }
     }
+
+    .UserProfile__identity {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .UserProfile__identity-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
     .Icon {
         margin-left: 1rem;
         svg {
@@ -122,13 +137,111 @@
     }
 
     .Userpic {
-        margin-right: 0.75rem;
+        margin-right: 0;
         vertical-align: middle;
     }
 
     .UserProfile__rep {
         font-size: 80%;
         font-weight: 200;
+    }
+
+    .UserProfile__voting-power {
+        --voting-power-color: #72e21b;
+        --voting-power-track: #8a8a8a;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+        width: 2.35rem;
+        height: 2.35rem;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
+    .UserProfile__voting-power-ring {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .UserProfile__voting-power-track,
+    .UserProfile__voting-power-consumed,
+    .UserProfile__voting-power-progress {
+        fill: none;
+        vector-effect: non-scaling-stroke;
+    }
+
+    .UserProfile__voting-power-track {
+        stroke: var(--voting-power-track);
+        stroke-width: 3.8;
+        stroke-dasharray: 5 5;
+        stroke-linecap: butt;
+        opacity: 0.35;
+    }
+
+    .UserProfile__voting-power-consumed {
+        stroke: var(--voting-power-track);
+        stroke-width: 4.2;
+        stroke-dasharray: 5 5;
+        stroke-linecap: butt;
+        opacity: 1;
+    }
+
+    .UserProfile__voting-power-progress {
+        stroke: var(--voting-power-color);
+        stroke-width: 8.5;
+        stroke-linecap: round;
+    }
+
+    .UserProfile__voting-power--high {
+        --voting-power-color: #72e21b;
+    }
+
+    .UserProfile__voting-power--medium {
+        --voting-power-color: #ff991f;
+    }
+
+    .UserProfile__voting-power--low {
+        --voting-power-color: #ef4339;
+    }
+
+    .UserProfile__voting-power-inner {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+        width: calc(100% - 0.48rem);
+        height: calc(100% - 0.48rem);
+        border-radius: 50%;
+        position: relative;
+        z-index: 1;
+        background: #f1f1f1;
+        color: #111;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+        text-shadow: none;
+    }
+
+    .UserProfile__voting-power-bolt {
+        color: #111;
+        font-size: 0.36rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.02rem;
+    }
+
+    .UserProfile__voting-power-value {
+        color: #111;
+        font-size: 0.58rem;
+        font-weight: 800;
+        line-height: 1;
     }
 
     .UserProfile__buttons {
@@ -206,6 +319,19 @@
     .UserProfile__banner .Userpic {
         width: 36px !important;
         height: 36px !important;
+    }
+
+    .UserProfile__banner .UserProfile__identity {
+        gap: 0.45rem;
+    }
+
+    .UserProfile__banner .UserProfile__voting-power {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .UserProfile__banner .UserProfile__voting-power-value {
+        font-size: 0.5rem;
     }
 
     .UserProfile__banner .UserProfile__buttons {

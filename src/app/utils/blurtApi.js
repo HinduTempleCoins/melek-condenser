@@ -10,6 +10,8 @@ const ASSET_SYMBOLS = {
 };
 
 const ACCOUNT_HISTORY_OPERATIONS = ChainTypes.operations || {};
+const DISABLED_WITNESS_SIGNING_KEY =
+    'BLT1111111111111111111111111111111114T1Anm';
 
 const WALLET_FINANCIAL_OPERATION_TYPES = [
     'transfer',
@@ -30,6 +32,7 @@ const HISTORY_MODE_OPERATION_TYPES = {
     wallet: WALLET_FINANCIAL_OPERATION_TYPES,
     author: ['author_reward'],
     curation: ['curation_reward'],
+    witness: ['producer_reward'],
 };
 
 const HISTORY_MODE_OPERATION_SETS = Object.keys(
@@ -344,6 +347,26 @@ async function getStateForWitnessesAndProposals() {
     return result;
 }
 
+async function getWitnessByAccount(accountName) {
+    try {
+        return await api.callAsync('condenser_api.get_witness_by_account', [
+            accountName,
+        ]);
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+function isActiveWitnessAccount(witness) {
+    return !!(
+        witness &&
+        witness.owner &&
+        witness.signing_key &&
+        witness.signing_key !== DISABLED_WITNESS_SIGNING_KEY
+    );
+}
+
 function getChainProperties() {
     return new Promise((resolve, reject) => {
         api.getChainProperties((err, result) => {
@@ -371,7 +394,13 @@ async function getGenericState(user) {
     if (user_to_check.startsWith('@'))
         user_to_check = user_to_check.split('@')[1];
     const account_details = await api.getAccountsAsync([user_to_check]);
-    result.accounts[user_to_check] = account_details[0];
+    const witness = await getWitnessByAccount(user_to_check);
+
+    result.accounts[user_to_check] = {
+        ...account_details[0],
+        witness_account: witness,
+        is_active_witness: isActiveWitnessAccount(witness),
+    };
 
     return result;
 }
@@ -543,7 +572,11 @@ async function getTransferHistory(account, { fetchDays = 30, historyMode = 'wall
 }
 
 function getHistoryFetchDays(url) {
-    if (url.includes('/author-rewards') || url.includes('/curation-rewards')) {
+    if (
+        url.includes('/author-rewards') ||
+        url.includes('/curation-rewards') ||
+        url.includes('/witness-rewards')
+    ) {
         return 7;
     }
 
@@ -553,6 +586,7 @@ function getHistoryFetchDays(url) {
 function getHistoryMode(url) {
     if (url.includes('/author-rewards')) return 'author';
     if (url.includes('/curation-rewards')) return 'curation';
+    if (url.includes('/witness-rewards')) return 'witness';
     return 'wallet';
 }
 
@@ -635,7 +669,8 @@ export async function getStateAsync(url) {
     if (
         path.includes('transfers') ||
         path.includes('author-rewards') ||
-        path.includes('curation-rewards')
+        path.includes('curation-rewards') ||
+        path.includes('witness-rewards')
     ) {
         fetch_transfers = true;
         //just convert path to be the username, nexus won't accept the request if transfers is in the path
@@ -660,7 +695,13 @@ export async function getStateAsync(url) {
         });
         let account = await api.getAccountsAsync([account_name]);
         account = account[0];
+        const existingAccount = raw.accounts[account_name];
+        const witness =
+            (existingAccount && existingAccount.witness_account) ||
+            (await getWitnessByAccount(account_name));
         account.transfer_history = account_history;
+        account.witness_account = witness;
+        account.is_active_witness = isActiveWitnessAccount(witness);
         raw.accounts[account_name] = account;
     }
 

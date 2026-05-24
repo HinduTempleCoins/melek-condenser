@@ -27,6 +27,43 @@ export const getStoredNightmode = () => {
     return undefined;
 };
 
+export const getAppliedNightmode = () => {
+    if (!process.env.BROWSER || typeof document === 'undefined') {
+        return undefined;
+    }
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (
+        (body && body.classList.contains('theme-dark')) ||
+        (html && html.classList.contains('theme-dark'))
+    ) {
+        return true;
+    }
+
+    if (
+        (body && body.classList.contains('theme-light')) ||
+        (html && html.classList.contains('theme-light'))
+    ) {
+        return false;
+    }
+
+    return undefined;
+};
+
+export const getSystemNightmode = () => {
+    if (
+        !process.env.BROWSER ||
+        typeof window === 'undefined' ||
+        !window.matchMedia
+    ) {
+        return undefined;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+
 export const appendThemeToUrl = (url, nightmodeEnabled) => {
     if (!url) return url;
 
@@ -38,11 +75,14 @@ export const appendThemeToUrl = (url, nightmodeEnabled) => {
                       ? window.location.search
                       : ''
               );
-    const storedNightmode = getStoredNightmode();
+    const appliedNightmode = getAppliedNightmode();
+    const systemNightmode = getSystemNightmode();
     const effectiveNightmode =
         typeof explicitNightmode === 'boolean'
             ? explicitNightmode
-            : storedNightmode;
+            : typeof appliedNightmode === 'boolean'
+                ? appliedNightmode
+                : systemNightmode;
 
     if (typeof effectiveNightmode !== 'boolean') return url;
 

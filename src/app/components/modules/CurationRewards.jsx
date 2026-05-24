@@ -252,6 +252,9 @@ class CurationRewards extends React.Component {
             state: { historyPageSize: requestedHistoryPageSize },
         } = this;
         const { transfer_history, account_name, isLoading } = this.props;
+        const pricePerBlurt = parseFloat(
+            this.props.state.global.get('blurt_price') || 0
+        );
 
         /// transfer log
         let rewards24 = 0;
@@ -326,6 +329,10 @@ class CurationRewards extends React.Component {
             .historyTransitionDirection
             ? ` UserWallet__history-table--slide-${this.state.historyTransitionDirection}`
             : '';
+        const rewardsWeekPower = Number(
+            vestsToHp(this.props.state, rewardsWeek + ' ' + VEST_TICKER)
+        );
+        const rewardsWeekUsd = rewardsWeekPower * pricePerBlurt;
 
         curation_log = curationLogNewestFirst
             .slice(
@@ -413,14 +420,21 @@ class CurationRewards extends React.Component {
                             <span>{tt('g.loading_data')}...</span>
                         ) : (
                             <span className="UserWallet__rewards-summary-values">
-                                {numberWithCommas(
-                                    vestsToHp(
-                                        this.props.state,
-                                        rewardsWeek + ' ' + VEST_TICKER
-                                    )
-                                ) +
-                                    ' ' +
-                                    'BP'}
+                                <span>
+                                    {numberWithCommas(
+                                        rewardsWeekPower.toFixed(3)
+                                    ) + ' BP'}
+                                </span>
+                                {pricePerBlurt > 0 && (
+                                    <span className="UserWallet__rewards-summary-separator">
+                                        &middot;
+                                    </span>
+                                )}
+                                {pricePerBlurt > 0 && (
+                                    <span>
+                                        ${numberWithCommas(rewardsWeekUsd.toFixed(2))}
+                                    </span>
+                                )}
                             </span>
                         )}
                     </div>

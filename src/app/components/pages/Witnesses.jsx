@@ -318,6 +318,7 @@ class Witnesses extends React.Component {
         );
 
         let witness_vote_count = 30;
+        const rankLabel = tt('witnesses_jsx.rank');
         let rank = 1;
         let foundWitnessToHighlight = false;
         let previousTotalVoteHpf = 0;
@@ -642,6 +643,62 @@ class Witnesses extends React.Component {
                 .toArray();
         }
 
+        const renderFiltersPanel = (suffix) => (
+            <div className="Witnesses__filters-grid">
+                <div className="Witnesses__filter-option">
+                    <input
+                        checked={this.state.filterEnabledWithBlocksWitness}
+                        onChange={() =>
+                            this.toggleEnabledWithBlocksWitness()
+                        }
+                        id={`enabled_blocks_${suffix}`}
+                        type="checkbox"
+                    />
+                    <label htmlFor={`enabled_blocks_${suffix}`}>
+                        Active (Blocks)
+                    </label>
+                </div>
+                <div className="Witnesses__filter-option">
+                    <input
+                        checked={this.state.filterEnabledWitness}
+                        onChange={() => this.toggleEnabledWitness()}
+                        id={`enabled_${suffix}`}
+                        type="checkbox"
+                    />
+                    <label htmlFor={`enabled_${suffix}`}>Active</label>
+                </div>
+                <div className="Witnesses__filter-option">
+                    <input
+                        checked={this.state.filterDisabledWitness}
+                        onChange={() => this.toggleDisabledWitness()}
+                        id={`disabled_${suffix}`}
+                        type="checkbox"
+                    />
+                    <label htmlFor={`disabled_${suffix}`}>Disabled</label>
+                </div>
+                <div className="Witnesses__filter-option">
+                    <input
+                        checked={this.state.showOnlyLatestVersion}
+                        onChange={() => this.toggleLatestVersion()}
+                        id={`version_${suffix}`}
+                        type="checkbox"
+                    />
+                    <label htmlFor={`version_${suffix}`}>
+                        Latest Version
+                    </label>
+                </div>
+                <div className="Witnesses__filter-option">
+                    <input
+                        checked={this.state.filterByVotes}
+                        onChange={() => this.toggleMyVotes()}
+                        id={`myVotes_${suffix}`}
+                        type="checkbox"
+                    />
+                    <label htmlFor={`myVotes_${suffix}`}>My Votes</label>
+                </div>
+            </div>
+        );
+
         return (
             <div className="Witnesses">
                 <div className="row">
@@ -667,81 +724,71 @@ class Witnesses extends React.Component {
                     </div>
                 </div>
                 {current_proxy ? null : (
-                    <div className="row small-collapse">
-                        <div className="small-12 medium-9 large-10 columns">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Serial No</th>
-                                        <th>{tt('witnesses_jsx.rank')}</th>
-                                        <th>{tt('witnesses_jsx.witness')}</th>
-                                        <th>{tt('witnesses_jsx.fees')}</th>
-                                        <th>
-                                            {tt('witnesses_jsx.missed_blocks')}
-                                        </th>
-                                        <th className="Witnesses__votes">
-                                            {tt('witnesses_jsx.votes_received')}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>{witnesses.toArray()}</tbody>
-                            </table>
+                    <div>
+                        <div className="row show-for-small-only">
+                            <div className="small-12 columns">
+                                <div className="panel callout radius Witnesses__filters Witnesses__filters--mobile">
+                                    <h3>Filters</h3>
+                                    <hr />
+                                    {renderFiltersPanel('mobile')}
+                                </div>
+                            </div>
                         </div>
-                        <div className="columns small-12 medium-3 large-2 hide-for-small-only">
-                            <div
-                                style={{ marginLeft: '20px' }}
-                                className="panel callout radius"
-                            >
-                                <h3>Filters</h3>
-                                <hr />
-                                <input
-                                    checked={
-                                        this.state
-                                            .filterEnabledWithBlocksWitness
-                                    }
-                                    onChange={() =>
-                                        this.toggleEnabledWithBlocksWitness()
-                                    }
-                                    id="enabled_blocks"
-                                    type="checkbox"
-                                />
-                                <label htmlFor="enabled_blocks">
-                                    Active (Blocks)
-                                </label>
-                                <br />
-                                <input
-                                    checked={this.state.filterEnabledWitness}
-                                    onChange={() => this.toggleEnabledWitness()}
-                                    id="enabled"
-                                    type="checkbox"
-                                />
-                                <label htmlFor="enabled">Active</label>
-                                <br />
-                                <input
-                                    checked={this.state.filterDisabledWitness}
-                                    onChange={() =>
-                                        this.toggleDisabledWitness()
-                                    }
-                                    id="disabled"
-                                    type="checkbox"
-                                />
-                                <label htmlFor="disabled">Disabled</label>
-                                <br />
-                                <input
-                                    checked={this.state.showOnlyLatestVersion}
-                                    onChange={() => this.toggleLatestVersion()}
-                                    id="version"
-                                    type="checkbox"
-                                />
-                                <label htmlFor="version">Latest Version</label>
-                                <br />
-                                <input
-                                    checked={this.state.filterByVotes}
-                                    onChange={() => this.toggleMyVotes()}
-                                    id="myVotes"
-                                    type="checkbox"
-                                />
-                                <label htmlFor="myVotes">My Votes</label>
+                        <div className="row small-collapse">
+                            <div className="small-12 medium-9 large-10 columns">
+                                <table className="Witnesses__table">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial No</th>
+                                            <th className="Witnesses__rank-header-cell">
+                                                {rankLabel.includes('(') ? (
+                                                    <span className="Witnesses__rank-header">
+                                                        <span>
+                                                            {rankLabel
+                                                                .slice(
+                                                                    0,
+                                                                    rankLabel.indexOf('(')
+                                                                )
+                                                                .trim()}
+                                                        </span>
+                                                        <span>
+                                                            {rankLabel.slice(
+                                                                rankLabel.indexOf('(')
+                                                            )}
+                                                        </span>
+                                                    </span>
+                                                ) : (
+                                                    rankLabel
+                                                )}
+                                            </th>
+                                            <th>
+                                                {tt('witnesses_jsx.witness')}
+                                            </th>
+                                            <th>{tt('witnesses_jsx.fees')}</th>
+                                            <th>
+                                                {tt(
+                                                    'witnesses_jsx.missed_blocks'
+                                                )}
+                                            </th>
+                                            <th className="Witnesses__votes">
+                                                {tt(
+                                                    'witnesses_jsx.votes_received'
+                                                )}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{witnesses.toArray()}</tbody>
+                                </table>
+                            </div>
+                            <div className="columns small-12 medium-3 large-2 hide-for-small-only">
+                                <div
+                                    style={{ marginLeft: '20px' }}
+                                    className="panel callout radius Witnesses__filters"
+                                >
+                                    <h3>Filters</h3>
+                                    <hr />
+                                    {renderFiltersPanel('desktop')}
+                                </div>
                             </div>
                         </div>
                     </div>

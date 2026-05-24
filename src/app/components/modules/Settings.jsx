@@ -132,62 +132,6 @@ class Settings extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  recieveAvatarUrl = (e) => {
-    const url = e.data
-
-    if (
-      (typeof url === 'string' || url instanceof String) &&
-            url.includes('http')
-    ) {
-      const { account, updateAvatar } = this.props
-      let { metaData } = this.props
-      this.setState({ loading: true })
-      // set avatar url in metadata
-      if (!metaData) metaData = {}
-      if (!metaData.profile) metaData.profile = {}
-      metaData.profile.avatarUrl = url
-
-      updateAvatar({
-        json_metadata: JSON.stringify(metaData),
-        account: account.name,
-        extensions: [],
-        posting_json_metadata: '',
-        errorCallback: (e) => {
-          if (e === 'Canceled') {
-            this.setState({
-              loading: false,
-              errorMessage: ''
-            })
-          } else {
-            console.log('updateAccount ERROR', e)
-            this.setState({
-              loading: false,
-              changed: false,
-              errorMessage: tt('g.server_returned_error')
-            })
-          }
-        },
-        successCallback: () => {
-          this.setState({
-            loading: false,
-            changed: false,
-            errorMessage: '',
-            successMessage: 'Avatar Saved Succesfully !'
-          })
-          toast.success('Avatar Saved Successfully', {
-            position: toast.POSITION.TOP_RIGHT
-          })
-          // remove successMessage after a while
-          setTimeout(
-            () => this.setState({ successMessage: '' }),
-            4000
-          )
-        }
-      })
-    }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
   removeAvatarUrl = () => {
     const { account, updateAvatar } = this.props
     let { metaData } = this.props
@@ -354,16 +298,6 @@ class Settings extends React.Component {
     }
   }
 
-  componentDidMount () {
-    // to catch avatar url on creation
-    window.addEventListener('message', this.recieveAvatarUrl)
-  }
-
-  componentWillUnmount () {
-    // to remove avatar url listener
-    window.removeEventListener('message', this.recieveAvatarUrl)
-  }
-
   render () {
     const { state, props } = this
     const { submitting, valid, touched } = this.state.accountSettings
@@ -381,6 +315,7 @@ class Settings extends React.Component {
     let { metaData } = this.props
     if (!metaData) metaData = {}
     if (!metaData.profile) metaData.profile = {}
+    const hasReadyPlayerAvatar = !!metaData.profile.avatarUrl
 
     const { user_preferences } = this.props
     const preferred_api_endpoint = this.getPreferredApiEndpoint()
@@ -574,46 +509,32 @@ class Settings extends React.Component {
               </form>
             </div>
           </div>
-          <div className='small-12 medium-6 large-6 columns'>
-            <div className='row'>
-              <div className='small-12 medium-12 large-12 columns'>
-                <h4>
-                  Add a Ready Player Me Avatar to your profile
-                </h4>
+          {hasReadyPlayerAvatar && (
+            <div className='small-12 medium-6 large-6 columns'>
+              <div className='row'>
+                <div className='small-12 medium-12 large-12 columns'>
+                  <h4>
+                    {tt('settings_jsx.ready_player_discontinued_notice')}
+                  </h4>
 
-                <div>
-                  <iframe
-                    ref={(elem) =>
-                          (this.avatarIFrame = elem)}
-                    className='Avatar-iframe'
-                    title='Ready Player Avatar'
-                    src='https://blurt.readyplayer.me'
-                  />
+                  <div style={{ textAlign: 'center' }}>
+                    <button
+                      onClick={this.removeAvatarUrl}
+                      disabled={
+                        state.loading ||
+                        submitting ||
+                        !metaData.profile.avatarUrl
+                      }
+                      type='button'
+                      className='button'
+                    >
+                      {tt('settings_jsx.remove_avatar')}
+                    </button>
+                  </div>
                 </div>
-
-                <small>
-                  Your avatar will be saved to your profile
-                  after you create one, just come here again
-                  and edit to change avatar
-                </small>
-
-                <br />
-                <br />
-                <button
-                  onClick={this.removeAvatarUrl}
-                  disabled={
-                                        state.loading ||
-                                        submitting ||
-                                        !metaData.profile.avatarUrl
-                                    }
-                  type='button'
-                  className='button'
-                >
-                  Remove Avatar
-                </button>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     )

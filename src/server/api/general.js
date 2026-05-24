@@ -332,11 +332,20 @@ export default function useGeneralApi(app) {
 
         logRequest('login_account', this, { account });
         try {
-            const db_account = yield models.Account.findOne({
-                attributes: ['user_id'],
-                where: { name: esc(account) },
-                logging: false,
-            });
+            let db_account = null;
+            try {
+                db_account = yield models.Account.findOne({
+                    attributes: ['user_id'],
+                    where: { name: esc(account) },
+                    logging: false,
+                });
+            } catch (dbError) {
+                console.error(
+                    'Warning in /login_account db lookup',
+                    this.session.uid,
+                    dbError.message
+                );
+            }
             if (db_account) this.session.user = db_account.user_id;
 
             if (signatures) {

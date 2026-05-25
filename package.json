@@ -1,10 +1,10 @@
 {
-    "name": "blurt_wallet",
+    "name": "melek_wallet",
     "version": "0.1.0",
-    "description": "The Blurt Wallet allows you to send and recieve blurt, and set your profile picture, and vote for witnesses!",
+    "description": "The MELEK Wallet handles signup, key management, transfers, and witness voting on the MELEK blockchain.",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.com/blurt/blurt.git"
+        "url": "https://gitlab.com/blurt/blurt-wallet.git"
     },
     "license": "MIT",
     "author": "Blurt",

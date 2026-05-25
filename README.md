@@ -1,4 +1,12 @@
-# Blurt Wallet
+# MELEK Wallet
+
+This is the Wallet for the MELEK Blockchain. It handles signup, key generation, account recovery, login sessions, transfers, and witness voting — the keys-and-money side of MELEK. The companion repo for the content/social side is `melek-condenser`.
+
+Forked from [Blurt Wallet](https://gitlab.com/blurt/blurt-wallet); upstream build/deploy notes below remain largely applicable during the rebranding period. See `CLAUDE.md` for the MELEK-specific rebrand status.
+
+---
+
+## (Upstream Blurt Wallet README follows)
 
 This is the Wallet for the Blurt Blockchain. You can use it to send and recieve funds. It is deployed to Blurt's Kubernetes cluster, and using the CI files you find here, you can deploy it to your own Kubernetes cluster, as well. Blurt provides free use of its Kubernetes cluster to application developers in the Blurt Ecosystem.
 

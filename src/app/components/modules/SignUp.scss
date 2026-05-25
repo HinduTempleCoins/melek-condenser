@@ -1,31 +1,81 @@
 .SignUp {
-    padding: 1rem 1rem 2rem 1rem;
-    a.button {
+    padding: 2rem 1.5rem;
+    max-width: 40rem;
+    margin: 0 auto;
+
+    &__header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    &__title {
+        margin: 0 0 0.5rem;
+        font-weight: 600;
+    }
+
+    &__subtitle {
+        color: #666;
+        margin: 0;
+    }
+
+    &__methods {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__method {
+        margin-bottom: 1rem;
+
+        &--unavailable {
+            opacity: 0.55;
+        }
+    }
+
+    &__method-link {
+        display: block;
+        padding: 1.25rem 1.5rem;
+        border: 1px solid #d8d8d8;
+        border-radius: 8px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+    }
+
+    a.SignUp__method-link:hover {
+        border-color: #888;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        text-decoration: none;
+    }
+
+    a.SignUp__method-link:active {
+        transform: translateY(1px);
+    }
+
+    &__method-title {
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 0.25rem;
+    }
+
+    &__method-description {
+        color: #666;
+        font-size: 0.92rem;
+        line-height: 1.4;
+    }
+
+    &__method-status {
         margin-top: 0.5rem;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #999;
     }
-    .button {
-        width: 16rem;
-    }
-}
 
-.SignUp--reddit-button {
-    background-color: #ef4623;
-    &:hover {
-        background-color: scale-color(#ef4623, $lightness: -6%);
+    &__footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: #666;
+        font-size: 0.92rem;
     }
-}
-
-.SignUp--fb-button {
-    background-color: #3b5998;
-    &:hover {
-        background-color: scale-color(#3b5998, $lightness: -6%);
-    }
-}
-
-.TermsAgree {
-    height: 10em;
-    resize: none;
-    display: block;
-    overflow: auto;
-    border: 1px solid #cacaca;
 }

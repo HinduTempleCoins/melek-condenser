@@ -36,6 +36,8 @@ export default {
       cb(null, [require('app/components/pages/ChangePasswordPage')])
     } else if (route.page === 'CreateAccount') {
       cb(null, [require('app/components/pages/CreateAccount')])
+    } else if (route.page === 'SignUp') {
+      cb(null, [require('app/components/pages/SignUp')])
     } else if (route.page === 'Approval') {
       cb(null, [require('app/components/pages/Approval')])
     } else if (route.page === 'RecoverAccountStep1') {

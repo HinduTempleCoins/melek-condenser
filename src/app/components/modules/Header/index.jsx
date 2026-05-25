@@ -15,7 +15,7 @@ import * as appActions from 'app/redux/AppReducer';
 import Userpic from 'app/components/elements/Userpic';
 import VotingPowerIndicator from 'app/components/elements/VotingPowerIndicator';
 import { SIGNUP_URL } from 'shared/constants';
-import BlurtLogo from 'app/components/elements/BlurtLogo';
+import MELEKLogo from 'app/components/elements/MELEKLogo';
 import normalizeProfile from 'app/utils/NormalizeProfile';
 import { appendThemeToUrl } from 'app/utils/themePreferences';
 
@@ -210,7 +210,7 @@ class Header extends React.Component {
                     <div className="small-5 large-6 columns Header__logotype">
                         {/*LOGO*/}
                         <Link className="Header__wallet-home-link" to="/">
-                            <BlurtLogo nightmodeEnabled={nightmodeEnabled} />
+                            <MELEKLogo />
                         </Link>
                         <a
                             className="Header__blog-logo-link"

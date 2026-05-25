@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import BlurtLogo from 'app/components/elements/BlurtLogo';
+import MELEKLogo from 'app/components/elements/MELEKLogo';
 
 class NotFound extends React.Component {
     render() {
@@ -12,7 +12,7 @@ class NotFound extends React.Component {
                             <ul className="menu">
                                 <li className="Header__top-logo">
                                     <a href="/">
-                                        <BlurtLogo />
+                                        <MELEKLogo />
                                     </a>
                                 </li>
                             </ul>

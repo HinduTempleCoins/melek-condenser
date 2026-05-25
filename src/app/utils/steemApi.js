@@ -4,6 +4,39 @@ import { Client } from '@busyorg/busyjs';
 
 import stateCleaner from 'app/redux/stateCleaner';
 
+// Static pages don't need on-chain state. Calling get_state for these against
+// the Blurt RPC returns "unhandled path", which blurtjs retries 10× with
+// exponential backoff (~6 min) — hanging SSR. Short-circuit with an empty
+// state so the route renders immediately.
+const STATIC_PAGE_PATHS = new Set([
+    'about.html',
+    'welcome',
+    'chat',
+    'faq.html',
+    'login.html',
+    'privacy.html',
+    'support.html',
+    'tos.html',
+    'tags',
+    'change_password',
+    'recover_account_step_1',
+    '~witnesses',
+    'submit.html',
+    'xss/test',
+    'benchmark',
+]);
+
+const emptyChainState = () => ({
+    accounts: {},
+    content: {},
+    props: {},
+    discussion_idx: {},
+    feed_price: {},
+    tag_idx: { trending: [] },
+    tags: {},
+    witnesses: {},
+});
+
 export async function getStateAsync(url) {
     // strip off query string
     url = url.split('?')[0];
@@ -12,6 +45,10 @@ export async function getStateAsync(url) {
     if (url.length > 0 && url[0] == '/') url = url.substring(1, url.length);
     if (url.length > 0 && url[url.length - 1] == '/') {
         url = url.substring(0, url.length - 1);
+    }
+
+    if (STATIC_PAGE_PATHS.has(url)) {
+        return stateCleaner(emptyChainState());
     }
 
     // blank URL defaults to `trending`

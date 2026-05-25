@@ -41,6 +41,7 @@
     "special_posts_url": false,
     "wallet_url": "",
     "wiki_url": "http://5.252.53.79/wiki",
+    "welcome_post_url": "",
     "gpt_banned_tags": ["nsfw", "tante"],
     "google_ad_enabled": false,
     "google_ad_test": false,

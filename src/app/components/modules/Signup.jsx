@@ -1,4 +1,5 @@
 import React from 'react';
+import OnboardingChat from 'app/components/elements/OnboardingChat';
 
 // Page 1 of the MELEK email-signup flow: language picker.
 // Mirrors the blurtplugin.online/account/register/ Page 1 layout but
@@ -59,6 +60,9 @@ const Signup = () => (
             <span className="Signup__footer-sep">·</span>
             <a href="/privacy.html">Privacy policy</a>
         </p>
+        <div className="Signup__chat">
+            <OnboardingChat />
+        </div>
     </div>
 );
 

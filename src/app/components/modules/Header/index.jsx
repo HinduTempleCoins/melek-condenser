@@ -212,19 +212,14 @@ class Header extends React.Component {
                         <Link className="Header__wallet-home-link" to="/">
                             <MELEKLogo />
                         </Link>
-                        <a
-                            className="Header__blog-logo-link"
-                            href={blog_home_link}
-                            title={tt('g.back_to_blog')}
-                            aria-label={tt('g.back_to_blog')}
-                        >
-                            <img
-                                alt={tt('g.blog')}
-                                src={blogLogo}
-                                width="150"
-                                height="40"
-                            />
-                        </a>
+                        {/*
+                          "Back to blog" link disabled during the bootstrap
+                          period. The upstream image was a BLURT BLOG logo
+                          and the link pointed at blurt.blog (a Blurt-
+                          branded surface). Restore once melek.salon is
+                          deployed and a MELEK blog-logo asset exists.
+                          See feedback_no_blurt_deploy.
+                        */}
                     </div>
 
                     <div className="small-7 large-6 columns Header__buttons">

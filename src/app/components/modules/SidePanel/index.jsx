@@ -172,7 +172,7 @@ const SidePanel = ({
             {
                 value: 'signup',
                 label: tt('g.sign_up'),
-                link: 'https://signup.blurtwallet.com',
+                link: '/signup',
             },
             {
                 value: 'post',

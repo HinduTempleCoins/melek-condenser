@@ -18,8 +18,8 @@ class Privacy extends React.Component {
                             applies to the
                         </span>
                         <span>
-                            blurt.world, subdomains (e.g.,
-                            signup.blurtwallet.com) and services
+                            melek.salon, subdomains (e.g.,
+                            wallet.melek.salon) and services
                         </span>
                         <span className="c1">
                             &nbsp;(collectively, &ldquo;Services&rdquo;).

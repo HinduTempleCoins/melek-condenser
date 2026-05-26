@@ -40,6 +40,12 @@ export default {
       cb(null, [require('app/components/pages/SignUp')])
     } else if (route.page === 'Signup') {
       cb(null, [require('app/components/pages/Signup')])
+    } else if (route.page === 'SignupEmail') {
+      cb(null, [require('app/components/pages/SignupEmail')])
+    } else if (route.page === 'SignupKeys') {
+      cb(null, [require('app/components/pages/SignupKeys')])
+    } else if (route.page === 'SignupDone') {
+      cb(null, [require('app/components/pages/SignupDone')])
     } else if (route.page === 'Approval') {
       cb(null, [require('app/components/pages/Approval')])
     } else if (route.page === 'RecoverAccountStep1') {

@@ -50,6 +50,15 @@ export default function resolveRoute (path) {
   if (path === '/signup') {
     return { page: 'Signup' }
   }
+  if (path === '/signup/en') {
+    return { page: 'SignupEmail' }
+  }
+  if (path === '/signup/keys') {
+    return { page: 'SignupKeys' }
+  }
+  if (path === '/signup/done') {
+    return { page: 'SignupDone' }
+  }
   if (path === '/approval') {
     return { page: 'Approval' }
   }

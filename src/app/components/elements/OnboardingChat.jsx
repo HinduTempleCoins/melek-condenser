@@ -1,8 +1,12 @@
 import React from 'react';
 
 // Hathor-voiced chat embedded across the /signup wizard. Persists
-// messages to localStorage so the conversation survives navigation
-// from /signup -> /signup/en -> /signup/verify/:token -> /signup/keys.
+// messages to sessionStorage so the conversation survives navigation
+// from /signup -> /signup/en -> /signup/keys -> /signup/done within
+// one browser tab. **sessionStorage, not localStorage**: the chat dies
+// on tab close. Across-session persistence will move to the on-chain
+// Welcome thread once the bot-side welcomer is live (see project
+// memory project_hathor_signup_integration).
 //
 // The Bot repo (HinduTempleCoins/Bot, Gemini-backed) does not expose
 // an HTTP API yet, so the bot's replies are a short scripted scaffold
@@ -13,7 +17,7 @@ import React from 'react';
 // On signup complete, the bot-side welcomer will @-mention the user
 // in a comment on the Welcome Post; the in-page chat ends there.
 
-const STORAGE_KEY = 'melek.onboarding-chat.v1';
+const SESSION_KEY = 'melek.onboarding-chat.v1';
 
 const OPENER =
     "Welcome — I'm Hathor. I help new folks land on MELEK. I'll be right here as you go through signup; ask me anything you want.";
@@ -28,11 +32,11 @@ const HANDOFF_LINE =
     "Account looks ready. From here, I'll @ you in the Welcome thread — see you there.";
 
 function loadState() {
-    if (typeof window === 'undefined' || !window.localStorage) {
+    if (typeof window === 'undefined' || !window.sessionStorage) {
         return { messages: [{ from: 'bot', text: OPENER }], step: 0, finished: false };
     }
     try {
-        const raw = window.localStorage.getItem(STORAGE_KEY);
+        const raw = window.sessionStorage.getItem(SESSION_KEY);
         if (!raw) {
             return { messages: [{ from: 'bot', text: OPENER }], step: 0, finished: false };
         }
@@ -51,10 +55,10 @@ function loadState() {
 }
 
 function saveState(state) {
-    if (typeof window === 'undefined' || !window.localStorage) return;
+    if (typeof window === 'undefined' || !window.sessionStorage) return;
     try {
-        window.localStorage.setItem(
-            STORAGE_KEY,
+        window.sessionStorage.setItem(
+            SESSION_KEY,
             JSON.stringify({
                 messages: state.messages,
                 step: state.step,
@@ -62,7 +66,7 @@ function saveState(state) {
             })
         );
     } catch (e) {
-        // localStorage may be unavailable (private mode, quota); ignore
+        // sessionStorage may be unavailable (private mode, quota); ignore
     }
 }
 
@@ -113,8 +117,8 @@ export default class OnboardingChat extends React.Component {
 
     handleReset = (e) => {
         e.preventDefault();
-        if (typeof window !== 'undefined' && window.localStorage) {
-            window.localStorage.removeItem(STORAGE_KEY);
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+            window.sessionStorage.removeItem(SESSION_KEY);
         }
         this.setState({
             messages: [{ from: 'bot', text: OPENER }],

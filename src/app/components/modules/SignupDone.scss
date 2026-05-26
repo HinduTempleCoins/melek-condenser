@@ -1,0 +1,14 @@
+.SignupDone {
+    &__actions {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto 2rem;
+
+        .button {
+            margin: 0;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+    }
+}

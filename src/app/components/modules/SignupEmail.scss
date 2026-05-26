@@ -1,0 +1,59 @@
+.SignupEmail {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 0 auto 1rem;
+        max-width: 24rem;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        font-size: 0.92rem;
+        color: #444;
+    }
+
+    &__input {
+        margin: 0;
+        height: auto;
+        padding: 0.6rem 0.85rem;
+        border: 1px solid #d8d8d8;
+        border-radius: 8px;
+        font-size: 1rem;
+
+        &:focus {
+            border-color: #1c252b;
+            outline: none;
+        }
+    }
+
+    &__error {
+        color: #c1232c;
+        font-size: 0.88rem;
+    }
+
+    &__submit {
+        margin: 0;
+        padding: 0.65rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &__note {
+        max-width: 24rem;
+        margin: 0 auto 2rem;
+        padding: 0.75rem 1rem;
+        background: #fff8e1;
+        border-left: 3px solid #f7d116;
+        font-size: 0.85rem;
+        color: #555;
+        line-height: 1.4;
+    }
+}

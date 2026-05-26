@@ -47,6 +47,9 @@ export default function resolveRoute (path) {
   if (path === '/sign_up') {
     return { page: 'SignUp' }
   }
+  if (path === '/signup') {
+    return { page: 'Signup' }
+  }
   if (path === '/approval') {
     return { page: 'Approval' }
   }

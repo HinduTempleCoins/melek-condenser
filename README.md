@@ -1,12 +1,12 @@
 # Condenser
 
-Condenser is the react.js web interface to [Blurt](https://gitlab.com/blurt/blurt).
+Condenser is the react.js web interface to MELEK. During the bootstrap period it talks to the [Blurt](https://gitlab.com/blurt/blurt) chain — chain symbols on the wire stay BLURT until the MELEK chain launches.
 
 ### Changelog
 
 Please update the changelog with every change that you make to condenser.
 
-#### Quick Start: Run your own Blurt front end
+#### Quick Start: Run your own MELEK front end
 
 To bring up a running container fit for production, it's as simple as this:
 

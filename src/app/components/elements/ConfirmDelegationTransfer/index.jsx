@@ -10,7 +10,7 @@ const ConfirmDelegationTransfer = ({ operation, amount, fee }) => {
                         key={`transaction-label-${i}`}
                         className="input-group-label"
                     >
-                        BLURT
+                        MELEK
                     </span>
                     <input
                         className="input-group-field"
@@ -45,7 +45,7 @@ const ConfirmDelegationTransfer = ({ operation, amount, fee }) => {
     return (
         <div className="info">
             {info}
-            <span>Transaction Fee: {fee} BLURT</span>
+            <span>Transaction Fee: {fee} MELEK</span>
         </div>
     );
 };

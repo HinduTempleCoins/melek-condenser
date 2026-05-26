@@ -473,7 +473,7 @@ function urlAccountName() {
 }
 
 function checkPasswordChecksum(password) {
-    // A Blurt generated password is a WIF prefixed with a P ..
+    // A MELEK generated password is a WIF prefixed with a P ..
     // It is possible to login directly with a WIF
     const wif = /^P/.test(password) ? password.substring(1) : password;
 

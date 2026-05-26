@@ -114,7 +114,7 @@ const SidePanel = ({
         block_explorers: [
             {
                 value: 'blurt_explorer',
-                label: 'Blurt Explorer',
+                label: 'MELEK Explorer',
                 link: 'https://blocks.blurtwallet.com',
             },
             {

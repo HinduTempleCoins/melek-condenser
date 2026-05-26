@@ -12,7 +12,7 @@
         "blog": "ブログ",
         "browse": "ブラウズ",
         "buy": "買う",
-        "buy_blurt_power": "Buy Blurt Power",
+        "buy_blurt_power": "Buy MELEK Power",
         "buy_or_sell": "購入または売却",
         "by": "by",
         "cancel": "キャンセル",
@@ -183,7 +183,7 @@
         "account_name_should_have_only_letters_digits_or_dashes": "アカウント名には英数字またはダッシュが使用できます。",
         "cannot_increase_reward_of_post_within_the_last_minute_before_payout": "支払いの直前に投稿の報酬を増やすことはできません",
         "vote_currently_exists_user_must_be_indicate_a_to_reject_witness": "現在、投票が存在し、証人を拒否するには強い意志を示す必要があります",
-        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "10分毎に各IPアドレスにつき1つのBlurtアカウントのみ許可されています",
+        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "10分毎に各IPアドレスにつき1つのMELEKアカウントのみ許可されています",
         "write_your_story": "投稿内容を書いてください",
         "remember_voting_and_posting_key": "投稿キーを記憶する",
         "auto_login_question_mark": "自動ログインしますか？",
@@ -202,8 +202,8 @@
         "please_email_questions_to": "質問をメールしてください：",
         "next_7_strings_single_block": {
             "authors_get_paid_when_people_like_you_upvote_their_post": "投稿者は読者から投稿をupvoteされることで報酬を得ます。",
-            "if_you_enjoyed_what_you_read_earn_amount": "読んで楽しんだら、次はアカウントを作成してBLURTを手に入れましょう！",
-            "free_blurt": "BLURTを手に入れよう！",
+            "if_you_enjoyed_what_you_read_earn_amount": "読んで楽しんだら、次はアカウントを作成してMELEKを手に入れましょう！",
+            "free_blurt": "MELEKを手に入れよう！",
             "sign_up_earn_blurt": "サインアップして "
         },
         "next_3_strings_together": {
@@ -227,14 +227,14 @@
             "other": "%(count)s件の返信"
         },
         "post_key_warning": {
-            "confirm": "BLURTの秘密キーまたはマスターパスワードを公開しようとしています。関連するアカウントの管理権とすべての資金を失う恐れがあります。",
-            "warning": "Blurtの従業員を含む正当なユーザーは秘密キーまたはマスターパスワードを要求することはありません。",
+            "confirm": "MELEKの秘密キーまたはマスターパスワードを公開しようとしています。関連するアカウントの管理権とすべての資金を失う恐れがあります。",
+            "warning": "MELEKの従業員を含む正当なユーザーは秘密キーまたはマスターパスワードを要求することはありません。",
             "checkbox": "理解しました。"
         },
         "post_as": "投稿します:"
     },
     "navigation": {
-        "about": "Blurtについて",
+        "about": "MELEKについて",
         "explore": "投稿を探す",
         "APP_NAME_whitepaper": "%(APP_NAME)sホワイトペーパー",
         "third_party_exchanges": "Third-party exchanges:",
@@ -253,15 +253,15 @@
         "learn_more": "詳細",
         "welcome": "ようこそ",
         "faq": "FAQ",
-        "chat": "Blurtチャット",
-        "app_center": "Blurtアプリセンター",
-        "business_center": "Businesses Accepting Blurt",
-        "api_docs": "Blurt API資料",
-        "bluepaper": "Blurtブルーペーパー",
+        "chat": "MELEKチャット",
+        "app_center": "MELEKアプリセンター",
+        "business_center": "Businesses Accepting MELEK",
+        "api_docs": "MELEK API資料",
+        "bluepaper": "MELEKブルーペーパー",
         "smt_whitepaper": "SMT Whitepaper",
-        "whitepaper": "Blurtホワイトペーパー",
-        "jobs": "Jobs at Blurt",
-        "blurt_proposals": "Blurt Proposals"
+        "whitepaper": "MELEKホワイトペーパー",
+        "jobs": "Jobs at MELEK",
+        "blurt_proposals": "MELEK Proposals"
     },
     "reply_editor": {
         "shorten_title": "タイトルが長すぎます",
@@ -349,7 +349,7 @@
         "unable_to_recover_account_not_change_ownership_recently": "このアカウントは最近パスワードが変更されていないため回復できません。",
         "password_not_used_in_last_days": "このパスワードは30日以内にこのアカウントで使用されていません。",
         "request_already_submitted_contact_support": "リクエストは既に送信されていて、現在作業中です。リクエストの状況については%(SUPPORT_EMAIL)sにお問い合わせください。",
-        "recover_account_intro": "時折、Blurtianのオーナーキーが盗まれることがあります。盗難アカウントの回復は、盗んだ者がオーナーキーを変更してから30日以内に、アカウントの正しい所有者にアカウントを取り戻します。盗難アカウントの回復は、アカウントの所有者が'%(APP_NAME)s'をアカウント受託者とし、%(APP_NAME)sの利用規約に準拠している場合にのみ%(APP_URL)sで行うことができます。",
+        "recover_account_intro": "時折、MELEKianのオーナーキーが盗まれることがあります。盗難アカウントの回復は、盗んだ者がオーナーキーを変更してから30日以内に、アカウントの正しい所有者にアカウントを取り戻します。盗難アカウントの回復は、アカウントの所有者が'%(APP_NAME)s'をアカウント受託者とし、%(APP_NAME)sの利用規約に準拠している場合にのみ%(APP_URL)sで行うことができます。",
         "login_with_facebook_or_reddit_media_to_verify_identity": "FacebookまたはRedditにログインして本人確認をしてください。",
         "login_with_social_media_to_verify_identity": "%(provider)sにログインして本人確認をしてください。",
         "enter_email_toverify_identity": "本人確認が必要です。確認するには以下の欄にメールアドレスを入力してください。",
@@ -484,8 +484,8 @@
         "estimated_value": "推定値は%(LIQUID_TOKEN)sの平均値に基いてUSドルで表されます。",
         "non_transferable": "%(VESTING_TOKEN)sは移転不可能であり、再び%(LIQUID_TOKEN)sに変換するには、1ヶ月（4週間）かかります。",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "変換した%(VESTING_TOKEN)sは、自分自身や他の人に送ることが可能ですが、もう一度送るには%(LIQUID_TOKEN)sに変換する必要があります。",
-        "part_of_your_blurt_power_is_currently_delegated": "現在のBLURT POWERの一部は委託されたものです。委託は影響力の寄付や、新規ユーザーがBlurtでアクションを起こしやすくするために行われます。委託された額は変動する可能性があります。",
-        "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."
+        "part_of_your_blurt_power_is_currently_delegated": "現在のMELEK POWERの一部は委託されたものです。委託は影響力の寄付や、新規ユーザーがMELEKでアクションを起こしやすくするために行われます。委託された額は変動する可能性があります。",
+        "blurt_power_apr": "MELEK POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."
     },
     "promote_post_jsx": {
         "promote_post": "投稿をプロモートする",
@@ -495,7 +495,7 @@
     },
     "about_jsx": {
         "about_app": "%(APP_NAME)sについて",
-        "about_app_details": "%(APP_NAME)sは誰もがコンテンツ作成やキュレーションで報酬を得られるソーシャルメディアプラットフォームです。これにはBlurtという堅牢なデジタルポイントシステムを活用しています。それは市場の価格発見と流動性によってデジタル報酬で実価値を与えます。",
+        "about_app_details": "%(APP_NAME)sは誰もがコンテンツ作成やキュレーションで報酬を得られるソーシャルメディアプラットフォームです。これにはMELEKという堅牢なデジタルポイントシステムを活用しています。それは市場の価格発見と流動性によってデジタル報酬で実価値を与えます。",
         "learn_more_at_app_url": "詳細は%(APP_URL)sを参照してください。",
         "resources": "リソース"
     },
@@ -517,13 +517,13 @@
         },
         "delegate_vesting_shares": {
             "revoke": "Revoke delegation to ",
-            "from_self": "Delegate %(amount)s BLURT POWER to ",
-            "to_self": "Receive delegation of %(amount)s BLURT POWER from ",
-            "from_user_to_user": "Delegate %(amount)s BLURT POWER from %(from)s to "
+            "from_self": "Delegate %(amount)s MELEK POWER to ",
+            "to_self": "Receive delegation of %(amount)s MELEK POWER from ",
+            "from_user_to_user": "Delegate %(amount)s MELEK POWER from %(from)s to "
         },
-        "return_vesting_delegation": "Receive returned delegation of %(amount)s BLURT POWER",
+        "return_vesting_delegation": "Receive returned delegation of %(amount)s MELEK POWER",
         "stop_power_down": "パワーダウンを停止しました",
-        "withdraw_vesting": "Start power down of %(powerdown_vests)s BLURT",
+        "withdraw_vesting": "Start power down of %(powerdown_vests)s MELEK",
         "start_power_down_of": "パワーダウンを開始しました：",
         "receive_interest_of": "利息受け取りました：",
         "bad_actor_caution": "Caution",
@@ -532,8 +532,8 @@
         "from_negative_rep_user_caution": "Caution",
         "from_negative_rep_user_explained": "This is from an account with a bad reputation. If you wish, you may temporarily reveal this memo which may contain dangerous links.",
         "from_negative_rep_user_reveal_memo": "I understand the risk; show anyway.",
-        "curation_reward": "%(curation_reward)s BLURT POWER for ",
-        "author_reward": "%(author_reward)s BLURT POWER for ",
+        "curation_reward": "%(curation_reward)s MELEK POWER for ",
+        "author_reward": "%(author_reward)s MELEK POWER for ",
         "claim_reward_balance": {
             "three_rewards": "Claim rewards: %(first_reward)s, %(second_reward)s and %(third_reward)s",
             "two_rewards": "Claim rewards: %(first_reward)s and %(second_reward)s",
@@ -545,14 +545,14 @@
             "filled_by_current_owner": "Paid %(open_pays)s for %(current_pays)s",
             "open_owner_filled_my_order": "Paid %(current_pays)s for %(open_pays)s"
         },
-        "comment_benefactor_reward": "%(benefactor_reward)s BLURT POWER for %(author)s/%(permlink)s",
+        "comment_benefactor_reward": "%(benefactor_reward)s MELEK POWER for %(author)s/%(permlink)s",
         "transfer_to_vesting": {
             "from_self": {
-                "no_to": "Transfer %(amount)s to BLURT POWER",
-                "to_someone": "Transfer %(amount)s BLURT POWER to "
+                "no_to": "Transfer %(amount)s to MELEK POWER",
+                "to_someone": "Transfer %(amount)s MELEK POWER to "
             },
-            "to_self": "Receive %(amount)s BLURT POWER from ",
-            "from_user_to_user": " Transfer %(amount)s BLURT POWER from %(from) to "
+            "to_self": "Receive %(amount)s MELEK POWER from ",
+            "from_user_to_user": " Transfer %(amount)s MELEK POWER from %(from) to "
         },
         "transfer": {
             "from_self": {
@@ -597,7 +597,7 @@
         "witness_rewards_by": "%(username)s の証人報酬",
         "replies_to": "への返信",
         "comments_by": "のコメント",
-        "blurt_proposals": "Blurt Proposals"
+        "blurt_proposals": "MELEK Proposals"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key": "秘密パスワードまたはキーが必要です（公開キーではありません）",
@@ -620,20 +620,20 @@
         "you_account_has_been_successfully_created": "あなたのアカウントは作成済みです！",
         "you_account_has_been_successfully_recovered": "あなたのアカウントは正常に回復されました！",
         "password_update_success": "%(accountName)sのパスワードは正常に更新されました。",
-        "password_info": "入力したパスワードまたは秘密キーが間違っています。手入力したか、またはデータエラーがある可能性があります。ヒント：Blurtで生成したパスワードまたは秘密キーは0 (ゼロ)、O (大文字のo)、I (大文字のi)、l (小文字のL)を含みません。",
+        "password_info": "入力したパスワードまたは秘密キーが間違っています。手入力したか、またはデータエラーがある可能性があります。ヒント：MELEKで生成したパスワードまたは秘密キーは0 (ゼロ)、O (大文字のo)、I (大文字のi)、l (小文字のL)を含みません。",
         "enter_your_username": "ユーザー名を入力してください",
-        "enter_blurt_key": "Enter a Blurt key (ideally your Posting Key)",
+        "enter_blurt_key": "Enter a MELEK key (ideally your Posting Key)",
         "password_or_wif": "パスワードまたはWIF",
         "this_operation_requires_your_key_or_master_password": "この操作には%(authType)sキーまたはマスターパスワードが必要です。",
         "keep_me_logged_in": "ログイン状態を維持する",
         "signup_button": "サインアップして",
-        "signup_button_emphasis": "BLURTを手に入れよう！",
-        "sign_up_get_blurt": "登録してBLURTを手に入れよう！",
+        "signup_button_emphasis": "MELEKを手に入れよう！",
+        "sign_up_get_blurt": "登録してMELEKを手に入れよう！",
         "returning_users": "再",
         "login_to_wallet": "Login to Wallet",
         "sign_transfer": "Sign to complete transfer",
         "use_keychain": "Use WhaleVault extension",
-        "dont_have_an_account": "Don't have a Blurt account?"
+        "dont_have_an_account": "Don't have a MELEK account?"
     },
     "chainvalidation_js": {
         "account_name_should_not_be_empty": "Account name should not be empty.",
@@ -695,7 +695,7 @@
     "transfer_jsx": {
         "amount_is_in_form": "金額は99999.999の形式です",
         "insufficient_funds": "残高不足です",
-        "leave_1_blurt": "Leave at least 1 BLURT for transaction fees.",
+        "leave_1_blurt": "Leave at least 1 MELEK for transaction fees.",
         "use_only_3_digits_of_precison": "小数点以下は3桁以内にしてください",
         "send_to_account": "送金先アカウント",
         "asset": "アセット",
@@ -703,7 +703,7 @@
         "this_memo_is_public": "このメモは公開されます",
         "convert_to_VESTING_TOKEN": "%(VESTING_TOKEN)sに変換",
         "balance_subject_to_3_day_withdraw_waiting_period": "引き出しに3日間の待ち時間が必要となる貯蓄口座です。",
-        "move_funds_to_another_account": "資金を他のBlurtアカウントに送ります。",
+        "move_funds_to_another_account": "資金を他のMELEKアカウントに送ります。",
         "protect_funds_by_requiring_a_3_day_withdraw_waiting_period": "3日間の引き出し待ち時間で資金を守ります。",
         "withdraw_funds_after_the_required_3_day_waiting_period": "3日間の待ち時間の後に資金を引き出します。",
         "from": "送信者",
@@ -734,7 +734,7 @@
         "transfers_are_temporary_disabled": "送金は一時的に無効になっています。",
         "history": "履歴",
         "redeem_rewards": "報酬の請求 (残高に送る)",
-        "buy_blurt_or_blurt_power": "BLURTを購入する"
+        "buy_blurt_or_blurt_power": "MELEKを購入する"
     },
     "powerdown_jsx": {
         "power_down": "パワーダウン",
@@ -755,8 +755,8 @@
     "termsagree_jsx": {
         "please_review": "Please review our terms to continue",
         "hi_user": "Hi %(username)s,",
-        "blurb": "Our Terms of Service set the rules and guidelines that you must accept and follow in order to use Blurt and our Privacy Policy explains the type of information we collect and what we do with it. Don't worry, we don't sell your data to anyone. We do use it to meet legal requirements and to learn how to make Blurt better.",
-        "i_agree_to_blurtblogs": "I agree to Blurt.blog's",
+        "blurb": "Our Terms of Service set the rules and guidelines that you must accept and follow in order to use MELEK and our Privacy Policy explains the type of information we collect and what we do with it. Don't worry, we don't sell your data to anyone. We do use it to meet legal requirements and to learn how to make MELEK better.",
+        "i_agree_to_blurtblogs": "I agree to MELEK's",
         "terms_of_service": "Terms of Service",
         "privacy_policy": "Privacy Policy",
         "continue": "Continue",
@@ -768,10 +768,10 @@
     "modals_jsx": {
         "your_transaction_failed": "Your transaction failed to process",
         "out_of_bandwidth_title": "Why? You've run out of Resource Credits",
-        "out_of_bandwidth_reason": "Actions such as posting and voting use computing resources, placing a real cost on the community members who run the Blurt blockchain for everyone.",
-        "out_of_bandwidth_reason_2": "To keep things free, Blurt intelligently allocates Resource Credits to each user based on their Blurt Power holdings, which can be used to submit a limited number of feeless transactions. When a user runs low on Resource Credits, they will either need to wait for them to recharge, or purchase additional Blurt Power. This system prioritizes actions by good community members while limiting spam.",
-        "out_of_bandwidth_option_title": "To keep interacting on Blurt:",
-        "out_of_bandwidth_option_1": "Buy and hold more Blurt Power",
+        "out_of_bandwidth_reason": "Actions such as posting and voting use computing resources, placing a real cost on the community members who run the MELEK blockchain for everyone.",
+        "out_of_bandwidth_reason_2": "To keep things free, MELEK intelligently allocates Resource Credits to each user based on their MELEK Power holdings, which can be used to submit a limited number of feeless transactions. When a user runs low on Resource Credits, they will either need to wait for them to recharge, or purchase additional MELEK Power. This system prioritizes actions by good community members while limiting spam.",
+        "out_of_bandwidth_option_title": "To keep interacting on MELEK:",
+        "out_of_bandwidth_option_1": "Buy and hold more MELEK Power",
         "out_of_bandwidth_option_2": "Wait until your Resource Credits recharge",
         "out_of_bandwidth_option_3": "Wait until the network usage decreases"
     },
@@ -780,19 +780,19 @@
         "phishylink_reveal": "show link"
     },
     "wallet_index": {
-        "title": "Blurt wallet login",
-        "description": "Welcome to Blurt's official Blurt blockchain wallet. Use it to transfer BLURT tokens, Power up, vote for Blurt Witnesses and change your Blurt profile details.",
+        "title": "MELEK wallet login",
+        "description": "Welcome to MELEK's official MELEK blockchain wallet. Use it to transfer MELEK tokens, Power up, vote for MELEK Witnesses and change your MELEK profile details.",
         "login": "Login",
-        "blurt_tokens": "Blurt tokens",
-        "blurt_symbol": "BLURT",
+        "blurt_tokens": "MELEK tokens",
+        "blurt_symbol": "MELEK",
         "blurt_description": "Liquid platform token",
-        "blurt_power_symbol": "BLURT Power",
+        "blurt_power_symbol": "MELEK Power",
         "blurt_power_description": "Vesting influence token",
         "hbd_symbol": "HBD",
         "hbd_description": "Seeks price stability with USD"
     },
     "blurt_proposals": {
-        "top_sps": "Blurt Proposals",
+        "top_sps": "MELEK Proposals",
         "votes_update_info": "* Only updated once per hour",
         "table": {
             "id": "Id",

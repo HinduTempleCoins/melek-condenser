@@ -231,7 +231,7 @@ class CreateAccount extends React.Component {
                         <div className="callout alert">
                             <h4>Cryptography test failed</h4>
                             <p>
-                                We will be unable to create your Blurt account
+                                We will be unable to create your MELEK account
                                 with this browser.
                             </p>
                             <p>
@@ -266,7 +266,7 @@ class CreateAccount extends React.Component {
                                 before you can create another account.
                             </p>
                             <p>
-                                Please note that Blurt can only register one
+                                Please note that MELEK can only register one
                                 account per verified user.
                             </p>
                         </div>
@@ -336,19 +336,19 @@ class CreateAccount extends React.Component {
                 <div className="CreateAccount row">
                     <div className="column">
                         <h4>
-                            Please read the Blurt Rules and fill in the form
-                            below to create your Blurt account
+                            Please read the MELEK Rules and fill in the form
+                            below to create your MELEK account
                         </h4>
                         {showRules ? (
                             <div className="CreateAccount__rules">
                                 <p>
-                                    The first rule of Blurt is: Do not lose your
+                                    The first rule of MELEK is: Do not lose your
                                     password.
                                     <br />
-                                    The second rule of Blurt is: Do{' '}
+                                    The second rule of MELEK is: Do{' '}
                                     <strong>not</strong> lose your password.
                                     <br />
-                                    The third rule of Blurt is: We cannot
+                                    The third rule of MELEK is: We cannot
                                     recover your password, or your account if
                                     you lose your password.
                                     <br />
@@ -361,7 +361,7 @@ class CreateAccount extends React.Component {
                                     <br />
                                     Seriously, we are, for technical reasons,
                                     entirely unable to gain access to an account
-                                    without knowing the password. Blurt is a new
+                                    without knowing the password. MELEK is a new
                                     model, entirely unlike other sites on the
                                     Internet. It's not simply policy:{' '}
                                     <strong>
@@ -402,7 +402,7 @@ class CreateAccount extends React.Component {
                                         this.setState({ showRules: true })
                                     }
                                 >
-                                    Blurt Rules &nbsp; &raquo;
+                                    MELEK Rules &nbsp; &raquo;
                                 </a>
                             </div>
                         )}

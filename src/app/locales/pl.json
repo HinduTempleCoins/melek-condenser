@@ -12,7 +12,7 @@
         "blog": "Blog",
         "browse": "Przeglądaj",
         "buy": "Kup",
-        "buy_blurt_power": "Buy Blurt Power",
+        "buy_blurt_power": "Buy MELEK Power",
         "buy_or_sell": "Kup lub Sprzedaj",
         "by": "przez",
         "cancel": "Anuluj",
@@ -183,7 +183,7 @@
         "account_name_should_have_only_letters_digits_or_dashes": "Nazwa konta powinna zawierać wyłącznie litery, cyfry, kropki lub myślniki",
         "cannot_increase_reward_of_post_within_the_last_minute_before_payout": "Nie można zwiększyć nagrody za post w ostatnich chwilach przed wypłatą",
         "vote_currently_exists_user_must_be_indicate_a_to_reject_witness": "głos oddany, użytkownik musi wskazać powód odrzucenia delegata",
-        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "Dozwolone jest tylko jedno konto Blurt dla danego adresu IP w ciągu 10 minut",
+        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "Dozwolone jest tylko jedno konto MELEK dla danego adresu IP w ciągu 10 minut",
         "write_your_story": "Napisz swoją historię",
         "remember_voting_and_posting_key": "Zapamiętaj klucze do głosowania i tworzenia wpisów",
         "auto_login_question_mark": "Automatyczne logowanie?",
@@ -202,8 +202,8 @@
         "please_email_questions_to": "Proszę wysłać swoje zapytanie na maila",
         "next_7_strings_single_block": {
             "authors_get_paid_when_people_like_you_upvote_their_post": "Autorzy otrzymują wypłatę gdy ludzie tacy jak Ty głosują na ich wpisy",
-            "if_you_enjoyed_what_you_read_earn_amount": "Jeśli podobało Ci się to o czym tu czytałeś, jeszcze dziś załóż tu konto i zacznij zarabiać DARMOWE TOKENY BLURT!",
-            "free_blurt": "DARMOWE TOKENY BLURT",
+            "if_you_enjoyed_what_you_read_earn_amount": "Jeśli podobało Ci się to o czym tu czytałeś, jeszcze dziś załóż tu konto i zacznij zarabiać DARMOWE TOKENY MELEK!",
+            "free_blurt": "DARMOWE TOKENY MELEK",
             "sign_up_earn_blurt": "Zarejestruj się by zarabiać"
         },
         "next_3_strings_together": {
@@ -227,14 +227,14 @@
             "other": "%(count)sodpowiedzi"
         },
         "post_key_warning": {
-            "confirm": "You are about to publish a BLURT private key or master password. You will probably lose control of the associated account and all its funds.",
-            "warning": "Legitimate users, including employees of Blurt, will never ask you for a private key or master password.",
+            "confirm": "You are about to publish a MELEK private key or master password. You will probably lose control of the associated account and all its funds.",
+            "warning": "Legitimate users, including employees of MELEK, will never ask you for a private key or master password.",
             "checkbox": "I understand"
         },
         "post_as": "Napisz jako"
     },
     "navigation": {
-        "about": "O Blurt",
+        "about": "O MELEK",
         "explore": "Przeglądaj",
         "APP_NAME_whitepaper": "%(APP_NAME)s Whitepaper",
         "third_party_exchanges": "Third-party exchanges:",
@@ -253,15 +253,15 @@
         "learn_more": "Dowiedz się więcej",
         "welcome": "Witaj",
         "faq": "FAQ",
-        "chat": "Blurt Chat",
-        "app_center": "Blurt App Center",
-        "business_center": "Businesses Accepting Blurt",
-        "api_docs": "Dokumentacja Blurt API",
-        "bluepaper": "Blurt Bluepaper",
+        "chat": "MELEK Chat",
+        "app_center": "MELEK App Center",
+        "business_center": "Businesses Accepting MELEK",
+        "api_docs": "Dokumentacja MELEK API",
+        "bluepaper": "MELEK Bluepaper",
         "smt_whitepaper": "SMT Whitepaper",
-        "whitepaper": "Blurt Whitepaper",
-        "jobs": "Jobs at Blurt",
-        "blurt_proposals": "Blurt Proposals"
+        "whitepaper": "MELEK Whitepaper",
+        "jobs": "Jobs at MELEK",
+        "blurt_proposals": "MELEK Proposals"
     },
     "reply_editor": {
         "shorten_title": "Tytuł skrócony",
@@ -484,8 +484,8 @@
         "estimated_value": "Szacowana wartość bazuje na średniej cenie tokenu %(LIQUID_TOKEN)s w dolarach amerykańskich.",
         "non_transferable": "Jednostki %(VESTING_TOKEN)s są niezbywalne i wymagają 1 miesiąca (w 4 ratach) do konwersji z powrotem na tokeny %(LIQUID_TOKEN)s.",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Przekonwertowane jednostki %(VESTING_TOKEN)s możesz wysłać sobie lub komuś innemu ale nie możesz ich wysłać ponownie bez konwersji z powrotem do tokenów %(LIQUID_TOKEN)s.",
-        "part_of_your_blurt_power_is_currently_delegated": "Część z Twoich jednostek wpływu BLURT POWER jest Ci oddelegowana. Delegowane jednostek to czasowe użyczenie dla zwiększenia wpływu lub by pomóc nowym użytkownikom platformy w korzystaniu ze Blurt. Kwota oddelegowanych jednostek może się zmieniać w czasie.",
-        "blurt_power_apr": "BLURT POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."
+        "part_of_your_blurt_power_is_currently_delegated": "Część z Twoich jednostek wpływu MELEK POWER jest Ci oddelegowana. Delegowane jednostek to czasowe użyczenie dla zwiększenia wpływu lub by pomóc nowym użytkownikom platformy w korzystaniu ze MELEK. Kwota oddelegowanych jednostek może się zmieniać w czasie.",
+        "blurt_power_apr": "MELEK POWER increases at an APR of approximately %(value)s&#37;, subject to blockchain variance. <a href=\"/faq.html#How_many_new_tokens_are_generated_by_the_blockchain\">See FAQ for details</a>."
     },
     "promote_post_jsx": {
         "promote_post": "Promuj wpis",
@@ -495,7 +495,7 @@
     },
     "about_jsx": {
         "about_app": "O %(APP_NAME)s",
-        "about_app_details": "%(APP_NAME)s jest platformą mediów społecznościowych gdzie wszyscy są opłacani za tworzenie i głosowanie na treści. Bazuje na solidnym systemie cyfrowych tokenów o nazwie Blurt, który reprezentuje realną wartość żetonów cyfrowych, opierając się na płynności i wolnorynkowej wycenie.",
+        "about_app_details": "%(APP_NAME)s jest platformą mediów społecznościowych gdzie wszyscy są opłacani za tworzenie i głosowanie na treści. Bazuje na solidnym systemie cyfrowych tokenów o nazwie MELEK, który reprezentuje realną wartość żetonów cyfrowych, opierając się na płynności i wolnorynkowej wycenie.",
         "learn_more_at_app_url": "Dowiedz się więcej %(APP_URL)s",
         "resources": "Zasoby"
     },
@@ -517,13 +517,13 @@
         },
         "delegate_vesting_shares": {
             "revoke": "Revoke delegation to ",
-            "from_self": "Delegate %(amount)s BLURT POWER to ",
-            "to_self": "Receive delegation of %(amount)s BLURT POWER from ",
-            "from_user_to_user": "Delegate %(amount)s BLURT POWER from %(from)s to "
+            "from_self": "Delegate %(amount)s MELEK POWER to ",
+            "to_self": "Receive delegation of %(amount)s MELEK POWER from ",
+            "from_user_to_user": "Delegate %(amount)s MELEK POWER from %(from)s to "
         },
-        "return_vesting_delegation": "Receive returned delegation of %(amount)s BLURT POWER",
+        "return_vesting_delegation": "Receive returned delegation of %(amount)s MELEK POWER",
         "stop_power_down": "Zatrzymaj zmniejszanie mocy",
-        "withdraw_vesting": "Start power down of %(powerdown_vests)s BLURT",
+        "withdraw_vesting": "Start power down of %(powerdown_vests)s MELEK",
         "start_power_down_of": "Zacznij zmniejszanie mocy",
         "receive_interest_of": "Odbierz odsetki od",
         "bad_actor_caution": "Caution",
@@ -532,8 +532,8 @@
         "from_negative_rep_user_caution": "Caution",
         "from_negative_rep_user_explained": "This is from an account with a bad reputation. If you wish, you may temporarily reveal this memo which may contain dangerous links.",
         "from_negative_rep_user_reveal_memo": "I understand the risk; show anyway.",
-        "curation_reward": "%(curation_reward)s BLURT POWER for ",
-        "author_reward": "%(author_reward)s BLURT POWER for ",
+        "curation_reward": "%(curation_reward)s MELEK POWER for ",
+        "author_reward": "%(author_reward)s MELEK POWER for ",
         "claim_reward_balance": {
             "three_rewards": "Claim rewards: %(first_reward)s, %(second_reward)s and %(third_reward)s",
             "two_rewards": "Claim rewards: %(first_reward)s and %(second_reward)s",
@@ -545,14 +545,14 @@
             "filled_by_current_owner": "Paid %(open_pays)s for %(current_pays)s",
             "open_owner_filled_my_order": "Paid %(current_pays)s for %(open_pays)s"
         },
-        "comment_benefactor_reward": "%(benefactor_reward)s BLURT POWER for %(author)s/%(permlink)s",
+        "comment_benefactor_reward": "%(benefactor_reward)s MELEK POWER for %(author)s/%(permlink)s",
         "transfer_to_vesting": {
             "from_self": {
-                "no_to": "Transfer %(amount)s to BLURT POWER",
-                "to_someone": "Transfer %(amount)s BLURT POWER to "
+                "no_to": "Transfer %(amount)s to MELEK POWER",
+                "to_someone": "Transfer %(amount)s MELEK POWER to "
             },
-            "to_self": "Receive %(amount)s BLURT POWER from ",
-            "from_user_to_user": " Transfer %(amount)s BLURT POWER from %(from) to "
+            "to_self": "Receive %(amount)s MELEK POWER from ",
+            "from_user_to_user": " Transfer %(amount)s MELEK POWER from %(from) to "
         },
         "transfer": {
             "from_self": {
@@ -597,7 +597,7 @@
         "witness_rewards_by": "Nagrody świadka %(username)s",
         "replies_to": "Odpowiedzi do",
         "comments_by": "Komentarze",
-        "blurt_proposals": "Blurt Proposals"
+        "blurt_proposals": "MELEK Proposals"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key": "Potrzebujesz prywatnego hasła lub klucza (nie klucz publiczny)",
@@ -620,22 +620,22 @@
         "you_account_has_been_successfully_created": "Twoje konto zostało utworzone!",
         "you_account_has_been_successfully_recovered": "Twoje konto zostało odzyskane!",
         "password_update_success": "Hasło %(accountName)s zostało zaktualizowane",
-        "password_info": "To hasło lub klucz prywatny zostało wprowadzone błędnie. Sprawdź poprawność zapisu. Wskazówka: Hasło lub klucz prywatny wygenerowany przez Blurt, nigdy nie będzie zawierał znaków: 0 (zero), O (duża litera o), I (duża litera i) i l (mała litera L).",
+        "password_info": "To hasło lub klucz prywatny zostało wprowadzone błędnie. Sprawdź poprawność zapisu. Wskazówka: Hasło lub klucz prywatny wygenerowany przez MELEK, nigdy nie będzie zawierał znaków: 0 (zero), O (duża litera o), I (duża litera i) i l (mała litera L).",
         "enter_your_username": "Podaj nazwę użytkownika",
-        "enter_blurt_key": "Enter a Blurt key (ideally your Posting Key)",
+        "enter_blurt_key": "Enter a MELEK key (ideally your Posting Key)",
         "password_or_wif": "Hasło lub WIF",
         "this_operation_requires_your_key_or_master_password": "Ta operacja wymaga twojego klucza %(authType)s klub hasła głównego.",
         "keep_me_logged_in": "Nie wylogowuj mnie",
         "signup_button": "Sign up now to earn ",
-        "signup_button_emphasis": "FREE BLURT!",
+        "signup_button_emphasis": "FREE MELEK!",
         "sign_up_get_blurt": "Sign up",
         "returning_users": "Powracający użytkownicy: ",
         "login_to_wallet": "Login to Wallet",
         "sign_transfer": "Sign to complete transfer",
         "use_keychain": "Use WhaleVault extension",
-        "dont_have_an_account": "Don't have a Blurt account?",
+        "dont_have_an_account": "Don't have a MELEK account?",
         "sign_up_now_to_earn": "Zarejestruj się aby zarabiać ",
-        "free_money": "DARMOWY BLURT!"
+        "free_money": "DARMOWY MELEK!"
     },
     "chainvalidation_js": {
         "account_name_should_not_be_empty": "Account name should not be empty.",
@@ -696,7 +696,7 @@
     "transfer_jsx": {
         "amount_is_in_form": "Podana kwota musi być w formacie 99999.999",
         "insufficient_funds": "Niewystarczające fundusze",
-        "leave_1_blurt": "Leave at least 1 BLURT for transaction fees.",
+        "leave_1_blurt": "Leave at least 1 MELEK for transaction fees.",
         "use_only_3_digits_of_precison": "Używaj tylko 3 cyfr po przecinku",
         "send_to_account": "Wyślij na konto",
         "asset": "Aktywa",
@@ -704,7 +704,7 @@
         "this_memo_is_public": "To memo jest publiczne",
         "convert_to_VESTING_TOKEN": "Zamień na %(VESTING_TOKEN)s",
         "balance_subject_to_3_day_withdraw_waiting_period": "Saldo zależy od 3-dniowego okresu karencji wymaganego do wycofania środków,",
-        "move_funds_to_another_account": "Przenieś fundusze na inne konto Blurt.",
+        "move_funds_to_another_account": "Przenieś fundusze na inne konto MELEK.",
         "protect_funds_by_requiring_a_3_day_withdraw_waiting_period": "Chroni fundusze poprzez 3-dniowy okres karencji.",
         "withdraw_funds_after_the_required_3_day_waiting_period": "Wypłata funduszy po 3-dniowym okresie karencji.",
         "from": "Od",
@@ -735,7 +735,7 @@
         "transfers_are_temporary_disabled": "Transfery tymczasowo wyłączone.",
         "history": "HISTORIA",
         "redeem_rewards": "Odbierz nagrody (transfer do salda)",
-        "buy_blurt_or_blurt_power": "Kup BLURT lub BLURT POWER"
+        "buy_blurt_or_blurt_power": "Kup MELEK lub MELEK POWER"
     },
     "powerdown_jsx": {
         "power_down": "Zmniejsz moc",
@@ -756,8 +756,8 @@
     "termsagree_jsx": {
         "please_review": "Please review our terms to continue",
         "hi_user": "Hi %(username)s,",
-        "blurb": "Our Terms of Service set the rules and guidelines that you must accept and follow in order to use Blurt and our Privacy Policy explains the type of information we collect and what we do with it. Don't worry, we don't sell your data to anyone. We do use it to meet legal requirements and to learn how to make Blurt better.",
-        "i_agree_to_blurtblogs": "I agree to Blurt.blog's",
+        "blurb": "Our Terms of Service set the rules and guidelines that you must accept and follow in order to use MELEK and our Privacy Policy explains the type of information we collect and what we do with it. Don't worry, we don't sell your data to anyone. We do use it to meet legal requirements and to learn how to make MELEK better.",
+        "i_agree_to_blurtblogs": "I agree to MELEK's",
         "terms_of_service": "Terms of Service",
         "privacy_policy": "Privacy Policy",
         "continue": "Continue",
@@ -769,10 +769,10 @@
     "modals_jsx": {
         "your_transaction_failed": "Your transaction failed to process",
         "out_of_bandwidth_title": "Why? You've run out of Resource Credits",
-        "out_of_bandwidth_reason": "Actions such as posting and voting use computing resources, placing a real cost on the community members who run the Blurt blockchain for everyone.",
-        "out_of_bandwidth_reason_2": "To keep things free, Blurt intelligently allocates Resource Credits to each user based on their Blurt Power holdings, which can be used to submit a limited number of feeless transactions. When a user runs low on Resource Credits, they will either need to wait for them to recharge, or purchase additional Blurt Power. This system prioritizes actions by good community members while limiting spam.",
-        "out_of_bandwidth_option_title": "To keep interacting on Blurt:",
-        "out_of_bandwidth_option_1": "Buy and hold more Blurt Power",
+        "out_of_bandwidth_reason": "Actions such as posting and voting use computing resources, placing a real cost on the community members who run the MELEK blockchain for everyone.",
+        "out_of_bandwidth_reason_2": "To keep things free, MELEK intelligently allocates Resource Credits to each user based on their MELEK Power holdings, which can be used to submit a limited number of feeless transactions. When a user runs low on Resource Credits, they will either need to wait for them to recharge, or purchase additional MELEK Power. This system prioritizes actions by good community members while limiting spam.",
+        "out_of_bandwidth_option_title": "To keep interacting on MELEK:",
+        "out_of_bandwidth_option_1": "Buy and hold more MELEK Power",
         "out_of_bandwidth_option_2": "Wait until your Resource Credits recharge",
         "out_of_bandwidth_option_3": "Wait until the network usage decreases"
     },
@@ -781,19 +781,19 @@
         "phishylink_reveal": "show link"
     },
     "wallet_index": {
-        "title": "Blurt wallet login",
-        "description": "Welcome to Blurt's official Blurt blockchain wallet. Use it to transfer BLURT tokens, Power up, vote for Blurt Witnesses and change your Blurt profile details.",
+        "title": "MELEK wallet login",
+        "description": "Welcome to MELEK's official MELEK blockchain wallet. Use it to transfer MELEK tokens, Power up, vote for MELEK Witnesses and change your MELEK profile details.",
         "login": "Login",
-        "blurt_tokens": "Blurt tokens",
-        "blurt_symbol": "BLURT",
+        "blurt_tokens": "MELEK tokens",
+        "blurt_symbol": "MELEK",
         "blurt_description": "Liquid platform token",
-        "blurt_power_symbol": "BLURT Power",
+        "blurt_power_symbol": "MELEK Power",
         "blurt_power_description": "Vesting influence token",
         "hbd_symbol": "HBD",
         "hbd_description": "Seeks price stability with USD"
     },
     "blurt_proposals": {
-        "top_sps": "Blurt Proposals",
+        "top_sps": "MELEK Proposals",
         "votes_update_info": "* Only updated once per hour",
         "table": {
             "id": "Id",

@@ -27,7 +27,7 @@ const ConfirmTransfer = ({ operation, fee }) => {
     return (
         <div className="info">
             {info}
-            <span>Transaction Fee: {fee} BLURT</span>
+            <span>Transaction Fee: {fee} MELEK</span>
         </div>
     );
 };

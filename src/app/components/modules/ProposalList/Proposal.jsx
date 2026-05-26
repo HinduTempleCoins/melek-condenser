@@ -158,11 +158,11 @@ export default class Proposal extends React.Component {
                 </div>
                 <div className="proposals__amount">
                     <span title={formatCurrency(totalPayout)}>
-                        <em>{abbreviateNumber(totalPayout)} BLURT</em>
+                        <em>{abbreviateNumber(totalPayout)} MELEK</em>
                     </span>
                     <small>
                         {tt('proposals.daily')}:{' '}
-                        {abbreviateNumber(daily_pay.split(' BLURT')[0])} BLURT
+                        {abbreviateNumber(daily_pay.split(' BLURT')[0])} MELEK
                         <br />
                         {tt('proposals.duration')}: {durationInDays} days
                     </small>

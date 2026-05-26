@@ -86,7 +86,7 @@ export default function reducer(state = defaultState, action) {
                             )
                         ) {
                             errorKey =
-                                'Account requires 10x the account creation fee in Blurt Power (approximately 30 BP) before it can power down.';
+                                'Account requires 10x the account creation fee in MELEK Power (approximately 30 BP) before it can power down.';
                         }
                         break;
                     default:
@@ -123,9 +123,9 @@ export default function reducer(state = defaultState, action) {
                     }
                     // Catch for unknown key better error handling
                     if (/unknown key: /.test(errorKey)) {
-                        errorKey = "Blurt account doesn't exist.";
+                        errorKey = "MELEK account doesn't exist.";
                         errorStr =
-                            "Transaction failed: Blurt account doesn't exist.";
+                            "Transaction failed: MELEK account doesn't exist.";
                     }
                     // Catch for invalid active authority
                     if (/Missing Active Authority /.test(errorKey)) {

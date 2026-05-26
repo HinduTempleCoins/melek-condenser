@@ -5,20 +5,20 @@ class Privacy extends React.Component {
         return (
             <div className="Privacy row">
                 <div className="column large-12">
-                    <h1>Blurt.blog Privacy Policy</h1>
+                    <h1>MELEK Privacy Policy</h1>
                     <h2>Effective: May 25, 2018</h2>
                     <p className="c0">
                         <span className="c1" />
                     </p>
                     <p className="c2">
                         <span>
-                            This Privacy Policy describes how Blurt.blog
+                            This Privacy Policy describes how MELEK
                             collects, uses and discloses information, and what
                             choices you have with respect to the information.
                             This Policy applies to the
                         </span>
                         <span>
-                            &nbsp;Blurt.blog, Blurt.blog subdomains and services
+                            &nbsp;MELEK, MELEK subdomains and services
                         </span>
                         <span className="c1">
                             &nbsp;(collectively, &ldquo;Services&rdquo;).
@@ -32,8 +32,8 @@ class Privacy extends React.Component {
                     </p>
                     <p className="c2">
                         <span className="c1">
-                            When we refer to &ldquo;Blurt.blog&rdquo;, we mean
-                            the Blurt.blog entity that acts as the controller of
+                            When we refer to &ldquo;MELEK&rdquo;, we mean
+                            the MELEK entity that acts as the controller of
                             your information.
                         </span>
                     </p>

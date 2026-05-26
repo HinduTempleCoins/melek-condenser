@@ -256,7 +256,7 @@ export function * createCommunityAccount (createCommunityAction) {
     yield put(
       transactionActions.broadcastOperation({
         type: 'account_create',
-        confirm: `This operation will cost ${parseFloat(accountCreationFee.split(' ')[0]) + 10} BLURT. Would you like to proceed?`,
+        confirm: `This operation will cost ${parseFloat(accountCreationFee.split(' ')[0]) + 10} MELEK. Would you like to proceed?`,
         operation: op,
         successCallback: (res) => {
           createAccountSuccessCB()

@@ -17,8 +17,8 @@ Insert the following code in the `head` section of your pages:
     <link rel="manifest" href="/images/favicons/site.webmanifest?v=4">
     <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg?v=4" color="#da532c">
     <link rel="shortcut icon" href="/images/favicons/favicon.ico?v=4">
-    <meta name="apple-mobile-web-app-title" content="Blurt Blog">
-    <meta name="application-name" content="Blurt Blog">
+    <meta name="apple-mobile-web-app-title" content="MELEK">
+    <meta name="application-name" content="MELEK">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png?v=4">
     <meta name="msapplication-config" content="/images/favicons/browserconfig.xml?v=4">

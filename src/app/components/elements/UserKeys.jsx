@@ -109,7 +109,7 @@ class UserKeys extends Component {
                         <h1>Keys & Permissions </h1>
                         <p className="UserKeys__p">
                             Any password or key is more likely to get
-                            compromised the more it is used. That's why Blurt
+                            compromised the more it is used. That's why MELEK
                             uses a hierarchical key system to keep you safe. You
                             are issued with four keys which have different
                             permissions. For example, the Posting Key (which is
@@ -121,7 +121,7 @@ class UserKeys extends Component {
                             <br />
                         </p>
                         <p className="UserKeys__p">
-                            Please take note of your Blurt Keys listed below.
+                            Please take note of your MELEK Keys listed below.
                             Ideally, use a Password Manager (like 1Password or
                             LastPass) or store an offline copy safely (on a
                             piece of paper or on a file on a USB drive).
@@ -149,7 +149,7 @@ class UserKeys extends Component {
                                 to this key.
                             </p>
                             <p className="key__description">
-                                Use this key to log in to other Blurt-powered
+                                Use this key to log in to other MELEK-powered
                                 social networks such as blurt.blog. Please Store
                                 this key safely.
                             </p>
@@ -228,10 +228,10 @@ class UserKeys extends Component {
                                     Transfer tokens
                                 </li>
                                 <li className="permissions__li">
-                                    Power BLURT up or down
+                                    Power MELEK up or down
                                 </li>
                                 <li className="permissions__li">
-                                    Vote for Blurt Producers
+                                    Vote for MELEK Producers
                                 </li>
                                 <li className="permissions__li">
                                     Place an order on an exchange
@@ -339,7 +339,7 @@ class UserKeys extends Component {
                         <div className="public-keys__intro">
                             <h3 className="public-keys__h3">Public Keys</h3>
                             <p className="public-keys__description">
-                                Each Blurt Key has a public and private key to
+                                Each MELEK Key has a public and private key to
                                 encrypt and decrypt data. Public keys are
                                 associated with usernames and can be used to
                                 look up associated transactions on the
@@ -349,7 +349,7 @@ class UserKeys extends Component {
                             </p>
                             <p className="public-keys__description">
                                 View public key information for this account in
-                                the 'Authorities' module of any Blurt block
+                                the 'Authorities' module of any MELEK block
                                 explorer:{' '}
                                 <a
                                     className="public-keys__link"

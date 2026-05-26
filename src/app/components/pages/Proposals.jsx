@@ -203,7 +203,7 @@ class Proposals extends React.Component {
                 proposal.receiver,
                 proposal.startDate,
                 proposal.endDate,
-                `${parseFloat(proposal.dailyAmount).toFixed(3)} BLURT`,
+                `${parseFloat(proposal.dailyAmount).toFixed(3)} MELEK`,
                 proposal.title,
                 proposal.permlink,
                 async () => {
@@ -330,7 +330,7 @@ class Proposals extends React.Component {
         const selected_proposal_voters = mergeVoters.filter(
             (v) => v.proposal.proposal_id === new_id
         );
-        const accounts_map = voters_accounts.map((acc) => acc.vesting_shares); // Blurt power
+        const accounts_map = voters_accounts.map((acc) => acc.vesting_shares); // MELEK power
         const voters_map = selected_proposal_voters.map((name) => name.voter); // voter name
 
         const acc_proxied_vests = voters_accounts.map(
@@ -341,7 +341,7 @@ class Proposals extends React.Component {
         );
 
         const blurt_power = [];
-        const calculateBlurtPower = () => {
+        const calculateMELEKPower = () => {
             // loop through each account vesting shares to calculate blurt power
             for (let i = 0; i < accounts_map.length; i++) {
                 const vests = parseFloat(accounts_map[i].split(' ')[0]);
@@ -355,7 +355,7 @@ class Proposals extends React.Component {
                 blurt_power.push(vesting_blurtf);
             }
         };
-        calculateBlurtPower();
+        calculateMELEKPower();
 
         const proxy_bp = [];
         const calculateProxyBp = () => {

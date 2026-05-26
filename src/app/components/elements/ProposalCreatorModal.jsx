@@ -147,7 +147,7 @@ class ProposalCreatorModal extends React.Component {
                                 />
                                 <br />
 
-                                <label>Daily requested amount in BLURT</label>
+                                <label>Daily requested amount in MELEK</label>
                                 <input
                                     onChange={this.handleDailyAmountChange}
                                     placeholder="100.000"
@@ -188,7 +188,7 @@ class ProposalCreatorModal extends React.Component {
                                 />
                                 <small style={{ color: 'red' }}>
                                     * Permlink is a URL from proposal
-                                    description (Blurt post), i.e
+                                    description (MELEK post), i.e
                                     create-cool-app
                                 </small>
                                 <br />
@@ -202,7 +202,7 @@ class ProposalCreatorModal extends React.Component {
                                     placeholder="Creator username"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Creator is the Blurt account that is
+                                    * Creator is the MELEK account that is
                                     creating and publishing the proposal
                                 </small>
                                 <br />
@@ -214,7 +214,7 @@ class ProposalCreatorModal extends React.Component {
                                     type="text"
                                 />
                                 <small style={{ color: 'red' }}>
-                                    * Receiver is the Blurt account that will
+                                    * Receiver is the MELEK account that will
                                     receive funding from the proposal
                                 </small>
                                 <br />

@@ -1,6 +1,6 @@
 <span id="disable_router_nav_history_direction_check"></span>
 
-## Welcome to Blurt!
+## Welcome to MELEK!
 
 ---
 
@@ -10,7 +10,7 @@ Now that you have an account, here's how to get started.
 
 ### 1. Backup your password
 
-Unlike centralized web services, **it is not possible to recover lost passwords on the Blurt blockchain**.
+Unlike centralized web services, **it is not possible to recover lost passwords on the MELEK blockchain**.
 
 You are entirely responsible for saving your password, backing it up, and keeping it secure.
 Never put your password into unverified third party websites as they may steal your account.
@@ -34,12 +34,12 @@ This includes your display name, location, about information, and website.
 
 The tradition for new users is to create an "introduceyourself" post in order
 to let the community get to know you. You can verify other social media
-accounts (Twitter, Facebook, etc.) by sharing the link to your Blurt account
+accounts (Twitter, Facebook, etc.) by sharing the link to your MELEK account
 from those profiles.
 
-### 5. Sign up for Blurt Chat
+### 5. Sign up for MELEK Chat
 
-A lot of users mingle and chat in [Blurt Discord](https://discord.blurt.blog). It is a
+A lot of users mingle and chat in [MELEK Discord](https://discord.blurt.blog). It is a
 great place to meet people!
 
 Ask questions in the [\#helpdesk](https://discord.blurt.blog) channel.
@@ -51,12 +51,12 @@ will fluctuate (up and down) and no payout is guaranteed. If a post receives
 enough votes for a payout, it will be split between the author (at least 50%)
 and voters ("curators").
 
-BLURT, and Blurt Power (BP) are the two forms of digital
-currency used by the Blurt Blockchain. More information
-[here](https://blurtwallet.com/faq.html#What_is_the_difference_between_BLURT__BLURT_Power__and_Blurt_Dollars).
+MELEK, and MELEK Power (BP) are the two forms of digital
+currency used by the MELEK Blockchain. More information
+[here](/faq.html#What_is_the_difference_between_MELEK__MELEK_Power__and_MELEK_Dollars).
 
 ##### Additional resources
 
 -   [FAQ](https://blurtwallet.com/faq.html) - Answers to commonly asked questions
--   [Apps Built on Blurt](https://blurt.blog/dapps) - Directory of apps, sites and tools built by Blurt community
--   [Blurt Block Explorer](https://blocks.blurtwallet.com/) - Shows the raw Blurt blockchain data
+-   [Apps Built on MELEK](https://blurt.blog/dapps) - Directory of apps, sites and tools built by MELEK community
+-   [MELEK Block Explorer](https://blocks.blurtwallet.com/) - Shows the raw MELEK blockchain data

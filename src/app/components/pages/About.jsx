@@ -9,7 +9,7 @@ class About extends React.Component {
                 <section className="AboutMission">
                     <div className="AboutMission__heading-container">
                         <h1 className="AboutMission__heading">
-                            Blurt.blog Mission, Vision and Values
+                            MELEK Mission, Vision and Values
                         </h1>
                     </div>
                 </section>

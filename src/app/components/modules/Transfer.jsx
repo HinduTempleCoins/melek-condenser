@@ -272,7 +272,7 @@ class TransferForm extends Component {
                 delegatedVestingShares;
 
             const vestBlurt = totalVestingFund * (avail / totalVestingShares);
-            balanceValue = `${vestBlurt.toFixed(3)} BLURT`;
+            balanceValue = `${vestBlurt.toFixed(3)} MELEK`;
         }
         return balanceValue;
     }
@@ -505,7 +505,7 @@ class TransferForm extends Component {
                                             border: 'none',
                                         }}
                                     >
-                                        <option value="BLURT">BLURT</option>
+                                        <option value="BLURT">MELEK</option>
                                     </select>
                                 </span>
                             )}
@@ -525,7 +525,7 @@ class TransferForm extends Component {
                                             border: 'none',
                                         }}
                                     >
-                                        <option value="BLURT">BLURT</option>
+                                        <option value="BLURT">MELEK</option>
                                     </select>
                                 </span>
                             )}

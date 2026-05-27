@@ -7,7 +7,7 @@ export default class Index extends React.Component {
         return (
             <div className="Index">
                 <div className="text-center">
-                    <SvgImage name="blurt" width="480px" height="240px" />
+                    <SvgImage name="melek" width="480px" height="240px" />
                 </div>
                 <h1 className="center text-center">
                     {translateHtml(

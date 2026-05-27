@@ -15,7 +15,7 @@ class NotFound extends React.Component {
                 </div>
                 <div className="NotFound float-center">
                     <div>
-                        <Icon name="blurt" size="4x" />
+                        <Icon name="melek" size="4x" />
                         <h4 className="NotFound__header">
                             Sorry! This page doesn't exist.
                         </h4>

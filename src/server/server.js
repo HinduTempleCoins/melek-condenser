@@ -211,6 +211,17 @@ app.use(
     )
 );
 
+// MELEK signup port (rebranded BLURT Plugin). Serves third_party/ as
+// static at /account/* so the form lives at the same URL path the
+// upstream BLURT Plugin uses. See third_party/README.md for the port
+// roadmap and CLAUDE.md "Signup architecture" for the design model.
+app.use(
+    mount(
+        '/account',
+        staticCache(path.join(__dirname, '../../third_party'), cacheOpts)
+    )
+);
+
 app.use(
     mount('/robots.txt', function* () {
         this.set('Cache-Control', 'public, max-age=86400000');

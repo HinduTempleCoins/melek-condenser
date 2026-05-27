@@ -107,7 +107,7 @@ A lot of users mingle and chat when they are not posting or browsing MELEK. It i
 
 There is a link to sign up in the main menu in the upper right corner.
 
-Your [https://discord.blurt.world/](https://discord.blurt.world/) account is a separate account from your MELEK account.
+Your Discord account is a separate account from your MELEK account.
 
 Each channel will have its rules posted in the "Room Info" section.
 

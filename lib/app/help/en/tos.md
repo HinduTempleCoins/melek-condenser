@@ -1,8 +1,8 @@
 Last Updated July 4, 2020
 
-Welcome to BLurt blog, This agreement (the “Agreement”) between you and
+Welcome to MELEK, This agreement (the “Agreement”) between you and
 MELEK. (“we”, “us”, “our”) sets out your rights to access
-and use of blurt.blog and any other products or services provided by us (the
+and use of melek.salon and any other products or services provided by us (the
 “Service”). If you are accepting this Agreement and using the Services on
 behalf of a company, organization, government, or other legal entity, you
 represent and warrant that you are authorized to do so and have the authority
@@ -11,7 +11,7 @@ that you have read, understood and accepted this Agreement.
 
 If we decide to make changes to this Agreement, we will provide notice of those
 changes by updating the “Last Updated” date above or posting notice on
-blurt.blog. Your continued use of the Service will confirm your acceptance of
+melek.salon. Your continued use of the Service will confirm your acceptance of
 the changes.
 
 ## 1. Privacy Policy
@@ -53,13 +53,13 @@ to Content you post.
 slogans that may appear on the Service are trademarks of MELEK Foundation and,
 may not be copied, imitated, or used, in whole or in part, unless explicitly
 permitted or without first receiving written permission from us to do so. The
-look and feel of blurt.blog and the Service is protected by copyright ©
+look and feel of melek.salon and the Service is protected by copyright ©
 MELEK Foundation. All rights reserved. You may not duplicate, copy, or reuse any
 portion of the HTML/CSS, Javascript, or visual design elements or concepts
 without express written permission.
 
 We encourage third-party dapp developers building on top of the MELEK
-blockchain to reach out to info@blurt.foundation for all branding and licensing
+blockchain to reach out to info@melek.salon for all branding and licensing
 questions.
 
 All other trademarks, registered trademarks, product names and company names or
@@ -331,7 +331,7 @@ MELEK Foundation.
 
 WILMINGTON, DE 19808
 
-info@blurt.foundation
+info@melek.salon
 
 Please send our Copyright Agent the following information:
 
@@ -491,7 +491,7 @@ permitted by applicable law.
 20.4. Process. You agree that you will notify us in writing of any Dispute
 within thirty (30) days of when it arises so that the parties can attempt, in
 good faith, to resolve the Dispute informally. Notice to the us shall be
-provided by sending an email to info@blurt.foundation. Your notice must include:
+provided by sending an email to info@melek.salon. Your notice must include:
 (1) your name, postal address, and email address; (2) a description of the
 nature or basis of the Dispute; and (3) the specific relief that you are
 seeking. If we cannot agree how to resolve the Dispute within thirty (30) days
@@ -549,7 +549,7 @@ this Agreement.
 ## 22. Termination
 
 We reserve the right, without notice and in our sole discretion, to terminate
-your license to access and use of the Service, which includes, blurt.blog, and
+your license to access and use of the Service, which includes, melek.salon, and
 to block or prevent your future access to, and use of, the Service that we
 provide.
 
@@ -566,9 +566,9 @@ This Agreement is the entire agreement between you and us concerning the
 Service. It supersedes all prior or contemporaneous agreements between you and
 us. We may modify this user agreement at any time. If we make changes to this
 agreement that materially affect your rights, we will provide notice and keep
-this edition available as an archive on blurt.blog. By continuing to use the
+this edition available as an archive on melek.salon. By continuing to use the
 Services after a change to this agreement, you agree to those changes.
 
 ## 25. Contact Information
 
-Notices to MELEK Foundation should be directed to info@blurt.foundation.
+Notices to MELEK Foundation should be directed to info@melek.salon.

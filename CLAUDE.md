@@ -83,6 +83,38 @@ src/app/redux/                    # Sagas including signup, account recovery
 src/app/components/pages/         # Signup, Wallet, Witnesses, Settings pages
 ```
 
+## Signup architecture
+
+The wallet has **no signup backend of its own** and will never have one. Clicking "Sign up" opens a **vendor-picker page** (the Ecency/LEO-on-Hive pattern): a list of providers that offer account creation, the user picks one, and that vendor's flow takes over.
+
+Security comes from inheriting audited third-party flows, not from rolling our own. **Do not build a signup backend from scratch.**
+
+### Active vendor — MELEK email signup (rebranded BLURT Plugin)
+
+The first listed vendor is a port of the upstream **BLURT Plugin** source code into this repo, served from the BLURT Plugin's own URL paths (transparent rehost). All visible strings/visuals get rebranded to MELEK.
+
+Hard requirement: **the ported plugin creates accounts on the MELEK chain, not BLURT.** Chain endpoints, `chain_id`, `address_prefix`, and the funded creator account configured in the port must point at MELEK. It must never broadcast `account_create_with_delegation` against the BLURT chain.
+
+### Future vendors (not yet built — track here so we don't forget)
+
+When MELEK is established enough to serve as a bridge platform, the vendor picker should grow to offer:
+
+- **BLURT account creation** — for users who want to participate on the original BLURT chain; would re-use the BLURT Plugin port targeting BLURT instead of MELEK (same code, different chain config)
+- **STEEM account creation** — same pattern, third instance of the BLURT Plugin port targeting the STEEM chain (or a STEEM-specific provider if one is more appropriate)
+
+These are not on the immediate roadmap but are part of the long-term design: MELEK as a multi-chain wallet that can onboard users to whichever Graphene-family chain they want, without us running any signup infrastructure ourselves.
+
+When adding a future vendor, the pattern is:
+1. Copy the existing BLURT Plugin port directory
+2. Swap chain config (RPC, chain_id, address_prefix, creator account, JS library if needed)
+3. Rebrand visible strings to the target chain (BLURT, STEEM)
+4. Register it as a new entry in the vendor-picker list
+
+### What lives where
+
+- Vendor-picker page → `src/app/components/pages/` (TODO — page does not exist yet)
+- Ported BLURT Plugin code → location TBD, will be added when source is identified
+
 ## Cross-repo: condenser handoff
 
 When a user signs up here, they should be redirected back to the condenser landing on the canonical Welcome / Tutorial Program post (so the AI welcome bot's tagged comment generates their first notification). The condenser exposes `welcome_post_url` via `$STM_Config` (added 2026-05-25 in `melek-condenser`). The wallet should redirect to that URL after successful signup.

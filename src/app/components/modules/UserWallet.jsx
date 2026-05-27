@@ -360,7 +360,7 @@ class UserWallet extends React.Component {
     }
     let conversion = <p />
     if (price_per_blurt) {
-      conversion = <p>(1 BLURT = ${price_per_blurt})</p>
+      conversion = <p>(1 MELEK = ${price_per_blurt})</p>
     }
 
     /// transfer log
@@ -531,7 +531,7 @@ class UserWallet extends React.Component {
             'userwallet_jsx.powerdowns_remaining'
         )}`
     const savings_balance_str = numberWithCommas(
-      saving_balance_blurt.toFixed(3) + ' BLURT'
+      saving_balance_blurt.toFixed(3) + ' MELEK'
     )
 
     const savings_menu = [
@@ -625,7 +625,7 @@ class UserWallet extends React.Component {
         </div>
         <div className='UserWallet__balance row'>
           <div className='column small-12 medium-8'>
-            BLURT
+            MELEK
             <FormattedHTMLMessage
               className='secondary'
               id='tips_js.liquid_token'
@@ -639,17 +639,17 @@ class UserWallet extends React.Component {
                   className='Wallet_dropdown'
                   items={blurt_menu}
                   el='li'
-                  selected={blurt_balance_str + ' BLURT'}
+                  selected={blurt_balance_str + ' MELEK'}
                 />
                 )
               : (
-                  blurt_balance_str + ' BLURT'
+                  blurt_balance_str + ' MELEK'
                 )}
           </div>
         </div>
         <div className='UserWallet__balance row zebra'>
           <div className='column small-12 medium-8'>
-            BLURT POWER
+            MELEK POWER
             <FormattedHTMLMessage
               className='secondary'
               id='tips_js.influence_token'
@@ -679,11 +679,11 @@ class UserWallet extends React.Component {
                   className='Wallet_dropdown'
                   items={power_menu}
                   el='li'
-                  selected={power_balance_str + ' BLURT'}
+                  selected={power_balance_str + ' MELEK'}
                 />
                 )
               : (
-                  power_balance_str + ' BLURT'
+                  power_balance_str + ' MELEK'
                 )}
             {delegated_blurt != 0
               ? (
@@ -694,8 +694,8 @@ class UserWallet extends React.Component {
                       : null
                   }}
                 >
-                  <Tooltip t='BLURT POWER delegated to/from this account'>
-                    ({received_power_balance_str} BLURT)
+                  <Tooltip t='MELEK POWER delegated to/from this account'>
+                    ({received_power_balance_str} MELEK)
                   </Tooltip>
                 </div>
                 )
@@ -753,7 +753,7 @@ class UserWallet extends React.Component {
                 />{' '}
                 {'(~' +
                                     powerdown_balance_str +
-                                    ' BLURT, ' +
+                                    ' MELEK, ' +
                                     powerdowns_remaining_str +
                                     ')'}
                 .

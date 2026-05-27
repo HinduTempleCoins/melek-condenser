@@ -218,7 +218,7 @@ export default class PdfDownload extends Component {
             ctx,
             'Generated at ' +
                 new Date().toISOString().replace(/\.\d{3}/, '') +
-                ' by blurt.blog',
+                ' by melek.salon',
             {
                 scale,
                 x: margin,
@@ -326,7 +326,7 @@ export default class PdfDownload extends Component {
 
         offset += this.renderText(
             ctx,
-            'Used to log in to apps such as blurt.world and perform social ' +
+            'Used to log in to apps such as melek.salon and perform social ' +
                 'actions such as posting, commenting, and voting.',
             {
                 scale,
@@ -618,7 +618,7 @@ export default class PdfDownload extends Component {
             ctx,
             'Public keys are associated with usernames and are used to ' +
                 'encrypt and verify messages. Your public keys are not required ' +
-                'for login. You can view these anytime at: https://steemd.com/@' +
+                'for login. You can view these anytime at: https://melek.salon/@' +
                 this.props.name,
             {
                 scale,

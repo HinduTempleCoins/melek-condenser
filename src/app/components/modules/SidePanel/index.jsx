@@ -132,23 +132,24 @@ const SidePanel = ({
             {
                 value: 'chat',
                 label: tt('navigation.chat'),
-                link: 'https://discord.blurt.world/',
+                link: '/chat',
+                internal: true,
             },
             {
                 value: 'block_explorer',
                 label: 'Block Explorer',
-                link: 'https://blocks.blurtwallet.com',
+                link: 'https://explorer.melek.salon',
             },
             // {
             //     value: 'jobs',
             //     label: tt('navigation.jobs'),
             //     link: 'https://recruiting.paylocity.com/recruiting/jobs/List/3288/Steemit-Inc',
             // },
-            {
-                value: 'tools',
-                label: 'Tools',
-                link: 'https://blurt.tools/',
-            },
+            // {
+            //     value: 'tools',
+            //     label: 'Tools',
+            //     link: 'https://blurt.tools/',
+            // },
             // {
             //     value: 'business',
             //     label: tt('navigation.business_center'),

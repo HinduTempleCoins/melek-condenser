@@ -1,6 +1,6 @@
 # Condenser
 
-Condenser is the react.js web interface to MELEK. During the bootstrap period it talks to the [Blurt](https://gitlab.com/blurt/blurt) chain — chain symbols on the wire stay BLURT until the MELEK chain launches.
+Condenser is the react.js web interface to the [MELEK blockchain](https://github.com/HinduTempleCoins/MELEK) — a BLURT-fork Graphene chain (same lineage as STEEM/HIVE). It points at the MELEK RPC (`https://rpc.melek.salon`) and uses MELEK chain symbols on the wire.
 
 ### Changelog
 
@@ -33,13 +33,11 @@ docker build -t="myname/condenser:mybranch"
 docker run -it -p 8080:8080 myname/condenser:mybranch
 ```
 
-By default you will be connected to public RPC node. This is actually on the real blockchain and
-you would use your regular account name and credentials to login - there is
-not an official separate testnet at this time. If you intend to run a
-full-fledged site relying on your own, we recommend running a local
-`blurtd` node (during the bootstrap period the condenser talks to the
-BLURT chain — see [https://gitlab.com/blurt/blurt](https://gitlab.com/blurt/blurt)).
-A MELEK-chain node will replace this once the MELEK chain launches.
+By default the container connects to the public MELEK RPC node (`https://rpc.melek.salon`).
+If you intend to run a full-fledged site, we recommend running a local MELEK node
+(forked from [BLURT](https://gitlab.com/blurt/blurt) — see the
+[`HinduTempleCoins/MELEK`](https://github.com/HinduTempleCoins/MELEK) repo for chain
+parameters and the eventual `melek-chain` C++ fork).
 
 ## Geting Set Up
 
@@ -82,7 +80,7 @@ You can use Chromium to connect by finding the remote client at
 The intention is to configure condenser using environment variables. You
 can see the names of all of the available configuration environment
 variables in `config/custom-environment-variables.json`. Default values are
-stored in `config/defaults.json`.
+stored in `config/default.json`.
 
 Keep in mind environment variables only exist in your active session, so if
 you wish to save them for later use you can put them all in a file and

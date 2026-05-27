@@ -1,7 +1,7 @@
 import Apps from 'steemscript/apps.json';
 
 export function makeCanonicalLink(d) {
-    let canonicalUrl = 'https://blurt.blog' + d.link;
+    let canonicalUrl = 'https://melek.salon' + d.link;
 
     if (d.json_metadata) {
         if (

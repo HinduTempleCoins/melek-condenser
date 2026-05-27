@@ -33,12 +33,12 @@ export default function extractMeta(chain_data, rp) {
         if (content && content.id !== '0.0.0') {
             // API currently returns 'false' data with id 0.0.0 for posts that do not exist
             const d = extractContent(objAccessor, content, false);
-            const url = 'https://blurt.world' + d.link;
+            const url = 'https://melek.salon' + d.link;
             const canonicalUrl = makeCanonicalLink(d);
             const title = d.title + ' — MELEK';
             const desc = d.desc + ' by ' + d.author;
             const image =
-                d.image_link || 'https://blurt.world/images/MELEKlogo.png';
+                d.image_link || 'https://melek.salon/images/MELEKlogo.png';
             const { category, created } = d;
 
             // Standard meta
@@ -52,7 +52,7 @@ export default function extractMeta(chain_data, rp) {
             metas.push({ name: 'og:url', content: url });
             metas.push({
                 name: 'og:image',
-                content: image || 'https://blurt.world/images/MELEKlogo.png',
+                content: image || 'https://melek.salon/images/MELEKlogo.png',
             });
             metas.push({ name: 'og:description', content: desc });
             metas.push({ name: 'og:site_name', content: 'MELEK' });
@@ -68,12 +68,12 @@ export default function extractMeta(chain_data, rp) {
                 name: 'twitter:card',
                 content: image ? 'summary_large_image' : 'summary',
             });
-            metas.push({ name: 'twitter:site', content: '@blurt' });
+            metas.push({ name: 'twitter:site', content: '@melek' });
             metas.push({ name: 'twitter:title', content: title });
             metas.push({ name: 'twitter:description', content: desc });
             metas.push({
                 name: 'twitter:image',
-                content: image || 'https://blurt.world/images/MELEKlogo.png',
+                content: image || 'https://melek.salon/images/MELEKlogo.png',
             });
         } else {
             addSiteMeta(metas);
@@ -84,10 +84,10 @@ export default function extractMeta(chain_data, rp) {
         let { name, about, profile_image } = normalizeProfile(account);
         if (name == null) name = account.name;
         if (about == null) {
-            about = 'Join thousands on blurt who share, post and earn rewards.';
+            about = 'Join thousands on MELEK who share, post and earn rewards.';
         }
         if (profile_image == null) {
-            profile_image = 'https://blurt.world/images/MELEKlogo.png';
+            profile_image = 'https://melek.salon/images/MELEKlogo.png';
         }
         // Set profile tags
         const title = `@${account.name}`;
@@ -99,7 +99,7 @@ export default function extractMeta(chain_data, rp) {
 
         // Twitter card data
         metas.push({ name: 'twitter:card', content: 'summary' });
-        metas.push({ name: 'twitter:site', content: '@blurt' });
+        metas.push({ name: 'twitter:site', content: '@melek' });
         metas.push({ name: 'twitter:title', content: title });
         metas.push({ name: 'twitter:description', content: desc });
         metas.push({ name: 'twitter:image', content: image });

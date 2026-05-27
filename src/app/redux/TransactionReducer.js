@@ -62,7 +62,7 @@ export default function reducer(state = defaultState, action) {
                         if (/Voting weight is too small/.test(errorStr)) {
                             errorKey = 'Voting weight is too small';
                             errorStr =
-                                'Voting weight is too small, please accumulate more voting power or blurt power.';
+                                'Voting weight is too small, please accumulate more voting power or MELEK Power.';
                         }
                         break;
                     case 'comment':

@@ -1,20 +1,26 @@
+// MELEK palette — Kurdish flag-inspired (red / green / gold / white).
+// Variable NAMES are inherited from upstream Blurt/Steemit ($color-orange,
+// $color-blue, etc.) and reused throughout the codebase as semantic
+// accent slots; the VALUES below ignore the names' literal colors and
+// supply the MELEK identity. A future cleanup pass can rename the
+// variables to be palette-agnostic ($color-accent, $color-success, etc.).
 $color-white: #fff;
 $color-black: #000;
-$color-red: #ff0264;
-$color-blue: #004eff;
-$color-blue-original-dark: #1a5099;
-$color-blue-original-light: #4ba2f2;
+$color-red: #d81e1e;                   // Kurdish flag red (muted slightly for web contrast)
+$color-blue: #117a37;                  // Kurdish flag green (semantic "accent secondary" / link)
+$color-blue-original-dark: #0d5c2a;    // darker green
+$color-blue-original-light: #1fa64d;   // lighter green
 $color-blue-black: #171f24;
 $color-blue-black-darkest: #11161a;
 $color-blue-dark: #2c3a45;
 $color-teal: #06d6a9;
 $color-teal-light: #00ffc8;
 $color-teal-dark: #049173;
-$color-orange: #f2652e;
-$color-orange-light: #ff7842;
-$color-orange-dark: #fb5b1b;
+$color-orange: #e5a21b;                // Kurdish gold / saffron (semantic "accent primary" / buttons)
+$color-orange-light: #f2b847;
+$color-orange-dark: #b97d0e;
 
-$color-yellow: #fce76c;
+$color-yellow: #fcdc02;                // Kurdish flag sun yellow
 $color-transparent: transparent;
 
 $color-background-almost-white: #fefefe;
@@ -24,11 +30,11 @@ $color-background-super-dark: #10151b;
 
 $color-text-dark: #333;
 $color-text-white: #fafbfc;
-$color-text-blue: #004eff;
+$color-text-blue: #117a37;             // matches $color-blue (Kurdish green)
 $color-text-gray: #788187;
 $color-text-gray-light: #a6b2ba;
 $color-text-teal: #1fbf8f;
-$color-text-orange: #f2652e;
+$color-text-orange: #e5a21b;           // matches $color-orange (Kurdish gold)
 $color-text-red: $color-red;
 
 $color-border-light: #eee;

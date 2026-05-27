@@ -160,9 +160,9 @@
         "account_name_should_be_longer": "El nombre de usuario debería ser más largo.",
         "account_name_should_have_only_letters_digits_or_dashes": "El nombre de usuario debería tener sólo letras, dígitos o guiones.",
         "cannot_increase_reward_of_post_within_the_last_minute_before_payout": "No se puede aumentar la recompensa de la publicación dentro del último minuto antes del pago.",
-        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "Sólo una cuenta Blurt permitida por dirección IP cada 10 minutos",
+        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "Sólo una cuenta MELEK permitida por dirección IP cada 10 minutos",
         "resteem_this_post": "Reesteemea esta Publicación",
-        "reblog": "Reblurtear",
+        "reblog": "Repostear",
         "write_your_story": "Escribe tu historia",
         "remember_voting_and_posting_key": "Recuerda la clave de voto y de publicación",
         "auto_login_question_mark": "¿Acceso automático?",
@@ -181,8 +181,8 @@
         "please_email_questions_to": "Por favor, envía un mail con tus dudas a",
         "next_7_strings_single_block": {
             "authors_get_paid_when_people_like_you_upvote_their_post": "Autores cobran cuando gente como tú vota por sus posts",
-            "if_you_enjoyed_what_you_read_earn_amount": "Si te ha gustado lo que has leído aquí, crea tu cuenta hoy mismo y empieza a ganar BLURT!",
-            "free_steem": "¡BLURT GRATIS!",
+            "if_you_enjoyed_what_you_read_earn_amount": "Si te ha gustado lo que has leído aquí, crea tu cuenta hoy mismo y empieza a ganar MELEK!",
+            "free_steem": "¡MELEK GRATIS!",
             "sign_up_earn_steem": "Regístrate ahora para ganar"
         },
         "next_3_strings_together": {
@@ -206,8 +206,8 @@
             "other": "%(count)s Respuestas"
         },
         "post_key_warning": {
-            "confirm": "Está a punto de publicar una clave privada BLURT o una contraseña maestra. Probablemente perderá el control de la cuenta asociada y todos sus fondos.",
-            "warning": "Los usuarios legítimos, incluidos los empleados de Blurt.blog., nunca le pedirán una clave privada o contraseña maestra.",
+            "confirm": "Está a punto de publicar una clave privada MELEK o una contraseña maestra. Probablemente perderá el control de la cuenta asociada y todos sus fondos.",
+            "warning": "Los usuarios legítimos, incluidos los empleados de MELEK.blog., nunca le pedirán una clave privada o contraseña maestra.",
             "checkbox": "Entiendo"
         }
     },
@@ -227,13 +227,13 @@
         "learn_more": "Para saber más",
         "welcome": "Bienvenido",
         "faq": "Preguntas Frecuentes",
-        "chat": "Chat de Blurt",
-        "app_center": "Centro de Aplicaciones Blurt",
-        "business_center": "Businesses Accepting Blurt",
-        "api_docs": "Documentos API de Blurt",
-        "bluepaper": "Blurt Bluepaper",
+        "chat": "Chat de MELEK",
+        "app_center": "Centro de Aplicaciones MELEK",
+        "business_center": "Businesses Accepting MELEK",
+        "api_docs": "Documentos API de MELEK",
+        "bluepaper": "MELEK Bluepaper",
         "smt_whitepaper": "Libro blanco de SMT",
-        "whitepaper": "Libro blanco de Blurt",
+        "whitepaper": "Libro blanco de MELEK",
         "intro_tagline": "El dinero habla.",
         "intro_paragraph": "Tu voz tiene valor. Únete a la comunidad que te paga por publicar y votar contenido de alta calidad"
     },
@@ -318,7 +318,7 @@
             "one": "1 publicación",
             "other": "%(count)s posts"
         },
-        "hide_resteems": "Hide Reblurts",
+        "hide_resteems": "Hide Reposts",
         "show_all": "Show All"
     },
     "post_jsx": {
@@ -332,9 +332,9 @@
         "fraud_or_plagiarism": "Fraude o Plagio",
         "hate_speech_or_internet_trolling": "Discurso de odio o trolear en internat",
         "intentional_miss_categorized_content_or_spam": "Uso erróneo de los tags o Spam",
-        "pending_payout": "Pago pendiente %(value)s BLURT",
+        "pending_payout": "Pago pendiente %(value)s MELEK",
         "payout_declined": "Pago rehusado",
-        "max_accepted_payout": "Máximo pago aceptado %(value)s BLURT",
+        "max_accepted_payout": "Máximo pago aceptado %(value)s MELEK",
         "promotion_cost": "Coste de promoción $ %(value)s",
         "past_payouts": "Pagos pasados $ %(value)s",
         "past_payouts_author": "Autor $ %(value)s",
@@ -392,7 +392,7 @@
         "estimated_value": "El valor estimado está basado en el valor medio de 1%(LIQUID_TOKEN)s en US dollars.",
         "non_transferable": "%(VESTING_TOKEN)s es intransferible y requiere 3 meses (13 pagos) para convertir de vuelta a %(LIQUID_TOKEN)s.",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "Los %(VESTING_TOKEN)s convertidos pueden ser enviados a ti mismo o a otras personas pero no pueden ser transferidos de nuevo sin convertirlos de vuelta a %(LIQUID_TOKEN)s.",
-        "part_of_your_steem_power_is_currently_delegated": "Part of %(user_name)s's BLURT POWER is currently delegated. Delegation is donated for influence or to help new users perform actions on blurt. Your delegation amount can fluctuate."
+        "part_of_your_steem_power_is_currently_delegated": "Part of %(user_name)s's MELEK POWER is currently delegated. Delegation is donated for influence or to help new users perform actions on blurt. Your delegation amount can fluctuate."
     },
     "promote_post_jsx": {
         "promote_post": "Promociona el Post",
@@ -402,7 +402,7 @@
     },
     "about_jsx": {
         "about_app": "Sobre %(APP_NAME)s",
-        "about_app_details": "%(APP_NAME)s es una plataforma social online donde todo el mundo genera ingresos creando y votando contenido. Usa un sistema muy sólido de puntos digitales llamado Blurt que soporta valor real gracias al precio de mercado y gracias a su liquidez.",
+        "about_app_details": "%(APP_NAME)s es una plataforma social online donde todo el mundo genera ingresos creando y votando contenido. Usa un sistema muy sólido de puntos digitales llamado MELEK que soporta valor real gracias al precio de mercado y gracias a su liquidez.",
         "learn_more_at_app_url": "Aprende más en %(APP_URL)s",
         "resources": "Recursos"
     },
@@ -411,7 +411,7 @@
     },
     "postsummary_jsx": {
         "resteemed": "reblurteado",
-        "resteemed_by": "Reblurteado por",
+        "resteemed_by": "Reposteado por",
         "reveal_it": "revelarlo",
         "adjust_your": "ajustar tu",
         "display_preferences": "Visualizar preferencias",
@@ -464,16 +464,16 @@
         "you_account_has_been_successfully_created": "Tu cuenta se ha creado con éxito!",
         "you_account_has_been_successfully_recovered": "Tu cuenta ha sido recuperada con éxito!",
         "password_update_succes": "La contraseña %(accountName)s ha sido cambiada correctamente",
-        "password_info": "La contraseña o la contraseña privada fue introducida incorrectamente. Probablemente. Ayuda: Las contraseñas generadas por Blurt.blog nunca contendrán 0 (cero), O (o mayúscula), I (i mayúscula), l (L minúscula).",
+        "password_info": "La contraseña o la contraseña privada fue introducida incorrectamente. Probablemente. Ayuda: Las contraseñas generadas por MELEK.blog nunca contendrán 0 (cero), O (o mayúscula), I (i mayúscula), l (L minúscula).",
         "enter_your_username": "Introduce tu nombre de usuario",
         "password_or_wif": "Contraseña o WIF",
         "this_operation_requires_your_key_or_master_password": "Esta operación requiere %(authType)s contraseña o la contraseña maestra",
         "keep_me_logged_in": "Manténme logeado",
         "amazing_community": "comunidad increíble",
         "to_comment_and_reward_others": "para comentar y recompensar a otros",
-        "sign_up_get_steem": "Crea una cuenta. Comienza en BLURT",
+        "sign_up_get_steem": "Crea una cuenta. Comienza en MELEK",
         "signup_button": "Crea una cuenta, comienza a ganar ",
-        "signup_button_emphasis": "FREE BLURT!",
+        "signup_button_emphasis": "FREE MELEK!",
         "returning_users": "Inicia sesion",
         "join_our": "Únete a nuestro",
         "sign_transfer": "Sign to complete transfer",
@@ -548,7 +548,7 @@
         "transfers_are_temporary_disabled": "Las transferencias están temporalmente inhabilitadas.",
         "history": "HISTORIA",
         "redeem_rewards": "Liquidar recompensas (Transferir al saldo)",
-        "buy_steem_or_steem_power": "Compra BLURT o BLURT POWER."
+        "buy_steem_or_steem_power": "Compra MELEK o MELEK POWER."
     },
     "checkloginowner_jsx": {
         "your_password_permissions_were_reduced": "Sus permisos de identificacion han sido limitados.",

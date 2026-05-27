@@ -1,1 +1,42 @@
-<div id="content"></div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MELEK</title>
+   <base href="/blurt-condenser/">
+   <script>
+   window.$STM_Config = {
+     fb_app: '', // optional Facebook App ID
+     blurtd_connection_client: 'https://rpc.blurt.world', // lightweight public RPC for normal operations
+     blurtd_connection_server: 'https://rpc.blurt.world', // empty disables get_state calls
+     blurtd_use_appbase: false,
+     chain_id: 'cd8d90f29ae273abec3eaa7731e25934c63eb654d55080caff2ebb7f5df6381f',
+     address_prefix: 'BLT',
+     img_proxy_prefix: '',
+     ipfs_prefix: '',
+     read_only_mode: false, // set true if you want to disable posting
+     upload_image: '', // optional image upload service
+     site_domain: 'https://puncakbukit.github.io/blurt-condenser',
+     google_analytics_id: '',
+     wallet_url: 'https://blurtwallet.com',
+     wiki_url: 'http://5.252.53.79/wiki',
+     failover_threshold: 2,
+     alternative_api_endpoints: [
+        "https://rpc.beblurt.com",
+        "https://blurt-rpc.saboin.com",
+        "https://rpc.blurt.world",
+        "https://blurtrpc.actifit.io",
+        "https://kentzz.blurt.world",
+        "https://rpc.blurt.live",
+        "https://blurtdev.techcoderx.com"
+     ],
+     // special flag for static deployments
+     disable_get_state: true
+   };
+   </script>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+</html>
+

@@ -1,12 +1,12 @@
 <span id="disable_router_nav_history_direction_check"></span>
 
-## Welcome to Blurt!
+## Welcome to MELEK!
 
 This page is full of information to help you learn about the platform and become a successful user. You can return to this page at any time by clicking on the "Welcome" link in the main menu. There is a table of contents below to help you navigate the page.
 
 Included on the page is a "To Do List" with recommended steps to get started with your account, and a "Quick Start Guide" with information on how the platform works.
 
-Below that is a section of "Helpful Posts from Blurt Users", which contains a collection of posts from users in the community that are helpful for new users getting started.
+Below that is a section of "Helpful Posts from MELEK Users", which contains a collection of posts from users in the community that are helpful for new users getting started.
 
 Below that is a list of recommended users to follow, a collection of other resources including the <a href="/faq.html">FAQ Page</a>, as well as information on where to find help.
 
@@ -16,10 +16,10 @@ Below that is a list of recommended users to follow, a collection of other resou
 
 1. <a href="#Backup_your_password">Backup Your Password</a>
 2. <a href="#Review_the_Quick_Start_Guide">Review the Quick Start Guide</a>
-3. <a href="#Read_the_Helpful_Posts_from_Blurt_Users">Read the Helpful Posts from Blurt Users</a>
+3. <a href="#Read_the_Helpful_Posts_from_MELEK_Users">Read the Helpful Posts from MELEK Users</a>
 4. <a href="#Setup_your_Profile_Avatar_and_Cover_Image">Setup your Profile, Avatar, and Cover Image</a>
 5. <a href="#Choose_your_NSFW_(Not_Safe_for_Work)_Display_Preference">Choose your "NSFW" (Not Safe for Work) Display Preferences, Language, and Rewards</a>
-6. <a href="#Sign_Up_for_Blurt_Chat">Sign Up for Blurt Chat</a>
+6. <a href="#Sign_Up_for_MELEK_Chat">Sign Up for Chat</a>
 7. <a href="#Create_your_introduceyourself_post">Create your "Introduceyourself" Post</a>
 8. <a href="#Learn_more">Learn More</a>
 
@@ -30,16 +30,16 @@ Below that is a list of recommended users to follow, a collection of other resou
 -   <a href="#Comments">Comments</a>
 -   <a href="#Creating_Posts">Creating Posts</a>
 -   <a href="#Followers_and_Feeds">Followers and Feeds</a>
--   <a href="#Reblurt">Reblurt</a>
+-   <a href="#Repost">Repost</a>
 -   <a href="#Digital_Currencies">Digital Currencies</a>
 -   <a href="#Curation">Curation</a>
 -   <a href="#Payments">Payments</a>
 <!-- - <a href="#Reputation">Reputation</a> -->
 -   <a href="#Plagiarism">Plagiarism</a>
 -   <a href="#Password_Security">Password Security</a>
--   <a href="#Earning_on_BLurt">Earning on BLurt</a>
+-   <a href="#Earning_on_MELEK">Earning on MELEK</a>
 
-### <a href="#Helpful_Posts_from_BLurt_Users">Helpful Posts from BLurt Users</a>
+### <a href="#Helpful_Posts_from_MELEK_Users">Helpful Posts from MELEK Users</a>
 
 ### <a href="#Users_to_Follow">Users to Follow</a>
 
@@ -57,7 +57,7 @@ Below that is a list of recommended users to follow, a collection of other resou
 
 ### <span id="Backup_your_password">1. Backup Your Password</span>
 
-Unlike centralized web services, **it is not possible to recover lost passwords on the Blurt blockchain**.
+Unlike centralized web services, **it is not possible to recover lost passwords on the MELEK blockchain**.
 
 You are entirely responsible for saving your password, backing it up, and keeping it secure.
 
@@ -73,9 +73,9 @@ The <a href="#Quick_Start_Guide">Quick Start Guide</a> section of this Welcome p
 
 <a href="#Table_of_Contents">^</a>
 
-### <span id="Read_the_Helpful_Posts_from_BLurt_Users">3. Read the Helpful Posts from BLurt Users</span>
+### <span id="Read_the_Helpful_Posts_from_MELEK_Users">3. Read the Helpful Posts from MELEK Users</span>
 
-The <a href="#Helpful_Posts_from_Blurt_Users">Helpful Posts from Blurt Users</a> section of this Welcome page contains many well-written articles from members of the community with tips on how to use blurt.blog and succeed on the Blurt blockchain.
+The <a href="#Helpful_Posts_from_MELEK_Users">Helpful Posts from MELEK Users</a> section of this Welcome page contains many well-written articles from members of the community with tips on how to use MELEK and succeed on the MELEK blockchain.
 
 <a href="#Table_of_Contents">^</a>
 
@@ -101,13 +101,13 @@ You can also choose how you will receive your Blog post rewards and Comment post
 
 <a href="#Table_of_Contents">^</a>
 
-### <span id="Sign_Up_for_Blurt_Chat">6. Sign Up for Blurt Chat</span>
+### <span id="Sign_Up_for_MELEK_Chat">6. Sign Up for Chat</span>
 
-A lot of users mingle and chat when they are not posting or browsing Blurt. It is a great place to meet people!
+A lot of users mingle and chat when they are not posting or browsing MELEK. It is a great place to meet people!
 
 There is a link to sign up in the main menu in the upper right corner.
 
-Your [https://discord.blurt.world/](https://discord.blurt.world/) account is a separate account from your Blurt account.
+Your [https://discord.blurt.world/](https://discord.blurt.world/) account is a separate account from your MELEK account.
 
 Each channel will have its rules posted in the "Room Info" section.
 
@@ -117,9 +117,9 @@ Each channel will have its rules posted in the "Room Info" section.
 
 While not required, the tradition for new users is to create an "introduceyourself" post in order to let the community get to know you.
 
-You can see some examples of what other people have done. Many users like to take a picture of themselves holding up a piece of paper that says "Blurt" with the current date.
+You can see some examples of what other people have done. Many users like to take a picture of themselves holding up a piece of paper that says "MELEK" with the current date.
 
-If you have other social media accounts (Twitter, Facebook, etc.) you can help the community verify that you are who you say you are by sharing the link to your Blurt profile on them. If you are claiming to be someone famous, this is pretty much expected.
+If you have other social media accounts (Twitter, Facebook, etc.) you can help the community verify that you are who you say you are by sharing the link to your MELEK profile on them. If you are claiming to be someone famous, this is pretty much expected.
 
 <a href="#Table_of_Contents">^</a>
 
@@ -135,13 +135,13 @@ The <a href="#Other_Resources">Other Resources</a> section of this Welcome page 
 
 ### <span id="Free_to_Participate">Free to Participate</span>
 
-It is free to post, comment, or vote on all content on blurt.blog. You might even get paid for it!
+It is free to post, comment, or vote on all content on MELEK. You might even get paid for it!
 
 <a href="#Table_of_Contents">^</a>
 
 ### <span id="Votes">Votes</span>
 
-Upvotes are Blurt's way of saying you like someone's post or comment.
+Upvotes are MELEK's way of saying you like someone's post or comment.
 
 To upvote, click on the <Icon name="chevron-up-circle" /> _Upvote_ icon at the bottom of the post/comment.
 
@@ -181,15 +181,15 @@ You can see all of your followers and the people you are following on your profi
 
 <a href="#Table_of_Contents">^</a>
 
-### <span id="Reblurt">Reblurt</span>
+### <span id="Repost">Repost</span>
 
-If you want to share someone else's post with all of your followers, click on the <Icon name="reblog" /> _reblurt_ icon. Reblurts cannot be undone.
+If you want to share someone else's post with all of your followers, click on the <Icon name="reblog" /> _repost_ icon. Reposts cannot be undone.
 
 <a href="#Table_of_Contents">^</a>
 
 ### <span id="Digital_Currencies">Digital Currencies</span>
 
-BLURT, Blurt Power are the two forms of digital currency used by the Blurt Blockchain.
+MELEK, MELEK Power are the two forms of digital currency used by the MELEK Blockchain.
 
 <a href="#Table_of_Contents">^</a>
 
@@ -197,7 +197,7 @@ BLURT, Blurt Power are the two forms of digital currency used by the Blurt Block
 
 Up to 25% of the reward for each post goes to the people who upvoted on it. These people are called Curators.
 
-The more Blurt Power you have in your account, the more your votes will be worth, and the more potential curation rewards you can earn!
+The more MELEK Power you have in your account, the more your votes will be worth, and the more potential curation rewards you can earn!
 
 <a href="#Table_of_Contents">^</a>
 
@@ -209,14 +209,14 @@ The projected payments may fluctuate (up and down) until the final payment amoun
 
 Payments for posts are split between the author (at least 75%) and the curators (up to 25%).
 
-The author reward is paid in Blurt Power by default.
+The author reward is paid in MELEK Power by default.
 
-Authors also have the option to decline payout, or be paid in Blurt Power!
+Authors also have the option to decline payout, or be paid in MELEK Power!
 
 <!-- <a href="#Table_of_Contents">^</a>
 ### <span id="Reputation">Reputation</span>
 
-A reputation score is one way that Blurt measures the amount of value you have brought to the community.
+A reputation score is one way that MELEK measures the amount of value you have brought to the community.
 
 The higher the reputation, the more upvotes the account received.
 
@@ -230,7 +230,7 @@ Your reputation will go up as you earn upvotes for your posts and comments, but 
 
 The community is looking for you to create engaging content.
 
-Plagiarising, which is posting someone else's material as if it were your own, is very frowned upon by the Blurt community.
+Plagiarising, which is posting someone else's material as if it were your own, is very frowned upon by the MELEK community.
 
 If you are using anyone else's material as part of your posts (including images), even if it is free to use, please cite your sources. You should make sure that you are not violating any copyright laws if you are using someone else's material/images. Limited, sourced material sharing is OK under fair use and fair dealing doctrines.
 
@@ -240,15 +240,15 @@ Remember, your posts should have original content in them. Quotes should not com
 
 ### <span id="Password_Security">Password Security</span>
 
-**It is not possible to recover lost passwords for Blurt accounts**. You are 100% responsible for having it backed up. This means secure digital backups, as well as secured paper backups, stored in different places if possible.
+**It is not possible to recover lost passwords for MELEK accounts**. You are 100% responsible for having it backed up. This means secure digital backups, as well as secured paper backups, stored in different places if possible.
 
 Never put your password into unverified third party websites as they may steal your account.
 
-Your Blurt account is worth real money. Treat your Blurt password like you would your bank password and keep it secure!
+Your MELEK account is worth real money. Treat your MELEK password like you would your bank password and keep it secure!
 
 <a href="#Table_of_Contents">^</a>
 
-### <span id="Earning_on_Blurt">Earning on Blurt</span>
+### <span id="Earning_on_MELEK">Earning on MELEK</span>
 
 Everyone's earnings are different. Have fun. Get involved. Meet new friends.
 
@@ -260,7 +260,7 @@ Don't get discouraged if you don't earn much at first. Keep up the good work!
 
 ---
 
-## <span id="Helpful_Posts_from_Blurt_Users">Helpful Posts from Blurt Users</span>
+## <span id="Helpful_Posts_from_MELEK_Users">Helpful Posts from MELEK Users</span>
 
 ### <span id="Blogging">Blogging</span>
 
@@ -288,9 +288,9 @@ Don't get discouraged if you don't earn much at first. Keep up the good work!
 
 ## <span id="Third_Party_References">Third Party References</span>
 
-New Member Support Community, and Discord Chat, as well as the tools listed under "Other Resources", are third party applications/services and are not owned or maintained by Blurt Foundation. Their listing here does not constitute an endorsement or recommendation on behalf of Blurt Foundation.
+New Member Support Community, and Discord Chat, as well as the tools listed under "Other Resources", are third party applications/services and are not owned or maintained by MELEK Foundation. Their listing here does not constitute an endorsement or recommendation on behalf of MELEK Foundation.
 
-All of the links in the "Helpful Posts from Blurt Users" section were created by our users and do not necessarily represent the views of Blurt Foundation or its management.
+All of the links in the "Helpful Posts from MELEK Users" section were created by our users and do not necessarily represent the views of MELEK Foundation or its management.
 
 Please use the third party tools and content at your own risk.
 

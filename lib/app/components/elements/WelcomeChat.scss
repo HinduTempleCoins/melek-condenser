@@ -1,0 +1,129 @@
+.WelcomeChat {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    font-size: 0.95rem;
+}
+
+.welcomeChatColumn {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 1rem;
+}
+
+.WelcomeChat__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #ff0264;
+    color: #fff;
+}
+
+.WelcomeChat__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fce76c;
+    color: #1c252b;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.WelcomeChat__heading {
+    line-height: 1.2;
+}
+
+.WelcomeChat__name {
+    font-weight: 700;
+}
+
+.WelcomeChat__subtitle {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.WelcomeChat__messages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    max-height: 360px;
+    overflow-y: auto;
+    background: #fafbfc;
+}
+
+.WelcomeChat__msg {
+    padding: 0.55rem 0.8rem;
+    border-radius: 14px;
+    max-width: 85%;
+    word-wrap: break-word;
+    line-height: 1.35;
+}
+
+.WelcomeChat__msg--bot {
+    align-self: flex-start;
+    background: #f0f0f0;
+    color: #1c252b;
+    border-bottom-left-radius: 4px;
+}
+
+.WelcomeChat__msg--user {
+    align-self: flex-end;
+    background: #ff0264;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.WelcomeChat__handoff {
+    align-self: stretch;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.WelcomeChat__handoff-note {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+.WelcomeChat__composer {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fff;
+}
+
+.WelcomeChat__composer input[type='text'] {
+    flex: 1;
+    margin: 0;
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+}
+
+.WelcomeChat__composer input[type='text']:disabled {
+    background: #f5f5f5;
+    color: #999;
+}
+
+.WelcomeChat__composer button {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}

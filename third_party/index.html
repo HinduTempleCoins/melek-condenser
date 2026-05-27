@@ -32,14 +32,15 @@
 
 <script>
   // MELEK chain configuration for the signup port.
-  // EMPTY values fail-closed: chain-init.js disables the form and shows
-  // a "chain not configured" banner instead of silently falling back to
-  // BLURT defaults. Set these at deploy time when MELEK chain is live.
+  // Set when MELEK chain went live, per HinduTempleCoins/MELEK
+  // condenser-patches/config/melek-overlay.json. chain-init.js still
+  // fail-closes if the chain is unreachable; the creator.php endpoint
+  // is the remaining piece needed for end-to-end signup.
   // See third_party/js/chain-init.js for the loader.
   window.MELEK_CHAIN_CONFIG = {
-      address_prefix: '',
-      chain_id: '',
-      rpc: ''
+      address_prefix: 'MELEK',
+      chain_id: '4cfa8136137dda78031d0508b844770906a61854c48e4032a4338ce26db538ff',
+      rpc: 'https://rpc.melek.salon'
   };
 </script>
 

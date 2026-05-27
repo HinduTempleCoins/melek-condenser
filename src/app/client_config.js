@@ -19,16 +19,16 @@ export const WIKI_URL = '';
 export const LANDING_PAGE_URL = 'https://melek.salon/';
 export const TERMS_OF_SERVICE_URL = 'https://' + APP_DOMAIN + '/tos.html';
 export const PRIVACY_POLICY_URL = 'https://' + APP_DOMAIN + '/privacy.html';
-export const WHITEPAPER_URL = '';
+export const WHITEPAPER_URL = 'https://melek.salon/whitepaper';
 
 // Asset symbols used in raw transaction data over the chain RPC.
-// During the bootstrap period we render against the Blurt chain, so these
-// must remain BLURT/VESTS/HBD for transactions to be accepted. They are
-// not user-visible labels (those are LIQUID_TOKEN / VESTING_TOKEN above).
-export const LIQUID_TICKER = 'BLURT';
+// These must match the symbols the MELEK chain emits.
+// MELEK has no SBD/HBD/debt-token equivalent — DEBT_TICKER is set to MELEK
+// to keep any legacy code paths benign (chain never emits debt-token ops).
+export const LIQUID_TICKER = 'MELEK';
 export const VEST_TICKER = 'VESTS';
-export const DEBT_TICKER = 'HBD';
-export const DEBT_TOKEN_SHORT = 'HBD';
+export const DEBT_TICKER = 'MELEK';
+export const DEBT_TOKEN_SHORT = 'MELEK';
 
 // application settings
 export const DEFAULT_LANGUAGE = 'en';

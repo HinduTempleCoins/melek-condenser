@@ -1,0 +1,268 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" href="img/favicon.png" type="image/x-icon">
+<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+
+  <!-- 🟢 Open Graph -->
+  <meta property="og:title" content="Create your BLURT account" />
+  <meta property="og:description" content="Register your free Blurt blockchain account in seconds. Encrypted keys, optional email backup, and voucher support included." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://blurtplugin.online/account/" />
+  <meta property="og:image" content="https://blurtplugin.online/account/img/account_creator.png" />
+  <meta property="og:image:alt" content="Blurt Account Creation" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- 💬 Twitter Cards (opcjonalnie) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Create your BLURT account">
+  <meta name="twitter:description" content="Register your free Blurt blockchain account in seconds.">
+  <meta name="twitter:image" content="https://blurtplugin.online/account/img/account_creator.png">
+
+  <title>BLURT Account Creation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css?v=20260504-style">
+  <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F6KHJM5QPR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F6KHJM5QPR');
+</script>
+<script src="js/bs58.bundle.js"></script>
+
+</head>
+<body>
+
+<div class="menu mt-6 col-md">
+    <div style="display: flex; justify-content: space-between;">
+  <a style="  margin-left: 20px;" href="/" data-i18n="interface.back"><== Back to main page</a>
+     <a style="  margin-left: 20px;" href="/account/register" data-i18n="register-page">Register by e-mail</a>
+        <div>
+      <select id="lang-switch">
+        <option value="en">English</option>
+        <option value="pl">Polski</option>
+      </select>
+    </div>
+</div>
+    <div id="maintenance_notice" class="alert alert-warning text-center" style="display:none;">
+  ⚠️ This form is currently running in test mode. Maintenance in progress.
+</div>
+
+  </div>
+
+  <div class="container mt-6 col-md">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <div class="contact_container"><p data-i18n="interface.contact">Contact us:</p> 
+<ul class="social-ico">
+        <li><a href="https://discord.com/invite/tHtubX6Kuz" class="socialicon" target="_blank" rel="noopener"><img src="img/discord.png"  title="Oficjalny Discord sieci Blurt" alt="Oficjalny Discord sieci Blurt" /></a></li>
+<li><a href="https://discord.gg/nVCYMckWuF" class="socialicon" target="_blank" rel="noopener"><img src="img/discord-pl.png"  title="Discord Polskiej społeczności sieci Blurt" alt="Discord Polskiej społeczności sieci Blurt" /></a></li>
+<li><a href="https://www.facebook.com/profile.php?id=100088085075370" class="socialicon" target="_blank" rel="noopener nofollow"><img src="img/fb.png" title="Facebook Blurt PL" alt="Facebook Blurt PL" /></a></li>
+<li><a href="mailto:kontakt@blurt.pl" class="socialicon" target="_blank" rel="noopener nofollow"><img src="img/mail.svg" title="Polski Kanał Blurt PL" alt="Polski Kanał Blurt PL" /></a></li>
+</ul>
+
+</div>
+<div class="contact_container" style="display:flex;"><p data-i18n="interface.frontend_login">Login:</p> 
+        <ul class="social-ico">
+                 <li><a href="https://blurt.blog" class="socialicon" target="_blank" rel="noopener dofollow"><img src="img/blurtblog.png"  title="Main Blurt Frontend blurt.blog" alt="Main Blurt Frontend" /></a></li>
+         <li><a href="https://blurt.intinte.org" class="socialicon" target="_blank"  rel="noopener dofollow"><img src="img/blurt.png"  title="Polish community Frontend." alt="Polish community Frontend" /></a></li>
+                  <li><a href="https://beblurt.com" class="socialicon" target="_blank" rel="noopener dofollow"><img src="img/iconBB.svg"  title="Frontend beblurt" alt="Frontend beblurt" /></a></li>
+                   <li><a href="https://blurb.blurt.blog/" class="socialicon" target="_blank" rel="noopener dofollow"><img src="img/blurb-ico.png"  title="Blurb x.com like miniblog" alt="Blurb x.com like miniblog" /></a></li>
+                   <li><a href="https://twiggy.lat/" class="socialicon" target="_blank" rel="noopener dofollow"><img src="https://twiggy.lat//cat.png"  title="Twiggy miniblog" alt="Twiggy miniblog" /></a></li>
+        <li><a href="https://blurt.media" class="socialicon" target="_blank" rel="noopener"><img src="img/blurtmedia-ico.png"  title="Blurt media page" alt="Blurt media page" /></a></li>
+</ul>
+
+</div>
+</div>
+
+<h1 class="text-center" data-i18n="form.title">BLURT Account Creator</h1>
+
+
+<div style="display:flex; flex-wrap: wrap;">
+  <div style="flex: 1;text-align: center; padding:20px;">
+    <div>
+    <img src="img/logo.png">
+  </div>
+<div style=" padding: 30px;">
+
+  <p data-i18n="interface.key_info" >To store your keys safely and conveniently while using the blurt network install WhaleVault extension for:</p>
+  <a href="https://chromewebstore.google.com/detail/whalevault/hcoigoaekhfajcoingnngmfjdidhmdon?pli=1" target="_blank">
+        <img style="width:32px" src="img/chrome-ico.png"></a>
+          <a href="https://chromewebstore.google.com/detail/whalevault/hcoigoaekhfajcoingnngmfjdidhmdon?pli=1" target="_blank">
+        <img style="width:32px" src="img/brave-ico.png"></a>
+<a href="https://addons.mozilla.org/pl/firefox/addon/whalevault/" target="_blank">
+    <img style="width:32px" src="img/firefox-ico.png">
+</a>
+
+</div>
+<div style=" padding: 0px 30px;">
+
+  <p data-i18n="interface.key_mobile">Mobile app BlurtKey:</p>
+  <a href="https://play.google.com/store/apps/details?id=com.blurtkey" target="_blank">
+        <img style="width:32px" src="img/google-play.png">
+
+</a>
+<a href="https://apps.apple.com/jp/app/imt-ase-blurtkey/id6448778419?l=en-US" target="_blank">
+    <img style="width:32px" src="img/app-store.png">
+</a>
+</div>
+</div>
+<div style="flex: 1; width: 100%;">
+    <!-- Formularz rejestracyjny -->
+<form id="form_id" enctype="multipart/form-data">
+          <!-- Account Info -->
+      <label data-i18n="form.label_name" for="username">BLURT Account Username</label>
+      <div class="input-group mb-3">
+<input id="username" type="text" class="form-control" name="username"
+  maxlength="16"
+  data-i18n-title="form.username_title"
+  title="Username must be 3–16 chars, lowercase letters, digits, hyphens or dots. Each part ≥3 chars."
+  required
+  onblur="checkUsernameAvailability()" />
+
+        <button class="btn btn-outline-secondary" type="button" onclick="checkUsernameAvailability()" data-i18n="form.check_av">Check Availability</button>
+        <small id="username-status" class="text-muted" style="width: 100%;" data-i18n="form.username-status" >Enter a valid username and check availability.</small>
+      </div>
+
+<div class="form-group mt-3">
+  <label for="voucher_code" data-i18n="form.voucher_label">Voucher Code</label>
+  <input type="text" class="form-control" id="voucher_code" name="voucher_code" required />
+  <small id="voucher-status" class="text-muted" data-i18n="form.voucher_info">Enter a valid voucher code.</small>
+</div>
+
+<div class="form-check mt-3" id="voucher-owner-ref-wrap" style="display:none;">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    id="use_voucher_owner_as_referrer"
+    name="use_voucher_owner_as_referrer"
+    value="1"
+    checked
+  >
+  <label
+    class="form-check-label"
+    for="use_voucher_owner_as_referrer"
+    data-i18n="form.use_voucher_owner_as_referrer"
+  >
+    Use voucher owner as referrer
+  </label>
+  <small
+    id="voucher-owner-info"
+    class="text-muted d-block mt-1"
+    data-i18n="form.voucher_owner_info_default"
+  >
+    Voucher owner will be used as the default referrer.
+  </small>
+</div>
+
+<div class="form-group mt-3" id="custom-referrer-wrap" style="display:none;">
+  <label for="custom_referrer" data-i18n="form.custom_referrer_label">Custom referrer</label>
+  <input
+    type="text"
+    class="form-control"
+    id="custom_referrer"
+    name="custom_referrer"
+    maxlength="16"
+    data-i18n-placeholder="form.custom_referrer_placeholder"
+    data-i18n-title="form.custom_referrer_title"
+    placeholder="Enter another BLURT username"
+    title="Enter another BLURT username or leave empty"
+  >
+  <small
+    id="custom-referrer-info"
+    class="text-muted"
+    data-i18n="form.custom_referrer_info"
+  >
+    Want to use someone else as referrer? Leave empty to skip.
+  </small>
+</div>
+
+        
+      <div class="form-check my-2">
+        <input class="form-check-input" type="checkbox" id="skip_email" onchange="toggleEmailOption()"><label class="form-check-label" for="skip_email" data-i18n="form.email_refuse">I don't want to receive keys by email.</label>
+    </div>
+  
+    <div id="email_encrypt_section">
+      <label data-i18n="form.email_placeholder">Your Email Address</label>
+      <input id="encryptionEmail" type="email" class="form-control" name="email"  />
+      <label data-i18n="form.encryption_password">Encryption password for email message:</label>
+      <input id="encryptionPassword" type="password" class="form-control" name="encryptionPassword" />
+      <p class="alert alert-danger" role="alert" data-i18n="form.alert-encryption">
+        Used to encrypt the email that contains your keys. Only you can decrypt it thanks to this password so remember it!
+      </p>
+    </div>
+
+
+  <div class="d-grid gap-2 my-3">
+  <button type="button" class="btn btn-secondary" onclick="showKeySection()" data-i18n="form.step">➡️ Next Step</button>
+</div>
+
+  <div id="keys-section" style="display: none;">
+      <!-- Generated Keys -->
+      <div class="form-group mt-3">
+        <label data-i18n="form.master">Generated Master Password</label>
+        <input id="password" type="text" class="form-control" name="master" readonly>
+      </div>
+      <div class="form-group">
+        <label data-i18n="form.owner">Owner Key</label>
+        <input id="owner_key" type="text" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label data-i18n="form.active">Active Key</label>
+        <input id="active_key" type="text" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label data-i18n="form.posting">Posting Key</label>
+        <input id="posting_key" type="text" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label data-i18n="form.memo">Memo Key</label>
+        <input id="memo_key" type="text" class="form-control" readonly>
+      </div>
+    <!-- Przycisk do wygenerowania kluczy -->
+    <div class="d-grid gap-2 my-3">
+      <button type="button" onclick="generateKeys();" class="btn btn-primary" data-i18n="form.generate_keys">🔐 Generate Keys</button>
+    </div>
+</div>
+      <input type="hidden" id="encrypted_keys" name="encrypted_keys">
+      <input type="hidden" id="raw_keys" name="raw_keys">
+      <!--<input type="hidden" name="h-captcha-response" id="captcha_token" />
+
+      <div class="h-captcha mt-3 mb-3" data-sitekey="9ad89fce-41dc-4732-bfec-2f807bb8fd8e"></div>-->
+
+      <!-- Przyciski końcowe -->
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success" id="sent" style="display:none;" data-i18n="form.create_account_button">✅ Create Account</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>  <!-- main container -->
+
+<script>
+  window.fakeMode = false;
+  window.prefilledVoucher = "";
+</script>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/dsteem@^0.10.1/dist/dsteem.js"></script>
+  <script src="js/blurt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+  <script src="/account/js/qrcode.min.js"></script>
+  
+  <script src='js/lang.js'></script>
+
+  <script src='js/script.js?v=20260515antiabuse'></script>
+
+
+</body>
+</html>
+

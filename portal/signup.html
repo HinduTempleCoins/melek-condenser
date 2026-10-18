@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MELEK Testnet Sign Up</title>
+  <link rel="icon" href="/portal/melek.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/portal/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/dsteem@0.11.1/dist/dsteem.js"></script>
+  <script src="/portal/common.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner"><span class="net-name">TESTNET ONLY</span> — this creates an account on the <span class="net-name-lower">MELEK test network</span>. Keys are generated in your browser. The server never sees your private keys.</div>
+    <header>
+      <a href="/portal/" class="back">&larr; MELEK Portal</a>
+      <h1>Create a Testnet Account</h1>
+    </header>
+
+    <section class="card">
+      <h2>1. Choose a username</h2>
+      <div class="row">
+        <input id="username" placeholder="3-16 chars, a-z 0-9 -" />
+        <button id="checkBtn">Check availability</button>
+      </div>
+      <div id="userMsg" class="msg"></div>
+    </section>
+
+    <section class="card" id="keysCard" style="display:none">
+      <h2>2. Your keys (generated in your browser)</h2>
+      <p class="note"><strong>Save these now.</strong> They are derived from a random master password and are shown only here. Email delivery is skipped on testnet (TODO: wire email verification for mainnet).</p>
+      <table class="keys">
+        <tr><th>Master password</th><td><code id="k-master"></code></td></tr>
+        <tr><th>Owner (private)</th><td><code id="k-owner"></code></td></tr>
+        <tr><th>Active (private)</th><td><code id="k-active"></code></td></tr>
+        <tr><th>Posting (private)</th><td><code id="k-posting"></code></td></tr>
+        <tr><th>Memo (private)</th><td><code id="k-memo"></code></td></tr>
+      </table>
+      <button id="dlBtn">Download keys (.txt)</button>
+      <label class="check"><input type="checkbox" id="saved" /> I have saved my keys somewhere safe.</label>
+      <button id="createBtn" disabled>Create account on testnet</button>
+      <div id="createMsg" class="msg"></div>
+    </section>
+  </div>
+
+  <script>
+  (function () {
+    var PREFIX = window.MELEK_TESTNET.addressPrefix;
+    var generated = null; // { name, master, keys: {owner,active,posting,memo}, pubs:{...} }
+
+    function validName(n) {
+      if (!/^[a-z][a-z0-9-]{1,14}[a-z0-9]$/.test(n)) return false;
+      if (n.indexOf('--') >= 0) return false;
+      return n.length >= 3 && n.length <= 16;
+    }
+
+    function randomMaster() {
+      var bytes = new Uint8Array(32);
+      crypto.getRandomValues(bytes);
+      // base58-ish from dsteem if available, else hex.
+      var s = '';
+      var alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+      for (var i = 0; i < bytes.length; i++) s += alphabet[bytes[i] % alphabet.length];
+      return 'P' + s; // P-prefixed master password
+    }
+
+    function deriveKeys(name) {
+      var master = randomMaster();
+      var roles = ['owner', 'active', 'posting', 'memo'];
+      var out = { master: master, keys: {}, pubs: {} };
+      roles.forEach(function (role) {
+        var priv = window.dsteem.PrivateKey.fromLogin(name, master, role);
+        out.keys[role] = priv.toString();
+        out.pubs[role] = priv.createPublic(PREFIX).toString();
+      });
+      return out;
+    }
+
+    async function checkUser() {
+      var name = el('username').value.trim().toLowerCase();
+      el('username').value = name;
+      if (!validName(name)) { setMsg('userMsg', 'Invalid name. Use 3-16 chars: a-z, 0-9, dashes; start with a letter.', 'err'); return; }
+      setMsg('userMsg', 'Checking…');
+      try {
+        var r = await rpcCall('get_accounts', [[name]]);
+        if (r && r.length) { setMsg('userMsg', '@' + name + ' is already taken.', 'err'); el('keysCard').style.display = 'none'; return; }
+        setMsg('userMsg', '@' + name + ' is available!', 'ok');
+        var d = deriveKeys(name);
+        generated = { name: name, master: d.master, keys: d.keys, pubs: d.pubs };
+        showKeys();
+      } catch (e) { setMsg('userMsg', 'Error: ' + e.message, 'err'); }
+    }
+
+    function showKeys() {
+      el('k-master').textContent = generated.master;
+      el('k-owner').textContent = generated.keys.owner;
+      el('k-active').textContent = generated.keys.active;
+      el('k-posting').textContent = generated.keys.posting;
+      el('k-memo').textContent = generated.keys.memo;
+      el('keysCard').style.display = '';
+      el('saved').checked = false;
+      el('createBtn').disabled = true;
+    }
+
+    function downloadKeys() {
+      if (!generated) return;
+      var txt = 'MELEK TESTNET account keys for @' + generated.name + '\n' +
+        'NETWORK: MELEK TESTNET (not mainnet, no real value)\n\n' +
+        'Master password: ' + generated.master + '\n' +
+        'Owner key:   ' + generated.keys.owner + '\n' +
+        'Active key:  ' + generated.keys.active + '\n' +
+        'Posting key: ' + generated.keys.posting + '\n' +
+        'Memo key:    ' + generated.keys.memo + '\n';
+      var blob = new Blob([txt], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'melek-testnet-' + generated.name + '-keys.txt';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    async function createAccount() {
+      if (!generated) return;
+      setMsg('createMsg', 'Creating account on testnet…');
+      try {
+        var res = await fetch(window.MELEK_TESTNET.faucet + '/create', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            name: generated.name,
+            ownerPub: generated.pubs.owner,
+            activePub: generated.pubs.active,
+            postingPub: generated.pubs.posting,
+            memoPub: generated.pubs.memo,
+          }),
+        });
+        var j = await res.json();
+        if (j.ok) {
+          setMsg('createMsg', 'Account @' + generated.name + ' created on testnet! tx ' + (j.id || 'broadcast') + '. Go to the Wallet to see it.', 'ok');
+        } else {
+          setMsg('createMsg', 'Could not create: ' + (j.reason || 'unknown'), 'err');
+        }
+      } catch (e) { setMsg('createMsg', 'Faucet error: ' + e.message, 'err'); }
+    }
+
+    el('checkBtn').addEventListener('click', checkUser);
+    el('username').addEventListener('keydown', function (e) { if (e.key === 'Enter') checkUser(); });
+    el('dlBtn').addEventListener('click', downloadKeys);
+    el('saved').addEventListener('change', function () { el('createBtn').disabled = !el('saved').checked; });
+    el('createBtn').addEventListener('click', createAccount);
+  })();
+  </script>
+</body>
+</html>

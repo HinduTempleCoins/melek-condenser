@@ -555,7 +555,6 @@ const Comment = connect(
                 transactionActions.broadcastOperation({
                     type: 'delete_comment',
                     operation,
-                    confirm: tt('g.operation_cost', { fee }),
                 })
             );
         },

@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[contenthash].js',
-    publicPath: './', // ✅ important for GitHub Pages
+    publicPath: '/assets/', // served from /assets/ by the SSR server (was './' — broke file-loader asset URLs)
   },
   plugins: [
     new webpack.DefinePlugin({

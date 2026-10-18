@@ -5,7 +5,7 @@ import { SIGNUP_URL } from 'shared/constants';
 const SidebarNewUsers = () => (
     <div className="c-sidebar__module">
         <div className="c-sidebar__header">
-            <h3 className="c-sidebar__h3">Explore Blurt?</h3>
+            <h3 className="c-sidebar__h3">Explore MELEK?</h3>
         </div>
         <div className="c-sidebar__content">
             <ul className="c-sidebar__list">
@@ -17,7 +17,22 @@ const SidebarNewUsers = () => (
                 <li className="c-sidebar__list-item">
                     <a
                         className="c-sidebar__link"
-                        href="https://blocks.blurtwallet.com"
+                        href={$STM_Config.wiki_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Wiki / FAQ
+                    </a>
+                </li>
+                <li className="c-sidebar__list-item">
+                    <a className="c-sidebar__link" href="/chat">
+                        Community Chat
+                    </a>
+                </li>
+                <li className="c-sidebar__list-item">
+                    <a
+                        className="c-sidebar__link"
+                        href="https://wallet.melek.salon"
                     >
                         Block Explorer
                     </a>
@@ -25,7 +40,7 @@ const SidebarNewUsers = () => (
                 <li className="c-sidebar__list-item">
                     <a
                         className="c-sidebar__link"
-                        href="https://blurtwallet.com/~witnesses"
+                        href="https://wallet.melek.salon/~witnesses"
                     >
                         Vote for Witnesses
                     </a>
@@ -33,9 +48,9 @@ const SidebarNewUsers = () => (
                 <li className="c-sidebar__list-item">
                     <a
                         className="c-sidebar__link"
-                        href="https://blurtwallet.com/proposals"
+                        href="https://wallet.melek.salon/proposals"
                     >
-                        Blurt Proposals
+                        Proposals
                     </a>
                 </li>
                 {/* <li className="c-sidebar__list-item"> */}

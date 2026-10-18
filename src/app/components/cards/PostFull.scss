@@ -81,6 +81,11 @@
         font-size: 240%;
         font-weight: 800;
         line-height: 1.1;
+        @media screen and (max-width: 39.9375em) {
+            // On phones, 240% headlines wrap to 4-5 lines on long titles;
+            // reduce to keep the headline scannable above the fold
+            font-size: 160%;
+        }
         .Icon {
             margin: 0 0 0 0.5rem;
             vertical-align: -30%;

@@ -1,7 +1,9 @@
 import React from 'react';
 import tt from 'counterpart';
 import { APP_DOMAIN, APP_NAME } from 'app/client_config';
-import { Link } from 'react-router';
+
+// Stolen-account recovery runs on MELEK-Signer; the wallet has no such route.
+const MELEK_RECOVER_URL = 'https://signer.melek.salon/recover';
 
 class RecoverAccountStep1 extends React.Component {
     render() {
@@ -20,11 +22,13 @@ class RecoverAccountStep1 extends React.Component {
                         <p>
                             {tt('g.external_link_message')}
                             {': '}
-                            <Link
-                                to={`${$STM_Config.wallet_url}/recover_account_step_1`}
+                            <a
+                                href={MELEK_RECOVER_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 {tt('navigation.stolen_account_recovery')}
-                            </Link>
+                            </a>
                         </p>
                     </div>
                 </div>

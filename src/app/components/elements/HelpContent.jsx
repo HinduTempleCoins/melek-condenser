@@ -50,6 +50,10 @@ let req = require.context('../../help', true, /\.md/);
 let HelpData = {};
 
 function split_into_sections(str) {
+    // MELEK: webpack ESM-interop can hand us { default: "..." } (or a non-string) for a .md
+    // require; coerce so .split never throws (an uncaught mount error blanks the whole app).
+    if (str && typeof str === "object" && typeof str.default === "string") str = str.default;
+    if (typeof str !== "string") str = String(str == null ? "" : str);
     let sections = str.split(/\[#\s?(.+?)\s?\]/);
     if (sections.length === 1) return sections[0];
     if (sections[0].length < 4) sections.splice(0, 1);

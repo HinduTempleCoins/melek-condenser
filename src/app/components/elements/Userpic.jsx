@@ -37,9 +37,14 @@ class Userpic extends Component {
             }
         }
 
+        // imageProxy() is '' when no image proxy is configured (img_proxy_prefix is `false` in
+        // config), which produced a RELATIVE url - "u/alice/avatar/small" - that the browser
+        // resolved against the current page path. Every avatar 404'd on every post, tag and feed
+        // route. Fall back to the site root and guarantee the separator.
+        const proxyPrefix = imageProxy() || '/';
+        const avatarBase = proxyPrefix.endsWith('/') ? proxyPrefix : proxyPrefix + '/';
         const style = {
-            backgroundImage:
-                'url(' + imageProxy() + `u/${account}/avatar/small)`,
+            backgroundImage: `url(${avatarBase}u/${account}/avatar/small)`,
         };
 
         return <div className="Userpic" style={style} />;

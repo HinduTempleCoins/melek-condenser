@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MELEK Wallet</title>
+  <link rel="icon" href="/portal/melek.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/portal/style.css" />
+  <!-- dsteem UMD (works with Steem-family forks; configured for the MELEK chain) -->
+  <script src="https://cdn.jsdelivr.net/npm/dsteem@0.11.1/dist/dsteem.js"></script>
+  <script src="/portal/common.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">Tokens shown are live MELEK balances.</div>
+    <header>
+      <a href="/portal/" class="back">&larr; MELEK Portal</a>
+      <h1>MELEK Wallet</h1>
+    </header>
+
+    <section class="card">
+      <h2>Look up an account</h2>
+      <div class="row">
+        <input id="lookup" placeholder="account name (e.g. initminer)" />
+        <button id="lookupBtn">View balances</button>
+      </div>
+      <div id="lookupMsg" class="msg"></div>
+      <table id="balances" class="balances" style="display:none">
+        <tr><th>MELEK (liquid)</th><td id="bal-liquid">—</td></tr>
+        <tr><th>MELEK DOLLARS</th><td id="bal-debt">—</td></tr>
+        <tr><th>MELEK POWER (VESTS)</th><td id="bal-vest">—</td></tr>
+        <tr><th>Savings</th><td id="bal-savings">—</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Send a transfer</h2>
+      <p class="note">Signs in your browser. Your private key is never sent anywhere.</p>
+      <div class="grid">
+        <label>From account <input id="t-from" placeholder="your account" /></label>
+        <label>Active private key (WIF) <input id="t-wif" type="password" placeholder="5... active key" /></label>
+        <label>To account <input id="t-to" placeholder="recipient (e.g. temp)" /></label>
+        <label>Amount <input id="t-amt" placeholder="1.000" /></label>
+        <label>Asset
+          <select id="t-asset"></select>
+        </label>
+        <label>Memo (optional) <input id="t-memo" placeholder="" /></label>
+      </div>
+      <button id="sendBtn">Send transfer</button>
+      <div id="sendMsg" class="msg"></div>
+    </section>
+
+    <section class="card">
+      <h2>Power up (transfer to vesting)</h2>
+      <p class="note">Converts liquid MELEK to MELEK POWER. Signs in your browser.</p>
+      <div class="grid">
+        <label>Account <input id="p-acct" placeholder="your account" /></label>
+        <label>Active private key (WIF) <input id="p-wif" type="password" placeholder="5... active key" /></label>
+        <label>Amount MELEK <input id="p-amt" placeholder="1.000" /></label>
+      </div>
+      <button id="powerBtn">Power up</button>
+      <div id="powerMsg" class="msg"></div>
+    </section>
+
+    <section class="card">
+      <h2>Power down (withdraw from vesting)</h2>
+      <p class="note">
+        Converts MELEK POWER back to liquid MELEK. The chain pays it out in weekly instalments, not
+        all at once. Enter <strong>0</strong> to cancel a power-down already in progress.
+        Signs in your browser.
+      </p>
+      <div class="grid">
+        <label>Account <input id="d-acct" placeholder="your account" /></label>
+        <label>Active private key (WIF) <input id="d-wif" type="password" placeholder="5... active key" /></label>
+        <label>Amount VESTS <input id="d-amt" placeholder="e.g. 1.000000  (0 cancels)" /></label>
+      </div>
+      <button id="downBtn">Power down</button>
+      <div id="downMsg" class="msg"></div>
+    </section>
+  </div>
+
+  <script>
+  (function () {
+    var SYM = window.MELEK_TESTNET.symbols;
+
+    async function lookup() {
+      var name = el('lookup').value.trim().toLowerCase();
+      if (!name) { setMsg('lookupMsg', 'Enter an account name.', 'err'); return; }
+      setMsg('lookupMsg', 'Loading…');
+      try {
+        var r = await rpcCall('get_accounts', [[name]]);
+        if (!r || !r.length) { setMsg('lookupMsg', 'Account not found: ' + name, 'err'); el('balances').style.display = 'none'; return; }
+        var a = r[0];
+        el('bal-liquid').textContent = (a.balance || '0.000 ' + SYM.liquid).replace(SYM.liquid, 'MELEK');
+        el('bal-debt').textContent = (a.sbd_balance || '0.000 ' + SYM.debt).replace(SYM.debt, 'MELEK DOLLARS');
+        el('bal-vest').textContent = a.vesting_shares || '0.000000 ' + SYM.vest;
+        el('bal-savings').textContent = (a.savings_balance || '0.000 ' + SYM.liquid).replace(SYM.liquid, 'MELEK');
+        el('balances').style.display = '';
+        setMsg('lookupMsg', 'Loaded balances for @' + name + '.', 'ok');
+      } catch (e) { setMsg('lookupMsg', 'Error: ' + e.message, 'err'); }
+    }
+
+    function fmtAmount(raw) {
+      var n = parseFloat(raw);
+      if (!isFinite(n) || n <= 0) return null;
+      return n.toFixed(3);
+    }
+
+    async function sendTransfer() {
+      var from = el('t-from').value.trim().toLowerCase();
+      var wif = el('t-wif').value.trim();
+      var to = el('t-to').value.trim().toLowerCase();
+      var amt = fmtAmount(el('t-amt').value);
+      var asset = el('t-asset').value;
+      var memo = el('t-memo').value;
+      if (!from || !wif || !to || !amt) { setMsg('sendMsg', 'Fill from, key, to, and a positive amount.', 'err'); return; }
+      setMsg('sendMsg', 'Signing and broadcasting…');
+      try {
+        var client = makeClient();
+        var key = window.dsteem.PrivateKey.fromString(wif);
+        var op = ['transfer', { from: from, to: to, amount: amt + ' ' + asset, memo: memo || '' }];
+        var r = await client.broadcast.sendOperations([op], key);
+        setMsg('sendMsg', 'Sent! tx ' + (r.id || r.trx_id || 'broadcast'), 'ok');
+      } catch (e) { setMsg('sendMsg', 'Failed: ' + e.message, 'err'); }
+    }
+
+    async function powerUp() {
+      var acct = el('p-acct').value.trim().toLowerCase();
+      var wif = el('p-wif').value.trim();
+      var amt = fmtAmount(el('p-amt').value);
+      if (!acct || !wif || !amt) { setMsg('powerMsg', 'Fill account, key, and a positive amount.', 'err'); return; }
+      setMsg('powerMsg', 'Signing and broadcasting…');
+      try {
+        var client = makeClient();
+        var key = window.dsteem.PrivateKey.fromString(wif);
+        var op = ['transfer_to_vesting', { from: acct, to: acct, amount: amt + ' ' + SYM.liquid }];
+        var r = await client.broadcast.sendOperations([op], key);
+        setMsg('powerMsg', 'Powered up! tx ' + (r.id || r.trx_id || 'broadcast'), 'ok');
+      } catch (e) { setMsg('powerMsg', 'Failed: ' + e.message, 'err'); }
+    }
+
+    // Power down is denominated in VESTS (six decimals), not the three-decimal liquid amounts, and
+    // 0 is MEANINGFUL here - it cancels a withdrawal already in progress - so it cannot reuse
+    // fmtAmount(), which rejects zero.
+    function fmtVests(raw) {
+      var n = parseFloat(raw);
+      if (!isFinite(n) || n < 0) return null;
+      return n.toFixed(6);
+    }
+
+    async function powerDown() {
+      var acct = el('d-acct').value.trim().toLowerCase();
+      var wif = el('d-wif').value.trim();
+      var amt = fmtVests(el('d-amt').value);
+      if (!acct || !wif || amt === null) {
+        setMsg('downMsg', 'Fill account, key, and a VESTS amount (0 cancels a power-down in progress).', 'err');
+        return;
+      }
+      var cancelling = parseFloat(amt) === 0;
+      setMsg('downMsg', cancelling ? 'Cancelling power-down...' : 'Signing and broadcasting...');
+      try {
+        var client = makeClient();
+        var key = window.dsteem.PrivateKey.fromString(wif);
+        var op = ['withdraw_vesting', { account: acct, vesting_shares: amt + ' ' + SYM.vest }];
+        var r = await client.broadcast.sendOperations([op], key);
+        setMsg('downMsg', (cancelling ? 'Power-down cancelled! tx ' : 'Power-down started! tx ') + (r.id || r.trx_id || 'broadcast'), 'ok');
+      } catch (e) { setMsg('downMsg', 'Failed: ' + e.message, 'err'); }
+    }
+
+    // The transfer asset list follows the ACTIVE chain. Hardcoding TESTS/TBD here is exactly what
+    // made this wallet unusable on mainnet.
+    (function fillAssets() {
+      var sel = el('t-asset');
+      if (!sel) return;
+      sel.innerHTML =
+        '<option value="' + SYM.liquid + '">MELEK (' + SYM.liquid + ')</option>' +
+        '<option value="' + SYM.debt + '">MELEK DOLLARS (' + SYM.debt + ')</option>';
+    })();
+
+    el('lookupBtn').addEventListener('click', lookup);
+    el('sendBtn').addEventListener('click', sendTransfer);
+    el('powerBtn').addEventListener('click', powerUp);
+    el('downBtn').addEventListener('click', powerDown);
+    el('lookup').addEventListener('keydown', function (e) { if (e.key === 'Enter') lookup(); });
+
+    // --- MELEK: auto-detect the account (URL path /@name, ?account=, #@name, or logged-in session) and load it ---
+    function melekHexDecode(h){ try{ var o=''; for(var i=0;i+1<h.length;i+=2){ o+=String.fromCharCode(parseInt(h.substr(i,2),16)); } return o; }catch(e){ return ''; } }
+    function melekLoggedInUser(){
+      try{
+        var raw = localStorage.getItem('autopost2') || '';
+        if(!raw) return '';
+        var dec = /^[0-9a-f]+$/i.test(raw) ? melekHexDecode(raw) : raw;
+        return (dec.split(/[\t\n\x00]/)[0] || '').toLowerCase();
+      }catch(e){ return ''; }
+    }
+    function melekDetectAccount(){
+      var m = location.pathname.match(/@([a-z0-9.\-]+)/i);
+      if(m) return m[1].toLowerCase();
+      var q = new URLSearchParams(location.search);
+      var a = (q.get('account') || q.get('u') || '').replace(/^@/,'');
+      if(a) return a.toLowerCase();
+      var h = (location.hash || '').replace(/^#@?/,'');
+      if(h) return h.toLowerCase();
+      return melekLoggedInUser();
+    }
+    (function melekAutoInit(){
+      var acct = melekDetectAccount();
+      if(!acct) return;
+      if(el('lookup')) el('lookup').value = acct;
+      if(el('t-from')) el('t-from').value = acct;
+      if(el('p-acct')) el('p-acct').value = acct;
+      try{ lookup(); }catch(e){}
+    })();
+
+  })();
+  </script>
+</body>
+</html>

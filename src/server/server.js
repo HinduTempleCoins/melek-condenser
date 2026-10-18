@@ -16,7 +16,7 @@ import useGeneralApi from './api/general';
 import useUserJson from './json/user_json';
 import usePostJson from './json/post_json';
 import isBot from 'koa-isbot';
-import encryptedSession from 'koa-encrypted-session';
+import session from 'koa-session';
 import csrf from 'koa-csrf';
 import minimist from 'minimist';
 import config from 'config';
@@ -33,10 +33,10 @@ if (cluster.isMaster) console.log('application server starting, please wait.');
 // import uploadImage from 'server/upload-image' //medium-editor
 
 const app = new Koa();
-app.name = 'Blurt app';
+app.name = 'MELEK app';
 const env = process.env.NODE_ENV || 'development';
 // cache of a thousand days
-const cacheOpts = { maxAge: 86400000, gzip: true, buffer: true };
+const cacheOpts = { maxAge: 86400, gzip: true, buffer: true };
 
 // import ads.txt to be served statically
 const adstxt = fs.readFileSync(
@@ -81,6 +81,32 @@ app.use(
         this.type = 'text/plain';
         this.body = adstxt;
     })
+);
+
+// MELEK TESTNET portal: linktree -> wallet + signup (static, testnet-only).
+// Served from the repo-root `portal/` dir at /portal. Keys are generated client-side
+// in the browser; the wallet/signup pages talk to the testnet RPC and the faucet directly.
+const portalIndex = fs.readFileSync(
+    path.join(__dirname, '../../portal/index.html'),
+    'utf8'
+);
+// koa-static-cache serves exact file paths; the bare directory ("/portal", "/portal/")
+// won't match a file, so serve the linktree index explicitly for those.
+app.use(
+    mount('/portal', function* (next) {
+        if (this.method === 'GET' && (this.path === '/' || this.path === '')) {
+            this.type = 'text/html';
+            this.body = portalIndex;
+            return;
+        }
+        yield next;
+    })
+);
+app.use(
+    mount(
+        '/portal',
+        staticCache(path.join(__dirname, '../../portal'), cacheOpts)
+    )
 );
 
 // Proxy asset folder to webpack development server in development mode
@@ -128,15 +154,15 @@ app.use(requestTime(statsLoggerClient));
 
 app.keys = [config.get('session_key')];
 
-const crypto_key = config.get('server_session_secret');
-encryptedSession(
+// koa-session (signed, koa-1 compatible). koa-encrypted-session pulled koa-session@6
+// (koa-2 async) which silently set NO cookie under koa@1.4.1 -> no session -> csrf 403.
+app.use(session(
     {
         maxAge: 1000 * 3600 * 24 * 60,
         key: config.get('session_cookie_key'),
-        secretKey: crypto_key,
     },
     app
-);
+));
 
 csrf(app);
 

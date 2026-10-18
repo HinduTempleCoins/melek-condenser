@@ -1,19 +1,19 @@
 # Condenser
 
-Condenser is the react.js web interface to [Blurt](https://gitlab.com/blurt/blurt).
+Condenser is the react.js web interface to the [MELEK blockchain](https://github.com/HinduTempleCoins/MELEK) — a BLURT-fork Graphene chain (same lineage as STEEM/HIVE). It points at the MELEK RPC (`https://rpc.melek.salon`) and uses MELEK chain symbols on the wire.
 
 ### Changelog
 
 Please update the changelog with every change that you make to condenser.
 
-#### Quick Start: Run your own Blurt front end
+#### Quick Start: Run your own MELEK front end
 
 To bring up a running container fit for production, it's as simple as this:
 
 ```bash
 export CHICKEN=$(base64 --wrap=0 /dev/urandom | head -c 32)
 echo $CHICKEN
-docker run -it -p 8080:8080 -e SDC_SESSION_SECRETKEY=$CHICKEN registry.gitlab.com/blurt/openblurt/condenser
+docker run -it -p 8080:8080 -e SDC_SESSION_SECRETKEY=$CHICKEN hindutemplecoins/melek-condenser
 ```
 
 NB: Make sure that you record $CHICKEN somewhere safe. It should remain consistent.
@@ -27,18 +27,17 @@ apt update
 apt upgrade
 apt install git
 curl -s https://get.docker.com | bash
-git clone https://gitlab.com/blurt/blurt.git
-cd blurt/ui/condenser
+git clone https://github.com/HinduTempleCoins/melek-condenser.git
+cd melek-condenser
 docker build -t="myname/condenser:mybranch"
 docker run -it -p 8080:8080 myname/condenser:mybranch
 ```
 
-By default you will be connected to public RPC node. This is actually on the real blockchain and
-you would use your regular account name and credentials to login - there is
-not an official separate testnet at this time. If you intend to run a
-full-fledged site relying on your own, we recommend running
-`blurtd` locally instead
-[https://gitlab.com/blurt/blurt](https://gitlab.com/blurt/blurt).
+By default the container connects to the public MELEK RPC node (`https://rpc.melek.salon`).
+If you intend to run a full-fledged site, we recommend running a local MELEK node
+(forked from [BLURT](https://gitlab.com/blurt/blurt) — see the
+[`HinduTempleCoins/MELEK`](https://github.com/HinduTempleCoins/MELEK) repo for chain
+parameters and the eventual `melek-chain` C++ fork).
 
 ## Geting Set Up
 
@@ -58,8 +57,8 @@ npm i -g yarn
 apt update
 apt upgrade
 apt install git
-git clone https://gitlab.com/blurt/blurt.git
-cd blurt/ui/condenser
+git clone https://github.com/HinduTempleCoins/melek-condenser.git
+cd melek-condenser
 mkdir tmp
 yarn install
 yarn build
@@ -67,7 +66,7 @@ yarn run
 start
 ```
 
-After you've done your dev work, push to a branch. CI will test the build. If it builds, merge to master and you'll have a docker container at registry.gitlab.com/blurt/openblurt/condenser containing your latest work.
+After you've done your dev work, push to a branch on github.com/HinduTempleCoins/melek-condenser. CI will test the build. Production deploys happen via Render (see DEPLOY.md).
 
 #### Debugging SSR code
 
@@ -81,7 +80,7 @@ You can use Chromium to connect by finding the remote client at
 The intention is to configure condenser using environment variables. You
 can see the names of all of the available configuration environment
 variables in `config/custom-environment-variables.json`. Default values are
-stored in `config/defaults.json`.
+stored in `config/default.json`.
 
 Keep in mind environment variables only exist in your active session, so if
 you wish to save them for later use you can put them all in a file and
@@ -161,11 +160,11 @@ This will read data from the blobs in `api_mockdata` directory. If you want to u
 
 ### Run blackbox tests using nightwatch
 
-To run a Selenium test suite, start the condenser docker image with a name `condenser` (like `docker run --name condenser -itp 8080:8080 blurt/condenser:latest`) and then run the blackboxtest image attached to the condneser image's network:
+To run a Selenium test suite, start the condenser docker image with a name `condenser` (like `docker run --name condenser -itp 8080:8080 hindutemplecoins/melek-condenser:latest`) and then run the blackboxtest image attached to the condenser image's network:
 
 ```
-docker build -t=blurt/condenser-blackboxtest blackboxtest/
-docker run --network container:condenser blurt/condenser-blackboxtest:latest
+docker build -t=hindutemplecoins/melek-condenser-blackboxtest blackboxtest/
+docker run --network container:condenser hindutemplecoins/melek-condenser-blackboxtest:latest
 
 ```
 
@@ -173,6 +172,6 @@ docker run --network container:condenser blurt/condenser-blackboxtest:latest
 
 To report a non-critical issue, please file an issue on this GitHub project.
 
-If you find a security issue please report details to: security@blurt.foundation
+If you find a security issue please report details to: security@melek.salon
 
 We will evaluate the risk and make a patch available before filing the issue.

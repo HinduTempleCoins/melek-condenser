@@ -150,7 +150,7 @@ class NotificationsList extends React.Component {
                         <div className="flex-column">
                             <div className="notification__message">
                                 <a
-                                    href={`https://blurtwallet.com/@${accountName}/transfers`}
+                                    href={`https://wallet.melek.salon/@${accountName}/transfers`}
                                 >
                                     {highlightText(
                                         `${tt(

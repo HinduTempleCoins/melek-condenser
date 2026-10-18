@@ -11,9 +11,9 @@ describe('htmlready', () => {
         expect(HtmlReady(teststring).html).toEqual('');
     });
 
-    it('should allow links where the text portion and href contains blurt.blog', () => {
+    it('should allow links where the text portion and href contains melek.salon', () => {
         const dirty =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://blurt.world/signup" xmlns="http://www.w3.org/1999/xhtml">https://blurt.world/signup</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://melek.salon/signup" xmlns="http://www.w3.org/1999/xhtml">https://melek.salon/signup</a></xml>';
         const res = HtmlReady(dirty).html;
         expect(res).toEqual(dirty);
     });
@@ -30,57 +30,57 @@ describe('htmlready', () => {
         expect(externalDomainResult).toEqual(externalDomainDirty);
     });
 
-    it('should not allow links where the text portion contains blurt.world but the link does not', () => {
+    it('should not allow links where the text portion contains melek.salon but the link does not', () => {
         // There isn't an easy way to mock counterpart, even with proxyquire, so we just test for the missing translation message -- ugly but ok
 
         const dirty =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://blurt.world/signup</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://melek.salon/signup</a></xml>';
         const cleansed =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://blurt.world/signup / https://steamit.com/signup</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://melek.salon/signup / https://steamit.com/signup</div></xml>';
         const res = HtmlReady(dirty).html;
         expect(res).toEqual(cleansed);
 
         const cased =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://blurt.world/signup</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://melek.salon/signup</a></xml>';
         const cleansedcased =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://blurt.world/signup / https://steamit.com/signup</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://melek.salon/signup / https://steamit.com/signup</div></xml>';
         const rescased = HtmlReady(cased).html;
         expect(rescased).toEqual(cleansedcased);
 
         const withuser =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://official@blurt.world/signup</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://official@melek.salon/signup</a></xml>';
         const cleansedwithuser =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://official@blurt.world/signup / https://steamit.com/signup</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://official@melek.salon/signup / https://steamit.com/signup</div></xml>';
         const reswithuser = HtmlReady(withuser).html;
         expect(reswithuser).toEqual(cleansedwithuser);
 
         const noendingslash =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com" xmlns="http://www.w3.org/1999/xhtml">https://blurt.world</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com" xmlns="http://www.w3.org/1999/xhtml">https://melek.salon</a></xml>';
         const cleansednoendingslash =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://blurt.world / https://steamit.com</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://melek.salon / https://steamit.com</div></xml>';
         const resnoendingslash = HtmlReady(noendingslash).html;
         expect(resnoendingslash).toEqual(cleansednoendingslash);
 
         // make sure extra-domain in-page links are also caught by our phishy link scan.
         const domainInpage =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com#really-evil-inpage-component" xmlns="http://www.w3.org/1999/xhtml">https://blurt.world</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com#really-evil-inpage-component" xmlns="http://www.w3.org/1999/xhtml">https://melek.salon</a></xml>';
         const cleanDomainInpage =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://blurt.world / https://steamit.com#really-evil-inpage-component</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://melek.salon / https://steamit.com#really-evil-inpage-component</div></xml>';
         const resDomainInpage = HtmlReady(domainInpage).html;
         expect(resDomainInpage).toEqual(cleanDomainInpage);
 
-        // anchor links including blurt.world should be allowed
+        // anchor links including melek.salon should be allowed
         const inpage =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="#https://steamit.com/unlikelyinpagelink" xmlns="http://www.w3.org/1999/xhtml">Go down lower for https://blurt.world info!</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="#https://steamit.com/unlikelyinpagelink" xmlns="http://www.w3.org/1999/xhtml">Go down lower for https://melek.salon info!</a></xml>';
         const cleanInpage =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="#https://steamit.com/unlikelyinpagelink" xmlns="http://www.w3.org/1999/xhtml">Go down lower for https://blurt.world info!</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="#https://steamit.com/unlikelyinpagelink" xmlns="http://www.w3.org/1999/xhtml">Go down lower for https://melek.salon info!</a></xml>';
         const resinpage = HtmlReady(inpage).html;
         expect(resinpage).toEqual(cleanInpage);
 
         const noprotocol =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/" xmlns="http://www.w3.org/1999/xhtml">for a good time, visit blurt.world today</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steamit.com/" xmlns="http://www.w3.org/1999/xhtml">for a good time, visit melek.salon today</a></xml>';
         const cleansednoprotocol =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">for a good time, visit blurt.world today / https://steamit.com/</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">for a good time, visit melek.salon today / https://steamit.com/</div></xml>';
         const resnoprotocol = HtmlReady(noprotocol).html;
         expect(resnoprotocol).toEqual(cleansednoprotocol);
     });
@@ -113,18 +113,18 @@ describe('htmlready', () => {
 
     it('should not link usernames at the front of linked text', () => {
         const nameinsidelinkfirst =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://blurt.world/signup">@hihi</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://melek.salon/signup">@hihi</a></xml>';
         const htmlified =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://blurt.world/signup">@hihi</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://melek.salon/signup">@hihi</a></xml>';
         const res = HtmlReady(nameinsidelinkfirst).html;
         expect(res).toEqual(htmlified);
     });
 
     it('should not link usernames in the middle of linked text', () => {
         const nameinsidelinkmiddle =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://blurt.world/signup">hi @hihi</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://melek.salon/signup">hi @hihi</a></xml>';
         const htmlified =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://blurt.world/signup">hi @hihi</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://melek.salon/signup">hi @hihi</a></xml>';
         const res = HtmlReady(nameinsidelinkmiddle).html;
         expect(res).toEqual(htmlified);
     });
@@ -157,7 +157,7 @@ describe('htmlready', () => {
 
     it('should not mistake usernames in valid comment urls as mentions', () => {
         const url =
-            'https://blurt.world/spam/@test-safari/34gfex-december-spam#@test-safari/re-test-safari-34gfex-december-spam-20180110t234627522z';
+            'https://melek.salon/spam/@test-safari/34gfex-december-spam#@test-safari/re-test-safari-34gfex-december-spam-20180110t234627522z';
         const prefix = '<xml xmlns="http://www.w3.org/1999/xhtml">';
         const suffix = '</xml>';
         const input = prefix + url + suffix;
@@ -185,9 +185,9 @@ describe('htmlready', () => {
 
     it('should detect urls that are phishy', () => {
         const dirty =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steewit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://blurt.world/signup</a></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><a href="https://steewit.com/signup" xmlns="http://www.w3.org/1999/xhtml">https://melek.salon/signup</a></xml>';
         const cleansed =
-            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://blurt.world/signup / https://steewit.com/signup</div></xml>';
+            '<xml xmlns="http://www.w3.org/1999/xhtml"><div title="missing translation: en.g.phishy_message" class="phishy">https://melek.salon/signup / https://steewit.com/signup</div></xml>';
         const res = HtmlReady(dirty).html;
         expect(res).toEqual(cleansed);
     });

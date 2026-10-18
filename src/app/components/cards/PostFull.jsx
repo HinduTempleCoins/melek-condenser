@@ -219,7 +219,7 @@ class PostFull extends React.Component {
             encodeURIComponent(s.title) +
             '&url=' +
             encodeURIComponent(s.url) +
-            '&source=Blurt&mini=true';
+            '&source=MELEK&mini=true';
         window.open(
             'https://www.linkedin.com/shareArticle?' + q,
             'Share',
@@ -575,7 +575,6 @@ export default connect(
                 transactionActions.broadcastOperation({
                     type: 'delete_comment',
                     operation,
-                    confirm: tt('g.operation_cost', { fee }),
                 })
             );
         },

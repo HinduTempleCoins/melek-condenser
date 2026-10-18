@@ -31,6 +31,7 @@ export function* getAccount(username, force = false) {
         state.global.get('accounts').get(username)
     );
 
+    // hive never serves `owner` prop (among others)
     const isLite = !!account && !account.get('owner');
 
     if (!account || force || isLite) {
@@ -52,64 +53,11 @@ export function* getAccount(username, force = false) {
     return account;
 }
 
-// --- PATCH: safe wrapper for receiveState ---
-function safePutReceiveState(state) {
-    if (globalActions && typeof globalActions.receiveState === 'function') {
-        return put(globalActions.receiveState(state));
-    } else {
-        console.warn(
-            'globalActions.receiveState is missing or not a function',
-            globalActions
-        );
-        return null; // no-op
-    }
-}
-// ----------------------------
-
-/** Manual refreshes. The router is in FetchDataSaga. */
+/** Manual refreshes.  The router is in FetchDataSaga. */
 export function* getState({ payload: { url } }) {
     try {
-        // Minimal state builder
-        let state = {
-            content: {},
-            accounts: {},
-            discussion_idx: {},
-        };
-
-        // Normalize the url
-        url = url.split('?')[0].replace(/^\/+|\/+$/g, '');
-        let page = url;
-        if (url === '') page = 'hot';
-
-        let discussions = [];
-        if (page.startsWith('trending') || page === 'trending') {
-            discussions = yield call(
-                [api, api.getDiscussionsByTrendingAsync],
-                { tag: '', limit: 20 }
-            );
-        } else if (page.startsWith('hot') || page === 'hot') {
-            discussions = yield call(
-                [api, api.getDiscussionsByHotAsync],
-                { tag: '', limit: 20 }
-            );
-        } else if (page.startsWith('created') || page === 'created') {
-            discussions = yield call(
-                [api, api.getDiscussionsByCreatedAsync],
-                { tag: '', limit: 20 }
-            );
-        }
-
-        // Fill state.content + index with posts
-        if (discussions && discussions.length) {
-            state.discussion_idx[page] = { '': [] };
-            for (let d of discussions) {
-                state.content[`${d.author}/${d.permlink}`] = d;
-                state.discussion_idx[page][''].push(
-                    `${d.author}/${d.permlink}`
-                );
-            }
-        }
-        yield safePutReceiveState(state);
+        const state = yield call(getStateAsync, url);
+        yield put(globalActions.receiveState(state));
     } catch (error) {
         console.error('~~ Saga getState error ~~>', url, error);
         yield put(appActions.steemApiError(error.message));
@@ -119,7 +67,9 @@ export function* getState({ payload: { url } }) {
 function* showTransactionErrorNotification() {
     const errors = yield select((state) => state.transaction.get('errors'));
     for (const [key, message] of errors) {
-        if (key !== 'bandwidthError' && key !== 'transactionFeeError') {
+        // Do not display a notification for the bandwidthError/transactionFeeError key.
+        if (key === 'bandwidthError' || key === 'transactionFeeError') {
+        } else {
             yield put(appActions.addNotification({ key, message }));
             yield put(transactionActions.deleteError({ key }));
         }
@@ -127,34 +77,29 @@ function* showTransactionErrorNotification() {
 }
 
 export function* getContent({ author, permlink, resolve, reject }) {
-    try {
-        // Ignore old bootstrap request for blurt-condenser/index.html
-        if (author === 'blurt-condenser' && permlink === 'index.html') {
-            console.warn('Skipping old bootstrap fetch; feed already loaded');
-            if (resolve) resolve();
-            return;
+    let content;
+    while (!content) {
+        content = yield call([api, api.getContentAsync], author, permlink);
+        if (content.author == '') {
+            // retry if content not found. #1870
+            content = null;
+            yield call(wait, 3000);
         }
+    }
 
-        if (!author || !permlink || permlink.endsWith('.html')) {
-            console.warn('Skipping getContent for non-post', { author, permlink });
-            if (reject) reject();
-            return;
-        }
-
-        const content = yield call([api, api.getContentAsync], author, permlink);
-        if (content && content.author) {
-            yield put(globalActions.receiveContent({ content }));
-            if (resolve) resolve(content);
-        } else {
-            console.warn('getContent: no content found', { author, permlink });
-            if (reject) reject();
-        }
-    } catch (error) {
-        console.error('~~ Saga getContent error ~~>', error);
-        if (reject) reject(error);
+    yield put(globalActions.receiveContent({ content }));
+    if (resolve && content) {
+        resolve(content);
+    } else if (reject && !content) {
+        reject();
     }
 }
 
+/**
+ * Save this user's preferences, either directly from the submitted payload or from whatever's saved in the store currently.
+ *
+ * @param {Object?} params.payload
+ */
 function* saveUserPreferences({ payload }) {
     if (payload) {
         yield setUserPreferences(payload);
@@ -163,4 +108,3 @@ function* saveUserPreferences({ payload }) {
     const prefs = yield select((state) => state.app.get('user_preferences'));
     yield setUserPreferences(prefs.toJS());
 }
-

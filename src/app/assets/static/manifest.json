@@ -1,6 +1,6 @@
 {
-    "name": "Blurt",
-    "short_name": "Blurt",
+    "name": "MELEK",
+    "short_name": "MELEK",
     "theme_color": "#FFFFFF",
     "background_color": "#FFFFFF",
     "start_url": "/",
@@ -27,6 +27,5 @@
             "type": "image/png"
         }
     ],
-    "gcm_sender_id": "724829305784",
     "gcm_user_visible_only": true
 }

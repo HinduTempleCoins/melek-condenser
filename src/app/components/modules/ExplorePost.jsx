@@ -55,8 +55,8 @@ class ExplorePost extends Component {
         // const steemd = 'https://steemd.com' + link;
         // const steemdb = 'https://steemdb.com' + link;
         // const busy = 'https://busy.org' + link;
-        const blurt_world = 'https://blurt.blog' + link;
-        const blurtmd = '[' + title + '](https://blurt.blog' + link + ')';
+        const blurt_world = 'https://melek.salon' + link;
+        const blurtmd = '[' + title + '](https://melek.salon' + link + ')';
         let text =
             this.state.copied == true
                 ? tt('explorepost_jsx.copied')

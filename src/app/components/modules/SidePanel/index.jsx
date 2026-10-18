@@ -60,7 +60,8 @@ const SidePanel = ({
             {
                 value: 'faq',
                 label: tt('navigation.faq'),
-                link: 'https://blurtfaq.org',
+                link: '/faq.html',
+                internal: true,
             },
             {
                 value: 'tags',
@@ -70,85 +71,54 @@ const SidePanel = ({
             // {
             //     value: 'recover_account_step_1',
             //     label: tt('navigation.stolen_account_recovery'),
-            //     link: `${walletUrl}/recover_account_step_1`,
+            //     link: 'https://signer.melek.salon/recover',
             // },
             {
                 value: 'change_password',
                 label: tt('navigation.change_account_password'),
-                link: `${walletUrl}/change_password`,
+                link: '/portal/wallet.html',
+                isExternal: true,
+                internal: true,
             },
             {
                 value: 'vote_for_witnesses',
                 label: tt('navigation.vote_for_witnesses'),
-                link: `${walletUrl}/~witnesses`,
+                link: '/~witnesses',
+                internal: true,
             },
         ],
         exchanges: [
-            {
-                value: 'probit',
-                label: 'Probit',
-                link: 'https://www.probit.com/app/exchange/BLURT-BTC',
-            },
-            {
-                value: 'ionomy',
-                label: 'Ionomy',
-                link: 'https://ionomy.com/en/markets/btc-blurt',
-            },
-            {
-                value: 'beldex',
-                label: 'Beldex',
-                link: 'https://www.beldex.io/tradeAdvance?pair=BLURT_BTC',
-            },
-            {
-                value: 'stex',
-                label: 'Stex',
-                link: 'https://app.stex.com/en/trade/pair/BTC/BLURT/1D',
-            },
-            {
-                value: 'hive-engine',
-                label: 'Hive Engine',
-                link: 'https://hive-engine.com/?p=market&t=BLURT',
-            },
-            {
-                value: 'steem-engine',
-                label: 'Steem Engine',
-                link: 'https://steem-engine.com/?p=market&t=BLURT',
-            },
-            {
-                value: 'leodex',
-                label: 'Leodex',
-                link: 'https://leodex.io/',
-            },
+            // MELEK is not listed on any third-party exchange yet. This list previously carried
+            // Blurt's exchange links with the ticker string swapped to MELEK — every one of them
+            // was a dead or wrong market page. The section below renders only when this is
+            // non-empty, so adding a real venue here brings it straight back.
         ],
         wrapped: [
-            {
-                value: 'wblurt',
-                label: 'Uniswap',
-                link:
-                    'https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x37472814e5c6146e6ca7ed1753cd1b18b733e5d4',
-            },
+            // Was a Uniswap link for 0x3747…e5d4 — the real wBLURT ERC-20, under a "Wrapped MELEK"
+            // heading. No wMELEK contract exists yet; add it here when it does.
         ],
         external: [
             {
                 value: 'chat',
                 label: tt('navigation.chat'),
-                link: 'https://discord.blurt.world/',
+                link: '/chat',
+                internal: true,
             },
             {
                 value: 'block_explorer',
                 label: 'Block Explorer',
-                link: 'https://blocks.blurtwallet.com',
+                link: 'https://explorer.melek.salon',
             },
             // {
             //     value: 'jobs',
             //     label: tt('navigation.jobs'),
             //     link: 'https://recruiting.paylocity.com/recruiting/jobs/List/3288/Steemit-Inc',
             // },
-            {
-                value: 'tools',
-                label: 'Blurt Tools',
-                link: 'https://blurt.tools/',
-            },
+            // {
+            //     value: 'tools',
+            //     label: 'Tools',
+            //     link: 'https://melek.salon/',
+            // },
             // {
             //     value: 'business',
             //     label: tt('navigation.business_center'),
@@ -204,7 +174,23 @@ const SidePanel = ({
             {
                 value: 'signup',
                 label: tt('g.sign_up'),
-                link: 'https://signup.blurtwallet.com',
+                link: '/portal/signup.html',
+                isExternal: true,
+                internal: true,
+            },
+            {
+                value: 'wallet',
+                label: 'Wallet',
+                link: '/portal/wallet.html',
+                isExternal: true,
+                internal: true,
+            },
+            {
+                value: 'portal',
+                label: 'MELEK Portal',
+                link: '/portal/',
+                isExternal: true,
+                internal: true,
             },
             {
                 value: 'post',
@@ -213,16 +199,7 @@ const SidePanel = ({
             },
         ],
         swag: [
-            {
-                value: 'logo-merch',
-                label: 'Logo Merch',
-                link: 'https://www.redbubble.com/shop/ap/51822392',
-            },
-            {
-                value: 'text-merch',
-                label: 'Text Merch',
-                link: 'https://www.redbubble.com/shop/ap/51897803',
-            },
+            // Was Blurt's Redbubble store. Point at a MELEK store when one exists.
         ],
     };
 
@@ -236,6 +213,7 @@ const SidePanel = ({
                 <ul className="vertical menu">
                     {sidePanelLinks.internal.map(makeLink)}
                 </ul>
+                {sidePanelLinks.exchanges.length > 0 && (
                 <ul className="vertical menu">
                     <li>
                         <a className="menu-section">
@@ -244,12 +222,16 @@ const SidePanel = ({
                     </li>
                     {sidePanelLinks.exchanges.map(makeLink)}
                 </ul>
+                )}
+                {sidePanelLinks.wrapped.length > 0 && (
                 <ul className="vertical menu">
                     <li>
-                        <a className="menu-section">Wrapped BLURT</a>
+                        <a className="menu-section">Wrapped MELEK</a>
                     </li>
                     {sidePanelLinks.wrapped.map(makeLink)}
                 </ul>
+                )}
+                {sidePanelLinks.swag.length > 0 && (
                 <ul className="vertical menu">
                     <li>
                         <a className="menu-section">
@@ -258,6 +240,7 @@ const SidePanel = ({
                     </li>
                     {sidePanelLinks.swag.map(makeLink)}
                 </ul>
+                )}
                 <ul className="vertical menu">
                     {sidePanelLinks.external.map(makeLink)}
                 </ul>

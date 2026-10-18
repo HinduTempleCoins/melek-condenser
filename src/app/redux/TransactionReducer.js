@@ -62,7 +62,7 @@ export default function reducer(state = defaultState, action) {
                         if (/Voting weight is too small/.test(errorStr)) {
                             errorKey = 'Voting weight is too small';
                             errorStr =
-                                'Voting weight is too small, please accumulate more voting power or blurt power.';
+                                'Voting weight is too small, please accumulate more voting power or MELEK Power.';
                         }
                         break;
                     case 'comment':
@@ -86,7 +86,7 @@ export default function reducer(state = defaultState, action) {
                     if (error.message) {
                         // TODO: This reformatting could be better, in most cases, errorKey and errorString end up being similar if not identical.
                         // Depends on FC_ASSERT formatting
-                        // https://github.com/steemit/blurt.world/issues/222
+                        // https://github.com/steemit/melek.salon/issues/222
                         const err_lines = error.message.split('\n');
                         if (err_lines.length > 2) {
                             errorKey = err_lines[1];
@@ -108,9 +108,9 @@ export default function reducer(state = defaultState, action) {
                     }
                     // Catch for unknown key better error handling
                     if (/unknown key: /.test(errorKey)) {
-                        errorKey = "Blurt account doesn't exist.";
+                        errorKey = "MELEK account doesn't exist.";
                         errorStr =
-                            "Transaction failed: Blurt account doesn't exist.";
+                            "Transaction failed: MELEK account doesn't exist.";
                     }
                     // Catch for invalid active authority
                     if (/Missing Active Authority /.test(errorKey)) {

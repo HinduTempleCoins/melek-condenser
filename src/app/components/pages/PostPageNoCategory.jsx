@@ -14,14 +14,8 @@ class PostWrapper extends React.Component {
         };
     }
 
-     componentWillMount() {
-         const route_params = this.props.routeParams;
-        // Bail early if this is a fake "index.html" route mis-parsed as a username
-        if (route_params.username === 'index.html') {
-            browserHistory.replace('/');
-            return;
-        }
-
+    componentWillMount() {
+        const route_params = this.props.routeParams;
         const post = route_params.username + '/' + route_params.slug;
         const dis = this.props.content.get(post);
         if (!dis) {

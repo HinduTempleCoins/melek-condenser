@@ -225,7 +225,6 @@ module.exports = connect(
                         required_posting_auths: [follower],
                         json: JSON.stringify(json),
                     },
-                    confirm: tt('g.operation_cost', { fee }),
                     successCallback: done,
                     // TODO: Why?
                     errorCallback: done,

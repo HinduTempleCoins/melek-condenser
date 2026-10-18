@@ -17,7 +17,7 @@ import * as userActions from 'app/redux/UserReducer';
 import * as appActions from 'app/redux/AppReducer';
 import Userpic from 'app/components/elements/Userpic';
 import { SIGNUP_URL } from 'shared/constants';
-import BlurtLogo from 'app/components/elements/BlurtLogo';
+import MELEKLogo from 'app/components/elements/MELEKLogo';
 import normalizeProfile from 'app/utils/NormalizeProfile';
 import Announcement from 'app/components/elements/Announcement';
 import GptAd from 'app/components/elements/GptAd';
@@ -286,17 +286,31 @@ class Header extends React.Component {
         // Since navigate isn't set, defaultNavigate will always be used.
         const nav = navigate || defaultNavigate;
 
-        const submit_story = $STM_Config.read_only_mode ? null : loggedIn ? (
-            <Link to="/submit.html">
-                <IconButton />
+        const submit_story = (
+            <Link
+                className="Header__post-link"
+                to="/submit.html"
+                title="Create a post"
+                style={{
+                    display: 'inline-block',
+                    marginRight: '0.6rem',
+                    padding: '0.35rem 0.9rem',
+                    borderRadius: '6px',
+                    background: '#eab308',
+                    color: '#171f24',
+                    fontWeight: 700,
+                    whiteSpace: 'nowrap',
+                }}
+            >
+                &#9998; Post
             </Link>
-        ) : null;
+        );
 
         const feed_link = `/@${username}/feed`;
         const replies_link = `/@${username}/recent-replies`;
         const account_link = `/@${username}`;
         const comments_link = `/@${username}/comments`;
-        const wallet_link = `${walletUrl}/@${username}`;
+        const wallet_link = '/@' + username + '/transfers';
         const settings_link = `/@${username}/settings`;
         const pathCheck = userPath === '/submit.html' ? true : null;
         const notifications_link = `/@${username}/notifications`;
@@ -368,7 +382,7 @@ class Header extends React.Component {
                         <div className="small-5 large-4 columns Header__logotype">
                             {/*LOGO*/}
                             <Link to={logo_link}>
-                                <BlurtLogo />
+                                <MELEKLogo />
                             </Link>
                         </div>
 
@@ -384,7 +398,7 @@ class Header extends React.Component {
                         <div className="small-7 large-4 columns Header__buttons">
                             {/*NOT LOGGED IN SIGN IN AND SIGN UP LINKS*/}
                             {!loggedIn && (
-                                <span className="Header__user-signup show-for-medium">
+                                <span className="Header__user-signup">
                                     <a
                                         className="Header__login-link"
                                         href="/login.html"
@@ -411,8 +425,8 @@ class Header extends React.Component {
                                 </a>
                             </span>
 
-                            {/*SUBMIT STORY*/}
-                            {submit_story}
+                            {/*SUBMIT STORY - logged-in only (declutters mobile header)*/}
+                            {loggedIn && submit_story}
                             {/*USER AVATAR */}
                             {loggedIn && (
                                 <DropdownMenu

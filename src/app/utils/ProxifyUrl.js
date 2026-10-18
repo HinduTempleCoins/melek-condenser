@@ -8,8 +8,8 @@
  * <proxy>/{int}x{int}/[<proxy>/{int}x{int}/]<proxy>/<file url>
  * @type {RegExp}
  */
-const rProxyDomain = /^http(s)?:\/\/images.blurt.blog\//g;
-const rProxyDomainsDimensions = /http(s)?:\/\/images.blurt.blog\/([0-9]+x[0-9]+)\//g;
+const rProxyDomain = /^http(s)?:\/\/images.melek.salon\//g;
+const rProxyDomainsDimensions = /http(s)?:\/\/images.melek.salon\/([0-9]+x[0-9]+)\//g;
 const NATURAL_SIZE = '0x0/';
 const CAPPED_SIZE = '640x0/';
 
@@ -23,7 +23,7 @@ export const imageProxy = () => $STM_Config.img_proxy_prefix;
  *                                          if true, preserves the first {int}x{int} in a proxy url. If not found, uses 0x0
  * @returns string
  */
-export default (url, dimensions = false) => {
+export const proxifyImageUrl = (url, dimensions = false) => {
     const proxyList = url.match(rProxyDomainsDimensions);
     let respUrl = url;
     if (proxyList) {
@@ -53,3 +53,5 @@ export default (url, dimensions = false) => {
     }
     return respUrl;
 };
+
+export default proxifyImageUrl;

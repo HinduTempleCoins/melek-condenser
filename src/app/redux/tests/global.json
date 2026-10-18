@@ -8,14 +8,14 @@
         "current_witness": "mottler-5",
         "total_pow": "18446744048449238345",
         "num_pow_witnesses": 79,
-        "virtual_supply": "156738.000 BLURT",
-        "current_supply": "156738.000 BLURT",
-        "confidential_supply": "0.000 BLURT",
+        "virtual_supply": "156738.000 MELEK",
+        "current_supply": "156738.000 MELEK",
+        "confidential_supply": "0.000 MELEK",
         "current_sbd_supply": "0.000 SBD",
         "confidential_sbd_supply": "0.000 SBD",
-        "total_vesting_fund_blurt": "274.000 BLURT",
+        "total_vesting_fund_blurt": "274.000 MELEK",
         "total_vesting_shares": "274.000000 VESTS",
-        "total_reward_fund_blurt": "77794.000 BLURT",
+        "total_reward_fund_blurt": "77794.000 MELEK",
         "total_reward_shares2": "0",
         "sbd_interest_rate": 1000,
         "average_block_size": 117,
@@ -65,7 +65,7 @@
             "woot"
         ],
         "median_props": {
-            "account_creation_fee": "100.000 BLURT",
+            "account_creation_fee": "100.000 MELEK",
             "maximum_block_size": 131072,
             "sbd_interest_rate": 1000
         }

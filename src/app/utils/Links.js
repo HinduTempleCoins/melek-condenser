@@ -19,10 +19,10 @@ const urlSet = ({ domain = domainPath, path } = {}) => {
 */
 export const any = (flags = 'i') => new RegExp(urlSet(), flags);
 export const local = (flags = 'i') =>
-    new RegExp(urlSet({ domain: '(?:localhost|(?:.*\\.)?blurt.blog)' }), flags);
+    new RegExp(urlSet({ domain: '(?:localhost|(?:.*\\.)?melek.salon)' }), flags);
 export const remote = (flags = 'i') =>
     new RegExp(
-        urlSet({ domain: `(?!localhost|(?:.*\\.)?blurt.blog)${domainPath}` }),
+        urlSet({ domain: `(?!localhost|(?:.*\\.)?melek.salon)${domainPath}` }),
         flags
     );
 export const image = (flags = 'i') =>

@@ -1,0 +1,62 @@
+# Render Blueprint — two services from one GitHub repo.
+#
+# - melek-condenser: the social front end (melek.salon)
+# - melek-wallet:    the wallet front end (wallet.melek.salon)
+#
+# Both branches live on github.com/HinduTempleCoins/melek-condenser.
+# After `Apply Blueprint`, set the env vars marked `sync: false` in each
+# service's Environment tab. See DEPLOY.md for full instructions.
+
+services:
+  - type: web
+    name: melek-condenser
+    runtime: node
+    repo: https://github.com/HinduTempleCoins/melek-condenser
+    branch: claude/add-claude-md-file-vWOxi
+    plan: starter
+    buildCommand: |
+      export NODE_OPTIONS=--openssl-legacy-provider
+      npm ci && npm run build
+    startCommand: BROWSER= NODE_OPTIONS=--openssl-legacy-provider node lib/server/index.js
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: SDC_CLIENT_BLURTD_URL
+        value: https://rpc.beblurt.com
+      - key: SDC_SERVER_BLURTD_URL
+        value: https://rpc.beblurt.com
+      - key: SDC_SESSION_SECRETKEY
+        generateValue: true
+
+  - type: web
+    name: melek-wallet
+    runtime: node
+    repo: https://github.com/HinduTempleCoins/melek-condenser
+    branch: claude/melek-rebrand
+    plan: starter
+    buildCommand: |
+      export NODE_OPTIONS=--openssl-legacy-provider
+      npm ci && npm run build
+    startCommand: BROWSER= NODE_OPTIONS=--openssl-legacy-provider node lib/server/index.js
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: SDC_CLIENT_BLURTD_URL
+        value: https://rpc.beblurt.com
+      - key: SDC_SERVER_BLURTD_URL
+        value: https://rpc.beblurt.com
+      - key: SDC_SESSION_SECRETKEY
+        generateValue: true
+      # Production email delivery (leave blank for demo mode):
+      - key: sendgrid_key
+        sync: false
+      - key: sendgrid_from
+        sync: false

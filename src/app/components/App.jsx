@@ -112,14 +112,7 @@ class App extends React.Component {
             callout = (
                 <div className="App__announcement row">
                     <div className="column">
-                        <div
-                            className={classNames(
-                                'callout success',
-                                { alert },
-                                { warning },
-                                { success }
-                            )}
-                        >
+                        <div className={classNames('callout success')}>
                             <CloseButton
                                 onClick={() =>
                                     this.setState({ showCallout: false })
@@ -135,14 +128,7 @@ class App extends React.Component {
             callout = (
                 <div className="App__announcement row">
                     <div className="column">
-                        <div
-                            className={classNames(
-                                'callout warning',
-                                { alert },
-                                { warning },
-                                { success }
-                            )}
-                        >
+                        <div className={classNames('callout warning')}>
                             <CloseButton
                                 onClick={() =>
                                     this.setState({ showCallout: false })

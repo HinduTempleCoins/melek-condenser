@@ -1,33 +1,888 @@
 /* eslint react/prop-types: 0 */
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import tt from 'counterpart';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import tt from 'counterpart'
+import { List } from 'immutable'
+import SavingsWithdrawHistory from 'app/components/elements/SavingsWithdrawHistory'
+import TransferHistoryRow from 'app/components/cards/TransferHistoryRow'
+import TimeAgoWrapper from 'app/components/elements/TimeAgoWrapper'
+import {
+  numberWithCommas,
+  vestingBlurt,
+  delegatedBlurt,
+  powerdownBlurt,
+  remainingPowerdowns,
+  pricePerBlurt
+} from 'app/utils/StateFunctions'
+import WalletSubMenu from 'app/components/elements/WalletSubMenu'
+import shouldComponentUpdate from 'app/utils/shouldComponentUpdate'
+import Tooltip from 'app/components/elements/Tooltip'
+import { FormattedHTMLMessage } from 'app/Translator'
+import {
+  LIQUID_TOKEN,
+  LIQUID_TOKEN_UPPERCASE,
+  LIQUID_TICKER,
+  DEBT_TOKENS,
+  VESTING_TOKEN
+} from 'app/client_config'
+import * as transactionActions from 'app/redux/TransactionReducer'
+import * as globalActions from 'app/redux/GlobalReducer'
+import DropdownMenu from 'app/components/elements/DropdownMenu'
+import LoadingIndicator from 'app/components/elements/LoadingIndicator'
+import {
+  WALLET_HISTORY_DAYS,
+  WALLET_HISTORY_PAGE_SIZE
+} from 'app/utils/historyPageSize'
+
+const assetPrecision = 1000
 
 class UserWallet extends React.Component {
-    render() {
-        const { account, walletUrl } = this.props;
-        if (!account) return null;
-
-        return (
-            <div className="UserWallet">
-                <div className="wallet-link row zebra">
-                    <p>
-                        <a href={walletUrl}>Go to wallet</a>
-                    </p>
-                </div>
-            </div>
-        );
+  constructor () {
+    super()
+    this.state = {
+      claimInProgress: false,
+      historyIndex: 0,
+      historyTransitionDirection: null
     }
+    this.historyTouchStartX = null
+    this.historyTouchStartY = null
+    this.onShowBuyBlurt = (e) => {
+      e.preventDefault()
+      const new_window = window.open()
+      new_window.opener = null
+      new_window.location =
+                'https://www.probit.com/app/exchange/MELEK-BTC'
+    }
+    this.onShowDepositBlurt = (e) => {
+      if (e && e.preventDefault) e.preventDefault()
+      const name = this.props.currentUser.get('username')
+      const new_window = window.open()
+      new_window.opener = null
+      new_window.location =
+                'https://melek.salon/market'
+    }
+    this.onShowWithdrawBlurt = (e) => {
+      e.preventDefault()
+      const new_window = window.open()
+      new_window.opener = null
+      new_window.location =
+                'https://melek.salon/market'
+    }
+    this.onShowDepositPower = (currentUserName, e) => {
+      e.preventDefault()
+      const new_window = window.open()
+      new_window.opener = null
+      new_window.location =
+                'https://melek.salon/market'
+    }
+    this.shouldComponentUpdate = shouldComponentUpdate(this, 'UserWallet')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const currentAccountName =
+      this.props.account && this.props.account.get && this.props.account.get('name')
+    const nextAccountName =
+      nextProps.account && nextProps.account.get && nextProps.account.get('name')
+
+    if (nextAccountName !== currentAccountName) {
+      this.setState({ historyIndex: 0, historyTransitionDirection: null })
+    }
+  }
+
+  getEffectiveHistoryIndex (totalEntries, historyPageSize) {
+    const maxHistoryIndex = Math.max(
+      0,
+      Math.ceil(totalEntries / historyPageSize) - 1
+    )
+
+    return Math.min(this.state.historyIndex, maxHistoryIndex)
+  }
+
+  canUseSwipePagination () {
+    return (
+      process.env.BROWSER &&
+      typeof window !== 'undefined' &&
+      window.innerWidth <= 640
+    )
+  }
+
+  handleHistoryTouchStart = (event) => {
+    if (
+      !this.canUseSwipePagination() ||
+      !event.touches ||
+      event.touches.length !== 1
+    ) {
+      return
+    }
+
+    const touch = event.touches[0]
+    this.historyTouchStartX = touch.clientX
+    this.historyTouchStartY = touch.clientY
+  }
+
+  handleHistoryTouchEnd = (event, totalEntries, historyPageSize) => {
+    if (
+      !this.canUseSwipePagination() ||
+      this.historyTouchStartX === null ||
+      this.historyTouchStartY === null ||
+      !event.changedTouches ||
+      event.changedTouches.length !== 1
+    ) {
+      this.historyTouchStartX = null
+      this.historyTouchStartY = null
+      return
+    }
+
+    const touch = event.changedTouches[0]
+    const deltaX = touch.clientX - this.historyTouchStartX
+    const deltaY = touch.clientY - this.historyTouchStartY
+
+    this.historyTouchStartX = null
+    this.historyTouchStartY = null
+
+    if (
+      totalEntries <= historyPageSize ||
+      Math.abs(deltaX) < 36 ||
+      Math.abs(deltaX) <= Math.abs(deltaY)
+    ) {
+      return
+    }
+
+    this._setHistoryPage(deltaX < 0, totalEntries, historyPageSize)
+  }
+
+  handleClaimRewards = (account) => {
+    this.setState({ claimInProgress: true }) // disable the claim button
+    this.props.claimRewards(account)
+  }
+
+  _setHistoryPage (back, totalEntries, historyPageSize) {
+    const currentHistoryIndex = this.getEffectiveHistoryIndex(
+      totalEntries,
+      historyPageSize
+    )
+    const maxHistoryIndex = Math.max(
+      0,
+      Math.ceil(totalEntries / historyPageSize) - 1
+    )
+    const nextHistoryIndex = currentHistoryIndex + (back ? 1 : -1)
+
+    this.setState({
+      historyIndex: Math.max(0, Math.min(maxHistoryIndex, nextHistoryIndex)),
+      historyTransitionDirection: back ? 'older' : 'newer'
+    })
+  }
+
+  getCurrentApr = (gprops) => {
+    // The inflation was set to 10.0% at block 0
+    const initialInflationRate = 10
+    const initialBlock = 0
+
+    // It decreases by 0.01% every 250k blocks
+    const decreaseRate = 250000
+    const decreasePercentPerIncrement = 0.01
+
+    // How many increments have happened since block 0?
+    const headBlock = gprops.head_block_number
+    const deltaBlocks = headBlock - initialBlock
+    const decreaseIncrements = deltaBlocks / decreaseRate
+
+    // Current inflation rate
+    let currentInflationRate =
+            initialInflationRate -
+            decreaseIncrements * decreasePercentPerIncrement
+
+    // Cannot go lower than 0.95%
+    if (currentInflationRate < 0.95) {
+      currentInflationRate = 0.95
+    }
+
+    // Now lets calculate the "APR"
+    const vestingRewardPercent = gprops.vesting_reward_percent / 10000
+    const currentSupply = gprops.current_supply.split(' ').shift()
+    const totalVestingFunds = gprops.total_vesting_fund_steem
+      .split(' ')
+      .shift()
+    return (
+      (currentSupply * currentInflationRate * vestingRewardPercent) /
+            totalVestingFunds
+    )
+  }
+
+  render () {
+    const { onShowDepositBlurt, onShowWithdrawBlurt, onShowDepositPower } =
+            this
+    const {
+      convertToBlurt,
+      price_per_blurt,
+      savings_withdraws,
+      account,
+      currentUser,
+      isLoading
+    } = this.props
+    const gprops = this.props.gprops.toJS()
+
+    const loadingState = (
+      <div className='UserWallet__loading-state'>
+        <LoadingIndicator type='circle' />
+        <span>{tt('g.loading_data')}...</span>
+      </div>
+    )
+
+    // do not render if account is not loaded or available
+    if (!account) return isLoading ? <div className='UserWallet'>{loadingState}</div> : null
+
+    // do not render if state appears to contain only lite account info
+    if (!account.has('vesting_shares')) return isLoading ? <div className='UserWallet'>{loadingState}</div> : null
+
+    const vesting_blurt = vestingBlurt(account.toJS(), gprops)
+    const delegated_blurt = delegatedBlurt(account.toJS(), gprops)
+    const powerdown_blurt = powerdownBlurt(account.toJS(), gprops)
+    const remaining_powerdowns = remainingPowerdowns(account.toJS())
+
+    const isMyAccount =
+            currentUser && currentUser.get('username') === account.get('name')
+
+    const disabledWarning = false
+    // isMyAccount = false; // false to hide wallet transactions
+
+    const showTransfer = (asset, transferType, e) => {
+      e.preventDefault()
+      this.props.showTransfer({
+        to: isMyAccount ? null : account.get('name'),
+        asset,
+        transferType
+      })
+    }
+
+    const savings_balance = account.get('savings_balance')
+
+    const powerDown = (cancel, e) => {
+      e.preventDefault()
+      const name = account.get('name')
+      if (cancel) {
+        const vesting_shares = cancel
+          ? '0.000000 VESTS'
+          : account.get('vesting_shares')
+        this.setState({ toggleDivestError: null })
+        const errorCallback = (e2) => {
+          this.setState({ toggleDivestError: e2.toString() })
+        }
+        const successCallback = () => {
+          this.setState({ toggleDivestError: null })
+        }
+        this.props.withdrawVesting({
+          account: name,
+          vesting_shares,
+          errorCallback,
+          successCallback
+        })
+      } else {
+        const to_withdraw = account.get('to_withdraw')
+        const withdrawn = account.get('withdrawn')
+        const vesting_shares = account.get('vesting_shares')
+        const delegated_vesting_shares = account.get(
+          'delegated_vesting_shares'
+        )
+        this.props.showPowerdown({
+          account: name,
+          to_withdraw,
+          withdrawn,
+          vesting_shares,
+          delegated_vesting_shares
+        })
+      }
+    }
+
+    // Sum savings withrawals
+    // let savings_pending = 0,
+    // if (savings_withdraws) {
+    //     savings_withdraws.forEach((withdraw) => {
+    //         const [amount, asset] = withdraw.get('amount').split(' ');
+    //         if (asset === 'BLURT') savings_pending += parseFloat(amount);
+    //     });
+    // }
+
+    // Sum conversions
+    const currentTime = new Date().getTime()
+    const conversions = account
+      .get('other_history', List())
+      .reduce((out, item) => {
+        if (item.getIn([1, 'op', 0], '') !== 'convert') return out
+
+        const timestamp = new Date(
+          item.getIn([1, 'timestamp'])
+        ).getTime()
+        const finishTime = timestamp + 86400000 * 3.5 // add 3.5day conversion delay
+        if (finishTime < currentTime) return out
+
+        return out.concat([
+          <div key={item.get(0)}>
+            <Tooltip
+              t={tt('userwallet_jsx.conversion_complete_tip', {
+                date: new Date(finishTime).toLocaleString()
+              })}
+            >
+              <span>
+                (+
+                {tt('userwallet_jsx.in_conversion', {
+                  amount: numberWithCommas(
+                    '$' + amount.toFixed(3)
+                  )
+                })}
+                )
+              </span>
+            </Tooltip>
+          </div>
+        ])
+      }, [])
+
+    const balance_blurt = parseFloat(account.get('balance').split(' ')[0])
+    const saving_balance_blurt = parseFloat(savings_balance.split(' ')[0])
+    const divesting =
+            parseFloat(account.get('vesting_withdraw_rate').split(' ')[0]) >
+            0.0
+
+    // set displayed estimated value
+
+    const total_blurt =
+            vesting_blurt + balance_blurt + saving_balance_blurt
+    // No mainnet witness has ever published a price feed, so price_per_blurt is 0/0 = NaN and this
+    // rendered "$NaN" to every user. Show the honest MELEK total instead of a dollar figure we
+    // cannot compute. When a feed does exist, the dollar estimate returns automatically.
+    const price_valid = Number.isFinite(price_per_blurt) && price_per_blurt > 0
+    const total_value = price_valid
+      ? '$' + numberWithCommas((total_blurt * price_per_blurt).toFixed(2))
+      : numberWithCommas(total_blurt.toFixed(3)) + ' MELEK'
+
+    // format spacing on estimated value based on account state
+    let estimate_output = <p>{total_value}</p>
+    if (isMyAccount) {
+      estimate_output = <p>{total_value}&nbsp; &nbsp; &nbsp;</p>
+    }
+    let conversion = <p />
+    if (price_valid) {
+      conversion = <p>(1 MELEK = ${price_per_blurt})</p>
+    }
+
+    /// transfer log
+    let idx = 0
+    const oneDay = 86400000
+    const historyPageSize = WALLET_HISTORY_PAGE_SIZE
+    const historyWindowStart = currentTime - WALLET_HISTORY_DAYS * oneDay
+    const transfer_entries_collection = account
+      .get('transfer_history')
+      .map((item) => {
+        const timestamp = new Date(item.getIn([1, 'timestamp'])).getTime()
+        if (timestamp < historyWindowStart) return null
+        return {
+          timestamp,
+          row: (
+            <TransferHistoryRow
+              key={idx++}
+              op={item.toJS()}
+              context={account.get('name')}
+            />
+          )
+        }
+      })
+      .filter((el) => !!el)
+      .reverse()
+    const transfer_entries = transfer_entries_collection.toArray
+      ? transfer_entries_collection.toArray()
+      : transfer_entries_collection
+    const historyIndex = this.getEffectiveHistoryIndex(
+      transfer_entries.length,
+      historyPageSize
+    )
+    const transfer_log = transfer_entries
+      .slice(
+        historyIndex * historyPageSize,
+        (historyIndex + 1) * historyPageSize
+      )
+      .map((item) => item.row)
+    const hasNewerHistory = historyIndex > 0
+    const hasOlderHistory =
+            (historyIndex + 1) * historyPageSize <
+            transfer_entries.length
+    const showHistoryLoadingState = isLoading && transfer_entries.length === 0
+    const historyTableAnimationClass = this.state.historyTransitionDirection
+      ? ` UserWallet__history-table--slide-${this.state.historyTransitionDirection}`
+      : ''
+    const historyNavButtons = (
+      <nav className='UserWallet__history-pager UserWallet__history-pager--swipe'>
+        <ul className='pager'>
+          <li>
+            <div
+              className={
+                                'button tiny hollow float-left ' +
+                                (!hasNewerHistory ? ' disabled' : '')
+                            }
+              onClick={
+                                !hasNewerHistory
+                                  ? null
+                                  : this._setHistoryPage.bind(
+                                      this,
+                                      false,
+                                      transfer_entries.length,
+                                      historyPageSize
+                                    )
+                            }
+              aria-label='Previous'
+            >
+              <span aria-hidden='true'>
+                &larr; {tt('g.newer')}
+              </span>
+            </div>
+          </li>
+          <li className='UserWallet__history-swipe-hint' aria-hidden='true'>
+            <span className='UserWallet__history-swipe-hint-chevron UserWallet__history-swipe-hint-chevron--left'>‹</span>
+            <span className='UserWallet__history-swipe-hint-track' />
+            <span className='UserWallet__history-swipe-hint-chevron UserWallet__history-swipe-hint-chevron--right'>›</span>
+          </li>
+          <li>
+            <div
+              className={
+                                'button tiny hollow float-right ' +
+                                (!hasOlderHistory ? ' disabled' : '')
+                            }
+              onClick={
+                                !hasOlderHistory
+                                  ? null
+                                  : this._setHistoryPage.bind(
+                                      this,
+                                      true,
+                                      transfer_entries.length,
+                                      historyPageSize
+                                    )
+                            }
+              aria-label='Next'
+            >
+              <span aria-hidden='true'>
+                {tt('g.older')} &rarr;
+              </span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    )
+
+    const blurt_menu = [
+      {
+        value: tt('userwallet_jsx.transfer'),
+        link: '#',
+        onClick: showTransfer.bind(
+          this,
+          LIQUID_TOKEN,
+          'Transfer to Account'
+        )
+      },
+      {
+        value: tt('userwallet_jsx.transfer_to_savings'),
+        link: '#',
+        onClick: showTransfer.bind(
+          this,
+          LIQUID_TOKEN,
+          'Transfer to Savings'
+        )
+      },
+      {
+        value: tt('userwallet_jsx.power_up'),
+        link: '#',
+        onClick: showTransfer.bind(
+          this,
+          'VESTS',
+          'Transfer to Account'
+        )
+      }
+    ]
+    const power_menu = [
+      {
+        value: tt('userwallet_jsx.power_down'),
+        link: '#',
+        onClick: powerDown.bind(this, false)
+      },
+      {
+        value: tt('userwallet_jsx.delegate'),
+        link: '#',
+        onClick: showTransfer.bind(
+          this,
+          'DELEGATE_VESTS',
+          'Delegate to Account'
+        )
+      }
+    ]
+
+    if (divesting) {
+      power_menu.push({
+        value: 'Cancel Power Down',
+        link: '#',
+        onClick: powerDown.bind(this, true)
+      })
+    }
+
+    const blurt_balance_str = numberWithCommas(balance_blurt.toFixed(3))
+    const power_balance_str = numberWithCommas(vesting_blurt.toFixed(3))
+    const received_power_balance_str =
+            (delegated_blurt < 0 ? '+' : '') +
+            numberWithCommas((-delegated_blurt).toFixed(3))
+    const powerdown_balance_str = numberWithCommas(
+      powerdown_blurt.toFixed(3)
+    )
+    const powerdowns_remaining_str = `${remaining_powerdowns.toString()} ${tt(
+            'userwallet_jsx.powerdowns_remaining'
+        )}`
+    const savings_balance_str = numberWithCommas(
+      saving_balance_blurt.toFixed(3) + ' MELEK'
+    )
+
+    const savings_menu = [
+      {
+        value: tt('userwallet_jsx.withdraw_LIQUID_TOKEN', {
+          LIQUID_TOKEN_UPPERCASE
+        }),
+        link: '#',
+        onClick: showTransfer.bind(this, LIQUID_TOKEN, 'Savings Withdraw')
+      }
+    ]
+
+    const reward_blurt =
+            parseFloat(account.get('reward_steem_balance').split(' ')[0]) > 0
+              ? account.get('reward_steem_balance')
+              : null
+    const reward_hp =
+            parseFloat(account.get('reward_vesting_steem').split(' ')[0]) > 0
+              ? account.get('reward_vesting_steem').replace('MELEK', 'MP')
+              : null
+    const rewards = []
+    if (reward_blurt) rewards.push(reward_blurt)
+    if (reward_hp) rewards.push(reward_hp)
+
+    let rewards_str
+    switch (rewards.length) {
+      case 3:
+        rewards_str = `${rewards[0]}, ${rewards[1]} and ${rewards[2]}`
+        break
+      case 2:
+        rewards_str = `${rewards[0]} and ${rewards[1]}`
+        break
+      case 1:
+        rewards_str = `${rewards[0]}`
+        break
+    }
+
+    let claimbox
+    if (currentUser && rewards_str && isMyAccount) {
+      claimbox = (
+        <div className='row'>
+          <div className='columns small-12'>
+            <div className='UserWallet__claimbox'>
+              <span className='UserWallet__claimbox-text'>
+                Your current rewards: {rewards_str}
+              </span>
+              <button
+                disabled={this.state.claimInProgress}
+                className='button'
+                onClick={(e) => {
+                  this.handleClaimRewards(account)
+                }}
+              >
+                {tt('userwallet_jsx.redeem_rewards')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    let hpApr
+    try {
+      // TODO: occasionally fails. gprops not loaded yet?
+      // console.log(gprops);
+      hpApr = this.getCurrentApr(gprops)
+    } catch (e) {}
+
+    return (
+      <div className='UserWallet'>
+        {claimbox}
+        <div className='row'>
+          <div className='columns small-10 medium-12 medium-expand'>
+            <WalletSubMenu
+              accountname={account.get('name')}
+              isMyAccount={isMyAccount}
+            />
+          </div>
+          {false &&
+          <div className='columns shrink'>
+            {isMyAccount && (
+              <button
+                className='UserWallet__buybp button hollow'
+                onClick={this.onShowBuyBlurt}
+              >
+                {tt('userwallet_jsx.buy_blurt_or_blurt_power')}
+              </button>
+            )}
+          </div>
+          }
+        </div>
+        <div className='UserWallet__balance row'>
+          <div className='column small-12 medium-8'>
+            MELEK
+            <FormattedHTMLMessage
+              className='secondary'
+              id='tips_js.liquid_token'
+              params={{ LIQUID_TOKEN, VESTING_TOKEN }}
+            />
+          </div>
+          <div className='column small-12 medium-4'>
+            {isMyAccount
+              ? (
+                <DropdownMenu
+                  className='Wallet_dropdown'
+                  items={blurt_menu}
+                  el='li'
+                  selected={blurt_balance_str + ' MELEK'}
+                />
+                )
+              : (
+                  blurt_balance_str + ' MELEK'
+                )}
+          </div>
+        </div>
+        <div className='UserWallet__balance row zebra'>
+          <div className='column small-12 medium-8'>
+            MELEK POWER
+            <FormattedHTMLMessage
+              className='secondary'
+              id='tips_js.influence_token'
+            />
+            {delegated_blurt != 0
+              ? (
+                <span className='secondary'>
+                  {tt(
+                    'tips_js.part_of_your_blurt_power_is_currently_delegated',
+                    { user_name: account.get('name') }
+                  )}
+                </span>
+                )
+              : null}
+            {hpApr && (
+              <FormattedHTMLMessage
+                className='secondary'
+                id='tips_js.blurt_power_apr'
+                params={{ value: hpApr.toFixed(2) }}
+              />
+            )}{' '}
+          </div>
+          <div className='column small-12 medium-4'>
+            {isMyAccount
+              ? (
+                <DropdownMenu
+                  className='Wallet_dropdown'
+                  items={power_menu}
+                  el='li'
+                  selected={power_balance_str + ' MELEK'}
+                />
+                )
+              : (
+                  power_balance_str + ' MELEK'
+                )}
+            {delegated_blurt != 0
+              ? (
+                <div
+                  style={{
+                    paddingRight: isMyAccount
+                      ? '0.85rem'
+                      : null
+                  }}
+                >
+                  <Tooltip t='MELEK POWER delegated to/from this account'>
+                    ({received_power_balance_str} MELEK)
+                  </Tooltip>
+                </div>
+                )
+              : null}
+          </div>
+        </div>
+        <div className='UserWallet__balance row'>
+          <div className='column small-12 medium-8'>
+            {tt('userwallet_jsx.savings')}
+            <div className='secondary'>
+              <span>
+                {tt(
+                  'transfer_jsx.balance_subject_to_3_day_withdraw_waiting_period'
+                )}
+              </span>
+            </div>
+          </div>
+          <div className='column small-12 medium-4'>
+            {isMyAccount
+              ? (
+                <DropdownMenu
+                  className='Wallet_dropdown'
+                  items={savings_menu}
+                  el='li'
+                  selected={savings_balance_str}
+                />
+                )
+              : (
+                  savings_balance_str
+                )}
+          </div>
+        </div>
+        <div className='UserWallet__balance row zebra'>
+          <div className='column small-12 medium-8'>
+            {tt('userwallet_jsx.estimated_account_value')}
+            <div className='secondary'>
+              {tt('tips_js.estimated_value', { LIQUID_TOKEN })}
+            </div>
+          </div>
+          <div className='column small-12 medium-4'>
+            {estimate_output} {conversion}
+          </div>
+        </div>
+        <div className='UserWallet__balance row'>
+          <div className='column small-12'>
+            {powerdown_blurt != 0 && (
+              <span>
+                {tt(
+                  'userwallet_jsx.next_power_down_is_scheduled_to_happen'
+                )}{' '}
+                <TimeAgoWrapper
+                  date={account.get(
+                    'next_vesting_withdrawal'
+                  )}
+                />{' '}
+                {'(~' +
+                                    powerdown_balance_str +
+                                    ' MELEK, ' +
+                                    powerdowns_remaining_str +
+                                    ')'}
+                .
+              </span>
+            )}
+          </div>
+        </div>
+        {disabledWarning && (
+          <div className='row'>
+            <div className='column small-12'>
+              <div className='callout warning'>
+                {tt(
+                  'userwallet_jsx.transfers_are_temporary_disabled'
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        <div className='row'>
+          <div className='column small-12'>
+            <hr />
+          </div>
+        </div>
+
+        {isMyAccount && <SavingsWithdrawHistory />}
+
+        <div className='row'>
+          <div className='column small-12'>
+            {/** history */}
+            <h4>{tt('userwallet_jsx.history')}</h4>
+            <div className='secondary'>
+              <span>
+                {tt(
+                  'transfer_jsx.beware_of_spam_and_phishing_links'
+                )}
+              </span>
+                            &nbsp;
+              <span>
+                {tt(
+                  'transfer_jsx.transactions_make_take_a_few_minutes'
+                )}
+              </span>
+            </div>
+            {showHistoryLoadingState
+              ? <div className='UserWallet__loading-state UserWallet__loading-state--history'>{loadingState.props.children}</div>
+              : (
+                <div
+                  className={
+                    'UserWallet__history-table-wrap' +
+                    ((hasNewerHistory || hasOlderHistory)
+                      ? ' UserWallet__history-table-wrap--swipe'
+                      : '')
+                  }
+                  onTouchEnd={(event) =>
+                    this.handleHistoryTouchEnd(
+                      event,
+                      transfer_entries.length,
+                      historyPageSize
+                    )}
+                  onTouchStart={this.handleHistoryTouchStart}
+                  style={{ '--wallet-history-row-count': historyPageSize }}
+                >
+                  <table
+                    className={
+                      'UserWallet__history-table' + historyTableAnimationClass
+                    }
+                    key={`wallet-history-${historyIndex}`}
+                  >
+                    <tbody>{transfer_log}</tbody>
+                  </table>
+                </div>
+                )}
+            {(hasNewerHistory || hasOlderHistory) && historyNavButtons}
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default connect(
-    // mapStateToProps
-    (state, ownProps) => {
-        const walletUrl = state.app.get('walletUrl');
-        return {
-            walletUrl,
-            ...ownProps,
-        };
+  // mapStateToProps
+  (state, ownProps) => {
+    const price_per_blurt = pricePerBlurt(state)
+    const savings_withdraws = state.user.get('savings_withdraws')
+    const gprops = state.global.get('props')
+    return {
+      ...ownProps,
+      price_per_blurt,
+      savings_withdraws,
+      gprops
     }
-)(UserWallet);
+  },
+  // mapDispatchToProps
+  (dispatch) => ({
+    claimRewards: (account) => {
+      const username = account.get('name')
+      const successCallback = () => {
+        dispatch(
+          globalActions.getState({ url: `@${username}/transfers` })
+        )
+      }
+
+      // MELEK: Steem's claim_reward_balance takes THREE assets. BLURT's condenser
+      // sent reward_blurt + reward_vests, which is one asset short of what this
+      // chain's operation expects, so no claim ever validated.
+      const operation = {
+        account: username,
+        reward_steem: account.get('reward_steem_balance'),
+        reward_sbd: account.get('reward_sbd_balance'),
+        reward_vests: account.get('reward_vesting_balance')
+      }
+
+      dispatch(
+        transactionActions.broadcastOperation({
+          type: 'claim_reward_balance',
+          operation,
+          successCallback
+        })
+      )
+    },
+    convertToBlurt: (e) => {
+      // post 2018-01-31 if no calls to this function exist may be safe to remove. Investigate use of ConvertToBlurt.jsx
+      e.preventDefault()
+      const name = 'convertToBlurt'
+      dispatch(globalActions.showDialog({ name }))
+    }
+  })
+)(UserWallet)

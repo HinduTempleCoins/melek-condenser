@@ -48,7 +48,7 @@ export default ({
         // title is only set in the case of an external link warning
         a: ['href', 'rel', 'title'],
     },
-    allowedSchemes: ['http', 'https', 'blurt', 'esteem'],
+    allowedSchemes: ['http', 'https', 'melek', 'blurt', 'esteem'],
     transformTags: {
         iframe: (tagName, attribs) => {
             const srcAtty = attribs.src;
@@ -151,7 +151,7 @@ export default ({
             href = href.trim();
             const attys = { href };
             // If it's not a (relative or absolute) blurt URL...
-            if (!href.match(/^(\/(?!\/)|https:\/\/blurt.blog)/)) {
+            if (!href.match(/^(\/(?!\/)|https:\/\/melek.salon)/)) {
                 // attys.target = '_blank' // pending iframe impl https://mathiasbynens.github.io/rel-noopener/
                 attys.rel = highQualityPost ? 'noopener' : 'nofollow noopener';
                 attys.title = getExternalLinkWarningMessage();

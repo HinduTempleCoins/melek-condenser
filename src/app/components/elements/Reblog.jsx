@@ -142,7 +142,6 @@ module.exports = connect(
             dispatch(
                 transactionActions.broadcastOperation({
                     type: 'custom_json',
-                    confirm: tt('g.operation_cost', { fee }),
                     operation,
                     successCallback,
                     errorCallback,

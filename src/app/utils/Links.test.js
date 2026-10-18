@@ -42,8 +42,8 @@ describe('Links', () => {
     it('by domain', () => {
         const locals = [
             'https://localhost/',
-            'http://blurt.world',
-            'http://blurt.world/group',
+            'http://melek.salon',
+            'http://melek.salon/group',
         ];
         match(linksRe.local(), locals);
         matchNot(linksRe.remote(), locals);
@@ -51,7 +51,7 @@ describe('Links', () => {
         const remotes = ['https://example.com/', 'http://abc.co'];
         match(linksRe.remote(), remotes);
         matchNot(linksRe.local(), remotes);
-        // match(linksRe({external: false}), largeData + 'https://blurt.world2/next', 'https://blurt.world2/next')
+        // match(linksRe({external: false}), largeData + 'https://melek.salon2/next', 'https://melek.salon2/next')
     });
     it('by image', () => {
         match(linksRe.image(), 'https://example.com/a.jpeg');

@@ -1014,7 +1014,7 @@ export default (formId) =>
                 if (rtags.links.size) meta.links = rtags.links;
                 else delete meta.links;
 
-                meta.app = 'blurt/0.1';
+                meta.app = 'melek/0.1';
                 if (isStory) {
                     meta.format = isHtml ? 'html' : 'markdown';
                 }
@@ -1051,7 +1051,7 @@ export default (formId) =>
                     switch (payoutType) {
                         case '0%': // decline payout
                             __config.comment_options = {
-                                max_accepted_payout: '0.000 BLURT',
+                                max_accepted_payout: '0.000 MBD',
                             };
                             break;
                         default: // 100% steem power payout
@@ -1153,7 +1153,6 @@ export default (formId) =>
                 dispatch(
                     transactionActions.broadcastOperation({
                         type: 'comment',
-                        confirm: tt('g.operation_cost', { fee }),
                         operation,
                         errorCallback,
                         successCallback,

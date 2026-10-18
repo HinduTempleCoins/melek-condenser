@@ -212,10 +212,18 @@ class Voting extends React.Component {
                 (el) => el.get('voter') === username
             );
             // weight warning, the API may send a string or a number (when zero)
-            if (vote)
-                this.setState({
-                    myVote: parseInt(vote.get('percent') || 0, 10),
-                });
+            //
+            // MELEK CHAIN: active_votes carries `percent: 0` and `weight: 0` for EVERY voter
+            // while `rshares` holds the real weight (verified against get_active_votes on
+            // melek.salon). Reading `percent` alone therefore leaves myVote at 0 forever, the
+            // upvote button never takes the `--upvoted` class, and the post offers "upvote"
+            // again after a successful vote. Fall back to the sign of rshares.
+            if (vote) {
+                const pct = parseInt(vote.get('percent') || 0, 10);
+                const rsh = parseFloat(vote.get('rshares') || 0);
+                const derived = pct !== 0 ? pct : rsh > 0 ? 10000 : rsh < 0 ? -10000 : 0;
+                this.setState({ myVote: derived });
+            }
         }
     }
 
@@ -380,12 +388,12 @@ class Voting extends React.Component {
                     {currentVp ? (
                         <div className="voting-power-display">
                             {tt('voting_jsx.vote_value')}:{' '}
-                            {voteValue.toFixed(2)} BLURT
+                            {voteValue.toFixed(2)} MELEK
                             <br />
                             {tt('voting_jsx.voting_power')}:{' '}
                             {currentVp.toFixed(1)}%
                             <br />
-                            {tt('g.transaction_fee')}: {fee} BLURT
+                            {tt('g.transaction_fee')}: {fee} MELEK
                         </div>
                     ) : (
                         ''
@@ -563,7 +571,7 @@ class Voting extends React.Component {
                 <span style={payout_limit_hit ? { opacity: '0.5' } : {}}>
                     <FormattedAsset
                         amount={payout}
-                        asset="BLURT"
+                        asset="MELEK"
                         classname={max_payout === 0 ? 'strikethrough' : ''}
                     />
                     {payoutItems.length > 0 && <Icon name="dropdown-arrow" />}
@@ -592,17 +600,22 @@ class Voting extends React.Component {
                 ++v
             ) {
                 const { percent, voter, rshares } = avotes[v];
-                const sign = Math.sign(percent);
+                // Same chain quirk as _checkMyVote: `percent` is 0 for every voter, so
+                // Math.sign(percent) was 0 and this loop skipped EVERY voter, leaving the
+                // voter list permanently empty. Derive the sign from rshares, and only print
+                // a percentage when the chain actually supplied one.
+                const pctNum = parseInt(percent || 0, 10);
+                const rsharesNum = parseFloat(rshares || 0);
+                const sign = pctNum !== 0 ? Math.sign(pctNum) : Math.sign(rsharesNum);
                 if (sign === 0) continue;
                 voters.push({
                     value:
                         (sign > 0 ? '+ ' : '- ') +
                         voter +
                         ': ' +
-                        ((payout * rshares) / total_rshares).toFixed(3) +
-                        ' BLURT (' +
-                        percent / 100 +
-                        '%)',
+                        ((payout * rsharesNum) / total_rshares).toFixed(3) +
+                        ' MELEK' +
+                        (pctNum !== 0 ? ' (' + pctNum / 100 + '%)' : ''),
                     link: '/@' + voter,
                 });
             }

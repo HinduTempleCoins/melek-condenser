@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'app/components/elements/Icon';
-import BlurtLogo from 'app/components/elements/BlurtLogo';
+import MELEKLogo from 'app/components/elements/MELEKLogo';
 
 class NotFound extends React.Component {
     render() {
@@ -9,13 +9,13 @@ class NotFound extends React.Component {
                 <div className="row Header__nav">
                     <div className="small-5 large-4 columns Header__logotype">
                         <a href="/">
-                            <BlurtLogo />
+                            <MELEKLogo />
                         </a>
                     </div>
                 </div>
                 <div className="NotFound float-center">
                     <div>
-                        <Icon name="blurt" size="4x" />
+                        <Icon name="melek" size="4x" />
                         <h4 className="NotFound__header">
                             Sorry! This page doesn't exist.
                         </h4>

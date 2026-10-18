@@ -30,7 +30,7 @@ const SidebarLinks = ({ username }) => (
                 <li className="c-sidebar__list-item">
                     <a
                         className="c-sidebar__link"
-                        href={'https://blurtwallet.com/@' + username + ''}
+                        href={'https://wallet.melek.salon/@' + username + ''}
                     >
                         {tt('g.my_wallet')}
                     </a>
@@ -38,9 +38,24 @@ const SidebarLinks = ({ username }) => (
                 <li className="c-sidebar__list-item">
                     <a
                         className="c-sidebar__link"
-                        href={'https://blocks.blurtwallet.com/#/@' + username}
+                        href={'https://wallet.melek.salon/#/@' + username}
                     >
                         {tt('g.my_explorer')}
+                    </a>
+                </li>
+                <li className="c-sidebar__list-item">
+                    <a
+                        className="c-sidebar__link"
+                        href={$STM_Config.wiki_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Wiki / FAQ
+                    </a>
+                </li>
+                <li className="c-sidebar__list-item">
+                    <a className="c-sidebar__link" href="/chat">
+                        Community Chat
                     </a>
                 </li>
                 <li className="c-sidebar__list-item">

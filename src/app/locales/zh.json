@@ -183,7 +183,7 @@
         "please_email_questions_to": "请把你的问题发邮件给",
         "next_7_strings_single_block": {
             "authors_get_paid_when_people_like_you_upvote_their_post": "当你和其他人给帖子点赞时，作者会得到报酬",
-            "if_you_enjoyed_what_you_read_earn_amount": "如果你喜欢阅读这里的内容，请立即创建你的帐户，并开始免费赚取BLURT！",
+            "if_you_enjoyed_what_you_read_earn_amount": "如果你喜欢阅读这里的内容，请立即创建你的帐户，并开始免费赚取MELEK！",
             "free_steem": "免费的Steem代币！",
             "sign_up_earn_steem": "现在注册来赚取"
         },
@@ -209,7 +209,7 @@
         }
     },
     "navigation": {
-        "about": "Blurt",
+        "about": "MELEK",
         "explore": "探索",
         "APP_NAME_whitepaper": "%(APP_NAME)s的白皮书",
         "buy_LIQUID_TOKEN": "购买%(LIQUID_TOKEN)s",
@@ -224,11 +224,11 @@
         "learn_more": "了解更多",
         "welcome": "欢迎",
         "faq": "常见问题",
-        "chat": "Blurt聊天",
-        "app_center": "Blurt应用中心",
-        "business_center": "Businesses Accepting Blurt",
-        "api_docs": "Blurt API文档",
-        "whitepaper": "Blurt白皮书",
+        "chat": "MELEK聊天",
+        "app_center": "MELEK应用中心",
+        "business_center": "Businesses Accepting MELEK",
+        "api_docs": "MELEK API文档",
+        "whitepaper": "MELEK白皮书",
         "intro_tagline": "妙笔生金",
         "intro_paragraph": "你的思想是有有价值的。赶快加入发表文章获得赏金的社区。"
     },
@@ -289,7 +289,7 @@
         "you_are_viewing_a_single_comments_thread_from": "你正在查看单个评论的主题"
     },
     "recoveraccountstep1_jsx": {
-        "recover_account_intro": "有时候，Blurt.blog 的拥有者钥匙可能会被盗用。被盗帐户恢复给予合法的帐户所有者30天，从小偷更改其所有者密钥的时候恢复其帐户。盗用帐户恢复只能在%(APP_URL)s上使用，如果帐户所有者已经明确列出 %(APP_NAME)s作为其帐户受信任者，并遵守了 %(APP_NAME)s 的服务条款。"
+        "recover_account_intro": "有时候，MELEK.blog 的拥有者钥匙可能会被盗用。被盗帐户恢复给予合法的帐户所有者30天，从小偷更改其所有者密钥的时候恢复其帐户。盗用帐户恢复只能在%(APP_URL)s上使用，如果帐户所有者已经明确列出 %(APP_NAME)s作为其帐户受信任者，并遵守了 %(APP_NAME)s 的服务条款。"
     },
     "user_profile": {
         "unknown_account": "未知的账户",
@@ -314,7 +314,7 @@
             "one": "1个帖子",
             "other": "%(count)s个帖子"
         },
-        "hide_resteems": "Hide Reblurts",
+        "hide_resteems": "Hide Reposts",
         "show_all": "Show All"
     },
     "post_jsx": {
@@ -328,9 +328,9 @@
         "fraud_or_plagiarism": "欺诈或剽窃",
         "hate_speech_or_internet_trolling": "仇恨言论或互联网钓鱼",
         "intentional_miss_categorized_content_or_spam": "故意错误分类或垃圾信息",
-        "pending_payout": "待获得赏金%(value)s BLURT",
+        "pending_payout": "待获得赏金%(value)s MELEK",
         "payout_declined": "拒绝赏金",
-        "max_accepted_payout": "赏金上限%(value)s BLURT",
+        "max_accepted_payout": "赏金上限%(value)s MELEK",
         "promotion_cost": "推广费$%(value)s",
         "past_payouts": "累计赏金$%(value)s",
         "past_payouts_author": "- 作者收入 $%(value)s",
@@ -389,7 +389,7 @@
         "estimated_value": "基于美元计算，%(LIQUID_TOKEN)s的估值。",
         "non_transferable": "%(VESTING_TOKEN)s是不可转让的，需要3个月(13笔付款)才可换回%(LIQUID_TOKEN)s",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "%(VESTING_TOKEN)s可以转给你自己或其他人，但是只有转回%(LIQUID_TOKEN)s后，才可以进行下一次转账。",
-        "part_of_your_steem_power_is_currently_delegated": "有一部分BLURT POWER是代理给你使用的。代理的BLURT POWER是为了帮助新用户在steemit上进行操作。你被代理的数量可能会有波动。"
+        "part_of_your_steem_power_is_currently_delegated": "有一部分MELEK POWER是代理给你使用的。代理的MELEK POWER是为了帮助新用户在steemit上进行操作。你被代理的数量可能会有波动。"
     },
     "promote_post_jsx": {
         "promote_post": "推广帖子",
@@ -545,7 +545,7 @@
         "transfers_are_temporary_disabled": "转移功能暂时被禁用。",
         "history": "历史",
         "redeem_rewards": "赎回奖励(转移至余额)",
-        "buy_steem_or_steem_power": "购买BLURT或BLURT Power"
+        "buy_steem_or_steem_power": "购买MELEK或MELEK Power"
     },
     "checkloginowner_jsx": {
         "your_password_permissions_were_reduced": "您的密码权限被减少",

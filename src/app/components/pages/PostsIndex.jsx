@@ -350,39 +350,64 @@ module.exports = {
     path: ':order(/:category)',
     component: connect(
         (state, ownProps) => {
-            let posts = null;
-            const { order, category } = ownProps.routeParams;
-
-            if (!category && order === 'created') {
-                // root SPA page: latest posts
-                const keys = state.global.getIn(['discussion_idx', 'created', '']);
-                posts = keys.map(key => state.global.getIn(['content', key]));
-            } else if (category === 'feed') {
-                const account_name = order.slice(1);
-                posts = state.global.getIn(['accounts', account_name, 'feed']);
-            } else {
-                posts = state.global.getIn(['discussion_idx', order, category]);
-                if (posts) {
-                    posts = posts.map(key => state.global.getIn(['content', key]));
-                }
+            // special case if user feed (vs. trending, etc)
+            let feed_posts;
+            if (ownProps.routeParams.category === 'feed') {
+                const account_name = ownProps.routeParams.order.slice(1);
+                feed_posts = state.global.getIn([
+                    'accounts',
+                    account_name,
+                    'feed',
+                ]);
             }
 
             return {
                 discussions: state.global.get('discussion_idx'),
-                feed_posts: posts,
+                status: state.global.get('status'),
+                loading: state.app.get('loading'),
+                feed_posts,
                 username:
                     state.user.getIn(['current', 'username']) ||
                     state.offchain.get('account'),
-                loading: state.app.get('loading'),
-                categories: state.global.getIn(['tag_idx', 'trending']).take(20),
-                featured: state.offchain.getIn(['special_posts', 'featured_posts']),
-                promoted: state.offchain.getIn(['special_posts', 'promoted_posts']),
-                notices: state.offchain.getIn(['special_posts', 'notices']).toJS(),
+                blogmode:
+                    state.app.getIn(['user_preferences', 'blogmode']) ===
+                    undefined
+                        ? true
+                        : state.app.getIn(['user_preferences', 'blogmode']),
+                sortOrder: ownProps.params.order,
+                topic: ownProps.params.category,
+                categories: state.global
+                    .getIn(['tag_idx', 'trending'])
+                    .take(20),
+                featured: state.offchain
+                    .get('special_posts')
+                    .get('featured_posts'),
+                promoted: state.offchain
+                    .get('special_posts')
+                    .get('promoted_posts'),
+                notices: state.offchain
+                    .get('special_posts')
+                    .get('notices')
+                    .toJS(),
+                maybeLoggedIn: state.user.get('maybeLoggedIn'),
+                isBrowser: process.env.BROWSER,
+                gptEnabled: state.app.getIn(['googleAds', 'gptEnabled']),
+                gptBannedTags: state.app.getIn(['googleAds', 'gptBannedTags']),
+                bandwidthKbytesFee: state.global.getIn([
+                    'props',
+                    'bandwidth_kbytes_fee',
+                ]),
+                operationFlatFee: state.global.getIn([
+                    'props',
+                    'operation_flat_fee',
+                ]),
             };
         },
-        (dispatch) => ({
-            requestData: (args) => dispatch(fetchDataSagaActions.requestData(args)),
-        })
+        (dispatch) => {
+            return {
+                requestData: (args) =>
+                    dispatch(fetchDataSagaActions.requestData(args)),
+            };
+        }
     )(PostsIndex),
 };
-

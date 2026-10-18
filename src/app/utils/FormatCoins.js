@@ -18,10 +18,10 @@ export function formatCoins(string) {
     string = string
         .replace('SBD', DEBT_TOKEN_SHORT)
         .replace('SD', DEBT_TOKEN_SHORT)
-        .replace('Blurt Power', VESTING_TOKEN)
-        .replace('BLURT POWER', VESTING_TOKEN)
-        .replace('Blurt', LIQUID_TOKEN)
-        .replace('BLURT', LIQUID_TOKEN_UPPERCASE)
+        .replace('MELEK Power', VESTING_TOKEN)
+        .replace('MELEK POWER', VESTING_TOKEN)
+        .replace('MELEK', LIQUID_TOKEN)
+        .replace('MELEK', LIQUID_TOKEN_UPPERCASE)
         .replace('$', CURRENCY_SIGN);
     return string;
 }

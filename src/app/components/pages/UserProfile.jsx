@@ -156,9 +156,16 @@ export default class UserProfile extends React.Component {
             onPrint,
         } = this;
         const username = current_user ? current_user.get('username') : null;
+        const messageHref = username
+            ? `https://pentecaust.com/dm?me=${encodeURIComponent(
+                  username
+              )}&with=${encodeURIComponent(accountname)}`
+            : `https://pentecaust.com/?dm=${encodeURIComponent(accountname)}`;
 
         let { section } = this.props.routeParams;
         if (!section) section = 'blog';
+        // /replies is an alias of the recent-replies tab
+        if (section === 'replies') section = 'recent-replies';
 
         // Loading status
         const status = global_status
@@ -583,6 +590,14 @@ export default class UserProfile extends React.Component {
                                     follower={username}
                                     following={accountname}
                                 />
+                                {<a
+                                    className="button slim hollow secondary"
+                                    href={messageHref}
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    Message
+                                </a>}
                             </div>
                         </div>
                         <h1>
@@ -633,8 +648,8 @@ export default class UserProfile extends React.Component {
                                         })}
                                     </Link>
                                 </span>
-                                <span>{accountBp} BP</span>
-                                <span>{parseInt(account.balance)} BLURT</span>
+                                <span>{accountBp} MP</span>
+                                <span>{parseInt(account.balance)} MELEK</span>
                             </div>
                             <p className="UserProfile__info">
                                 {location && (
@@ -661,6 +676,14 @@ export default class UserProfile extends React.Component {
                                 following={accountname}
                                 what="blog"
                             />
+                            {<a
+                                className="button slim hollow secondary"
+                                href={messageHref}
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                Message
+                            </a>}
                         </div>
                     </div>
                 </div>
@@ -682,7 +705,7 @@ module.exports = {
             const walletUrl = state.app.get('walletUrl');
             const blurtPerVest =
                 parseFloat(
-                    state.global.getIn(['props', 'total_vesting_fund_blurt'])
+                    state.global.getIn(['props', 'total_vesting_fund_steem'])
                 ) /
                 parseFloat(
                     state.global.getIn(['props', 'total_vesting_shares'])

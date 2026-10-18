@@ -3,7 +3,7 @@ import GDPRUserList from './utils/GDPRUserList';
 export const routeRegex = {
     PostsIndex: /^\/(@[\w\.\d-]+)\/feed\/?$/,
     UserProfile1: /^\/(@[\w\.\d-]+)\/?$/,
-    UserProfile2: /^\/(@[\w\.\d-]+)\/(blog|posts|comments|transfers|curation-rewards|author-rewards|permissions|created|recent-replies|notifications|feed|password|followed|followers|settings)\/?$/,
+    UserProfile2: /^\/(@[\w\.\d-]+)\/(blog|posts|comments|transfers|curation-rewards|author-rewards|permissions|created|recent-replies|notifications|feed|password|followed|followers|settings|replies)\/?$/,
     UserProfile3: /^\/(@[\w\.\d-]+)\/[\w\.\d-]+/,
     CategoryFilters: /^\/(hot|trending|promoted|payout|payout_comments|created)\/?$/gi,
     PostNoCategory: /^\/(@[\w\.\d-]+)\/([\w\d-]+)/,
@@ -14,8 +14,7 @@ export const routeRegex = {
 };
 
 export default function resolveRoute(path) {
-    if (path === '/' || path === '/index.html') {
-        // Always map root and /index.html to feed
+    if (path === '/') {
         return { page: 'PostsIndex', params: ['hot'] };
     }
     if (path === '/about.html') {
@@ -23,6 +22,9 @@ export default function resolveRoute(path) {
     }
     if (path === '/welcome') {
         return { page: 'Welcome' };
+    }
+    if (path === '/chat') {
+        return { page: 'Chat' };
     }
     if (path === '/faq.html') {
         return { page: 'Faq' };

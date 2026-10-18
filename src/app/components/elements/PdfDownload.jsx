@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { PrivateKey } from '@blurtfoundation/blurtjs/lib/auth/ecc';
 import QRious from 'qrious';
-import logo from 'app/assets/images/pdf-logo.svg';
 
 function image2canvas(image, bgcolor) {
     const canvas = document.createElement('canvas');
@@ -50,7 +49,7 @@ export default class PdfDownload extends Component {
         await new Promise((res, rej) => {
             const s = document.createElement('script');
             s.type = 'text/javascript';
-            s.src = 'https://static.blurt.world/jspdf.min.js';
+            s.src = '/static/jspdf.min.js';
             document.body.appendChild(s);
             s.addEventListener('load', res);
         });
@@ -58,7 +57,7 @@ export default class PdfDownload extends Component {
         await new Promise((res, rej) => {
             const s = document.createElement('script');
             s.type = 'text/javascript';
-            s.src = 'https://static.blurt.world/Roboto-Regular-normal.js';
+            s.src = '/static/Roboto-Regular-normal.js';
             document.body.appendChild(s);
             s.addEventListener('load', res);
         });
@@ -66,7 +65,7 @@ export default class PdfDownload extends Component {
         await new Promise((res, rej) => {
             const s = document.createElement('script');
             s.type = 'text/javascript';
-            s.src = 'https://static.blurt.world/Roboto-Bold-normal.js';
+            s.src = '/static/Roboto-Bold-normal.js';
             document.body.appendChild(s);
             s.addEventListener('load', res);
         });
@@ -74,7 +73,7 @@ export default class PdfDownload extends Component {
         await new Promise((res, rej) => {
             const s = document.createElement('script');
             s.type = 'text/javascript';
-            s.src = 'https://static.blurt.world/RobotoMono-Regular-normal.js';
+            s.src = '/static/RobotoMono-Regular-normal.js';
             document.body.appendChild(s);
             s.addEventListener('load', res);
         });
@@ -85,7 +84,7 @@ export default class PdfDownload extends Component {
         return (
             <div className="pdf-download">
                 <img
-                    src={logo}
+                    src="/images/pdf-logo.svg"
                     style={{ display: 'none' }}
                     className="pdf-logo"
                 />
@@ -185,7 +184,7 @@ export default class PdfDownload extends Component {
         );
 
         offset += 0.265;
-        offset += this.renderText(ctx, `Blurt keys for @${this.props.name}`, {
+        offset += this.renderText(ctx, `MELEK keys for @${this.props.name}`, {
             scale,
             x: margin,
             y: offset,
@@ -200,7 +199,7 @@ export default class PdfDownload extends Component {
         offset += 0.1;
         offset += this.renderText(
             ctx,
-            'Your recovery account partner: wallet.blurt.world',
+            'Your recovery account partner: wallet.melek.salon',
             {
                 scale,
                 x: margin,
@@ -219,7 +218,7 @@ export default class PdfDownload extends Component {
             ctx,
             'Generated at ' +
                 new Date().toISOString().replace(/\.\d{3}/, '') +
-                ' by blurt.blog',
+                ' by melek.salon',
             {
                 scale,
                 x: margin,
@@ -239,12 +238,12 @@ export default class PdfDownload extends Component {
         offset += 0.2;
         offset += this.renderText(
             ctx,
-            'blurt.world is powered by Blurt and uses its hierarchical key ' +
+            'melek.salon is powered by MELEK and uses its hierarchical key ' +
                 'system to keep you and your tokens safe. Print this out and ' +
                 'keep it somewhere safe. When in doubt, use your Private ' +
                 'Posting Key as your password, not your Master Password which ' +
                 'is only intended to be used to change your private keys. You ' +
-                'can also view these anytime at: https://explorer.blurt.world/' +
+                'can also view these anytime at: https://wallet.melek.salon/' +
                 this.props.name,
             {
                 scale,
@@ -303,7 +302,7 @@ export default class PdfDownload extends Component {
         offset += 0.15;
         this.drawQr(
             ctx,
-            'blurt://import/wif/' +
+            'melek://import/wif/' +
                 keys.postingPrivate +
                 '/account/' +
                 this.props.name,
@@ -327,7 +326,7 @@ export default class PdfDownload extends Component {
 
         offset += this.renderText(
             ctx,
-            'Used to log in to apps such as blurt.world and perform social ' +
+            'Used to log in to apps such as melek.salon and perform social ' +
                 'actions such as posting, commenting, and voting.',
             {
                 scale,
@@ -364,7 +363,7 @@ export default class PdfDownload extends Component {
         offset += 0.15;
         this.drawQr(
             ctx,
-            'blurt://import/wif/' +
+            'melek://import/wif/' +
                 keys.memoPrivate +
                 '/account/' +
                 this.props.name,
@@ -428,7 +427,7 @@ export default class PdfDownload extends Component {
         offset += 0.15;
         this.drawQr(
             ctx,
-            'blurt://import/wif/' +
+            'melek://import/wif/' +
                 keys.activePrivate +
                 '/account/' +
                 this.props.name,
@@ -454,7 +453,7 @@ export default class PdfDownload extends Component {
         offset += this.renderText(
             ctx,
             'Used for monetary and wallet related actions, such as ' +
-                'transferring tokens or powering BLURT up and down.',
+                'transferring tokens or powering MELEK up and down.',
             {
                 scale,
                 x: margin + qrSize + 0.1,
@@ -491,7 +490,7 @@ export default class PdfDownload extends Component {
         offset += 0.15;
         this.drawQr(
             ctx,
-            'blurt://import/wif/' +
+            'melek://import/wif/' +
                 keys.ownerPrivate +
                 '/account/' +
                 this.props.name,
@@ -519,7 +518,7 @@ export default class PdfDownload extends Component {
             'This key is used to reset all your other keys. It is ' +
                 'recommended to keep it offline at all times. If your ' +
                 'account is compromised, use this key to recover it ' +
-                'within 30 days at https://blurtwallet.com.',
+                'within 30 days at https://wallet.melek.salon.',
             {
                 scale,
                 x: margin + qrSize + 0.1,
@@ -619,7 +618,7 @@ export default class PdfDownload extends Component {
             ctx,
             'Public keys are associated with usernames and are used to ' +
                 'encrypt and verify messages. Your public keys are not required ' +
-                'for login. You can view these anytime at: https://steemd.com/@' +
+                'for login. You can view these anytime at: https://melek.salon/@' +
                 this.props.name,
             {
                 scale,

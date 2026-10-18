@@ -3,6 +3,7 @@ import CloseButton from 'app/components/elements/CloseButton';
 import { Link } from 'react-router';
 import tt from 'counterpart';
 import { SIGNUP_URL } from 'shared/constants';
+import melekAngel from 'app/assets/images/melek-angel.jpg';
 
 export default class WelcomePanel extends React.Component {
     constructor(props) {
@@ -15,14 +16,6 @@ export default class WelcomePanel extends React.Component {
             <div className="welcomeWrapper">
                 <div className="welcomeBanner">
                     <CloseButton onClick={this.setShowBannerFalse} />
-                    <div className="row">
-                        <div className="text-center welcomeImage small-12 show-for-small-only">
-                            <img
-                                className="heroImage"
-                                src={require('app/assets/images/blurtgirlsplash.png')}
-                            />
-                        </div>
-                    </div>
                     <div className="row">
                         <div className="large-1 show-for-large" />
                         <div className="small-12 medium-6 large-5 welcomePitch">
@@ -49,10 +42,11 @@ export default class WelcomePanel extends React.Component {
                                 </Link>
                             </div>
                         </div>
-                        <div className="text-center welcomeImage medium-6 large-5 show-for-medium">
+                        <div className="small-12 medium-6 large-5 welcomeChatColumn">
                             <img
-                                className="heroImage"
-                                src={require('app/assets/images/blurtgirlsplash.png')}
+                                className="welcomeAngel"
+                                src={melekAngel}
+                                alt="Hathor, the MELEK witness"
                             />
                         </div>
                     </div>

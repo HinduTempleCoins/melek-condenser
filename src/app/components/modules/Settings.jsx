@@ -118,7 +118,7 @@ class Settings extends React.Component {
                                         '/settings'
                                     }
                                 >
-                                    blurtwallet.com
+                                    wallet.melek.salon
                                 </a>
                                 .
                             </p>

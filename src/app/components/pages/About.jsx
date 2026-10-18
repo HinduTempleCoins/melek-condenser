@@ -8,7 +8,7 @@ class About extends React.Component {
             <div className="About">
                 <section className="AboutMission">
                     <div className="AboutMission__heading-container">
-                        <h1 className="AboutMission__heading">About Blurt</h1>
+                        <h1 className="AboutMission__heading">About MELEK</h1>
                     </div>
                 </section>
             </div>

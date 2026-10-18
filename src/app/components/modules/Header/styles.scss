@@ -65,6 +65,9 @@
     justify-content: flex-end;
     height: 4rem;
     > .Header__user-signup {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
         > a {
             padding-right: 0.25rem;
             font-size: 1.125rem;
@@ -74,10 +77,23 @@
                 padding: 0.6rem;
                 text-transform: none;
                 margin: 0 0.75rem 0 0.5rem;
+                @media screen and (max-width: 39.9375em) {
+                    // No login link to its left on small; tighten left margin
+                    // and slim down padding so logo + signup + search + burger
+                    // all fit comfortably at 375px
+                    padding: 0.4rem 0.6rem;
+                    font-size: 1rem;
+                    margin: 0 0.25rem 0 0;
+                }
             }
             &.Header__login-link {
                 @extend .link;
                 @extend .link--primary;
+                white-space: nowrap;
+                @media screen and (max-width: 39.9375em) {
+                    font-size: 0.95rem;
+                    padding-right: 0.15rem;
+                }
             }
         }
     }
@@ -96,14 +112,14 @@
 
 .Header__userpic {
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     .Userpic {
-        width: 36px !important;
-        height: 36px !important;
+        width: 40px !important;
+        height: 40px !important;
         @include MQ(M) {
-            width: 40px !important;
-            height: 40px !important;
+            width: 44px !important;
+            height: 44px !important;
             position: relative;
             top: -2px;
         }
@@ -111,8 +127,9 @@
 }
 
 span.Header__hamburger.toggle-menu {
-    width: 1rem;
-    height: 1rem;
+    // 44x44 tap target (WCAG/Apple HIG minimum); icon stays 20x16 via centered ::after
+    width: 2.75rem;
+    height: 2.75rem;
     @include hamburger();
     // This margin is to prevent user avatar overlapping the hamburger in the header.
     margin-left: 0.25rem;
@@ -124,6 +141,10 @@ span.Header__hamburger.toggle-menu {
     }
     cursor: pointer;
     &::after {
+        // Re-center the 20x16 bar stack inside the enlarged 44x44 container
+        top: calc(50% - 8px);
+        left: calc(50% - 10px);
+        width: 20px;
         transition: 0.2s all ease-in-out;
         @include themify($themes) {
             background: themed('textColorPrimary');

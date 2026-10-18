@@ -107,3 +107,115 @@ export function filterTags(tags) {
 //     }
 //     return undefined;
 // }
+
+export function vestsToHpf(state, vesting_shares) {
+    const { global } = state;
+    let vests = vesting_shares;
+    if (typeof vesting_shares === 'string') {
+        vests = assetFloat(vesting_shares, VEST_TICKER);
+    }
+    const total_vests = assetFloat(
+        global.getIn(['props', 'total_vesting_shares']),
+        VEST_TICKER
+    );
+    const total_vest_blurt = assetFloat(
+        global.getIn(['props', 'total_vesting_fund_steem']),
+        LIQUID_TICKER
+    );
+    return total_vest_blurt * (vests / total_vests);
+}
+
+export function vestsToHp(state, vesting_shares) {
+    return vestsToHpf(state, vesting_shares).toFixed(3);
+}
+
+export function spToVestsf(state, blurt_power) {
+    const { global } = state;
+    let power = blurt_power;
+    if (typeof power === 'string') {
+        power = assetFloat(power, LIQUID_TICKER);
+    }
+    const total_vests = assetFloat(
+        global.getIn(['props', 'total_vesting_shares']),
+        VEST_TICKER
+    );
+    const total_vest_blurt = assetFloat(
+        global.getIn(['props', 'total_vesting_fund_steem']),
+        LIQUID_TICKER
+    );
+    return (blurt_power / total_vest_blurt) * total_vests;
+}
+
+export function spToVests(state, vesting_shares) {
+    return spToVestsf(state, vesting_shares).toFixed(6);
+}
+
+export function vestingBlurt(account, gprops) {
+    const vests = parseFloat(account.vesting_shares.split(' ')[0]);
+    const total_vests = parseFloat(gprops.total_vesting_shares.split(' ')[0]);
+    const total_vest_blurt = parseFloat(
+        gprops.total_vesting_fund_steem.split(' ')[0]
+    );
+    const vesting_blurtf = total_vest_blurt * (vests / total_vests);
+    return vesting_blurtf;
+}
+
+// How much BLURT this account has delegated out (minus received).
+export function delegatedBlurt(account, gprops) {
+    const delegated_vests = parseFloat(
+        account.delegated_vesting_shares.split(' ')[0]
+    );
+    const received_vests = parseFloat(
+        account.received_vesting_shares.split(' ')[0]
+    );
+    const vests = delegated_vests - received_vests;
+    const total_vests = parseFloat(gprops.total_vesting_shares.split(' ')[0]);
+    const total_vest_blurt = parseFloat(
+        gprops.total_vesting_fund_steem.split(' ')[0]
+    );
+    const vesting_blurtf = total_vest_blurt * (vests / total_vests);
+    return vesting_blurtf;
+}
+
+// How much BLURT this account is powering down.
+export function powerdownBlurt(account, gprops) {
+    const withdraw_rate_vests = parseFloat(
+        account.vesting_withdraw_rate.split(' ')[0]
+    );
+    const remaining_vests =
+        (parseFloat(account.to_withdraw) - parseFloat(account.withdrawn)) /
+        1000000;
+    const vests = Math.min(withdraw_rate_vests, remaining_vests);
+    const total_vests = parseFloat(gprops.total_vesting_shares.split(' ')[0]);
+    const total_vest_blurt = parseFloat(
+        gprops.total_vesting_fund_steem.split(' ')[0]
+    );
+    const powerdown_blurtf = total_vest_blurt * (vests / total_vests);
+    return powerdown_blurtf;
+}
+
+export function remainingPowerdowns(account) {
+    const to_withdraw = parseFloat(account.to_withdraw);
+    const withdrawn = parseFloat(account.withdrawn);
+    const remaining = 4 - Math.floor((withdrawn / to_withdraw) * 4);
+    return remaining;
+}
+
+export function assetFloat(str, asset) {
+    try {
+        assert.equal(typeof str, 'string');
+        assert.equal(typeof asset, 'string');
+        assert(
+            new RegExp(`^\\d+(\\.\\d+)? ${asset}$`).test(str),
+            'Asset should be formatted like 99.99 ' + asset + ': ' + str
+        );
+        return parseFloat(str.split(' ')[0]);
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
+}
+export function pricePerBlurt(state) {
+    const price = state.global.get('blurt_price');
+    return price;
+}

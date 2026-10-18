@@ -9,11 +9,11 @@ $global-lineheight: 1.6 !default;
 /// Colors used for buttons, callouts, links, etc. There must always be a color called `primary`.
 /// @type Map
 $foundation-palette: (
-    primary: #1a5099,
+    primary: #117a37,
     secondary: #777,
-    success: #3adb76,
-    warning: #ffae00,
-    alert: #ec5840,
+    success: #1fa64d,
+    warning: #e5a21b,
+    alert: #d81e1e,
 ) !default;
 
 /// Color used for light gray UI items.
@@ -30,7 +30,7 @@ $dark-gray: #8a8a8a !default;
 
 //$dark-blue: #1A5099 !default; //not used yet
 
-$light-blue: #4ba2f2 !default;
+$light-blue: #1fa64d !default;
 
 /// Color used for black ui items.
 /// @type Color

@@ -461,6 +461,12 @@ export function* preBroadcast_comment({ operation, username }) {
     const comment_op = [['comment', op]];
 
     // comment_options must come directly after comment
+    // MELEK: comment_options is live again. The earlier failure was NOT asset
+    // serialization — blurtjs shipped BLURT's operation table, so comment_options went
+    // out as opcode 13, which this Steem-fork node reads as account_witness_proxy and
+    // rejects as a bad authority. st_operations is now aligned to the node's table
+    // (verified byte-for-byte against condenser_api.get_transaction_hex), so it
+    // serializes as 19 and validates.
     if (comment_options) {
         const {
             max_accepted_payout = ['1000000.000', DEBT_TICKER].join(' '),
@@ -473,6 +479,7 @@ export function* preBroadcast_comment({ operation, username }) {
                 author,
                 permlink,
                 max_accepted_payout,
+                percent_steem_dollars: 0,
                 allow_votes,
                 allow_curation_rewards,
                 extensions: comment_options.extensions
@@ -506,7 +513,7 @@ export function* createPermlink(title, author) {
             permlink = s;
         }
 
-        // ensure permlink conforms to BLURTIT_MAX_PERMLINK_LENGTH
+        // ensure permlink conforms to MELEKIT_MAX_PERMLINK_LENGTH
         if (permlink.length > 255) {
             permlink = permlink.substring(0, 255);
         }

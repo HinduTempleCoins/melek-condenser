@@ -71,7 +71,7 @@ const SidePanel = ({
             // {
             //     value: 'recover_account_step_1',
             //     label: tt('navigation.stolen_account_recovery'),
-            //     link: `${walletUrl}/recover_account_step_1`,
+            //     link: 'https://signer.melek.salon/recover',
             // },
             {
                 value: 'change_password',

@@ -162,7 +162,7 @@
         "account_name_should_be_longer": "账户名应该更长",
         "account_name_should_have_only_letters_digits_or_dashes": "帐户名称应该只有字母、数字或破折号",
         "cannot_increase_reward_of_post_within_the_last_minute_before_payout": "在收到奖励前的最后一分钟内不能增加奖励",
-        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "每10分钟一个IP地址只允许一个Steem账号",
+        "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "每10分钟一个IP地址只允许一个MELEK账号",
         "resteem_this_post": "转发这这篇文章",
         "reblog": "转发",
         "write_your_story": "写下你的故事",
@@ -184,7 +184,7 @@
         "next_7_strings_single_block": {
             "authors_get_paid_when_people_like_you_upvote_their_post": "当你和其他人给帖子点赞时，作者会得到报酬",
             "if_you_enjoyed_what_you_read_earn_amount": "如果你喜欢阅读这里的内容，请立即创建你的帐户，并开始免费赚取MELEK！",
-            "free_steem": "免费的Steem代币！",
+            "free_steem": "免费的MELEK代币！",
             "sign_up_earn_steem": "现在注册来赚取"
         },
         "next_3_strings_together": {
@@ -389,7 +389,7 @@
         "estimated_value": "基于美元计算，%(LIQUID_TOKEN)s的估值。",
         "non_transferable": "%(VESTING_TOKEN)s是不可转让的，需要3个月(13笔付款)才可换回%(LIQUID_TOKEN)s",
         "converted_VESTING_TOKEN_can_be_sent_to_yourself_but_can_not_transfer_again": "%(VESTING_TOKEN)s可以转给你自己或其他人，但是只有转回%(LIQUID_TOKEN)s后，才可以进行下一次转账。",
-        "part_of_your_steem_power_is_currently_delegated": "有一部分MELEK POWER是代理给你使用的。代理的MELEK POWER是为了帮助新用户在steemit上进行操作。你被代理的数量可能会有波动。"
+        "part_of_your_steem_power_is_currently_delegated": "有一部分MELEK POWER是代理给你使用的。代理的MELEK POWER是为了帮助新用户在MELEK上进行操作。你被代理的数量可能会有波动。"
     },
     "promote_post_jsx": {
         "promote_post": "推广帖子",
@@ -399,7 +399,7 @@
     },
     "about_jsx": {
         "about_app": "关于%(APP_NAME)s",
-        "about_app_details": "%(APP_NAME)s是一个社交媒体平台，通过写文章和审查文章内容，每个人都可以得到赏金。它有一个强大的数字积分系统，称为Steem，其通过市场价格发现机制和流动性，来支撑数字奖励的真实价值。",
+        "about_app_details": "%(APP_NAME)s是一个社交媒体平台，通过写文章和审查文章内容，每个人都可以得到赏金。它有一个强大的数字积分系统，称为MELEK，其通过市场价格发现机制和流动性，来支撑数字奖励的真实价值。",
         "learn_more_at_app_url": "了解更多%(APP_URL)s",
         "resources": "资源"
     },
@@ -463,7 +463,7 @@
         "you_account_has_been_successfully_created": "您的帐号已经成功创建!",
         "you_account_has_been_successfully_recovered": "您的帐号已经成功恢复!",
         "password_update_succes": "%(accountName)s的密码成功修改",
-        "password_info": "密码或私钥输入不正确。有可能是输入错误。提示：Steemit创建的密码或私钥中永远不包含 0(零)， O(大写O)， I(大写i)和l (小写L)。",
+        "password_info": "密码或私钥输入不正确。有可能是输入错误。提示：MELEK创建的密码或私钥中永远不包含 0(零)， O(大写O)， I(大写i)和l (小写L)。",
         "enter_your_username": "输入您的用户名",
         "password_or_wif": "密码或WIF",
         "this_operation_requires_your_key_or_master_password": "此操作需要您的%(authType)s密钥或主密码。",
@@ -521,7 +521,7 @@
         "this_memo_is_public": "这个备注是公开的",
         "convert_to_VESTING_TOKEN": "转换成%(VESTING_TOKEN)s",
         "balance_subject_to_3_day_withdraw_waiting_period": "余额取决于3天的提款等待期，",
-        "move_funds_to_another_account": "将资金转移给另一个Steem的用户。",
+        "move_funds_to_another_account": "将资金转移给另一个MELEK的用户。",
         "protect_funds_by_requiring_a_3_day_withdraw_waiting_period": "通过设置3天的提款等待期来保护资金。",
         "withdraw_funds_after_the_required_3_day_waiting_period": "需要在3天的等待期后提取资金。",
         "from": "从",

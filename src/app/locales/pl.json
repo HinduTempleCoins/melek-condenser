@@ -163,7 +163,7 @@
         "account_name_should_have_only_letters_digits_or_dashes": "Nazwa konta powinna zawierać wyłącznie litery, cyfry, kropki lub myślniki",
         "cannot_increase_reward_of_post_within_the_last_minute_before_payout": "Nie można zwiększyć nagrody za post w ostatnich chwilach przed wypłatą",
         "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "Dozwolone jest tylko jedno konto MELEK dla danego adresu IP w ciągu 10 minut",
-        "resteem_this_post": "Resteemuj ten post",
+        "resteem_this_post": "Repostuj ten post",
         "reblog": "Repost",
         "write_your_story": "Napisz swoją historię",
         "remember_voting_and_posting_key": "Zapamiętaj klucze do głosowania i tworzenia wpisów",

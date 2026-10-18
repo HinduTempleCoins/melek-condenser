@@ -1,76 +1,82 @@
-# Condenser
+# MELEK condenser
 
-Condenser is the react.js web interface to the [MELEK blockchain](https://github.com/HinduTempleCoins/MELEK) — a BLURT-fork Graphene chain (same lineage as STEEM/HIVE). It points at the MELEK RPC (`https://rpc.melek.salon`) and uses MELEK chain symbols on the wire.
+The web front end for the [MELEK](https://melek.salon) social blockchain. This
+is the source of the live site at **https://melek.salon**: a server-side-rendered
+React app on a Koa server that reads from and broadcasts to a MELEK RPC node.
+Users post, comment, vote, transfer and manage their accounts here; keys are
+handled in the browser and never sent to the server.
 
-### Changelog
+MELEK is a Graphene-family DPoS chain forked from [Blurt](https://gitlab.com/blurt/blurt),
+which forked [Steem](https://github.com/steemit/steem). The chain node lives in
+[HinduTempleCoins/melek-chain](https://github.com/HinduTempleCoins/melek-chain).
+This front end is a fork of the Blurt condenser, itself a fork of
+[steemit/condenser](https://github.com/steemit/condenser).
 
-Please update the changelog with every change that you make to condenser.
+## Run it yourself
 
-#### Quick Start: Run your own MELEK front end
-
-To bring up a running container fit for production, it's as simple as this:
-
-```bash
-export CHICKEN=$(base64 --wrap=0 /dev/urandom | head -c 32)
-echo $CHICKEN
-docker run -it -p 8080:8080 -e SDC_SESSION_SECRETKEY=$CHICKEN hindutemplecoins/melek-condenser
-```
-
-NB: Make sure that you record $CHICKEN somewhere safe. It should remain consistent.
-
-If you would like to modify, build, and run condenser using docker, it's as
-simple as pulling in the gitlab repo and issuing one command to build it,
-like this:
+You need Node.js 18 or newer and npm. Any MELEK RPC node works; the public one is
+`https://melek.salon/rpc`.
 
 ```bash
-apt update
-apt upgrade
-apt install git
-curl -s https://get.docker.com | bash
 git clone https://github.com/HinduTempleCoins/melek-condenser.git
 cd melek-condenser
-docker build -t="myname/condenser:mybranch"
-docker run -it -p 8080:8080 myname/condenser:mybranch
+npm install
+mkdir -p tmp
+
+# development mode: hot-reloading bundles, app on http://localhost:8080
+npm start
 ```
 
-By default the container connects to the public MELEK RPC node (`https://rpc.melek.salon`).
-If you intend to run a full-fledged site, we recommend running a local MELEK node
-(forked from [BLURT](https://gitlab.com/blurt/blurt) — see the
-[`HinduTempleCoins/MELEK`](https://github.com/HinduTempleCoins/MELEK) repo for chain
-parameters and the eventual `melek-chain` C++ fork).
-
-## Geting Set Up
-
-#### NVM
+### Production build
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-nvm i node
-npm i -g yarn
+npm run build                       # webpack bundle + babel to lib/
+export SDC_SESSION_SECRETKEY=$(base64 --wrap=0 /dev/urandom | head -c 32)
+export SDC_CLIENT_BLURTD_URL=https://melek.salon/rpc   # RPC the browser uses
+export SDC_SERVER_BLURTD_URL=https://melek.salon/rpc   # RPC the SSR server uses
+NODE_ENV=production PORT=8080 node lib/server/index.js
 ```
 
-#### Install and build
+On Node 17+ the webpack 4 build needs `NODE_OPTIONS=--openssl-legacy-provider`.
+Keep `SDC_SESSION_SECRETKEY` stable across restarts, or every session is logged
+out. The session cookie requires HTTPS, so put a TLS-terminating proxy (Caddy,
+or nginx with certbot) in front and forward `X-Forwarded-Proto: https`.
+
+### Docker
 
 ```bash
-apt update
-apt upgrade
-apt install git
-git clone https://github.com/HinduTempleCoins/melek-condenser.git
-cd melek-condenser
-mkdir tmp
-yarn install
-yarn build
-yarn run
-start
+docker build -t melek-condenser .
+docker run -it -p 8080:8080 \
+  -e SDC_SESSION_SECRETKEY="$(base64 --wrap=0 /dev/urandom | head -c 32)" \
+  -e SDC_CLIENT_BLURTD_URL=https://melek.salon/rpc \
+  -e SDC_SERVER_BLURTD_URL=https://melek.salon/rpc \
+  melek-condenser
 ```
 
-After you've done your dev work, push to a branch on github.com/HinduTempleCoins/melek-condenser. CI will test the build. Production deploys happen via Render (see DEPLOY.md).
+### Configuration
+
+All settings can be set with environment variables; the names are in
+`config/custom-environment-variables.json` and the defaults in
+`config/default.json`. The defaults already target MELEK mainnet (chain id
+`907959e5...ad8b`, address prefix `MELEK`). The ones you will usually touch:
+
+| Variable | What it does |
+|---|---|
+| `SDC_SESSION_SECRETKEY` | Session signing secret. Required in production; generate your own. |
+| `SDC_CLIENT_BLURTD_URL` / `SDC_SERVER_BLURTD_URL` | RPC node for the browser and for server-side rendering. |
+| `SDC_CHAIN_ID` / `SDC_ADDRESS_PREFIX` | Chain id and key prefix, if you point it at a MELEK testnet. |
+| `SDC_IMAGE_PROXY_PREFIX` / `SDC_UPLOAD_IMAGE_URL` | Image proxy and upload service. |
+
+The `RPC` variable names still say `BLURTD`; they are inherited from upstream
+and kept so existing deploy scripts keep working.
+
+`src/server/server-html.jsx` also loads `/melek-extras.js`, a small script
+that melek.salon serves alongside the app. It is not in this repository yet, and
+a self-hosted copy works without it (the browser just gets a 404 for it).
 
 #### Debugging SSR code
 
-`yarn debug` will build a development version of the codebase and then start the
+`npm run debug` will build a development version of the codebase and then start the
 local server with `--inspect-brk` so that you can connect a debugging client.
 You can use Chromium to connect by finding the remote client at
 `chrome://inspect/#devices`.
@@ -114,8 +120,8 @@ base64 --wrap=0 /dev/urandom | head -c 32
 #### Js & Jsx
 
 We use [prettier](https://github.com/prettier/prettier) to autofromat the
-code, with [this configuration](.prettierrc). Run `yarn run fmt` to format
-everything in `src/`, or `yarn exec -- prettier --config .prettierrc --write src/whatever/file.js` for a specific file.
+code, with [this configuration](.prettierrc). Run `npm run fmt` to format
+everything in `src/`, or `npx prettier --config .prettierrc --write src/whatever/file.js` for a specific file.
 
 #### CSS & SCSS
 
@@ -137,22 +143,22 @@ the Header component:
 
 ## Storybook
 
-`yarn run storybook`
+`npm run storybook`
 
 ## Testing
 
 ### Run test suite
 
-`yarn test`
+`npm run ci:test`
 
-will run `jest`
+runs `jest`.
 
 ### Test endpoints offline
 
 If you want to test a server-side rendered page without using the network, do this:
 
 ```
-yarn build
+npm run build
 OFFLINE_SSR_TEST=true NODE_ENV=production node --prof lib/server/index.js
 ```
 
@@ -160,18 +166,32 @@ This will read data from the blobs in `api_mockdata` directory. If you want to u
 
 ### Run blackbox tests using nightwatch
 
-To run a Selenium test suite, start the condenser docker image with a name `condenser` (like `docker run --name condenser -itp 8080:8080 hindutemplecoins/melek-condenser:latest`) and then run the blackboxtest image attached to the condenser image's network:
+To run a Selenium test suite, build and start the condenser docker image with a name `condenser` (like `docker build -t melek-condenser . && docker run --name condenser -itp 8080:8080 melek-condenser`) and then run the blackboxtest image attached to the condenser image's network:
 
 ```
-docker build -t=hindutemplecoins/melek-condenser-blackboxtest blackboxtest/
-docker run --network container:condenser hindutemplecoins/melek-condenser-blackboxtest:latest
+docker build -t melek-condenser-blackboxtest blackboxtest/
+docker run --network container:condenser melek-condenser-blackboxtest
 
 ```
 
-## Issues
+## Issues and contributions
 
-To report a non-critical issue, please file an issue on this GitHub project.
+Bugs and feature requests: open an issue at
+https://github.com/HinduTempleCoins/melek-condenser/issues. Issues labelled
+`good first issue` are sized for a first contribution.
 
-If you find a security issue please report details to: security@melek.salon
+Security problems: please do not open a public issue. Use GitHub's private
+vulnerability reporting ("Security" tab, "Report a vulnerability") so a fix can
+ship before details are public.
 
-We will evaluate the risk and make a patch available before filing the issue.
+## Credits and license
+
+MELEK condenser stands on the work of two upstream projects:
+
+- [steemit/condenser](https://github.com/steemit/condenser), the original
+  Steem front end, copyright Steemit, Inc. (MIT).
+- The [Blurt condenser](https://gitlab.com/blurt/openblurt/condenser), copyright
+  the Blurt contributors (MIT), from which this repository was forked.
+
+Thank you to both teams. This repository is released under the MIT License, with
+the upstream copyright notices preserved; see [LICENSE](LICENSE).

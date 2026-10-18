@@ -167,7 +167,7 @@
         "account_name_should_have_only_letters_digits_or_dashes": "L'identifiant ne peut comporter que des lettres, des chiffres, des points ou des traits d'union.",
         "cannot_increase_reward_of_post_within_the_last_minute_before_payout": "Les gains d'un article ne peuvent être accrus durant la dernière minute avant rétribution.",
         "only_one_APP_NAME_account_allowed_per_ip_address_every_10_minutes": "Un seul compte MELEK est permis par adresse IP toutes les 10 minutes",
-        "resteem_this_post": "Resteemer cet article",
+        "resteem_this_post": "Reposter cet article",
         "reblog": "Repost",
         "write_your_story": "Ecris ton histoire",
         "remember_voting_and_posting_key": "Se souvenir de la clé de publication et de vote",

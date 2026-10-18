@@ -13,7 +13,6 @@ import { isFetchingOrRecentlyUpdated } from 'app/utils/StateFunctions';
 import Callout from 'app/components/elements/Callout';
 import SidebarLinks from 'app/components/elements/SidebarLinks';
 import SidebarNewUsers from 'app/components/elements/SidebarNewUsers';
-import SidebarStats from 'app/components/elements/SidebarStats';
 import Notices from 'app/components/elements/Notices';
 import { GptUtils } from 'app/utils/GptUtils';
 import GptAd from 'app/components/elements/GptAd';
@@ -280,14 +279,6 @@ class PostsIndex extends React.Component {
                         this.props.isBrowser && (
                             <div>
                                 <SidebarLinks username={this.props.username} />
-                                <SidebarStats
-                                    bandwidthKbytesFee={
-                                        this.props.bandwidthKbytesFee
-                                    }
-                                    operationFlatFee={
-                                        this.props.operationFlatFee
-                                    }
-                                />
                             </div>
                         )
                     )}
@@ -393,14 +384,6 @@ module.exports = {
                 isBrowser: process.env.BROWSER,
                 gptEnabled: state.app.getIn(['googleAds', 'gptEnabled']),
                 gptBannedTags: state.app.getIn(['googleAds', 'gptBannedTags']),
-                bandwidthKbytesFee: state.global.getIn([
-                    'props',
-                    'bandwidth_kbytes_fee',
-                ]),
-                operationFlatFee: state.global.getIn([
-                    'props',
-                    'operation_flat_fee',
-                ]),
             };
         },
         (dispatch) => {

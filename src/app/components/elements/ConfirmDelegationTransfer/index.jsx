@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ConfirmDelegationTransfer = ({ operation, amount, fee }) => {
+const ConfirmDelegationTransfer = ({ operation, amount }) => {
     const info = Object.keys(operation).map((k, i) => {
         if (k === 'vesting_shares') {
             return (
@@ -45,7 +45,6 @@ const ConfirmDelegationTransfer = ({ operation, amount, fee }) => {
     return (
         <div className="info">
             {info}
-            <span>Transaction Fee: {fee} MELEK</span>
         </div>
     );
 };

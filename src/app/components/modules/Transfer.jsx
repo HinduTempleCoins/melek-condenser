@@ -319,8 +319,6 @@ class TransferForm extends Component {
             dispatchSubmit,
             totalVestingFund,
             totalVestingShares,
-            operationFlatFee,
-            bandwidthKbytesFee,
         } = this.props;
         const { transferType } = this.props.initialValues;
         const { submitting, valid, handleSubmit } = this.state.transfer;
@@ -340,8 +338,6 @@ class TransferForm extends Component {
                         transferType,
                         totalVestingShares,
                         totalVestingFund,
-                        operationFlatFee,
-                        bandwidthKbytesFee,
                     });
                 })}
                 onChange={this.clearError}
@@ -675,26 +671,6 @@ export default connect(
                       .split(' ')[0]
               )
             : 0;
-        const operationFlatFee = state.global.getIn([
-            'props',
-            'operation_flat_fee',
-        ])
-            ? parseFloat(
-                  state.global
-                      .getIn(['props', 'operation_flat_fee'])
-                      .split(' ')[0]
-              )
-            : 0.001;
-        const bandwidthKbytesFee = state.global.getIn([
-            'props',
-            'bandwidth_kbytes_fee',
-        ])
-            ? parseFloat(
-                  state.global
-                      .getIn(['props', 'bandwidth_kbytes_fee'])
-                      .split(' ')[0]
-              )
-            : 0.1;
         const initialValues = state.user.get('transfer_defaults', Map()).toJS();
         const toVesting = initialValues.asset === 'VESTS';
         const toDelegate = initialValues.asset === 'DELEGATE_VESTS';
@@ -738,8 +714,6 @@ export default connect(
             ]),
             totalVestingFund,
             totalVestingShares,
-            operationFlatFee,
-            bandwidthKbytesFee,
         };
     },
 
@@ -757,8 +731,6 @@ export default connect(
             errorCallback,
             totalVestingFund,
             totalVestingShares,
-            operationFlatFee,
-            bandwidthKbytesFee,
         }) => {
             if (
                 !toVesting &&
@@ -793,18 +765,8 @@ export default connect(
                 memo: toVesting ? undefined : memo ? memo : '',
             };
 
-            let size = JSON.stringify(operation).replace(
-                /[\[\]\,\"]/g,
-                ''
-            ).length;
-            let bw_fee = Math.max(
-                0.001,
-                ((size / 1024) * bandwidthKbytesFee).toFixed(3)
-            );
-            let fee = (operationFlatFee + bw_fee).toFixed(3);
-            let confirm = () => (
-                <ConfirmTransfer operation={operation} fee={fee} />
-            );
+            // MELEK (Steem fork) has no per-operation fee — no fee is shown.
+            let confirm = () => <ConfirmTransfer operation={operation} />;
             if (transferType === 'Savings Withdraw')
                 operation.request_id = Math.floor(
                     (Date.now() / 1000) % 4294967295
@@ -831,20 +793,10 @@ export default connect(
                         ' ' +
                         asset2,
                 };
-                let size = JSON.stringify(operation).replace(
-                    /[\[\]\,\"]/g,
-                    ''
-                ).length;
-                let bw_fee = Math.max(
-                    0.001,
-                    ((size / 1024) * bandwidthKbytesFee).toFixed(3)
-                );
-                let fee = operationFlatFee + bw_fee;
                 confirm = () => (
                     <ConfirmDelegationTransfer
                         operation={operation}
                         amount={amount}
-                        fee={fee}
                     />
                 );
 

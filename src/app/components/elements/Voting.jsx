@@ -236,8 +236,6 @@ class Voting extends React.Component {
             is_comment,
             post_obj,
             current_account,
-            operationFlatFee,
-            bandwidthKbytesFee,
             // price_per_blurt,
             // sbd_print_rate,
             username,
@@ -289,18 +287,7 @@ class Voting extends React.Component {
             currentMana = maxMana;
         }
         let currentVp = (currentMana * 100) / maxMana;
-        let operation = {
-            voter: username,
-            author,
-            permlink,
-            weight: 10000,
-        };
-        let size = JSON.stringify(operation).replace(/[\[\]\,\"]/g, '').length;
-        let bw_fee = Math.max(
-            0.001,
-            ((size / 1024) * bandwidthKbytesFee).toFixed(3)
-        );
-        let fee = (operationFlatFee + bw_fee).toFixed(3);
+        // MELEK (Steem fork) has no per-operation fee; the Blurt fee readout is removed.
         let rshares = currentVp * 100 * parseInt(net_vesting_shares * 1e6, 10);
         let voteValue =
             (((rshares * (rshares + 2 * 2e12)) /
@@ -392,8 +379,6 @@ class Voting extends React.Component {
                             <br />
                             {tt('voting_jsx.voting_power')}:{' '}
                             {currentVp.toFixed(1)}%
-                            <br />
-                            {tt('g.transaction_fee')}: {fee} MELEK
                         </div>
                     ) : (
                         ''
@@ -738,14 +723,6 @@ export default connect(
             'reward_fund',
             'reward_balance',
         ]);
-        const operationFlatFee = state.global.getIn([
-            'props',
-            'operation_flat_fee',
-        ]);
-        const bandwidthKbytesFee = state.global.getIn([
-            'props',
-            'bandwidth_kbytes_fee',
-        ]);
         const blacklist = state.global.get('blacklist');
         const enable_slider =
             net_vesting_shares > VOTE_WEIGHT_DROPDOWN_THRESHOLD;
@@ -762,8 +739,6 @@ export default connect(
             current_account,
             loggedin: username != null,
             voting,
-            operationFlatFee,
-            bandwidthKbytesFee,
             blacklist,
             recentClaims,
             rewardBalance,

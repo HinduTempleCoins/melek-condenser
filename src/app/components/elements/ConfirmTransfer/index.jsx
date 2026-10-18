@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ConfirmTransfer = ({ operation, fee }) => {
+const ConfirmTransfer = ({ operation }) => {
     const info = Object.keys(operation).map((k, i) => {
         if (k !== '') {
             return (
@@ -27,7 +27,6 @@ const ConfirmTransfer = ({ operation, fee }) => {
     return (
         <div className="info">
             {info}
-            <span>Transaction Fee: {fee} MELEK</span>
         </div>
     );
 };

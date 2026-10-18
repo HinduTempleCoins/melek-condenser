@@ -1,9 +1,9 @@
 {
-    "steemd_connection_client": "https://alpha.melek.salon/rpc",
-    "steemd_connection_server": "http://127.0.0.1:8090",
+    "steemd_connection_client": "https://melek.salon/rpc",
+    "steemd_connection_server": "https://melek.salon/rpc",
     "steemd_use_appbase": false,
-    "chain_id": "18dcf0a285365fc58b71f18b3d3fec954aa0c141c44e4e5cb4cf777b9eab274e",
-    "address_prefix": "TST",
+    "chain_id": "907959e559e253f0db275e467363425cc2cf4f20f7721699914d248a5547ad8b",
+    "address_prefix": "MELEK",
     "site_domain": "alpha.melek.salon",
     "helmet": { "directives": { "connectSrc": "'self' https://alpha.melek.salon" } }
 }
